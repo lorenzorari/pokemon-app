@@ -1,3 +1,7 @@
+import {
+  NamedAPIResource,
+  NamedAPIResources,
+} from './../common/named-api-resource';
 import { PokemonAbilities } from './ability';
 import { PokemonHeldItems } from './held-item';
 import { PokemonMoves } from './move';
@@ -14,13 +18,13 @@ export interface Pokemon {
   order?: number;
   weight?: number;
   abilities?: PokemonAbilities;
-  forms?: any;
+  forms?: NamedAPIResources;
   gameIndices?: any;
   heldItems?: PokemonHeldItems;
   locationAreaEncounters?: string;
   moves?: PokemonMoves;
   sprites?: PokemonSprites;
-  species?: any;
+  species?: NamedAPIResource;
   stats?: PokemonStats;
   types?: PokemonTypes;
 }
