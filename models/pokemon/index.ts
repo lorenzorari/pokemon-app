@@ -1,3 +1,10 @@
+import { PokemonAbilities } from './ability';
+import { PokemonHeldItems } from './held-item';
+import { PokemonMoves } from './move';
+import { PokemonSprites } from './sprite';
+import { PokemonStats } from './stat';
+import { PokemonTypes } from './type';
+
 export interface Pokemon {
   id?: number;
   name?: string;
@@ -6,16 +13,16 @@ export interface Pokemon {
   isDefault?: boolean;
   order?: number;
   weight?: number;
-  abilities?: any;
+  abilities?: PokemonAbilities;
   forms?: any;
   gameIndices?: any;
-  heldItems?: any;
+  heldItems?: PokemonHeldItems;
   locationAreaEncounters?: string;
-  moves?: any;
-  sprites?: any;
+  moves?: PokemonMoves;
+  sprites?: PokemonSprites;
   species?: any;
-  stats?: any;
-  types?: any;
+  stats?: PokemonStats;
+  types?: PokemonTypes;
 }
 
 export declare type Pokemons = Pokemon[];
