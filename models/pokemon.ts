@@ -17,3 +17,5 @@ export interface Pokemon {
   stats?: any;
   types?: any;
 }
+
+export declare type Pokemons = Pokemon[];
