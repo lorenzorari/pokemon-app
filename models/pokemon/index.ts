@@ -1,16 +1,16 @@
 export interface Pokemon {
   id?: number;
   name?: string;
-  base_experience?: number;
+  baseExperience?: number;
   height?: number;
-  is_default?: boolean;
+  isDefault?: boolean;
   order?: number;
   weight?: number;
   abilities?: any;
   forms?: any;
-  game_indices?: any;
-  held_items?: any;
-  location_area_encounters?: string;
+  gameIndices?: any;
+  heldItems?: any;
+  locationAreaEncounters?: string;
   moves?: any;
   sprites?: any;
   species?: any;
