@@ -1,23 +1,46 @@
-import React from 'react';
-import './App.css';
+import React, { useEffect, useState } from 'react';
+import './App.scss';
+import { Pokemon } from '../../../models/pokemon';
+import humps from 'humps';
 
 function App() {
+  const [pokemon, setPokemon] = useState<Pokemon>(null);
+
+  useEffect(() => {
+    const init = async () => {
+      fetch('https://pokeapi.co/api/v2/pokemon/charizard')
+        .then(res => res.json())
+        .then(res => {
+          const data = humps.camelizeKeys(res);
+          setPokemon(data as Record<string, any>);
+        });
+    };
+
+    init();
+  }, []);
+
+  const getArtworkUrl = (pokemon: Pokemon) => {
+    return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`;
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <section>
+      <div className="card">
+        <h2 className="card__title">{pokemon?.name}</h2>
+
+        <div className="card__number">#006</div>
+
+        <figure className="card__figure">
+          <img
+            className="card__figure__image"
+            src={pokemon && getArtworkUrl(pokemon)}
+            alt={pokemon?.name}
+          />
+        </figure>
+
+        <div className="card__type">Fire</div>
+      </div>
+    </section>
   );
 }
 
