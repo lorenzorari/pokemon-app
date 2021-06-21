@@ -47,6 +47,7 @@
   }
 
   &__figure {
+    margin: 1rem 0 0 0;
     width: 20rem;
     z-index: 1;
 
@@ -55,11 +56,22 @@
     }
   }
 
+  &__type-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-color: #efd4b3;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+  }
+
   &__type {
     position: relative;
-    margin-bottom: 1rem;
+    margin: 1rem 0.5rem;
     padding: 0.5rem 1.5rem;
-    background-color: #fff;
+    background-color: #f28826;
+    color: white;
     font-weight: bold;
     text-transform: uppercase;
 
@@ -69,7 +81,7 @@
       bottom: 0;
       right: 0;
       border-top: 12px solid transparent;
-      border-right: 12px solid #e7ab66;
+      border-right: 12px solid #efd4b3;
       width: 0;
     }
 
@@ -79,7 +91,7 @@
       top: 0;
       left: 0;
       border-bottom: 12px solid transparent;
-      border-left: 12px solid #e7ab66;
+      border-left: 12px solid #efd4b3;
       width: 0;
     }
   }

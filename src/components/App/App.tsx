@@ -38,7 +38,9 @@ function App() {
           />
         </figure>
 
-        <div className="card__type">Fire</div>
+        <div className="card__type-container">
+          <div className="card__type">Fire</div>
+        </div>
       </div>
     </section>
   );
