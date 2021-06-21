@@ -1,14 +1,11 @@
 import React from 'react';
 import { Pokemon } from '../../../../models/pokemon';
+import { zeroPad } from '../../../libs/utils/zero-pad';
 import './card.scss';
 
 const PokemonCard = ({ pokemon }) => {
   const getArtworkUrl = (pokemon: Pokemon) => {
     return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`;
-  };
-
-  const zeroPad = (id: number, places: number) => {
-    return String(id).padStart(places, '0');
   };
 
   return (
