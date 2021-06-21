@@ -1,5 +1,6 @@
 import React from 'react';
 import { Pokemon } from '../../../../models/pokemon';
+import './card.scss';
 
 const PokemonCard = ({ pokemon }) => {
   const getArtworkUrl = (pokemon: Pokemon) => {
