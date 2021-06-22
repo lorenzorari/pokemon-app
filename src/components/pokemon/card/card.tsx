@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { getArtworkUrl } from '../../../helpers/get-artwork-url';
 import styles from './card.module.scss';
 import PokemonCardId from './id';
@@ -12,12 +12,12 @@ const PokemonCard = ({ pokemon }) => {
 
       <PokemonCardId pokemon={pokemon} />
 
-      <figure className={styles.card__figure}>
+      <figure className={styles.figure}>
         <PokemonCardImage pokemon={pokemon} />
       </figure>
 
-      <div className={styles.card__typeContainer}>
-        <div className={styles.card__type}>{pokemon?.types[0].type.name}</div>
+      <div className={styles['type-container']}>
+        <div className={styles.type}>{pokemon?.types[0].type.name}</div>
       </div>
     </div>
   );
