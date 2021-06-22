@@ -2,6 +2,7 @@ import React from 'react';
 import { getArtworkUrl } from '../../../helpers/get-artwork-url';
 import styles from './card.module.scss';
 import PokemonCardId from './id';
+import PokemonCardImage from './image';
 import PokemonCardTitle from './title';
 
 const PokemonCard = ({ pokemon }) => {
@@ -12,11 +13,7 @@ const PokemonCard = ({ pokemon }) => {
       <PokemonCardId pokemon={pokemon} />
 
       <figure className={styles.card__figure}>
-        <img
-          className={styles.card__figure__image}
-          src={pokemon && getArtworkUrl(pokemon)}
-          alt={pokemon?.name}
-        />
+        <PokemonCardImage pokemon={pokemon} />
       </figure>
 
       <div className={styles.card__typeContainer}>
