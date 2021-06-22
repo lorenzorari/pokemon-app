@@ -1,7 +1,7 @@
 import React from 'react';
 import { getArtworkUrl } from '../../../helpers/get-artwork-url';
-import { zeroPad } from '../../../libs/utils/zero-pad';
 import styles from './card.module.scss';
+import PokemonCardId from './id';
 import PokemonCardTitle from './title';
 
 const PokemonCard = ({ pokemon }) => {
@@ -9,7 +9,7 @@ const PokemonCard = ({ pokemon }) => {
     <div className={styles.card}>
       <PokemonCardTitle pokemon={pokemon} />
 
-      <div className={styles.card__number}>{`#${zeroPad(pokemon?.id, 3)}`}</div>
+      <PokemonCardId pokemon={pokemon} />
 
       <figure className={styles.card__figure}>
         <img

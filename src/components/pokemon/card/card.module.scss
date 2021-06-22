@@ -14,34 +14,6 @@
   background-color: var(--color-fire-light);
   font-family: 'Sen', sans-serif;
 
-  &-title {
-    position: relative;
-    align-self: flex-start;
-    margin: 0;
-    padding: 0.5rem 1rem;
-    background-color: var(--color-fire-lighter);
-    border-top-left-radius: 8px;
-    text-transform: capitalize;
-
-    &:before {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      border-top: 12px solid transparent;
-      border-right: 12px solid var(--color-fire-light);
-    }
-  }
-
-  &__number {
-    position: absolute;
-    inset: 4rem auto;
-    color: var(--color-fire-lighter);
-    font-size: 7rem;
-    font-weight: bold;
-    z-index: 0;
-  }
-
   &__figure {
     margin: 1rem 0 0 0;
     width: 20rem;
