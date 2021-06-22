@@ -30,34 +30,3 @@
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
 }
-
-.type {
-  position: relative;
-  margin: 1rem 0.5rem;
-  padding: 0.5rem 1rem;
-  background-color: var(--color-fire);
-  color: white;
-  font-weight: bold;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-
-  &:before {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    border-top: 12px solid transparent;
-    border-right: 12px solid var(--color-fire-lighter);
-    width: 0;
-  }
-
-  &:after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    border-bottom: 12px solid transparent;
-    border-left: 12px solid var(--color-fire-lighter);
-    width: 0;
-  }
-}

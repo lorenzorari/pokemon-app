@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { getArtworkUrl } from '../../../helpers/get-artwork-url';
-import styles from './card.module.scss';
+import React from 'react';
 import PokemonCardId from './id';
 import PokemonCardImage from './image';
 import PokemonCardTitle from './title';
+import TypeTag from '../../type-tag';
+import styles from './card.module.scss';
 
 const PokemonCard = ({ pokemon }) => {
   return (
@@ -17,7 +17,7 @@ const PokemonCard = ({ pokemon }) => {
       </figure>
 
       <div className={styles['type-container']}>
-        <div className={styles.type}>{pokemon?.types[0].type.name}</div>
+        <TypeTag value={pokemon?.types[0].type.name} />
       </div>
     </div>
   );
