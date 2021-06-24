@@ -3,6 +3,7 @@ import './App.scss';
 import { Pokemon } from '../../../models/pokemon';
 import humps from 'humps';
 import PokemonCard from '../pokemon/card/card';
+import TextField from '../text-field';
 
 function App() {
   const [searchValue, setSearchValue] = useState('');
@@ -47,7 +48,7 @@ function App() {
   return (
     <section>
       <form>
-        <input
+        <TextField
           type="text"
           placeholder="Search pokemon"
           onChange={e => handlePokemonSearch(e)}
