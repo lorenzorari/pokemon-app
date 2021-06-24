@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Sen&display=swap');
+
+.card {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  margin: 1rem auto 0 auto;
+  width: 20rem;
+
+  border-radius: 8px;
+  background-color: var(--color-fire-light);
+  font-family: 'Sen', sans-serif;
+}
+
+.figure {
+  margin: 1rem 0 0 0;
+  width: 20rem;
+  z-index: 1;
+}
+
+.type-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-color: var(--color-fire-lighter);
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}

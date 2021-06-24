@@ -1,0 +1,18 @@
+.title {
+  position: relative;
+  align-self: flex-start;
+  margin: 0;
+  padding: 0.5rem 1rem;
+  background-color: var(--color-fire-lighter);
+  border-top-left-radius: 8px;
+  text-transform: capitalize;
+
+  &:before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    border-top: 12px solid transparent;
+    border-right: 12px solid var(--color-fire-light);
+  }
+}
