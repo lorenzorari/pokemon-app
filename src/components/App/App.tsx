@@ -47,7 +47,7 @@ function App() {
 
   return (
     <section>
-      <form>
+      <form className="search-bar">
         <TextField
           type="text"
           placeholder="Search pokemon"
