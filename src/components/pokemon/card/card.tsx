@@ -16,9 +16,7 @@ const PokemonCard = ({ pokemon }) => {
         <PokemonCardImage pokemon={pokemon} />
       </figure>
 
-      <div className={styles['type-container']}>
-        <TypeTag value={pokemon?.types[0].type.name} />
-      </div>
+      <TypeTag value={pokemon?.types[0].type.name} />
     </div>
   );
 };
