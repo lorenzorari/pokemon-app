@@ -3,7 +3,7 @@
   margin: 1rem 0.5rem;
   padding: 0.5rem 1rem;
   background-color: var(--color-fire);
-  color: white;
+  color: var(--color-white);
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -14,7 +14,7 @@
     bottom: 0;
     right: 0;
     border-top: 12px solid transparent;
-    border-right: 12px solid var(--color-fire-lighter);
+    border-right: 12px solid var(--color-fire-light);
     width: 0;
   }
 
@@ -24,7 +24,7 @@
     top: 0;
     left: 0;
     border-bottom: 12px solid transparent;
-    border-left: 12px solid var(--color-fire-lighter);
+    border-left: 12px solid var(--color-fire-light);
     width: 0;
   }
 }
