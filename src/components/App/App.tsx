@@ -9,8 +9,6 @@ function App() {
   const [searchValue, setSearchValue] = useState('');
   const [pokemon, setPokemon] = useState<Pokemon>(null);
 
-  console.log({ searchValue });
-
   useEffect(() => {
     const init = async () => {
       fetch('https://pokeapi.co/api/v2/pokemon/charizard')
