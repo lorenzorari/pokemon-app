@@ -1,4 +1,8 @@
 :root {
+  /* BASE */
+  --color-white: white;
+
+  /* 🔥 FIRE */
   --color-fire: #f28826;
   --color-fire-light: #f1c38a;
 }
