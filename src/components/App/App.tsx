@@ -3,8 +3,10 @@ import './App.scss';
 import { Pokemon } from '../../../models/pokemon';
 import humps from 'humps';
 import PokemonCard from '../pokemon/card/card';
+import TextField from '../text-field';
 
 function App() {
+  const [searchValue, setSearchValue] = useState('');
   const [pokemon, setPokemon] = useState<Pokemon>(null);
 
   useEffect(() => {
@@ -20,16 +22,38 @@ function App() {
     init();
   }, []);
 
-  // const getArtworkUrl = (pokemon: Pokemon) => {
-  //   return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`;
-  // };
+  const handlePokemonSearch = (e: React.FormEvent<HTMLInputElement>) => {
+    setSearchValue(e.currentTarget.value);
+  };
 
-  // const zeroPad = (id: number, places: number) => {
-  //   return String(id).padStart(places, '0');
-  // };
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      searchPokemon(searchValue);
+    }
+  };
+
+  const searchPokemon = (wantedPokemon: string) => {
+    fetch(`https://pokeapi.co/api/v2/pokemon/${wantedPokemon}`)
+      .then(res => res.json())
+      .then(res => {
+        const data = humps.camelizeKeys(res);
+        setPokemon(data as Record<string, any>);
+      })
+      .catch();
+  };
 
   return (
     <section>
+      <form className="search-bar">
+        <TextField
+          type="text"
+          placeholder="Search pokemon"
+          onChange={e => handlePokemonSearch(e)}
+          onKeyPress={e => handleKeyPress(e)}
+        />
+      </form>
+
       <PokemonCard pokemon={pokemon} />
     </section>
   );
