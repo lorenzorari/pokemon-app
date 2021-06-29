@@ -1,8 +1,29 @@
 :root {
   /* BASE */
+  --color-black: #3f3f3f;
   --color-white: white;
 
   /* 🔥 FIRE */
   --color-fire: #f28826;
   --color-fire-light: #f1c38a;
+
+  /* 🌑 DARK */
+  --color-dark-1: #705848;
+  --color-dark-2: #9b7d69;
+
+  /* ✊ FIGHTING */
+  --color-fighting-1: #c03028;
+  --color-fighting-2: #f97e77;
+
+  /* 🗻 GROUND */
+  --color-ground-1: #e0c068;
+  --color-ground-2: #f5db92;
+
+  /* 🤘 ROCK */
+  --color-rock-1: #b8a038;
+  --color-rock-2: #dcc871;
+
+  /* 🔘 NORMAL */
+  --color-normal-1: #a8a878;
+  --color-normal-2: #cecea8;
 }
