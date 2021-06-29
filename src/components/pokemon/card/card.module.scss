@@ -16,17 +16,7 @@
 }
 
 .figure {
-  margin: 1rem 0 0 0;
+  margin: 2rem 0 0 0;
   width: 20rem;
   z-index: 1;
-}
-
-.type-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  background-color: var(--color-fire-lighter);
-  border-bottom-left-radius: 8px;
-  border-bottom-right-radius: 8px;
 }

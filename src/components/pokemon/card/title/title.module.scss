@@ -3,16 +3,18 @@
   align-self: flex-start;
   margin: 0;
   padding: 0.5rem 1rem;
-  background-color: var(--color-fire-lighter);
+  background-color: var(--color-fire);
   border-top-left-radius: 8px;
   text-transform: capitalize;
+  color: var(--color-white);
+  letter-spacing: 1px;
 
   &:before {
     content: '';
     position: absolute;
     bottom: 0;
     right: 0;
-    border-top: 12px solid transparent;
-    border-right: 12px solid var(--color-fire-light);
+    border-top: 14px solid transparent;
+    border-right: 14px solid var(--color-fire-light);
   }
 }
