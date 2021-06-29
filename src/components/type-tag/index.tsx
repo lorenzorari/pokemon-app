@@ -9,7 +9,7 @@ const TypeTag = ({ value }) => {
   };
 
   if (value !== 'fire') setCSSProperty('background-color', 'gray');
-  else setCSSProperty('background-color', 'var(--color-fire)');
+  else setCSSProperty('background-color', 'var(--color-fire-1)');
 
   return <div className={styles.type}>{value}</div>;
 };
