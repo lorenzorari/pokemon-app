@@ -18,7 +18,9 @@ const PokemonCard = ({ pokemon }) => {
   };
 
   const setTheme = (type: string) => {
-    setBackgroundColor(type);
+    // setBackgroundColor(type);
+    setCSSProperty(cardRef.current, '--color-type-1', `var(--color-${type}-1)`);
+    setCSSProperty(cardRef.current, '--color-type-2', `var(--color-${type}-2)`);
   };
 
   useEffect(() => setTheme(pokemon?.types[0].type.name));
