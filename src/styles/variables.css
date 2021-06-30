@@ -2,6 +2,8 @@
   /* BASE */
   --color-black: #3f3f3f;
   --color-white: white;
+  --color-type-1: var(--color-normal-1);
+  --color-type-2: var(--color-normal-2);
 
   /* 🔥 FIRE */
   --color-fire-1: #f28826;
