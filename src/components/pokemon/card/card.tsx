@@ -9,16 +9,7 @@ import { setCSSProperty } from '../../../libs/utils/set-css-property';
 const PokemonCard = ({ pokemon }) => {
   const cardRef = useRef<HTMLHeadingElement>(null);
 
-  const setBackgroundColor = (type: string) => {
-    setCSSProperty(
-      cardRef.current,
-      'background-color',
-      `var(--color-${type}-2)`
-    );
-  };
-
   const setTheme = (type: string) => {
-    // setBackgroundColor(type);
     setCSSProperty(cardRef.current, '--color-type-1', `var(--color-${type}-1)`);
     setCSSProperty(cardRef.current, '--color-type-2', `var(--color-${type}-2)`);
   };
