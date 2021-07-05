@@ -1,17 +1,29 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
+import { setCSSProperty } from '../../libs/utils/set-css-property';
 import styles from './type-tag.module.scss';
 
 const TypeTag = ({ value }) => {
-  const el: HTMLElement = document.querySelector('.' + styles.type);
+  const typeRef = useRef<HTMLDivElement>(null);
 
-  const setCSSProperty = (property: string, value: string) => {
-    el?.style.setProperty(property, value);
+  const setBackgroundColor = (type: string) => {
+    setCSSProperty(
+      typeRef.current,
+      'background-color',
+      `var(--color-${type}-1`
+    );
   };
 
-  if (value !== 'fire') setCSSProperty('background-color', 'gray');
-  else setCSSProperty('background-color', 'var(--color-fire)');
+  const setTheme = type => {
+    setBackgroundColor(type);
+  };
 
-  return <div className={styles.type}>{value}</div>;
+  useEffect(() => setTheme(value));
+
+  return (
+    <div ref={typeRef} className={styles.type}>
+      {value}
+    </div>
+  );
 };
 
 export default TypeTag;

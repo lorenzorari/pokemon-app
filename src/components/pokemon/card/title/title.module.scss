@@ -3,7 +3,7 @@
   align-self: flex-start;
   margin: 0;
   padding: 0.5rem 1rem;
-  background-color: var(--color-fire);
+  background-color: var(--color-type-1);
   border-top-left-radius: 8px;
   text-transform: capitalize;
   color: var(--color-white);
@@ -15,6 +15,6 @@
     bottom: 0;
     right: 0;
     border-top: 14px solid transparent;
-    border-right: 14px solid var(--color-fire-light);
+    border-right: 14px solid var(--color-type-2);
   }
 }
