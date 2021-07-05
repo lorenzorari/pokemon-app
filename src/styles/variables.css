@@ -5,27 +5,75 @@
   --color-type-1: var(--color-normal-1);
   --color-type-2: var(--color-normal-2);
 
-  /* 🔥 FIRE */
-  --color-fire-1: #f28826;
-  --color-fire-2: #f1c38a;
+  /* 🐞 BUG */
+  --color-bug-1: #a8b820;
+  --color-bug-2: #d8e373;
 
   /* 🌑 DARK */
   --color-dark-1: #705848;
   --color-dark-2: #9b7d69;
 
+  /* 🐉 DRAGON */
+  --color-dragon-1: #7038f8;
+  --color-dragon-2: #ba9ffb;
+
+  /* ⚡ ELECTRIC */
+  --color-electric-1: #f8d030;
+  --color-electric-2: #ffeda6;
+
+  /* 🌟 FAIRY */
+  --color-fairy-1: #f0b6bc;
+  --color-fairy-2: #ffdfe2;
+
   /* ✊ FIGHTING */
   --color-fighting-1: #c03028;
   --color-fighting-2: #f97e77;
+
+  /* 🔥 FIRE */
+  --color-fire-1: #f28826;
+  --color-fire-2: #f1c38a;
+
+  /* 🦅 FLYING */
+  --color-flying-1: #a890f0;
+  --color-flying-2: #d8cbfd;
+
+  /* 👻 GHOST */
+  --color-ghost-1: #705898;
+  --color-ghost-2: #b19dd3;
+
+  /* 🍃 GRASS */
+  --color-grass-1: #78c850;
+  --color-grass-2: #b3ec96;
 
   /* 🗻 GROUND */
   --color-ground-1: #e0c068;
   --color-ground-2: #f5db92;
 
-  /* 🤘 ROCK */
-  --color-rock-1: #b8a038;
-  --color-rock-2: #dcc871;
+  /* ❄ ICE */
+  --color-ice-1: #98d8d8;
+  --color-ice-2: #dcfdfd;
 
   /* 🔘 NORMAL */
   --color-normal-1: #a8a878;
   --color-normal-2: #cecea8;
+
+  /* 💀 POISON */
+  --color-poison-1: #a040a0;
+  --color-poison-2: #d786d7;
+
+  /* 😵 PSYCHIC */
+  --color-poison-1: #f85888;
+  --color-poison-2: #f6afc4;
+
+  /* 🤘 ROCK */
+  --color-rock-1: #b8a038;
+  --color-rock-2: #dcc871;
+
+  /* ⚙ STEEL */
+  --color-steel-1: #b8b8d0;
+  --color-steel-2: #dfdfe9;
+
+  /* 💧 WATER */
+  --color-water-1: #6890f0;
+  --color-water-2: #bbcfff;
 }
