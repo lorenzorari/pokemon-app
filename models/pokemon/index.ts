@@ -1,7 +1,4 @@
-import {
-  NamedAPIResource,
-  NamedAPIResources,
-} from './../common/named-api-resource';
+import { NamedAPIResource, NamedAPIResources } from '../named-api-resource';
 import { PokemonAbilities } from './ability';
 import { PokemonHeldItems } from './held-item';
 import { PokemonMoves } from './move';
