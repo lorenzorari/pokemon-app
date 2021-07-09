@@ -1,26 +1,34 @@
 import React, { useEffect, useState } from 'react';
-import './App.scss';
-import { Pokemon } from '../../../models/pokemon';
-import humps from 'humps';
+import { NamedAPIResources } from '../../../models/named-api-resource';
+import { Pokemons } from '../../../models/pokemon';
+import { getAllPokemons, getPokemon } from '../../services/pokemon';
 import PokemonCard from '../pokemon/card/card';
 import TextField from '../text-field';
+import './App.scss';
 
 function App() {
+  const INITIAL_URL = 'https://pokeapi.co/api/v2/pokemon';
   const [searchValue, setSearchValue] = useState('');
-  const [pokemon, setPokemon] = useState<Pokemon>(null);
+  const [pokemons, setPokemons] = useState<Pokemons>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const init = async () => {
-      fetch('https://pokeapi.co/api/v2/pokemon/charizard')
-        .then(res => res.json())
-        .then(res => {
-          const data = humps.camelizeKeys(res);
-          setPokemon(data as Record<string, any>);
-        });
+      const { results } = await getAllPokemons(INITIAL_URL);
+      loadPokemons(results);
+      setLoading(false);
     };
 
     init();
   }, []);
+
+  const loadPokemons = async (data: NamedAPIResources) => {
+    const pokemonData = await Promise.all(
+      data.map(async ({ url }) => await getPokemon(url))
+    );
+
+    setPokemons(pokemonData);
+  };
 
   const handlePokemonSearch = (e: React.FormEvent<HTMLInputElement>) => {
     setSearchValue(e.currentTarget.value);
@@ -34,13 +42,13 @@ function App() {
   };
 
   const searchPokemon = (wantedPokemon: string) => {
-    fetch(`https://pokeapi.co/api/v2/pokemon/${wantedPokemon}`)
-      .then(res => res.json())
-      .then(res => {
-        const data = humps.camelizeKeys(res);
-        setPokemon(data as Record<string, any>);
-      })
-      .catch();
+    // fetch(`${INITIAL_URL}/${wantedPokemon}`)
+    //   .then(res => res.json())
+    //   .then(res => {
+    //     const data = humps.camelizeKeys(res);
+    //     // setPokemons(data as Record<string, any>);
+    //   })
+    //   .catch();
   };
 
   return (
@@ -54,7 +62,13 @@ function App() {
         />
       </form>
 
-      <PokemonCard pokemon={pokemon} />
+      {!loading ? (
+        pokemons.map(pokemon => (
+          <PokemonCard key={pokemon.id} pokemon={pokemon} />
+        ))
+      ) : (
+        <div>Loading...</div>
+      )}
     </section>
   );
 }
