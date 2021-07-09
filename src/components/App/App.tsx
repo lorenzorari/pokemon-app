@@ -63,9 +63,11 @@ function App() {
       </form>
 
       {!loading ? (
-        pokemons.map(pokemon => (
-          <PokemonCard key={pokemon.id} pokemon={pokemon} />
-        ))
+        <div className="pokemons-container">
+          {pokemons.map(pokemon => (
+            <PokemonCard key={pokemon.id} pokemon={pokemon} />
+          ))}
+        </div>
       ) : (
         <div>Loading...</div>
       )}
