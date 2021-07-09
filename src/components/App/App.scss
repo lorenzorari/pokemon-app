@@ -7,7 +7,7 @@
 .pokemons-container {
   display: grid;
   grid-gap: 1rem;
-  grid-template-columns: repeat(auto-fit, 20rem);
+  grid-template-columns: repeat(auto-fit, 16rem);
   justify-content: center;
   margin-top: 1rem;
 }
