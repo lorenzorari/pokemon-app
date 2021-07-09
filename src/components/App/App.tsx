@@ -1,9 +1,5 @@
-import humps from 'humps';
 import React, { useEffect, useState } from 'react';
-import {
-  NamedAPIResource,
-  NamedAPIResources,
-} from '../../../models/named-api-resource';
+import { NamedAPIResources } from '../../../models/named-api-resource';
 import { Pokemons } from '../../../models/pokemon';
 import { getAllPokemons, getPokemon } from '../../services/pokemon';
 import PokemonCard from '../pokemon/card/card';
