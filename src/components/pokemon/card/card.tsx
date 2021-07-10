@@ -5,6 +5,7 @@ import PokemonCardTitle from './title';
 import TypeTag from '../../type-tag';
 import styles from './card.module.scss';
 import { setCSSProperty } from '../../../libs/utils/set-css-property';
+import VanillaTilt from 'vanilla-tilt';
 
 const PokemonCard = ({ pokemon }) => {
   const cardRef = useRef<HTMLHeadingElement>(null);
@@ -14,7 +15,10 @@ const PokemonCard = ({ pokemon }) => {
     setCSSProperty(cardRef.current, '--color-type-2', `var(--color-${type}-2)`);
   };
 
-  useEffect(() => setTheme(pokemon?.types[0].type.name));
+  useEffect(() => {
+    setTheme(pokemon?.types[0].type.name);
+    VanillaTilt.init(cardRef.current);
+  });
 
   return (
     <div ref={cardRef} className={styles.card}>
