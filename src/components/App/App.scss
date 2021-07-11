@@ -9,6 +9,7 @@
   grid-gap: 1rem;
   grid-template-columns: repeat(auto-fit, 14rem);
   justify-content: center;
-  margin: 2rem 0;
-  padding: 0 12rem;
+  margin: 2rem auto;
+  max-width: 60rem;
+  padding: 0 1rem;
 }
