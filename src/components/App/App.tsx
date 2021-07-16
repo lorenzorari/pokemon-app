@@ -5,7 +5,7 @@ import { Pokemons } from '../../../models/pokemon';
 import { getAllPokemons, getPokemon } from '../../services/pokemon';
 import PokemonCard from '../pokemon/card/card';
 import TextField from '../text-field';
-import './App.scss';
+import styles from './App.module.scss';
 
 function App() {
   const INITIAL_URL = 'https://pokeapi.co/api/v2/pokemon';
@@ -59,7 +59,7 @@ function App() {
 
   return (
     <section>
-      <form className="search-bar">
+      <form className={styles['search-bar']}>
         <TextField
           type="text"
           placeholder="Search a pokemon by name or id..."
@@ -69,7 +69,7 @@ function App() {
       </form>
 
       {!loading ? (
-        <div className="pokemons-container">
+        <div className={styles['pokemons-container']}>
           {pokemons.map(pokemon => (
             <PokemonCard key={pokemon.id} pokemon={pokemon} />
           ))}
