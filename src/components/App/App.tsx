@@ -55,8 +55,6 @@ function App() {
     setPokemons([pokemon]);
   };
 
-  console.log({ pokemons });
-
   return (
     <section>
       <form className={styles['search-bar']}>
