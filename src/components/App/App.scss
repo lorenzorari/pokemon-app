@@ -3,3 +3,13 @@
   justify-content: center;
   margin-top: 1rem;
 }
+
+.pokemons-container {
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: repeat(auto-fit, 14rem);
+  justify-content: center;
+  margin: 2rem auto;
+  max-width: 60rem;
+  padding: 0 1rem;
+}

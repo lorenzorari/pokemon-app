@@ -7,16 +7,17 @@
   align-items: center;
   flex-direction: column;
 
-  margin: 1rem auto 0 auto;
-  width: 20rem;
+  width: 14rem;
 
   border-radius: 8px;
   background-color: var(--color-type-2);
   font-family: 'Sen', sans-serif;
+  box-shadow: 0px 4px 10px 2px rgb(177, 177, 177);
+  user-select: none;
 }
 
 .figure {
-  margin: 2rem 0 0 0;
-  width: 20rem;
+  margin: 3rem 0 0 0;
+  width: 14rem;
   z-index: 1;
 }

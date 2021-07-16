@@ -1,3 +1,4 @@
+import humps from 'humps';
 import React, { useEffect, useState } from 'react';
 import { NamedAPIResources } from '../../../models/named-api-resource';
 import { Pokemons } from '../../../models/pokemon';
@@ -24,7 +25,7 @@ function App() {
 
   const loadPokemons = async (data: NamedAPIResources) => {
     const pokemonData = await Promise.all(
-      data.map(async ({ url }) => await getPokemon(url))
+      data.map(async ({ name }) => await getPokemon(name))
     );
 
     setPokemons(pokemonData);
@@ -41,31 +42,38 @@ function App() {
     }
   };
 
-  const searchPokemon = (wantedPokemon: string) => {
-    // fetch(`${INITIAL_URL}/${wantedPokemon}`)
-    //   .then(res => res.json())
-    //   .then(res => {
-    //     const data = humps.camelizeKeys(res);
-    //     // setPokemons(data as Record<string, any>);
-    //   })
-    //   .catch();
+  const searchPokemon = async (wantedPokemon: string) => {
+    if (wantedPokemon === '') {
+      const { results } = await getAllPokemons(INITIAL_URL);
+      setLoading(true);
+      await loadPokemons(results);
+      setLoading(false);
+      return;
+    }
+
+    const pokemon = await getPokemon(wantedPokemon);
+    setPokemons([pokemon]);
   };
+
+  console.log({ pokemons });
 
   return (
     <section>
       <form className="search-bar">
         <TextField
           type="text"
-          placeholder="Search pokemon"
+          placeholder="Search a pokemon by name or id..."
           onChange={e => handlePokemonSearch(e)}
           onKeyPress={e => handleKeyPress(e)}
         />
       </form>
 
       {!loading ? (
-        pokemons.map(pokemon => (
-          <PokemonCard key={pokemon.id} pokemon={pokemon} />
-        ))
+        <div className="pokemons-container">
+          {pokemons.map(pokemon => (
+            <PokemonCard key={pokemon.id} pokemon={pokemon} />
+          ))}
+        </div>
       ) : (
         <div>Loading...</div>
       )}
