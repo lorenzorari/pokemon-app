@@ -1,23 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Sen&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;700&display=swap');
 
 .card {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+  padding: 1.6rem 1.6rem 0 1.6rem;
+  width: 10rem;
 
-  width: 14rem;
-
-  border-radius: 8px;
-  background-color: var(--color-type-2);
-  font-family: 'Sen', sans-serif;
+  border-radius: 20px;
+  background-color: var(--color-type-1);
   box-shadow: 0px 4px 10px 2px rgb(177, 177, 177);
+  font-family: 'Nunito', sans-serif;
   user-select: none;
 }
 
 .figure {
-  margin: 3rem 0 0 0;
-  width: 14rem;
-  z-index: 1;
+  margin: 1rem auto;
+  width: 10rem;
 }
