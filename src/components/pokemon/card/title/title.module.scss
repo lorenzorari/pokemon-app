@@ -1,21 +1,7 @@
 .title {
-  position: relative;
-  align-self: flex-start;
   margin: 0;
-  padding: 0.5rem 1rem;
-  background-color: var(--color-type-1);
-  border-top-left-radius: 8px;
+  padding: 0;
   text-transform: capitalize;
   color: var(--color-white);
-  letter-spacing: 1px;
-  font-size: 1rem;
-
-  &:before {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    border-top: 14px solid transparent;
-    border-right: 14px solid var(--color-type-2);
-  }
+  font-size: 1.2rem;
 }
