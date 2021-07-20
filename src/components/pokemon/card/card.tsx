@@ -5,6 +5,7 @@ import PokemonCardTitle from './title';
 import TypeTag from '../../type-tag';
 import { Pokemon } from '../../../../models/pokemon';
 import styles from './card.module.scss';
+import { ReactSVG } from 'react-svg';
 
 interface Props {
   pokemon: Pokemon;
@@ -24,11 +25,18 @@ const PokemonCard = ({ pokemon }: Props) => {
 
       <PokemonCardId pokemon={pokemon} />
 
+      <div className={styles['types-container']}>
+        <ReactSVG
+          className={styles['type']}
+          src={`./assets/${pokemonType}.svg`}
+        />
+      </div>
+
       <figure className={styles.figure}>
         <PokemonCardImage pokemon={pokemon} />
       </figure>
 
-      <TypeTag value={pokemon?.types[0].type.name} />
+      {/* <TypeTag value={pokemon?.types[0].type.name} /> */}
     </div>
   );
 };
