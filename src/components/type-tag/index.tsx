@@ -1,29 +1,16 @@
-import React, { useEffect, useRef } from 'react';
-import { setCSSProperty } from '../../libs/utils/set-css-property';
+import React from 'react';
+import { ReactSVG } from 'react-svg';
 import styles from './type-tag.module.scss';
 
-const TypeTag = ({ value }) => {
-  const typeRef = useRef<HTMLDivElement>(null);
+interface Props {
+  value: string;
+  style?: React.CSSProperties;
+}
 
-  const setBackgroundColor = (type: string) => {
-    setCSSProperty(
-      typeRef.current,
-      'background-color',
-      `var(--color-${type}-1`
-    );
-  };
+const TypeTag = ({ value, style }: Props) => {
+  const src = `./assets/${value}.svg`;
 
-  const setTheme = type => {
-    setBackgroundColor(type);
-  };
-
-  useEffect(() => setTheme(value));
-
-  return (
-    <div ref={typeRef} className={styles.type}>
-      {value}
-    </div>
-  );
+  return <ReactSVG style={style} className={styles.type} src={src} />;
 };
 
 export default TypeTag;
