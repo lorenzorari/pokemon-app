@@ -10,7 +10,12 @@ interface Props {
 const TypeTag = ({ value, style }: Props) => {
   const src = `./assets/${value}.svg`;
 
-  return <ReactSVG style={style} className={styles.type} src={src} />;
+  const tagStyle = {
+    ...style,
+    '--color-type-1': `var(--color-${value}-1)`,
+  };
+
+  return <ReactSVG style={tagStyle} className={styles.type} src={src} />;
 };
 
 export default TypeTag;
