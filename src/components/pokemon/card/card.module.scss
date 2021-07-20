@@ -16,30 +16,6 @@
   margin-top: 0.5rem;
 }
 
-.type {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  height: 1.3rem;
-  width: 1.3rem;
-  padding: 0.4rem;
-  margin-right: 0.5rem;
-
-  background-color: var(--color-white);
-  border-radius: 50%;
-
-  svg {
-    display: block;
-    height: 100%;
-    width: 100%;
-
-    path {
-      fill: var(--color-type-1);
-    }
-  }
-}
-
 .figure {
   margin: 1rem auto;
   width: 10rem;
