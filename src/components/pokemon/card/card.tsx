@@ -12,12 +12,18 @@ interface Props {
 }
 
 const PokemonCard = ({ pokemon }: Props) => {
-  const pokemonType = pokemon.types[0].type.name;
+  const pokemonTypes = pokemon.types;
+  const pokemonType = pokemonTypes[0].type.name;
 
   const style = {
     '--color-type-1': `var(--color-${pokemonType}-1)`,
     '--color-type-2': `var(--color-${pokemonType}-2)`,
   } as React.CSSProperties;
+
+  const styleTypeTag = {
+    padding: '0.4rem',
+    marginRight: '0.5rem',
+  };
 
   return (
     <div style={style} className={styles.card}>
@@ -26,17 +32,19 @@ const PokemonCard = ({ pokemon }: Props) => {
       <PokemonCardId pokemon={pokemon} />
 
       <div className={styles['types-container']}>
-        <ReactSVG
-          className={styles['type']}
-          src={`./assets/${pokemonType}.svg`}
-        />
+        {pokemonTypes.map(({ type }, i) => (
+          <TypeTag key={i} style={styleTypeTag} value={type.name} />
+        ))}
       </div>
 
       <figure className={styles.figure}>
         <PokemonCardImage pokemon={pokemon} />
       </figure>
 
-      {/* <TypeTag value={pokemon?.types[0].type.name} /> */}
+      <ReactSVG
+        className={styles.bgImage}
+        src={`./assets/${pokemonType}.svg`}
+      />
     </div>
   );
 };
