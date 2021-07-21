@@ -42,7 +42,7 @@ const PokemonCard = ({ pokemon }: Props) => {
       </figure>
 
       <ReactSVG
-        className={styles.bgImage}
+        className={styles['background-image']}
         src={`./assets/${pokemonType}.svg`}
       />
     </div>
