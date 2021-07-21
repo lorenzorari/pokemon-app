@@ -42,8 +42,10 @@
   --color-ghost-2: #b19dd3;
 
   /* 🍃 GRASS */
-  --color-grass-1: #78c850;
-  --color-grass-2: #b3ec96;
+  --color-grass-1: hsla(137, 52%, 65%, 1);
+  --color-grass-2: hsla(137, 52%, 76%, 1);
+  /* --color-grass-1: #78c850;
+  --color-grass-2: #b3ec96; */
 
   /* 🗻 GROUND */
   --color-ground-1: #e0c068;
@@ -62,8 +64,8 @@
   --color-poison-2: #d786d7;
 
   /* 😵 PSYCHIC */
-  --color-poison-1: #f85888;
-  --color-poison-2: #f6afc4;
+  --color-psychic-1: #f85888;
+  --color-psychic-2: #f6afc4;
 
   /* 🤘 ROCK */
   --color-rock-1: #b8a038;
