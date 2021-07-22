@@ -35,7 +35,7 @@ function App() {
     setPokemons([...pokemons, ...pokemonData]);
   };
 
-  const handleNextPage = async () => {
+  const handleMorePokemon = async () => {
     const { results, next, previous } = await getAllPokemons(nextPageUrl);
     setPreviousPageUrl(previous);
     setNextPageUrl(next);
@@ -85,7 +85,7 @@ function App() {
             ))}
           </div>
 
-          <button onClick={handleNextPage}>More Pokemon</button>
+          <button onClick={handleMorePokemon}>More Pokemon</button>
         </>
       ) : (
         <div>Loading...</div>
