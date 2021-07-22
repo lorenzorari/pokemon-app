@@ -1,23 +1,50 @@
-@import url('https://fonts.googleapis.com/css2?family=Sen&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;700&display=swap');
 
 .card {
   position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+  padding: 1.6rem 1.6rem 0 1.6rem;
+  width: 10.5rem;
 
-  width: 14rem;
+  transition: box-shadow, transform ease 0.2s;
+  transform: perspective(1px) translateZ(0) scale(1);
 
-  border-radius: 8px;
-  background-color: var(--color-type-2);
-  font-family: 'Sen', sans-serif;
-  box-shadow: 0px 4px 10px 2px rgb(177, 177, 177);
+  border-radius: 20px;
+  background-color: var(--color-type-1);
+  box-shadow: 0px 0px 30px 11px hsla(0, 0%, 0%, 0.25);
+  font-family: 'Nunito', sans-serif;
+  overflow: hidden;
   user-select: none;
+  z-index: 1;
+
+  &:hover {
+    box-shadow: 0px 0px 30px 11px var(--color-type-2);
+    transform: scale(1.02);
+  }
+}
+
+.types-container {
+  display: flex;
+  margin-top: 0.5rem;
 }
 
 .figure {
-  margin: 3rem 0 0 0;
-  width: 14rem;
-  z-index: 1;
+  margin: 1rem auto;
+  width: 10rem;
+}
+
+.background-image {
+  position: absolute;
+  bottom: -2.4rem;
+  left: 2.5rem;
+  right: -3rem;
+  z-index: -1;
+
+  svg {
+    height: 100%;
+    width: 100%;
+
+    path {
+      fill: var(--color-type-2);
+    }
+  }
 }

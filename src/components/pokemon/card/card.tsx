@@ -1,36 +1,50 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import PokemonCardId from './id';
 import PokemonCardImage from './image';
 import PokemonCardTitle from './title';
 import TypeTag from '../../type-tag';
+import { Pokemon } from '../../../../models/pokemon';
 import styles from './card.module.scss';
-import { setCSSProperty } from '../../../libs/utils/set-css-property';
-import VanillaTilt from 'vanilla-tilt';
+import { ReactSVG } from 'react-svg';
 
-const PokemonCard = ({ pokemon }) => {
-  const cardRef = useRef<HTMLHeadingElement>(null);
+interface Props {
+  pokemon: Pokemon;
+}
 
-  const setTheme = (type: string) => {
-    setCSSProperty(cardRef.current, '--color-type-1', `var(--color-${type}-1)`);
-    setCSSProperty(cardRef.current, '--color-type-2', `var(--color-${type}-2)`);
+const PokemonCard = ({ pokemon }: Props) => {
+  const pokemonTypes = pokemon.types;
+  const pokemonType = pokemonTypes[0].type.name;
+
+  const style = {
+    '--color-type-1': `var(--color-${pokemonType}-1)`,
+    '--color-type-2': `var(--color-${pokemonType}-2)`,
+  } as React.CSSProperties;
+
+  const styleTypeTag = {
+    padding: '0.4rem',
+    marginRight: '0.5rem',
   };
 
-  useEffect(() => {
-    setTheme(pokemon?.types[0].type.name);
-    VanillaTilt.init(cardRef.current);
-  });
-
   return (
-    <div ref={cardRef} className={styles.card}>
+    <div style={style} className={styles.card}>
       <PokemonCardTitle pokemon={pokemon} />
 
       <PokemonCardId pokemon={pokemon} />
+
+      <div className={styles['types-container']}>
+        {pokemonTypes.map(({ type }, i) => (
+          <TypeTag key={i} style={styleTypeTag} value={type.name} />
+        ))}
+      </div>
 
       <figure className={styles.figure}>
         <PokemonCardImage pokemon={pokemon} />
       </figure>
 
-      <TypeTag value={pokemon?.types[0].type.name} />
+      <ReactSVG
+        className={styles['background-image']}
+        src={`./assets/${pokemonType}.svg`}
+      />
     </div>
   );
 };
