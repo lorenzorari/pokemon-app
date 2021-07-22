@@ -11,11 +11,15 @@ function App() {
   const INITIAL_URL = 'https://pokeapi.co/api/v2/pokemon';
   const [searchValue, setSearchValue] = useState('');
   const [pokemons, setPokemons] = useState<Pokemons>([]);
+  const [previousPageUrl, setPreviousPageUrl] = useState<string>(null);
+  const [nextPageUrl, setNextPageUrl] = useState<string>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const init = async () => {
-      const { results } = await getAllPokemons(INITIAL_URL);
+      const { results, next, previous } = await getAllPokemons(INITIAL_URL);
+      setPreviousPageUrl(previous);
+      setNextPageUrl(next);
       loadPokemons(results);
       setLoading(false);
     };
@@ -28,7 +32,14 @@ function App() {
       data.map(async ({ name }) => await getPokemon(name))
     );
 
-    setPokemons(pokemonData);
+    setPokemons([...pokemons, ...pokemonData]);
+  };
+
+  const handleNextPage = async () => {
+    const { results, next, previous } = await getAllPokemons(nextPageUrl);
+    setPreviousPageUrl(previous);
+    setNextPageUrl(next);
+    loadPokemons(results);
   };
 
   const handlePokemonSearch = (e: React.FormEvent<HTMLInputElement>) => {
@@ -66,12 +77,16 @@ function App() {
         />
       </form>
 
-      {!loading ? (
-        <div className={styles['pokemons-container']}>
-          {pokemons.map(pokemon => (
-            <PokemonCard key={pokemon.id} pokemon={pokemon} />
-          ))}
-        </div>
+      {!loading && pokemons.length > 0 ? (
+        <>
+          <div className={styles['pokemons-container']}>
+            {pokemons.map(pokemon => (
+              <PokemonCard key={pokemon.id} pokemon={pokemon} />
+            ))}
+          </div>
+
+          <button onClick={handleNextPage}>More Pokemon</button>
+        </>
       ) : (
         <div>Loading...</div>
       )}
