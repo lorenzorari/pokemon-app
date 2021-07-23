@@ -1,5 +1,5 @@
 import React from 'react';
-import { zeroPad } from '../../../../libs/utils/zero-pad';
+import { zeroPad } from '../../../../utils/zero-pad';
 import styles from './id.module.scss';
 
 const PokemonCardId = ({ pokemon }) => {
