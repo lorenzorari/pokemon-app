@@ -7,12 +7,8 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/details">
-          <PokemonDetails />
-        </Route>
-        <Route path="/">
-          <Home />
-        </Route>
+        <Route exact path="/details" component={PokemonDetails} />
+        <Route exact path="/" component={Home} />
       </Switch>
     </Router>
   );
