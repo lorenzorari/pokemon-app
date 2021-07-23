@@ -5,18 +5,16 @@ import PokemonDetails from '../../pages/pokemon-details';
 
 function App() {
   return (
-    <>
-      <Router>
-        <Switch>
-          <Route path="/details">
-            <PokemonDetails />
-          </Route>
-          <Route path="/">
-            <Home />
-          </Route>
-        </Switch>
-      </Router>
-    </>
+    <Router>
+      <Switch>
+        <Route path="/details">
+          <PokemonDetails />
+        </Route>
+        <Route path="/">
+          <Home />
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 
