@@ -1,5 +1,9 @@
+import { Names } from '../name';
+import { APIResource } from './../api-resource';
+import { Descriptions } from './../description';
 import { NamedAPIResource } from './../named-api-resource';
 import { SpeciesDexEntries } from './dex-entry';
+import { FlavorTexts } from './flavor-text';
 import { Genera } from './genus';
 import { PalParkEncounterAreas } from './pal-park-encounter-area';
 import { SpeciesVarieties } from './variety';
@@ -23,13 +27,13 @@ export interface Species {
   color?: NamedAPIResource;
   shape?: NamedAPIResource;
   evolvesFromSpecies?: NamedAPIResource;
-  evolutionChain?: any;
+  evolutionChain?: APIResource;
   habitat?: NamedAPIResource;
   generation?: NamedAPIResource;
-  names?: any;
+  names?: Names;
   palParkEncounters?: PalParkEncounterAreas;
-  flavorTextEntries?: any;
-  formDescriptions?: any;
+  flavorTextEntries?: FlavorTexts;
+  formDescriptions?: Descriptions;
   genera?: Genera;
   varieties?: SpeciesVarieties;
 }
