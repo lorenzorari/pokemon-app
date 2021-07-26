@@ -5,6 +5,7 @@ import { Pokemon } from '../../../models/pokemon';
 import PokemonCardId from '../../components/pokemon/card/id';
 import PokemonCardImage from '../../components/pokemon/card/image';
 import PokemonCardTitle from '../../components/pokemon/card/title';
+import PokemonDetailsBiography from '../../components/pokemon/details/biography';
 import TypeTag from '../../components/type-tag';
 import { getPokemon } from '../../services/pokemon';
 import styles from './pokemon-details.module.scss';
@@ -58,20 +59,7 @@ const PokemonDetails = () => {
             />
           </div>
 
-          <div className={styles['details-container']}>
-            <ul className={styles['details-tabs']}>
-              <li>Biography</li>
-              <li>Stats</li>
-              <li>Evolutions</li>
-            </ul>
-
-            <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vero
-              necessitatibus, accusantium aliquid dolorem dolor odit sit sunt?
-              Adipisci, nesciunt! Cupiditate minus delectus, facilis voluptates
-              obcaecati alias accusantium. Fugiat, qui enim.
-            </p>
-          </div>
+          <PokemonDetailsBiography />
         </>
       )}
     </main>
