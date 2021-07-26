@@ -4,7 +4,7 @@ import { Genera } from './genus';
 import { PalParkEncounterAreas } from './pal-park-encounter-area';
 import { SpeciesVarieties } from './variety';
 
-interface Species {
+export interface Species {
   id?: number;
   name?: string;
   order?: number;
