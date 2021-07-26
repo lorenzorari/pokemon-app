@@ -1,0 +1,67 @@
+.main {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin: 0;
+  height: 100vh;
+  padding: 4rem;
+  background-color: var(--color-type-1);
+  color: var(--color-white);
+  overflow: hidden;
+}
+
+.basic-info-container {
+  position: relative;
+  width: 40rem;
+  // background-color: burlywood;
+  z-index: 1;
+}
+
+.pokemon-image {
+  display: flex;
+  justify-content: center;
+  width: auto;
+  margin-top: 8rem;
+  // background-color: #fff;
+
+  img {
+    width: auto;
+    min-width: 5rem;
+    max-width: 24rem;
+  }
+}
+
+.background-image {
+  position: absolute;
+  bottom: -30rem;
+  left: -10rem;
+  width: 60rem;
+
+  z-index: -1;
+
+  svg {
+    height: 100%;
+    width: 100%;
+
+    path {
+      fill: var(--color-type-2);
+    }
+  }
+}
+
+.details-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 35rem;
+  // background-color: burlywood;
+}
+
+.details-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 2rem;
+}
