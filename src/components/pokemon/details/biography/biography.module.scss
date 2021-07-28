@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   max-width: 35rem;
-  // background-color: burlywood;
 }
 
 .details-tabs {
@@ -13,4 +12,9 @@
   padding: 0;
   list-style: none;
   font-size: 2rem;
+}
+
+.description {
+  font-weight: 300;
+  color: hsl(0, 0%, 80%);
 }

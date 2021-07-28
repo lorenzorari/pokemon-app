@@ -10,7 +10,7 @@ const PokemonDetailsBiography = () => {
         <li>Evolutions</li>
       </ul>
 
-      <p>
+      <p className={styles.description}>
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vero
         necessitatibus, accusantium aliquid dolorem dolor odit sit sunt?
         Adipisci, nesciunt! Cupiditate minus delectus, facilis voluptates
