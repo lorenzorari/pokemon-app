@@ -1,4 +1,5 @@
 import React from 'react';
+import PokemonDescription from '../../description';
 import PokemonInformation from '../../information';
 import styles from './biography.module.scss';
 
@@ -11,12 +12,12 @@ const PokemonDetailsBiography = () => {
         <li>Evolutions</li>
       </ul>
 
-      <p className={styles.description}>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vero
-        necessitatibus, accusantium aliquid dolorem dolor odit sit sunt?
-        Adipisci, nesciunt! Cupiditate minus delectus, facilis voluptates
-        obcaecati alias accusantium. Fugiat, qui enim.
-      </p>
+      <PokemonDescription>
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consequatur
+        doloremque dolore vero, ipsa quidem, cupiditate corrupti numquam,
+        doloribus quisquam magni animi eius dicta nostrum repudiandae esse
+        placeat aspernatur? Maxime, quia.
+      </PokemonDescription>
 
       <ul className={styles['info-container']}>
         <PokemonInformation title="Species" content="content" />
