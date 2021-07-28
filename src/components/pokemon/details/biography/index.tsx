@@ -1,4 +1,5 @@
 import React from 'react';
+import PokemonInformation from '../../information';
 import styles from './biography.module.scss';
 
 const PokemonDetailsBiography = () => {
@@ -16,6 +17,14 @@ const PokemonDetailsBiography = () => {
         Adipisci, nesciunt! Cupiditate minus delectus, facilis voluptates
         obcaecati alias accusantium. Fugiat, qui enim.
       </p>
+
+      <ul className={styles['info-container']}>
+        <PokemonInformation title="Species" content="content" />
+        <PokemonInformation title="Height" content="content" />
+        <PokemonInformation title="Weight" content="content" />
+        <PokemonInformation title="Abilities" content="content" />
+        <PokemonInformation title="Gender" content="content" />
+      </ul>
     </div>
   );
 };
