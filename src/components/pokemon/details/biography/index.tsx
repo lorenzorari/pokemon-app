@@ -20,11 +20,11 @@ const PokemonDetailsBiography = () => {
       </PokemonDescription>
 
       <ul className={styles['info-container']}>
-        <PokemonInformation title="Species" content="content" />
-        <PokemonInformation title="Height" content="content" />
-        <PokemonInformation title="Weight" content="content" />
-        <PokemonInformation title="Abilities" content="content" />
-        <PokemonInformation title="Gender" content="content" />
+        <PokemonInformation title="Species">content</PokemonInformation>
+        <PokemonInformation title="Height">content</PokemonInformation>
+        <PokemonInformation title="Weight">content</PokemonInformation>
+        <PokemonInformation title="Abilities">content</PokemonInformation>
+        <PokemonInformation title="Gender">content</PokemonInformation>
       </ul>
     </div>
   );
