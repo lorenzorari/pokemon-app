@@ -7,6 +7,7 @@ import PokemonCardImage from '../../components/pokemon/card/image';
 import PokemonCardTitle from '../../components/pokemon/card/title';
 import PokemonDescription from '../../components/pokemon/description';
 import PokemonDetailsBiography from '../../components/pokemon/details/biography';
+import Tab from '../../components/tab';
 import TypeTag from '../../components/type-tag';
 import { getPokemon } from '../../services/pokemon';
 import styles from './pokemon-details.module.scss';
@@ -18,6 +19,7 @@ interface Params {
 const PokemonDetails = () => {
   const { id } = useParams<Params>();
   const [pokemon, setPokemon] = useState<Pokemon>(null);
+  const [activeTab, setActiveTab] = useState<string>('biography');
   const pokemonType = pokemon?.types[0].type.name;
 
   const style = {
@@ -62,9 +64,24 @@ const PokemonDetails = () => {
 
           <div className={styles['details-container']}>
             <ul className={styles['details-tabs']}>
-              <li>Biography</li>
-              <li>Stats</li>
-              <li>Evolutions</li>
+              <Tab
+                onClick={() => setActiveTab('biography')}
+                isActive={activeTab === 'biography'}
+              >
+                Biography
+              </Tab>
+              <Tab
+                onClick={() => setActiveTab('stats')}
+                isActive={activeTab === 'stats'}
+              >
+                Stats
+              </Tab>
+              <Tab
+                onClick={() => setActiveTab('evolutions')}
+                isActive={activeTab === 'evolutions'}
+              >
+                Evolutions
+              </Tab>
             </ul>
 
             <PokemonDescription>
