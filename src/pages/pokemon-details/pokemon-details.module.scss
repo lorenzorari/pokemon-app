@@ -61,7 +61,12 @@
   margin: 0;
   padding: 0;
 
-  color: hsl(0, 0, 80%);
+  color: var(--color-type-2);
   font-size: 2rem;
+  font-weight: 700;
   list-style: none;
+
+  li:hover {
+    color: var(--color-white);
+  }
 }
