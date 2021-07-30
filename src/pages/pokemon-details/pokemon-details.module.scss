@@ -55,7 +55,7 @@
 
 .details-tabs {
   display: grid;
-  grid-template-columns: 10rem 5rem 10rem;
+  grid-template-columns: repeat(3, auto);
   column-gap: 2rem;
 
   margin: 0;
@@ -68,5 +68,6 @@
 
   li:hover {
     color: var(--color-white);
+    cursor: pointer;
   }
 }
