@@ -5,7 +5,6 @@ import { Pokemon } from '../../../models/pokemon';
 import PokemonCardId from '../../components/pokemon/card/id';
 import PokemonCardImage from '../../components/pokemon/card/image';
 import PokemonCardTitle from '../../components/pokemon/card/title';
-import PokemonDescription from '../../components/pokemon/description';
 import PokemonDetailsBiography from '../../components/pokemon/details/biography';
 import Tab from '../../components/tab';
 import TypeTag from '../../components/type-tag';
@@ -83,13 +82,6 @@ const PokemonDetails = () => {
                 Evolutions
               </Tab>
             </ul>
-
-            <PokemonDescription>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-              Consequatur doloremque dolore vero, ipsa quidem, cupiditate
-              corrupti numquam, doloribus quisquam magni animi eius dicta
-              nostrum repudiandae esse placeat aspernatur? Maxime, quia.
-            </PokemonDescription>
 
             <PokemonDetailsBiography />
           </div>
