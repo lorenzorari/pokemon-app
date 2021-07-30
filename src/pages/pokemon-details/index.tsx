@@ -15,10 +15,17 @@ interface Params {
   id: string;
 }
 
+const BIOGRAPHY = 'biography';
+const STATS = 'stats';
+const EVOLUTIONS = 'evolutions';
+
+const detailsView = { [BIOGRAPHY]: <PokemonDetailsBiography /> };
+
 const PokemonDetails = () => {
   const { id } = useParams<Params>();
   const [pokemon, setPokemon] = useState<Pokemon>(null);
-  const [activeTab, setActiveTab] = useState<string>('biography');
+  const [activeTab, setActiveTab] = useState<string>(BIOGRAPHY);
+
   const pokemonType = pokemon?.types[0].type.name;
 
   const style = {
@@ -64,26 +71,26 @@ const PokemonDetails = () => {
           <div className={styles['details-container']}>
             <ul className={styles['details-tabs']}>
               <Tab
-                onClick={() => setActiveTab('biography')}
-                isActive={activeTab === 'biography'}
+                onClick={() => setActiveTab(BIOGRAPHY)}
+                isActive={activeTab === BIOGRAPHY}
               >
                 Biography
               </Tab>
               <Tab
-                onClick={() => setActiveTab('stats')}
-                isActive={activeTab === 'stats'}
+                onClick={() => setActiveTab(STATS)}
+                isActive={activeTab === STATS}
               >
                 Stats
               </Tab>
               <Tab
-                onClick={() => setActiveTab('evolutions')}
-                isActive={activeTab === 'evolutions'}
+                onClick={() => setActiveTab(EVOLUTIONS)}
+                isActive={activeTab === EVOLUTIONS}
               >
                 Evolutions
               </Tab>
             </ul>
 
-            <PokemonDetailsBiography />
+            {detailsView[activeTab]}
           </div>
         </>
       )}
