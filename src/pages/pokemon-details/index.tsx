@@ -9,7 +9,9 @@ import PokemonDetailsBiography from '../../components/pokemon/details/biography'
 import Tab from '../../components/tab';
 import TypeTag from '../../components/type-tag';
 import { getPokemon } from '../../services/pokemon';
+import { Species } from '../../../models/species';
 import styles from './pokemon-details.module.scss';
+import humps from 'humps';
 
 interface Params {
   id: string;
@@ -19,11 +21,10 @@ const BIOGRAPHY = 'biography';
 const STATS = 'stats';
 const EVOLUTIONS = 'evolutions';
 
-const detailsView = { [BIOGRAPHY]: <PokemonDetailsBiography /> };
-
 const PokemonDetails = () => {
   const { id } = useParams<Params>();
   const [pokemon, setPokemon] = useState<Pokemon>(null);
+  const [species, setSpecies] = useState<Species>(null);
   const [activeTab, setActiveTab] = useState<string>(BIOGRAPHY);
 
   const pokemonType = pokemon?.types[0].type.name;
@@ -38,14 +39,31 @@ const PokemonDetails = () => {
     margin: '.5rem .5rem 0 0',
   };
 
+  const tabView = {
+    [BIOGRAPHY]: species && (
+      <PokemonDetailsBiography pokemon={pokemon} species={species} />
+    ),
+  };
+
   useEffect(() => {
     const init = async () => {
-      const data = await getPokemon(id);
-      setPokemon(data);
+      const pokemonData = await getPokemon(id);
+
+      const speciesData = await new Promise(resolve => {
+        fetch(pokemonData.species.url)
+          .then(res => res.json())
+          .then(res => {
+            const data = humps.camelizeKeys(res);
+            return resolve(data as Species);
+          });
+      });
+
+      setPokemon(pokemonData);
+      setSpecies(speciesData);
     };
 
     init();
-  });
+  }, []);
 
   return (
     <main style={style} className={styles.main}>
@@ -90,7 +108,7 @@ const PokemonDetails = () => {
               </Tab>
             </ul>
 
-            {detailsView[activeTab]}
+            {tabView[activeTab]}
           </div>
         </>
       )}
