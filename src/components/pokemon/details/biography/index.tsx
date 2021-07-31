@@ -1,24 +1,64 @@
 import React from 'react';
+import { Pokemon } from '../../../../../models/pokemon';
+import { Species } from '../../../../../models/species';
 import PokemonDescription from '../../description';
 import PokemonInformation from '../../information';
 import styles from './biography.module.scss';
 
-const PokemonDetailsBiography = () => {
+interface Props {
+  pokemon: Pokemon;
+  species: Species;
+}
+
+const PokemonDetailsBiography = ({ pokemon, species }: Props) => {
+  const getDescription = () => {
+    return species.flavorTextEntries.find(
+      ({ language }) => language.name === 'en'
+    ).flavorText;
+  };
+
+  const getSpecies = () => {
+    return species.genera.find(({ language }) => language.name === 'en').genus;
+  };
+
+  const getAnthropometry = (value: number) => {
+    return (value / 10).toFixed(1);
+  };
+
+  const getGender = () => {
+    switch (species.genderRate) {
+      case -1:
+        return 'Genderless';
+
+      case 0:
+        return 'Male only';
+
+      case 8:
+        return 'Female only';
+
+      default:
+        return 'Male & Female';
+    }
+  };
+
   return (
     <>
-      <PokemonDescription>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consequatur
-        doloremque dolore vero, ipsa quidem, cupiditate corrupti numquam,
-        doloribus quisquam magni animi eius dicta nostrum repudiandae esse
-        placeat aspernatur? Maxime, quia.
-      </PokemonDescription>
+      <PokemonDescription>{getDescription()}</PokemonDescription>
 
       <ul className={styles['info-container']}>
-        <PokemonInformation title="Species">content</PokemonInformation>
-        <PokemonInformation title="Height">content</PokemonInformation>
-        <PokemonInformation title="Weight">content</PokemonInformation>
+        <PokemonInformation title="Species">{getSpecies()}</PokemonInformation>
+
+        <PokemonInformation title="Height">
+          {getAnthropometry(pokemon.height)} m
+        </PokemonInformation>
+
+        <PokemonInformation title="Weight">
+          {getAnthropometry(pokemon.weight)} kg
+        </PokemonInformation>
+
         <PokemonInformation title="Abilities">content</PokemonInformation>
-        <PokemonInformation title="Gender">content</PokemonInformation>
+
+        <PokemonInformation title="Gender">{getGender()}</PokemonInformation>
       </ul>
     </>
   );
