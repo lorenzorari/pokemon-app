@@ -12,6 +12,7 @@ import { getPokemon } from '../../services/pokemon';
 import { Species } from '../../../models/species';
 import styles from './pokemon-details.module.scss';
 import humps from 'humps';
+import PokemonDetailsStats from '../../components/pokemon/details/stats/stats';
 
 interface Params {
   id: string;
@@ -25,7 +26,7 @@ const PokemonDetails = () => {
   const { id } = useParams<Params>();
   const [pokemon, setPokemon] = useState<Pokemon>(null);
   const [species, setSpecies] = useState<Species>(null);
-  const [activeTab, setActiveTab] = useState<string>(BIOGRAPHY);
+  const [activeTab, setActiveTab] = useState<string>(STATS);
 
   const pokemonType = pokemon?.types[0].type.name;
 
@@ -43,6 +44,7 @@ const PokemonDetails = () => {
     [BIOGRAPHY]: species && (
       <PokemonDetailsBiography pokemon={pokemon} species={species} />
     ),
+    [STATS]: <PokemonDetailsStats />,
   };
 
   useEffect(() => {
