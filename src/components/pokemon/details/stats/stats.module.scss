@@ -1,0 +1,7 @@
+.stats-container {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(3, auto);
+  gap: 0.5rem 4rem;
+  margin-top: 1.5rem;
+}
