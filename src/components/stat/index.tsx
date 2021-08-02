@@ -3,7 +3,7 @@ import styles from './stat.module.scss';
 
 interface Props {
   title: string;
-  value: string;
+  value: number;
 }
 
 const Stat = ({ title, value }: Props) => {
