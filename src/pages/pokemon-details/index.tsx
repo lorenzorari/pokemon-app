@@ -13,6 +13,7 @@ import { Species } from '../../../models/species';
 import styles from './pokemon-details.module.scss';
 import humps from 'humps';
 import PokemonDetailsStats from '../../components/pokemon/details/stats/stats';
+import PokemonCard from '../../components/pokemon/card/card';
 
 interface Params {
   id: string;
@@ -28,12 +29,12 @@ const PokemonDetails = () => {
   const [species, setSpecies] = useState<Species>(null);
   const [activeTab, setActiveTab] = useState<string>(STATS);
 
-  const pokemonType = pokemon?.types[0].type.name;
+  // const pokemonType = pokemon?.types[0].type.name;
 
-  const style = {
-    '--color-type-1': `var(--color-${pokemonType}-1)`,
-    '--color-type-2': `var(--color-${pokemonType}-2)`,
-  } as React.CSSProperties;
+  // const style = {
+  //   '--color-type-1': `var(--color-${pokemonType}-1)`,
+  //   '--color-type-2': `var(--color-${pokemonType}-2)`,
+  // } as React.CSSProperties;
 
   const styleTypeTag = {
     padding: '.5rem',
@@ -68,24 +69,11 @@ const PokemonDetails = () => {
   }, []);
 
   return (
-    <main style={style} className={styles.main}>
+    <main className={styles.main}>
       {pokemon && (
         <>
           <div className={styles['basic-info-container']}>
-            <div className={styles['basic-info']}>
-              <PokemonCardTitle pokemon={pokemon} />
-              <PokemonCardId pokemon={pokemon} />
-              <TypeTag style={styleTypeTag} value={pokemonType} />
-            </div>
-
-            <figure className={styles['pokemon-image']}>
-              <PokemonCardImage pokemon={pokemon} />
-            </figure>
-
-            <ReactSVG
-              className={styles['background-image']}
-              src={`/assets/${pokemonType}.svg`}
-            />
+            <PokemonCard pokemon={pokemon} />
           </div>
 
           <div className={styles['details-container']}>
