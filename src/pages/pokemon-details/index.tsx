@@ -44,7 +44,7 @@ const PokemonDetails = () => {
     [BIOGRAPHY]: species && (
       <PokemonDetailsBiography pokemon={pokemon} species={species} />
     ),
-    [STATS]: <PokemonDetailsStats />,
+    [STATS]: <PokemonDetailsStats pokemon={pokemon} />,
   };
 
   useEffect(() => {
