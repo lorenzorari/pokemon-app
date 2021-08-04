@@ -8,13 +8,10 @@
   --color-type-2: var(--color-normal-2);
 
   /* STATS */
-  --stat-saturation: 70;
-  --Stat-lightness:  65;
-
-  --color-stat-bad:    hsl(360, var(--stat-saturation), var(--Stat-lightness));
-  --color-stat-medium: hsl( 40, var(--stat-saturation), var(--Stat-lightness));
-  --color-stat-good:   hsl(137, var(--stat-saturation), var(--Stat-lightness));
-  --color-stat-great:  hsl(205, var(--stat-saturation), var(--Stat-lightness));
+  --color-stat-bad:    hsl(360, 70%, 65%);
+  --color-stat-medium: hsl( 40, 70%, 65%);
+  --color-stat-great:  hsl(205, 70%, 65%);
+  --color-stat-good:   hsl(137, 70%, 65%);
 
   /* 🐞 BUG */
   --color-bug-1: #a8b820;
