@@ -1,52 +1,48 @@
+$columns: 3;
+$columnWidth: 10rem;
+$columnGap: 1rem;
+
 .main {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  margin: 0;
+  display: grid;
+  grid-template-columns: 45fr 55fr;
   height: 100vh;
-  padding: 4rem;
 }
 
 .basic-info-container {
-  position: relative;
-  width: 40rem;
-  // background-color: burlywood;
-  z-index: 1;
-}
-
-.pokemon-image {
   display: flex;
   justify-content: center;
-  width: auto;
-  margin-top: 8rem;
-  // background-color: #fff;
+  align-items: center;
 
-  img {
-    width: auto;
-    min-width: 5rem;
-    max-width: 24rem;
-  }
+  background-color: burlywood;
+}
+
+.details {
+  display: flex;
+  justify-content: center;
+  padding-top: 3rem;
 }
 
 .details-container {
-  width: 35rem;
+  width: $columns * $columnWidth + ($columns - 1) * $columnGap;
 }
 
 .details-tabs {
   display: grid;
-  grid-template-columns: repeat(3, auto);
-  column-gap: 2rem;
+  grid-template-columns: repeat(3, 10rem);
+  column-gap: 1rem;
 
   margin: 0;
   padding: 0;
 
-  color: var(--color-type-2);
+  color: hsl(0, 0, 80%);
+
   font-size: 2rem;
   font-weight: 700;
   list-style: none;
+  text-align: center;
 
   li:hover {
-    color: var(--color-white);
+    color: var(--color-black);
     cursor: pointer;
   }
 }
