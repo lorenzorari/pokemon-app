@@ -1,9 +1,20 @@
+/* prettier-ignore */
+
 :root {
   /* BASE */
   --color-black: #3f3f3f;
   --color-white: white;
   --color-type-1: var(--color-normal-1);
   --color-type-2: var(--color-normal-2);
+
+  /* STATS */
+  --stat-saturation: 70;
+  --Stat-lightness:  65;
+
+  --color-stat-bad:    hsl(360, var(--stat-saturation), var(--Stat-lightness));
+  --color-stat-medium: hsl( 40, var(--stat-saturation), var(--Stat-lightness));
+  --color-stat-good:   hsl(137, var(--stat-saturation), var(--Stat-lightness));
+  --color-stat-great:  hsl(205, var(--stat-saturation), var(--Stat-lightness));
 
   /* 🐞 BUG */
   --color-bug-1: #a8b820;
