@@ -68,20 +68,22 @@ const PokemonDetails = () => {
             <PokemonCard pokemon={pokemon} />
           </div>
 
-          <div className={styles['details-container']}>
-            <ul className={styles['details-tabs']}>
-              {tabs.map((tab, i) => (
-                <Tab
-                  key={i}
-                  onClick={() => setActiveTab(tab)}
-                  isActive={activeTab === tab}
-                >
-                  {tab}
-                </Tab>
-              ))}
-            </ul>
+          <div className={styles.details}>
+            <div className={styles['details-container']}>
+              <ul className={styles['details-tabs']}>
+                {tabs.map((tab, i) => (
+                  <Tab
+                    key={i}
+                    onClick={() => setActiveTab(tab)}
+                    isActive={activeTab === tab}
+                  >
+                    {tab}
+                  </Tab>
+                ))}
+              </ul>
 
-            {tabView[activeTab]}
+              {tabView[activeTab]}
+            </div>
           </div>
         </>
       )}
