@@ -8,8 +8,10 @@ interface Props {
 }
 
 const Tab = ({ children, onClick, isActive }: Props) => {
+  const className = [styles.tab, isActive && styles.active].join(' ');
+
   return (
-    <li className={isActive && styles.active} onClick={onClick}>
+    <li className={className} onClick={onClick}>
       {children}
     </li>
   );
