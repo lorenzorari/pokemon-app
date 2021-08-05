@@ -5,7 +5,7 @@ import { Pokemon } from '../../../models/pokemon';
 import { Species } from '../../../models/species';
 import PokemonCard from '../../components/pokemon/card/card';
 import PokemonDetailsBiography from '../../components/pokemon/details/biography';
-import PokemonDetailsStats from '../../components/pokemon/details/stats/stats';
+import PokemonDetailsStats from '../../components/pokemon/details/stats';
 import Tab from '../../components/tab';
 import { getPokemon } from '../../services/pokemon';
 import styles from './pokemon-details.module.scss';
