@@ -1,14 +1,13 @@
 import humps from 'humps';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
-import { updateExpressionWithTypeArguments } from 'typescript';
-import { Pokemon, Pokemons } from '../../../models/pokemon';
+import { Pokemon } from '../../../models/pokemon';
 import { Species } from '../../../models/species';
 import PokemonCard from '../../components/pokemon/card/card';
 import PokemonDetailsBiography from '../../components/pokemon/details/biography';
+import PokemonDetailsEvolutions from '../../components/pokemon/details/evolutions';
 import PokemonDetailsStats from '../../components/pokemon/details/stats';
 import Tab from '../../components/tab';
-import { getArtworkUrl } from '../../helpers/get-artwork-url';
 import { getPokemon } from '../../services/pokemon';
 import styles from './pokemon-details.module.scss';
 
@@ -21,31 +20,26 @@ const STATS = 'Stats';
 const EVOLUTIONS = 'Evolutions';
 
 const getIdFromSpeciesResourceUrl = (url: string) => {
-  return +url.slice(-2)[0];
+  return +url.split('/').slice(-2)[0];
 };
 
 const PokemonDetails = () => {
   const { id } = useParams<Params>();
   const [pokemon, setPokemon] = useState<Pokemon>(null);
   const [species, setSpecies] = useState<Species>(null);
-  // const [evolutionChain, setEvolutionChain] = useState(null);
   const [pokemonEvolutions, setPokemonEvolutions] = useState([]);
-  const [activeTab, setActiveTab] = useState<string>(STATS);
+  const [activeTab, setActiveTab] = useState<string>(EVOLUTIONS);
 
   const tabs: string[] = [BIOGRAPHY, STATS, EVOLUTIONS];
-
-  // const pokemonType = pokemon?.types[0].type.name;
-
-  // const style = {
-  //   '--color-type-1': `var(--color-${pokemonType}-1)`,
-  //   '--color-type-2': `var(--color-${pokemonType}-2)`,
-  // } as React.CSSProperties;
 
   const tabView = {
     [BIOGRAPHY]: species && (
       <PokemonDetailsBiography pokemon={pokemon} species={species} />
     ),
     [STATS]: <PokemonDetailsStats pokemon={pokemon} />,
+    [EVOLUTIONS]: pokemonEvolutions.length > 0 && (
+      <PokemonDetailsEvolutions pokemonEvolutions={pokemonEvolutions} />
+    ),
   };
 
   useEffect(() => {
@@ -147,16 +141,7 @@ const PokemonDetails = () => {
                 ))}
               </ul>
 
-              {/* {tabView[activeTab]} */}
-              {pokemonEvolutions.map(evo => {
-                if (Array.isArray(evo)) {
-                  return evo.map(alternateEvo => (
-                    <div key={alternateEvo.id}>{alternateEvo.name}</div>
-                  ));
-                }
-
-                return <div key={evo.id}>{evo.name}</div>;
-              })}
+              {tabView[activeTab]}
             </div>
           </div>
         </>
