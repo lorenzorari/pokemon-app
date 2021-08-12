@@ -6,7 +6,7 @@ const PokemonCardImage = ({ pokemon }) => {
   return (
     <img
       className={styles.image}
-      src={pokemon && getArtworkUrl(pokemon)}
+      src={pokemon && getArtworkUrl(pokemon.id)}
       alt={pokemon?.name}
     />
   );
