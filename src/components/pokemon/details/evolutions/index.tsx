@@ -6,37 +6,22 @@ const PokemonDetailsEvolutions = ({ pokemonEvolutions }) => {
   return (
     <ul className={styles['evolutions-container']}>
       {pokemonEvolutions.map(evo => {
-        if (Array.isArray(evo)) {
-          return (
-            <li>
-              <div className={styles.line}>
-                <hr />
-              </div>
-              <div className={styles['alternate-evolutions-container']}>
-                {evo.map(alternateEvo => (
-                  <PokemonEvolution
-                    key={alternateEvo.id}
-                    evolution={alternateEvo}
-                  />
-                ))}
-              </div>
-            </li>
-          );
-        }
-
         return (
           <li key={evo.id}>
-            <div className={styles.line}>
+            <div className={styles['line-container']}>
               <hr />
             </div>
-            <div className={styles['alternate-evolutions-container']}>
-              <PokemonEvolution evolution={evo} />
-              {/* <PokemonEvolution evolution={evo} /> */}
-              {/* <PokemonEvoluwtion evolution={evo} /> */}
-              {/* <PokemonEvolution evolution={evo} /> */}
-            </div>
 
-            {/* {i !== pokemonEvolutions.length - 1 && <span>{'>'}</span>} */}
+            {Array.isArray(evo) ? (
+              evo.map(alternateEvo => (
+                <PokemonEvolution
+                  key={alternateEvo.id}
+                  evolution={alternateEvo}
+                />
+              ))
+            ) : (
+              <PokemonEvolution evolution={evo} />
+            )}
           </li>
         );
       })}
