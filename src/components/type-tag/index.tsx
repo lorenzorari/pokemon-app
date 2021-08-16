@@ -8,7 +8,7 @@ interface Props {
 }
 
 const TypeTag = ({ value, style }: Props) => {
-  const src = `./assets/${value}.svg`;
+  const src = `/assets/${value}.svg`;
 
   const tagStyle = {
     ...style,

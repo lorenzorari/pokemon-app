@@ -1,9 +1,17 @@
+/* prettier-ignore */
+
 :root {
   /* BASE */
   --color-black: #3f3f3f;
   --color-white: white;
   --color-type-1: var(--color-normal-1);
   --color-type-2: var(--color-normal-2);
+
+  /* STATS */
+  --color-stat-bad:    hsl(360, 70%, 65%);
+  --color-stat-medium: hsl( 40, 70%, 65%);
+  --color-stat-great:  hsl(205, 70%, 65%);
+  --color-stat-good:   hsl(137, 70%, 65%);
 
   /* 🐞 BUG */
   --color-bug-1: #a8b820;

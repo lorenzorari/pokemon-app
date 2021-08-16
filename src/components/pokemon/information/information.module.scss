@@ -1,0 +1,14 @@
+.info {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 1rem;
+  list-style: none;
+
+  &-title {
+    font-weight: 300;
+  }
+
+  &-content {
+    font-weight: 700;
+  }
+}

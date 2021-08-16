@@ -1,0 +1,26 @@
+.evolution {
+  h3 {
+    margin: 0.5rem 0;
+    text-align: center;
+    text-transform: capitalize;
+  }
+
+  figure {
+    display: flex;
+    width: 100%;
+    margin: 0 auto;
+    padding: 1rem;
+
+    border-radius: 50%;
+    background-color: hsl(0, 0%, 90%);
+
+    img {
+      width: 100%;
+      transition: transform ease 0.2s;
+
+      &:hover {
+        transform: translateY(-1rem);
+      }
+    }
+  }
+}
