@@ -1,6 +1,7 @@
 import humps from 'humps';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
+import { ChainLink, ChainLinks } from '../../../models/evolution/chain';
 import { Pokemon } from '../../../models/pokemon';
 import { Species } from '../../../models/species';
 import PokemonCard from '../../components/pokemon/card/card';
@@ -62,52 +63,52 @@ const PokemonDetails = () => {
     init();
   }, []);
 
-  const getPokemonEvolutions = evolutionChain => {
-    if (evolutionChain) {
-      const { url, name } = evolutionChain.species; // First species
+  const createEvolution = (url, name) => {
+    return {
+      id: getIdFromSpeciesResourceUrl(url),
+      name,
+    };
+  };
 
-      const evolutions = [
-        {
-          id: getIdFromSpeciesResourceUrl(url),
-          name,
-        },
-      ];
+  const addSimpleEvolution = ({ evolvesTo }: ChainLink, array: Array<any>) => {
+    const { url, name } = evolvesTo[0].species;
+    array.push(createEvolution(url, name));
+  };
 
-      let currentEvo = evolutionChain;
+  const addAlternateEvolutions = (
+    chainLinks: ChainLinks,
+    array: Array<any>
+  ) => {
+    const finalEvolutions: any = [];
 
-      while (currentEvo.evolvesTo.length) {
-        const nextEvos = currentEvo.evolvesTo;
+    const alternateEvos = chainLinks.map(altEvo => {
+      const { evolvesTo, species } = altEvo;
 
+      if (evolvesTo.length) addSimpleEvolution(altEvo, finalEvolutions);
+
+      return createEvolution(species.url, species.name);
+    });
+
+    array.push(alternateEvos);
+    finalEvolutions.length && array.push(finalEvolutions);
+  };
+
+  const getPokemonEvolutions = (chainLink: ChainLink) => {
+    if (chainLink) {
+      const { url, name } = chainLink.species; // First species
+
+      const evolutions: any = [createEvolution(url, name)];
+
+      let nextEvos = chainLink.evolvesTo;
+
+      while (nextEvos.length) {
         if (nextEvos.length === 1) {
-          const { url, name } = nextEvos[0].species;
-
-          evolutions.push({ id: getIdFromSpeciesResourceUrl(url), name });
-
-          currentEvo = nextEvos[0];
+          addSimpleEvolution(nextEvos[0], evolutions);
+          nextEvos = nextEvos[0].evolvesTo;
         }
 
         if (nextEvos.length > 1) {
-          const finalEvolution: any = [];
-
-          const alternateEvos = nextEvos.map(({ evolvesTo, species }) => {
-            if (evolvesTo.length) {
-              const { url, name } = evolvesTo[0].species;
-
-              finalEvolution.push({
-                id: getIdFromSpeciesResourceUrl(url),
-                name,
-              });
-            }
-
-            return {
-              id: getIdFromSpeciesResourceUrl(species.url),
-              name: species.name,
-            };
-          });
-
-          evolutions.push(alternateEvos);
-          finalEvolution.length && evolutions.push(finalEvolution);
-
+          addAlternateEvolutions(nextEvos, evolutions);
           break;
         }
       }
