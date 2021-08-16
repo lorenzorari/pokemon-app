@@ -2,9 +2,9 @@ import { NamedAPIResource } from './../named-api-resource';
 import { EvolutionDetails } from './detail';
 
 export interface EvolutionChain {
-  id: number;
-  babyTriggerItem: NamedAPIResource;
-  chain: ChainLink;
+  id?: number;
+  babyTriggerItem?: NamedAPIResource;
+  chain?: ChainLink;
 }
 
 export declare type EvolutionChains = EvolutionChain[];
