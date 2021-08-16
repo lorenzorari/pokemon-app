@@ -1,4 +1,3 @@
-import humps from 'humps';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { ChainLink, ChainLinks } from '../../../models/evolution/chain';
@@ -9,7 +8,9 @@ import PokemonDetailsBiography from '../../components/pokemon/details/biography'
 import PokemonDetailsEvolutions from '../../components/pokemon/details/evolutions';
 import PokemonDetailsStats from '../../components/pokemon/details/stats';
 import Tab from '../../components/tab';
+import { getEvolutionChain } from '../../services/evolution-chain';
 import { getPokemon } from '../../services/pokemon';
+import { getSpecies } from '../../services/species';
 import styles from './pokemon-details.module.scss';
 
 interface Params {
@@ -46,15 +47,7 @@ const PokemonDetails = () => {
   useEffect(() => {
     const init = async () => {
       const pokemonData = await getPokemon(id);
-
-      const speciesData = await new Promise(resolve => {
-        fetch(pokemonData.species.url)
-          .then(res => res.json())
-          .then(res => {
-            const data = humps.camelizeKeys(res);
-            return resolve(data as Species);
-          });
-      });
+      const speciesData = await getSpecies(pokemonData);
 
       setPokemon(pokemonData);
       setSpecies(speciesData);
@@ -70,9 +63,8 @@ const PokemonDetails = () => {
     };
   };
 
-  const addSimpleEvolution = ({ evolvesTo }: ChainLink, array: Array<any>) => {
-    const { url, name } = evolvesTo[0].species;
-    array.push(createEvolution(url, name));
+  const addSimpleEvolution = ({ species }: ChainLink, array: Array<any>) => {
+    array.push(createEvolution(species.url, species.name));
   };
 
   const addAlternateEvolutions = (
@@ -81,10 +73,8 @@ const PokemonDetails = () => {
   ) => {
     const finalEvolutions: any = [];
 
-    const alternateEvos = chainLinks.map(altEvo => {
-      const { evolvesTo, species } = altEvo;
-
-      if (evolvesTo.length) addSimpleEvolution(altEvo, finalEvolutions);
+    const alternateEvos = chainLinks.map(({ evolvesTo, species }) => {
+      if (evolvesTo.length) addSimpleEvolution(evolvesTo[0], finalEvolutions);
 
       return createEvolution(species.url, species.name);
     });
@@ -99,16 +89,16 @@ const PokemonDetails = () => {
 
       const evolutions: any = [createEvolution(url, name)];
 
-      let nextEvos = chainLink.evolvesTo;
+      let currentEvo = chainLink.evolvesTo;
 
-      while (nextEvos.length) {
-        if (nextEvos.length === 1) {
-          addSimpleEvolution(nextEvos[0], evolutions);
-          nextEvos = nextEvos[0].evolvesTo;
+      while (currentEvo.length) {
+        if (currentEvo.length === 1) {
+          addSimpleEvolution(currentEvo[0], evolutions);
+          currentEvo = currentEvo[0].evolvesTo;
         }
 
-        if (nextEvos.length > 1) {
-          addAlternateEvolutions(nextEvos, evolutions);
+        if (currentEvo.length > 1) {
+          addAlternateEvolutions(currentEvo, evolutions);
           break;
         }
       }
@@ -121,16 +111,9 @@ const PokemonDetails = () => {
 
   useEffect(() => {
     const init = async () => {
-      const { chain }: any = await new Promise(resolve => {
-        fetch(species.evolutionChain.url)
-          .then(res => res.json())
-          .then(res => {
-            const data = humps.camelizeKeys(res);
-            return resolve(data);
-          });
-      });
-
+      const { chain } = await getEvolutionChain(species);
       const evolutions = getPokemonEvolutions(chain);
+
       setPokemonEvolutions(evolutions);
     };
 
