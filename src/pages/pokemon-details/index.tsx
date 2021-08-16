@@ -75,24 +75,41 @@ const PokemonDetails = () => {
 
       let currentEvo = evolutionChain;
 
-      if (currentEvo.evolvesTo.length === 1) {
-        while (currentEvo.evolvesTo.length > 0) {
-          const nextEvo = currentEvo.evolvesTo[0];
-          const { url, name } = nextEvo.species;
+      while (currentEvo.evolvesTo.length) {
+        const nextEvos = currentEvo.evolvesTo;
+
+        if (nextEvos.length === 1) {
+          const { url, name } = nextEvos[0].species;
 
           evolutions.push({ id: getIdFromSpeciesResourceUrl(url), name });
 
-          currentEvo = nextEvo;
+          currentEvo = nextEvos[0];
         }
-      }
 
-      if (currentEvo.evolvesTo.length > 1) {
-        const alternateEvos = currentEvo.evolvesTo.map(evo => ({
-          id: getIdFromSpeciesResourceUrl(evo.species.url),
-          name: evo.species.name,
-        }));
+        if (nextEvos.length > 1) {
+          const finalEvolution: any = [];
 
-        evolutions.push(alternateEvos);
+          const alternateEvos = nextEvos.map(({ evolvesTo, species }) => {
+            if (evolvesTo.length) {
+              const { url, name } = evolvesTo[0].species;
+
+              finalEvolution.push({
+                id: getIdFromSpeciesResourceUrl(url),
+                name,
+              });
+            }
+
+            return {
+              id: getIdFromSpeciesResourceUrl(species.url),
+              name: species.name,
+            };
+          });
+
+          evolutions.push(alternateEvos);
+          finalEvolution.length && evolutions.push(finalEvolution);
+
+          break;
+        }
       }
 
       return evolutions;
