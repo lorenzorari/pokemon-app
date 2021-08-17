@@ -15,11 +15,9 @@ const getPokemon = async (pokemon: string): Promise<Pokemon> => {
 };
 
 const getAllPokemons = async (url: string): Promise<PokemonPagination> => {
-  return new Promise(resolve => {
-    fetch(url)
-      .then(res => res.json())
-      .then(res => resolve(res as PokemonPagination));
-  });
+  return new Promise(resolve =>
+    axios.get(url).then(({ data }) => resolve(data as PokemonPagination))
+  );
 };
 
 export { getPokemon, getAllPokemons };
