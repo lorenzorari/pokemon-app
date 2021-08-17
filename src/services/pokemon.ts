@@ -1,14 +1,14 @@
 import axios from 'axios';
-import humps from 'humps';
 import { Pokemon } from '../../models/pokemon';
 import { PokemonPagination } from './../../models/pokemon/pagination';
+import { convertUnderscoreToCamelcase } from './../utils/convert-underscore-to-camelcase';
 
 const INITIAL_URL = 'https://pokeapi.co/api/v2/pokemon';
 
 const getPokemon = async (pokemon: string): Promise<Pokemon> => {
   return new Promise(resolve =>
     axios.get(`${INITIAL_URL}/${pokemon}`).then(res => {
-      const data = humps.camelizeKeys(res.data); // Convert underscore to camelCase
+      const data = convertUnderscoreToCamelcase(res.data);
       resolve(data as Pokemon);
     })
   );
