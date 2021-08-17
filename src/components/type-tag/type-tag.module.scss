@@ -1,0 +1,23 @@
+$squareSize: 2.4rem;
+
+.type {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: $squareSize;
+  width: $squareSize;
+
+  background-color: var(--color-white);
+  border-radius: 50%;
+
+  svg {
+    display: block;
+    height: 100%;
+    width: 100%;
+
+    path {
+      fill: var(--color-type-1);
+    }
+  }
+}
