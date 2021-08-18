@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import { ReactSVG } from 'react-svg';
 import styles from './type-tag.module.scss';
 
@@ -17,7 +18,7 @@ const TypeTag = ({ value, className }: Props) => {
   return (
     <ReactSVG
       style={tagStyle}
-      className={[styles.type, className].join(' ')}
+      className={classNames(styles.type, className)}
       src={src}
     />
   );
