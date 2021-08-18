@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { NamedAPIResources } from '../../../models/named-api-resource';
 import { Pokemons } from '../../../models/pokemon';
-import PokemonCard from '../../components/pokemon/card/card';
+import PokemonCard from '../../components/pokemon/card';
 import TextField from '../../components/text-field';
 import { getAllPokemons, getPokemon } from '../../services/pokemon';
 import styles from './home.module.scss';
