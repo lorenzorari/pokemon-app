@@ -67,6 +67,10 @@ const Home = () => {
     setPokemons([pokemon]);
   };
 
+  const handleClickCard = (id: number) => {
+    history.push(`/pokedex/${id}`);
+  };
+
   return (
     <section>
       <form className={styles['search-bar']}>
@@ -78,11 +82,15 @@ const Home = () => {
         />
       </form>
 
-      {!loading && pokemons.length > 0 ? (
+      {!loading && pokemons.length ? (
         <>
           <div className={styles['pokemons-container']}>
             {pokemons.map(pokemon => (
-              <PokemonCard key={pokemon.id} pokemon={pokemon} />
+              <PokemonCard
+                key={pokemon.id}
+                onClick={() => handleClickCard(pokemon.id)}
+                pokemon={pokemon}
+              />
             ))}
           </div>
 
