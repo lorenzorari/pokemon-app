@@ -3,7 +3,7 @@ import { useParams } from 'react-router';
 import { ChainLink, ChainLinks } from '../../../models/evolution/chain';
 import { Pokemon } from '../../../models/pokemon';
 import { Species } from '../../../models/species';
-import PokemonCard from '../../components/pokemon/card/card';
+import PokemonCard from '../../components/pokemon/card';
 import PokemonDetailsBiography from '../../components/pokemon/details/biography';
 import PokemonDetailsEvolutions from '../../components/pokemon/details/evolutions';
 import PokemonDetailsStats from '../../components/pokemon/details/stats';
