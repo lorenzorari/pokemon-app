@@ -3,7 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { NamedAPIResources } from '../../../models/named-api-resource';
 import { Pokemons } from '../../../models/pokemon';
 import PokemonCard from '../../components/pokemon/card';
-import TextField from '../../components/text-field';
+import SearchBar from '../../components/search-bar';
 import { getAllPokemons, getPokemon } from '../../services/pokemon';
 import styles from './home.module.scss';
 
@@ -70,7 +70,7 @@ const Home = () => {
   return (
     <section>
       <form className={styles['search-bar']}>
-        <TextField
+        <SearchBar
           type="text"
           placeholder="Search a pokemon by name or id..."
           onChange={e => handlePokemonSearch(e)}
