@@ -20,11 +20,6 @@ const PokemonCard = ({ pokemon }: Props) => {
     '--color-type-2': `var(--color-${pokemonType}-2)`,
   } as React.CSSProperties;
 
-  const styleTypeTag = {
-    padding: '0.4rem',
-    marginRight: '0.5rem',
-  };
-
   return (
     <div style={style} className={styles.card}>
       <PokemonCardTitle pokemon={pokemon} />
@@ -33,7 +28,7 @@ const PokemonCard = ({ pokemon }: Props) => {
 
       <div className={styles['types-container']}>
         {pokemonTypes.map(({ type }, i) => (
-          <TypeTag key={i} style={styleTypeTag} value={type.name} />
+          <TypeTag key={i} className={styles['type-tag']} value={type.name} />
         ))}
       </div>
 
