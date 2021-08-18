@@ -54,8 +54,8 @@ const Home = () => {
     }
   };
 
-  const searchPokemon = async (wantedPokemon: string) => {
-    if (wantedPokemon === '') {
+  const searchPokemon = async (value: string) => {
+    if (value === '') {
       const { results } = await getAllPokemons(INITIAL_URL);
       setLoading(true);
       await loadPokemons(results);
@@ -63,7 +63,7 @@ const Home = () => {
       return;
     }
 
-    const pokemon = await getPokemon(wantedPokemon);
+    const pokemon = await getPokemon(value);
     setPokemons([pokemon]);
   };
 
