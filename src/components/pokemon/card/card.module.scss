@@ -1,20 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;700&display=swap');
-
 .card {
   position: relative;
   padding: 1.6rem 1.6rem 0 1.6rem;
-  width: 10.5rem;
+  width: 13rem;
 
   transition: box-shadow, transform ease 0.2s;
   transform: perspective(1px) translateZ(0) scale(1);
 
+  z-index: 1;
+  overflow: hidden;
   border-radius: 20px;
   background-color: var(--color-type-1);
   box-shadow: 0px 0px 30px 11px hsla(0, 0%, 0%, 0.25);
-  font-family: 'Nunito', sans-serif;
-  overflow: hidden;
   user-select: none;
-  z-index: 1;
 
   &:hover {
     box-shadow: 0px 0px 30px 11px var(--color-type-2);
