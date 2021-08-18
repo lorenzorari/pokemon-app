@@ -4,18 +4,23 @@ import styles from './type-tag.module.scss';
 
 interface Props {
   value: string;
-  style?: React.CSSProperties;
+  className?: string;
 }
 
-const TypeTag = ({ value, style }: Props) => {
+const TypeTag = ({ value, className }: Props) => {
   const src = `/assets/${value}.svg`;
 
   const tagStyle = {
-    ...style,
     '--color-type-1': `var(--color-${value}-1)`,
-  };
+  } as React.CSSProperties;
 
-  return <ReactSVG style={tagStyle} className={styles.type} src={src} />;
+  return (
+    <ReactSVG
+      style={tagStyle}
+      className={[styles.type, className].join(' ')}
+      src={src}
+    />
+  );
 };
 
 export default TypeTag;
