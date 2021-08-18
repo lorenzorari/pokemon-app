@@ -9,9 +9,10 @@ import { ReactSVG } from 'react-svg';
 
 interface Props {
   pokemon: Pokemon;
+  onClick?: () => void;
 }
 
-const PokemonCard = ({ pokemon }: Props) => {
+const PokemonCard = ({ pokemon, onClick }: Props) => {
   const pokemonTypes = pokemon.types;
   const pokemonType = pokemonTypes[0].type.name;
 
@@ -21,7 +22,7 @@ const PokemonCard = ({ pokemon }: Props) => {
   } as React.CSSProperties;
 
   return (
-    <div style={style} className={styles.card}>
+    <div onClick={onClick} style={style} className={styles.card}>
       <PokemonCardTitle pokemon={pokemon} />
 
       <PokemonCardId pokemon={pokemon} />
