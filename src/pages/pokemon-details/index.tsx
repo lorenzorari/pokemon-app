@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import { ChainLink, ChainLinks } from '../../../models/evolution/chain';
 import { Pokemon } from '../../../models/pokemon';
 import { Species } from '../../../models/species';
+import Button from '../../components/button';
 import PokemonCard from '../../components/pokemon/card';
 import PokemonDetailsBiography from '../../components/pokemon/details/biography';
 import PokemonDetailsEvolutions from '../../components/pokemon/details/evolutions';
@@ -27,6 +29,7 @@ const getIdFromSpeciesResourceUrl = (url: string) => {
 
 const PokemonDetails = () => {
   const { id } = useParams<Params>();
+  const history = useHistory();
   const [pokemon, setPokemon] = useState<Pokemon>(null);
   const [species, setSpecies] = useState<Species>(null);
   const [pokemonEvolutions, setPokemonEvolutions] = useState([]);
@@ -120,11 +123,18 @@ const PokemonDetails = () => {
     species && init();
   }, [species]);
 
+  const handleBackButton = () => {
+    history.push('/');
+  };
+
   return (
     <main className={styles.main}>
       {pokemon && (
         <>
           <div className={styles['basic-info-container']}>
+            <Button theme="back" onClick={handleBackButton}>
+              Back
+            </Button>
             <PokemonCard pokemon={pokemon} />
           </div>
 
