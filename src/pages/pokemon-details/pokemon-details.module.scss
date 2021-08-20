@@ -9,9 +9,16 @@ $columnGap: 1rem;
 }
 
 .basic-info-container {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+
+  button {
+    position: absolute;
+    inset: 2rem auto auto 2rem;
+  }
 }
 
 .details {
