@@ -88,6 +88,7 @@ const Home = () => {
             {pokemons.map(pokemon => (
               <PokemonCard
                 key={pokemon.id}
+                className={styles.card}
                 onClick={() => handleClickCard(pokemon.id)}
                 pokemon={pokemon}
               />
