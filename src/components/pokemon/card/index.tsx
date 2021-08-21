@@ -6,13 +6,15 @@ import TypeTag from '../../type-tag';
 import { Pokemon } from '../../../../models/pokemon';
 import styles from './card.module.scss';
 import { ReactSVG } from 'react-svg';
+import classNames from 'classnames';
 
 interface Props {
   pokemon: Pokemon;
+  className?: string;
   onClick?: () => void;
 }
 
-const PokemonCard = ({ pokemon, onClick }: Props) => {
+const PokemonCard = ({ pokemon, className, onClick }: Props) => {
   const pokemonTypes = pokemon.types;
   const pokemonType = pokemonTypes[0].type.name;
 
@@ -22,7 +24,11 @@ const PokemonCard = ({ pokemon, onClick }: Props) => {
   } as React.CSSProperties;
 
   return (
-    <article onClick={onClick} style={style} className={styles.card}>
+    <article
+      className={classNames(styles.card, className)}
+      style={style}
+      onClick={onClick}
+    >
       <PokemonCardTitle pokemon={pokemon} />
 
       <PokemonCardId pokemon={pokemon} />
