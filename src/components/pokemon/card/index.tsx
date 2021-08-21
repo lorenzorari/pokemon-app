@@ -22,7 +22,7 @@ const PokemonCard = ({ pokemon, onClick }: Props) => {
   } as React.CSSProperties;
 
   return (
-    <div onClick={onClick} style={style} className={styles.card}>
+    <article onClick={onClick} style={style} className={styles.card}>
       <PokemonCardTitle pokemon={pokemon} />
 
       <PokemonCardId pokemon={pokemon} />
@@ -41,7 +41,7 @@ const PokemonCard = ({ pokemon, onClick }: Props) => {
         className={styles['background-image']}
         src={`./assets/${pokemonType}.svg`}
       />
-    </div>
+    </article>
   );
 };
 
