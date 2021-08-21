@@ -135,7 +135,7 @@ const PokemonDetails = () => {
             <Button theme="back" onClick={handleBackButton}>
               Back
             </Button>
-            <PokemonCard pokemon={pokemon} />
+            <PokemonCard className={styles.card} pokemon={pokemon} />
           </div>
 
           <div className={styles.details}>
