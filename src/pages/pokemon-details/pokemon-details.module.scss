@@ -2,10 +2,13 @@ $columns: 3;
 $columnWidth: 10rem;
 $columnGap: 1rem;
 
-.main {
+.layout {
   display: grid;
   grid-template-columns: 45fr 55fr;
+
   height: 100vh;
+  max-width: 1440px;
+  margin: 0 auto;
 }
 
 .basic-info-container {
