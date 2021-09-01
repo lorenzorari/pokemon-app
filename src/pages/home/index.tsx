@@ -22,14 +22,14 @@ const Home = () => {
   useEffect(() => {
     const options: IntersectionObserverInit = {
       root: null,
-      rootMargin: '10px',
+      rootMargin: '20px',
       threshold: 1.0,
     };
 
     const observer = new IntersectionObserver(handleObserver, options);
 
     if (loader.current) observer.observe(loader.current);
-  }, []);
+  });
 
   useEffect(() => {
     const init = async () => {
