@@ -7,6 +7,7 @@ $columnGap: 1rem;
   grid-template-columns: 45fr 55fr;
 
   height: 100vh;
+  max-height: 1086px;
   max-width: 1536px;
   margin: 0 auto;
 
@@ -36,7 +37,6 @@ $columnGap: 1rem;
   display: flex;
   justify-content: center;
   padding-top: 3rem;
-
   overflow-y: scroll;
 }
 
