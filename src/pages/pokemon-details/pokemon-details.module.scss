@@ -2,10 +2,16 @@ $columns: 3;
 $columnWidth: 10rem;
 $columnGap: 1rem;
 
-.main {
+.layout {
   display: grid;
   grid-template-columns: 45fr 55fr;
+
   height: 100vh;
+  max-height: 1086px;
+  max-width: 1536px;
+  margin: 0 auto;
+
+  overflow-y: hidden;
 }
 
 .basic-info-container {
@@ -31,6 +37,7 @@ $columnGap: 1rem;
   display: flex;
   justify-content: center;
   padding-top: 3rem;
+  overflow-y: scroll;
 }
 
 .details-container {
