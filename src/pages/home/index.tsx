@@ -12,7 +12,7 @@ const Home = () => {
   const history = useHistory();
   const [searchValue, setSearchValue] = useState('');
   const [pokemons, setPokemons] = useState<Pokemons>([]);
-  const [previousPageUrl, setPreviousPageUrl] = useState<string>(null);
+  // const [previousPageUrl, setPreviousPageUrl] = useState<string>(null);
   const [nextPageUrl, setNextPageUrl] = useState<string>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
