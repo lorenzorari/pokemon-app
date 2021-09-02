@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { NamedAPIResources } from '../../../models/named-api-resource';
 import { Pokemons } from '../../../models/pokemon';
-import PokemonCard from '../../components/pokemon/card/card';
-import TextField from '../../components/text-field';
+import PokemonCard from '../../components/pokemon/card';
+import SearchBar from '../../components/search-bar';
 import { getAllPokemons, getPokemon } from '../../services/pokemon';
 import styles from './home.module.scss';
 
@@ -15,6 +15,33 @@ const Home = () => {
   const [previousPageUrl, setPreviousPageUrl] = useState<string>(null);
   const [nextPageUrl, setNextPageUrl] = useState<string>(null);
   const [loading, setLoading] = useState<boolean>(true);
+
+  const [page, setPage] = useState(1);
+  const loader = useRef(null);
+
+  useEffect(() => {
+    const options: IntersectionObserverInit = {
+      root: null,
+      rootMargin: '20px',
+      threshold: 1.0,
+    };
+
+    const observer = new IntersectionObserver(handleObserver, options);
+
+    if (loader.current) observer.observe(loader.current);
+  });
+
+  useEffect(() => {
+    const init = async () => {
+      await handleMorePokemon();
+    };
+
+    init();
+  }, [page]);
+
+  const handleObserver = (entries: IntersectionObserverEntry[]) => {
+    if (entries[0].isIntersecting) setPage(page => page + 1);
+  };
 
   useEffect(() => {
     const init = async () => {
@@ -54,8 +81,8 @@ const Home = () => {
     }
   };
 
-  const searchPokemon = async (wantedPokemon: string) => {
-    if (wantedPokemon === '') {
+  const searchPokemon = async (value: string) => {
+    if (value === '') {
       const { results } = await getAllPokemons(INITIAL_URL);
       setLoading(true);
       await loadPokemons(results);
@@ -63,14 +90,18 @@ const Home = () => {
       return;
     }
 
-    const pokemon = await getPokemon(wantedPokemon);
+    const pokemon = await getPokemon(value);
     setPokemons([pokemon]);
+  };
+
+  const handleClickCard = (id: number) => {
+    history.push(`/pokedex/${id}`);
   };
 
   return (
     <section>
       <form className={styles['search-bar']}>
-        <TextField
+        <SearchBar
           type="text"
           placeholder="Search a pokemon by name or id..."
           onChange={e => handlePokemonSearch(e)}
@@ -78,15 +109,21 @@ const Home = () => {
         />
       </form>
 
-      {!loading && pokemons.length > 0 ? (
+      {!loading && pokemons.length ? (
         <>
           <div className={styles['pokemons-container']}>
             {pokemons.map(pokemon => (
-              <PokemonCard key={pokemon.id} pokemon={pokemon} />
+              <PokemonCard
+                key={pokemon.id}
+                className={styles.card}
+                onClick={() => handleClickCard(pokemon.id)}
+                pokemon={pokemon}
+              />
             ))}
           </div>
 
-          <button onClick={handleMorePokemon}>More Pokemon</button>
+          {/* <button onClick={handleMorePokemon}>More Pokemon</button> */}
+          <div ref={loader}>More Pokemons</div>
         </>
       ) : (
         <div>Loading...</div>

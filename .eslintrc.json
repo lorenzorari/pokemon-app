@@ -5,6 +5,7 @@
     "jest": true
   },
   "rules": {
+    "no-control-regex": "off",
     "no-console": "off",
     "import/first": "error",
     "react/prop-types": "off"

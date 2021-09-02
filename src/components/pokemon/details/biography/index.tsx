@@ -12,9 +12,17 @@ interface Props {
 
 const PokemonDetailsBiography = ({ pokemon, species }: Props) => {
   const getDescription = () => {
-    return species.flavorTextEntries.find(
+    const text = species.flavorTextEntries.find(
       ({ language }) => language.name === 'en'
     ).flavorText;
+
+    return text
+      .replace(/u'\f'/, ' ')
+      .replace(/\u00AD/g, '')
+      .replace(/\u000C/g, ' ')
+      .replace(/u' -\n'/, ' - ')
+      .replace(/u'-\n'/, '-')
+      .replace(/(\r\n|\n|\r)/gm, ' ');
   };
 
   const getSpecies = () => {

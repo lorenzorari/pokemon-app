@@ -1,0 +1,28 @@
+$figureSize: 1.2rem;
+
+.search-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 3px solid var(--color-black);
+  border-radius: 10px;
+  padding: 0.5rem;
+
+  input {
+    width: 14rem;
+    padding: 0;
+    border: none;
+    outline: none;
+  }
+
+  figure {
+    margin: 0 0 0 1rem;
+    height: $figureSize;
+    width: $figureSize;
+
+    img {
+      height: 100%;
+      width: 100%;
+    }
+  }
+}

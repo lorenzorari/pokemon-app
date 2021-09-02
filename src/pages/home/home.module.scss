@@ -7,9 +7,20 @@
 .pokemons-container {
   display: grid;
   grid-gap: 1rem;
-  grid-template-columns: repeat(auto-fit, 14rem);
+  grid-template-columns: repeat(auto-fit, 13rem);
   justify-content: center;
   margin: 2rem auto;
   max-width: 60rem;
   padding: 0 1rem;
+}
+
+.card {
+  transition: box-shadow, transform ease 0.2s;
+  transform: perspective(1px) translateZ(0) scale(1);
+  will-change: transform;
+
+  &:hover {
+    transform: scale(1.04);
+    cursor: pointer;
+  }
 }

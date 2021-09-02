@@ -1,0 +1,38 @@
+.btn-back {
+  display: flex;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  white-space: nowrap;
+  color: var(--color-black);
+
+  div {
+    height: 2rem;
+    width: 2rem;
+
+    svg {
+      height: 100%;
+      width: 100%;
+
+      path {
+        fill: var(--color-black);
+      }
+    }
+  }
+
+  span {
+    display: inline-flex;
+    overflow: hidden;
+    max-width: 0;
+    transition: all ease 0.2s;
+    opacity: 0;
+  }
+
+  &:hover span {
+    padding-left: 0.2rem;
+    max-width: 30rem;
+    transition: max-width ease 0.5s, padding-left ease 0.2s;
+    opacity: 1;
+  }
+}

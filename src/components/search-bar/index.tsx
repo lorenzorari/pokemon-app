@@ -1,5 +1,5 @@
 import React, { ChangeEventHandler, KeyboardEventHandler } from 'react';
-import styles from './text-field.module.scss';
+import styles from './search-bar.module.scss';
 
 interface Props {
   type?: string;
@@ -8,7 +8,7 @@ interface Props {
   onKeyPress?: KeyboardEventHandler<any>;
 }
 
-const TextField = (props: Props) => {
+const SearchBar = (props: Props) => {
   return (
     <div className={styles['search-bar']}>
       <input
@@ -24,4 +24,4 @@ const TextField = (props: Props) => {
   );
 };
 
-export default TextField;
+export default SearchBar;
