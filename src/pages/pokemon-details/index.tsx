@@ -128,7 +128,7 @@ const PokemonDetails = () => {
   };
 
   return (
-    <main className={styles.main}>
+    <main className={styles.layout}>
       {pokemon && (
         <>
           <div className={styles['basic-info-container']}>
