@@ -12,9 +12,9 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route exact path="/pokedex/:id" component={PokemonDetails} />
-        <Route exact strict path="/pokedex" component={Home} />
-        <Redirect from="/" to="/pokedex" />
+        <Route exact path="/pokemon/:id" component={PokemonDetails} />
+        <Route exact path="/" component={Home} />
+        <Redirect from="*" to="/" />
       </Switch>
     </Router>
   );

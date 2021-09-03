@@ -95,7 +95,7 @@ const Home = () => {
   };
 
   const handleClickCard = (id: number) => {
-    history.push(`/pokedex/${id}`);
+    history.push(`/pokemon/${id}`);
   };
 
   return (
