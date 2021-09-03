@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { ReactSVG } from 'react-svg';
 import { NamedAPIResources } from '../../../models/named-api-resource';
 import { Pokemons } from '../../../models/pokemon';
 import PokemonCard from '../../components/pokemon/card';
@@ -121,8 +122,9 @@ const Home = () => {
             ))}
           </div>
 
-          {/* <button onClick={handleMorePokemon}>More Pokemon</button> */}
-          <div ref={loader}>More Pokemons</div>
+          <div ref={loader} className={styles['more-pokemons-loader']}>
+            <ReactSVG src="/assets/pokeball.svg" />
+          </div>
         </>
       ) : (
         <div>Loading...</div>
