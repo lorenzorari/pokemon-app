@@ -64,10 +64,12 @@ const Home = () => {
   };
 
   const handleMorePokemon = async () => {
-    const { results, next, previous } = await getAllPokemons(nextPageUrl);
-    setPreviousPageUrl(previous);
-    setNextPageUrl(next);
-    loadPokemons(results);
+    if (nextPageUrl) {
+      const { results, next, previous } = await getAllPokemons(nextPageUrl);
+      setPreviousPageUrl(previous);
+      setNextPageUrl(next);
+      loadPokemons(results);
+    }
   };
 
   const handlePokemonSearch = (e: React.FormEvent<HTMLInputElement>) => {
