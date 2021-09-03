@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { NamedAPIResources } from '../../../models/named-api-resource';
 import { Pokemons } from '../../../models/pokemon';
 import PokemonCard from '../../components/pokemon/card';
@@ -12,7 +12,6 @@ const Home = () => {
   const history = useHistory();
   const [searchValue, setSearchValue] = useState('');
   const [pokemons, setPokemons] = useState<Pokemons>([]);
-  const [previousPageUrl, setPreviousPageUrl] = useState<string>(null);
   const [nextPageUrl, setNextPageUrl] = useState<string>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -45,8 +44,7 @@ const Home = () => {
 
   useEffect(() => {
     const init = async () => {
-      const { results, next, previous } = await getAllPokemons(INITIAL_URL);
-      setPreviousPageUrl(previous);
+      const { results, next } = await getAllPokemons(INITIAL_URL);
       setNextPageUrl(next);
       loadPokemons(results);
       setLoading(false);
@@ -65,8 +63,7 @@ const Home = () => {
 
   const handleMorePokemon = async () => {
     if (nextPageUrl) {
-      const { results, next, previous } = await getAllPokemons(nextPageUrl);
-      setPreviousPageUrl(previous);
+      const { results, next } = await getAllPokemons(nextPageUrl);
       setNextPageUrl(next);
       loadPokemons(results);
     }
