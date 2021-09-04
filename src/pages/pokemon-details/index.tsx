@@ -33,7 +33,7 @@ const PokemonDetails = () => {
   const [pokemon, setPokemon] = useState<Pokemon>(null);
   const [species, setSpecies] = useState<Species>(null);
   const [pokemonEvolutions, setPokemonEvolutions] = useState([]);
-  const [activeTab, setActiveTab] = useState<string>(EVOLUTIONS);
+  const [activeTab, setActiveTab] = useState<string>(BIOGRAPHY);
 
   const tabs: string[] = [BIOGRAPHY, STATS, EVOLUTIONS];
 
