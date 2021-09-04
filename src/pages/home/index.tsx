@@ -15,18 +15,20 @@ const Home = () => {
   const [pokemons, setPokemons] = useState<Pokemons>([]);
   const [nextPageUrl, setNextPageUrl] = useState<string>(null);
   const [loading, setLoading] = useState<boolean>(true);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
 
   const [page, setPage] = useState(1);
   const loader = useRef(null);
 
   useEffect(() => {
-    const options: IntersectionObserverInit = {
-      root: null,
-      rootMargin: '20px',
-      threshold: 1.0,
-    };
+    const observer = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting && !isLoadingMore) {
+        observer.unobserve(entries[0].target);
 
-    const observer = new IntersectionObserver(handleObserver, options);
+        setIsLoadingMore(true);
+        setPage(page => page + 1);
+      }
+    });
 
     if (loader.current) observer.observe(loader.current);
   });
@@ -34,20 +36,17 @@ const Home = () => {
   useEffect(() => {
     const init = async () => {
       await handleMorePokemon();
+      setIsLoadingMore(false);
     };
 
     init();
   }, [page]);
 
-  const handleObserver = (entries: IntersectionObserverEntry[]) => {
-    if (entries[0].isIntersecting) setPage(page => page + 1);
-  };
-
   useEffect(() => {
     const init = async () => {
       const { results, next } = await getAllPokemons(INITIAL_URL);
       setNextPageUrl(next);
-      loadPokemons(results);
+      await loadPokemons(results);
       setLoading(false);
     };
 
@@ -66,7 +65,7 @@ const Home = () => {
     if (nextPageUrl) {
       const { results, next } = await getAllPokemons(nextPageUrl);
       setNextPageUrl(next);
-      loadPokemons(results);
+      await loadPokemons(results);
     }
   };
 
