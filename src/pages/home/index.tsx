@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { ReactSVG } from 'react-svg';
 import { NamedAPIResources } from '../../../models/named-api-resource';
 import { Pokemons } from '../../../models/pokemon';
+import InfiniteScroll from '../../components/infinite-scroll';
 import PokemonCard from '../../components/pokemon/card';
 import SearchBar from '../../components/search-bar';
 import { getAllPokemons, getPokemon } from '../../services/pokemon';
@@ -17,30 +18,8 @@ const Home = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
 
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState<number>(1);
   const loader = useRef(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(entries => {
-      if (entries[0].isIntersecting && !isLoadingMore) {
-        observer.unobserve(entries[0].target);
-
-        setIsLoadingMore(true);
-        setPage(page => page + 1);
-      }
-    });
-
-    if (loader.current) observer.observe(loader.current);
-  });
-
-  useEffect(() => {
-    const init = async () => {
-      await handleMorePokemon();
-      setIsLoadingMore(false);
-    };
-
-    init();
-  }, [page]);
 
   useEffect(() => {
     const init = async () => {
@@ -97,6 +76,20 @@ const Home = () => {
     history.push(`/pokemon/${id}`);
   };
 
+  const handleObserver: IntersectionObserverCallback = (entries, observer) => {
+    if (entries[0].isIntersecting && !isLoadingMore) {
+      observer.unobserve(entries[0].target);
+
+      setIsLoadingMore(true);
+      setPage(page => page + 1);
+    }
+  };
+
+  const loadMore = async () => {
+    await handleMorePokemon();
+    setIsLoadingMore(false);
+  };
+
   return (
     <section>
       <form className={styles['search-bar']}>
@@ -110,20 +103,28 @@ const Home = () => {
 
       {!loading && pokemons.length ? (
         <>
-          <div className={styles['pokemons-container']}>
-            {pokemons.map(pokemon => (
-              <PokemonCard
-                key={pokemon.id}
-                className={styles.card}
-                onClick={() => handleClickCard(pokemon.id)}
-                pokemon={pokemon}
-              />
-            ))}
-          </div>
-
-          <div ref={loader} className={styles['more-pokemons-loader']}>
-            <ReactSVG src="/assets/pokeball.svg" />
-          </div>
+          <InfiniteScroll
+            observerCallback={handleObserver}
+            loadMore={loadMore}
+            page={page}
+            ref={loader}
+            loaderElement={
+              <div ref={loader} className={styles['more-pokemons-loader']}>
+                <ReactSVG src="/assets/pokeball.svg" />
+              </div>
+            }
+          >
+            <div className={styles['pokemons-container']}>
+              {pokemons.map(pokemon => (
+                <PokemonCard
+                  key={pokemon.id}
+                  className={styles.card}
+                  onClick={() => handleClickCard(pokemon.id)}
+                  pokemon={pokemon}
+                />
+              ))}
+            </div>
+          </InfiniteScroll>
         </>
       ) : (
         <div>Loading...</div>
