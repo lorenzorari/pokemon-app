@@ -1,7 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import { ReactSVG } from 'react-svg';
 import { NamedAPIResources } from '../../../models/named-api-resource';
 import { Pokemons } from '../../../models/pokemon';
+import InfiniteScroll from '../../components/infinite-scroll';
 import PokemonCard from '../../components/pokemon/card';
 import SearchBar from '../../components/search-bar';
 import { getAllPokemons, getPokemon } from '../../services/pokemon';
@@ -12,43 +14,18 @@ const Home = () => {
   const history = useHistory();
   const [searchValue, setSearchValue] = useState('');
   const [pokemons, setPokemons] = useState<Pokemons>([]);
-  const [previousPageUrl, setPreviousPageUrl] = useState<string>(null);
   const [nextPageUrl, setNextPageUrl] = useState<string>(null);
   const [loading, setLoading] = useState<boolean>(true);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
 
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState<number>(1);
   const loader = useRef(null);
 
   useEffect(() => {
-    const options: IntersectionObserverInit = {
-      root: null,
-      rootMargin: '20px',
-      threshold: 1.0,
-    };
-
-    const observer = new IntersectionObserver(handleObserver, options);
-
-    if (loader.current) observer.observe(loader.current);
-  });
-
-  useEffect(() => {
     const init = async () => {
-      await handleMorePokemon();
-    };
-
-    init();
-  }, [page]);
-
-  const handleObserver = (entries: IntersectionObserverEntry[]) => {
-    if (entries[0].isIntersecting) setPage(page => page + 1);
-  };
-
-  useEffect(() => {
-    const init = async () => {
-      const { results, next, previous } = await getAllPokemons(INITIAL_URL);
-      setPreviousPageUrl(previous);
+      const { results, next } = await getAllPokemons(INITIAL_URL);
       setNextPageUrl(next);
-      loadPokemons(results);
+      await loadPokemons(results);
       setLoading(false);
     };
 
@@ -64,10 +41,11 @@ const Home = () => {
   };
 
   const handleMorePokemon = async () => {
-    const { results, next, previous } = await getAllPokemons(nextPageUrl);
-    setPreviousPageUrl(previous);
-    setNextPageUrl(next);
-    loadPokemons(results);
+    if (nextPageUrl) {
+      const { results, next } = await getAllPokemons(nextPageUrl);
+      setNextPageUrl(next);
+      await loadPokemons(results);
+    }
   };
 
   const handlePokemonSearch = (e: React.FormEvent<HTMLInputElement>) => {
@@ -98,6 +76,20 @@ const Home = () => {
     history.push(`/pokemon/${id}`);
   };
 
+  const handleObserver: IntersectionObserverCallback = (entries, observer) => {
+    if (entries[0].isIntersecting && !isLoadingMore) {
+      observer.unobserve(entries[0].target);
+
+      setIsLoadingMore(true);
+      setPage(page => page + 1);
+    }
+  };
+
+  const loadMore = async () => {
+    await handleMorePokemon();
+    setIsLoadingMore(false);
+  };
+
   return (
     <section>
       <form className={styles['search-bar']}>
@@ -111,19 +103,28 @@ const Home = () => {
 
       {!loading && pokemons.length ? (
         <>
-          <div className={styles['pokemons-container']}>
-            {pokemons.map(pokemon => (
-              <PokemonCard
-                key={pokemon.id}
-                className={styles.card}
-                onClick={() => handleClickCard(pokemon.id)}
-                pokemon={pokemon}
-              />
-            ))}
-          </div>
-
-          {/* <button onClick={handleMorePokemon}>More Pokemon</button> */}
-          <div ref={loader}>More Pokemons</div>
+          <InfiniteScroll
+            observerCallback={handleObserver}
+            loadMore={loadMore}
+            page={page}
+            ref={loader}
+            loaderElement={
+              <div ref={loader} className={styles['more-pokemons-loader']}>
+                <ReactSVG src="/assets/pokeball.svg" />
+              </div>
+            }
+          >
+            <div className={styles['pokemons-container']}>
+              {pokemons.map(pokemon => (
+                <PokemonCard
+                  key={pokemon.id}
+                  className={styles.card}
+                  onClick={() => handleClickCard(pokemon.id)}
+                  pokemon={pokemon}
+                />
+              ))}
+            </div>
+          </InfiniteScroll>
         </>
       ) : (
         <div>Loading...</div>
