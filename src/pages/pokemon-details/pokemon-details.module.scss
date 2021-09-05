@@ -84,7 +84,13 @@ $columnGap: 1rem;
 }
 
 @media screen and (max-width: 560px) {
-  .details {
-    background-color: goldenrod;
+  /* Scalable font : 
+      [minimum size] + ([maximum size] - [minimum size])
+      * ((100vw - [minimum viewport width])
+      / ([maximum viewport width] - [minimum viewport width]))
+  */
+
+  html {
+    font-size: calc(8px + (14 - 8) * ((100vw - 320px) / (560 - 320)));
   }
 }
