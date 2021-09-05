@@ -10,8 +10,6 @@ $columnGap: 1rem;
   max-height: 1086px;
   max-width: 1536px;
   margin: 0 auto;
-
-  overflow-y: hidden;
 }
 
 .basic-info-container {
@@ -37,10 +35,9 @@ $columnGap: 1rem;
 .details {
   display: flex;
   justify-content: center;
-  padding: 3rem 0;
+  padding-top: 3rem;
   width: 55%;
   min-width: 35rem;
-  overflow-y: scroll;
 }
 
 .details-container {
@@ -62,11 +59,11 @@ $columnGap: 1rem;
   text-align: center;
 }
 
-@media screen and (max-width: 1024px) {
-  .layout {
-    overflow-y: overlay;
-  }
+.tab-content {
+  margin-top: 1.5rem;
+}
 
+@media screen and (max-width: 1024px) {
   .basic-info-container {
     height: 30rem;
     width: 100%;

@@ -152,7 +152,7 @@ const PokemonDetails = () => {
                 ))}
               </ul>
 
-              {tabView[activeTab]}
+              <div className={styles['tab-content']}>{tabView[activeTab]}</div>
             </div>
           </div>
         </>
