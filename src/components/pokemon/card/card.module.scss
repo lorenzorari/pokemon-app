@@ -5,7 +5,7 @@
 
   z-index: 1;
   overflow: hidden;
-  border-radius: 20px;
+  border-radius: 1.3rem;
   background-color: var(--color-type-1);
   user-select: none;
 }
@@ -27,13 +27,8 @@
   right: -3rem;
   z-index: -1;
 
-  svg {
-    height: 100%;
-    width: 100%;
-
-    path {
-      fill: var(--color-type-2);
-    }
+  svg path {
+    fill: var(--color-type-2);
   }
 }
 

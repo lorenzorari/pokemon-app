@@ -3,8 +3,8 @@ $columnWidth: 10rem;
 $columnGap: 1rem;
 
 .layout {
-  display: grid;
-  grid-template-columns: 45fr 55fr;
+  display: flex;
+  flex-wrap: wrap;
 
   height: 100vh;
   max-height: 1086px;
@@ -20,6 +20,7 @@ $columnGap: 1rem;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  width: 45%;
 
   button {
     position: absolute;
@@ -36,7 +37,9 @@ $columnGap: 1rem;
 .details {
   display: flex;
   justify-content: center;
-  padding-top: 3rem;
+  padding: 3rem 0;
+  width: 55%;
+  min-width: 35rem;
   overflow-y: scroll;
 }
 
@@ -57,4 +60,37 @@ $columnGap: 1rem;
   font-weight: 700;
   list-style: none;
   text-align: center;
+}
+
+@media screen and (max-width: 1024px) {
+  .layout {
+    overflow-y: overlay;
+  }
+
+  .basic-info-container {
+    height: 30rem;
+    width: 100%;
+
+    .card {
+      transform: scale(1.2);
+    }
+  }
+
+  .details {
+    height: 100%;
+    width: 100%;
+    padding-top: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 560px) {
+  /* Scalable font : 
+      [minimum size] + ([maximum size] - [minimum size])
+      * ((100vw - [minimum viewport width])
+      / ([maximum viewport width] - [minimum viewport width]))
+  */
+
+  html {
+    font-size: calc(8px + (14 - 8) * ((100vw - 320px) / (560 - 320)));
+  }
 }

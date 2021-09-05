@@ -7,6 +7,7 @@ import { Pokemon } from '../../../../models/pokemon';
 import styles from './card.module.scss';
 import { ReactSVG } from 'react-svg';
 import classNames from 'classnames';
+import PokemonBackgroundImage from './background-image';
 
 interface Props {
   pokemon: Pokemon;
@@ -43,9 +44,9 @@ const PokemonCard = ({ pokemon, className, onClick }: Props) => {
         <PokemonCardImage pokemon={pokemon} />
       </figure>
 
-      <ReactSVG
+      <PokemonBackgroundImage
         className={styles['background-image']}
-        src={`./assets/${pokemonType}.svg`}
+        src={`/assets/${pokemonType}.svg`}
       />
     </article>
   );
