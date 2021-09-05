@@ -4,21 +4,26 @@ $figureSize: 1.2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: 3px solid var(--color-black);
-  border-radius: 10px;
+
   padding: 0.5rem;
 
+  border: 0.188rem solid var(--color-black);
+  border-radius: 0.625rem;
+
   input {
-    width: 14rem;
-    padding: 0;
+    width: 15rem;
+    padding: 0.1rem 0.2rem;
+
+    font-size: 0.9rem;
+
     border: none;
     outline: none;
   }
 
   figure {
-    margin: 0 0 0 1rem;
     height: $figureSize;
     width: $figureSize;
+    margin: 0 0 0 1rem;
 
     img {
       height: 100%;
