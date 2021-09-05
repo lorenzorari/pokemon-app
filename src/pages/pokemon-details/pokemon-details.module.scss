@@ -3,8 +3,8 @@ $columnWidth: 10rem;
 $columnGap: 1rem;
 
 .layout {
-  display: grid;
-  grid-template-columns: 45fr 55fr;
+  display: flex;
+  flex-wrap: wrap;
 
   height: 100vh;
   max-height: 1086px;
@@ -20,6 +20,7 @@ $columnGap: 1rem;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  width: 45%;
 
   button {
     position: absolute;
@@ -37,6 +38,8 @@ $columnGap: 1rem;
   display: flex;
   justify-content: center;
   padding-top: 3rem;
+  width: 55%;
+  min-width: 35rem;
   overflow-y: scroll;
 }
 
