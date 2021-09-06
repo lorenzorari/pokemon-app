@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { useHistory } from 'react-router-dom';
-import { ChainLink, ChainLinks } from '../../../models/evolution/chain';
-import { Pokemon } from '../../../models/pokemon';
-import { Species } from '../../../models/species';
+import { ChainLink, ChainLinks } from '../../models/evolution/chain';
+import { Pokemon } from '../../models/pokemon';
+import { Species } from '../../models/species';
 import Button from '../../components/button';
 import PokemonCard from '../../components/pokemon/card';
 import PokemonDetailsBiography from '../../components/pokemon/details/biography';
