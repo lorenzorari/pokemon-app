@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { ReactSVG } from 'react-svg';
-import { NamedAPIResources } from '../../../models/named-api-resource';
-import { Pokemons } from '../../../models/pokemon';
+import { NamedAPIResources } from '../../models/named-api-resource';
+import { Pokemons } from '../../models/pokemon';
 import InfiniteScroll from '../../components/infinite-scroll';
 import PokemonCard from '../../components/pokemon/card';
 import SearchBar from '../../components/search-bar';
@@ -110,7 +110,7 @@ const Home = () => {
             ref={loader}
             loaderElement={
               <div ref={loader} className={styles['more-pokemons-loader']}>
-                <ReactSVG src="/assets/pokeball.svg" />
+                <ReactSVG src="/assets/svg/pokeball.svg" />
               </div>
             }
           >

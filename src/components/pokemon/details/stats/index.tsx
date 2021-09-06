@@ -1,5 +1,5 @@
 import React from 'react';
-import { Pokemon } from '../../../../../models/pokemon';
+import { Pokemon } from '../../../../models/pokemon';
 import Stat from '../../../stat';
 import styles from './stats.module.scss';
 

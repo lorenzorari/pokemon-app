@@ -3,7 +3,7 @@ import PokemonCardId from './id';
 import PokemonCardImage from './image';
 import PokemonCardTitle from './title';
 import TypeTag from '../../type-tag';
-import { Pokemon } from '../../../../models/pokemon';
+import { Pokemon } from '../../../models/pokemon';
 import styles from './card.module.scss';
 import { ReactSVG } from 'react-svg';
 import classNames from 'classnames';
@@ -46,7 +46,7 @@ const PokemonCard = ({ pokemon, className, onClick }: Props) => {
 
       <PokemonBackgroundImage
         className={styles['background-image']}
-        src={`/assets/${pokemonType}.svg`}
+        src={`/assets/svg/pokemon-types/${pokemonType}.svg`}
       />
     </article>
   );

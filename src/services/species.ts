@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { Species } from '../../models/species';
-import { Pokemon } from './../../models/pokemon/index';
+import { Species } from '../models/species';
+import { Pokemon } from './../models/pokemon/index';
 import { convertUnderscoreToCamelcase } from './../utils/convert-underscore-to-camelcase';
 
 const getSpecies = async ({ species }: Pokemon): Promise<Species> => {

@@ -9,7 +9,7 @@ interface Props {
 }
 
 const TypeTag = ({ value, className }: Props) => {
-  const src = `/assets/${value}.svg`;
+  const src = `/assets/svg/pokemon-types/${value}.svg`;
 
   const tagStyle = {
     '--color-type-1': `var(--color-${value}-1)`,

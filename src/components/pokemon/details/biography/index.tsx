@@ -1,6 +1,6 @@
 import React from 'react';
-import { Pokemon } from '../../../../../models/pokemon';
-import { Species } from '../../../../../models/species';
+import { Pokemon } from '../../../../models/pokemon';
+import { Species } from '../../../../models/species';
 import PokemonDescription from '../../description';
 import PokemonInformation from '../../information';
 import styles from './biography.module.scss';
