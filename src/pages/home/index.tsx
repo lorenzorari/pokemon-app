@@ -91,7 +91,7 @@ const Home = () => {
   };
 
   return (
-    <section>
+    <main>
       <form className={styles['search-bar']}>
         <SearchBar
           type="text"
@@ -129,7 +129,7 @@ const Home = () => {
       ) : (
         <div>Loading...</div>
       )}
-    </section>
+    </main>
   );
 };
 
