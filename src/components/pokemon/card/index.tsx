@@ -46,7 +46,7 @@ const PokemonCard = ({ pokemon, className, onClick }: Props) => {
 
       <PokemonBackgroundImage
         className={styles['background-image']}
-        src={`/assets/${pokemonType}.svg`}
+        src={`/assets/svg/pokemon-types/${pokemonType}.svg`}
       />
     </article>
   );

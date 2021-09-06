@@ -15,7 +15,7 @@ const Button = ({ children, theme = 'default', onClick }: Props) => {
         <button onClick={onClick}>{children}</button>
       ) : (
         <button className={styles['btn-back']} onClick={onClick}>
-          <ReactSVG src="/assets/arrow.svg" />
+          <ReactSVG src="/assets/svg/arrow.svg" />
           <span>{children}</span>
         </button>
       )}

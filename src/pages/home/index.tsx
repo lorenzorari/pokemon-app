@@ -110,7 +110,7 @@ const Home = () => {
             ref={loader}
             loaderElement={
               <div ref={loader} className={styles['more-pokemons-loader']}>
-                <ReactSVG src="/assets/pokeball.svg" />
+                <ReactSVG src="/assets/svg/pokeball.svg" />
               </div>
             }
           >

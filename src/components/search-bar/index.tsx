@@ -18,7 +18,7 @@ const SearchBar = (props: Props) => {
         onKeyPress={props.onKeyPress}
       />
       <figure>
-        <img src="./assets/search.svg" />
+        <img src="./assets/svg/search.svg" />
       </figure>
     </div>
   );
