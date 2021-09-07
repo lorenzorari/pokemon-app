@@ -8,6 +8,8 @@ import PokemonCard from '../../components/pokemon/card';
 import SearchBar from '../../components/search-bar';
 import { getAllPokemons, getPokemon } from '../../services/pokemon';
 import styles from './home.module.scss';
+import Particles from 'react-tsparticles';
+import particlesOptions from '../../data/particlesOptions';
 
 const Home = () => {
   const INITIAL_URL = 'https://pokeapi.co/api/v2/pokemon';
@@ -91,7 +93,16 @@ const Home = () => {
   };
 
   return (
-    <main>
+    <main className={styles.main}>
+      <div className={styles['heading-container']}>
+        <Particles
+          className={styles.particles}
+          options={particlesOptions}
+        ></Particles>
+
+        <h1>Pocketex</h1>
+      </div>
+
       <form className={styles['search-bar']}>
         <SearchBar
           type="text"

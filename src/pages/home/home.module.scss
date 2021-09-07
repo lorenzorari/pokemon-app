@@ -1,3 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500&display=swap');
+
+.main {
+  display: flex;
+  flex-direction: column;
+}
+
+.heading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: hsl(350, 91%, 45%);
+
+  font-size: 3rem;
+
+  .particles {
+    position: relative;
+    height: 100%;
+    width: 100%;
+
+    animation: showUp 1s forwards;
+  }
+
+  h1 {
+    position: absolute;
+
+    font-family: 'Urbanist', sans-serif;
+    letter-spacing: 2px;
+
+    color: var(--color-white);
+  }
+}
+
 .search-bar {
   display: flex;
   justify-content: center;
@@ -43,5 +77,15 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+@keyframes showUp {
+  from {
+    transform: scale(0);
+  }
+
+  to {
+    transform: scale(1);
   }
 }
