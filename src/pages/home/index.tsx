@@ -95,7 +95,7 @@ const Home = () => {
   return (
     <main className={styles.main}>
       <div className={styles['heading-container']}>
-        {/* <Particles className={styles.particles} options={particlesOptions} /> */}
+        <Particles className={styles.particles} options={particlesOptions} />
 
         <div className={styles['heading-content']}>
           <div className={styles.heading}>
