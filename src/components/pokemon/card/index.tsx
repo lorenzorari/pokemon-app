@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PokemonCardId from './id';
 import PokemonCardImage from './image';
 import PokemonCardTitle from './title';
@@ -52,4 +52,8 @@ const PokemonCard = ({ pokemon, className, onClick }: Props) => {
   );
 };
 
-export default PokemonCard;
+const PokemonCardPropsAreEqual = (prev, next) => {
+  return prev.pokemon === next.pokemon;
+};
+
+export default memo(PokemonCard, PokemonCardPropsAreEqual);
