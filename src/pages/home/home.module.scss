@@ -1,34 +1,57 @@
 @import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500&display=swap');
 
-.main {
-  display: flex;
-  flex-direction: column;
-}
-
 .heading-container {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: hsl(350, 91%, 45%);
 
-  font-size: 3rem;
+  // font-size: 3rem;
+
+  background-color: hsl(350, 91%, 45%);
 
   .particles {
     position: relative;
     height: 100%;
     width: 100%;
+    transform: scale(0);
+    // background-color: cadetblue;
+    animation: scaleUp 0.5s forwards;
 
-    animation: showUp 1s forwards;
+    // transform: scale(0);
+    animation-delay: 1.5s;
   }
 
-  h1 {
+  .heading-content {
     position: absolute;
 
-    font-family: 'Urbanist', sans-serif;
-    letter-spacing: 2px;
+    .heading {
+      --headingSize: 10rem;
 
-    color: var(--color-white);
+      display: flex;
+      align-items: center;
+      height: calc(var(--headingSize) + 2rem);
+      margin-bottom: 1rem;
+      overflow: hidden;
+
+      h1 {
+        font-family: 'Urbanist', sans-serif;
+        font-size: var(--headingSize);
+        letter-spacing: 0.175rem;
+
+        transform: translateY(-100%);
+        animation: slideFromTop 0.5s forwards;
+        animation-delay: 0.5s;
+
+        color: var(--color-white);
+      }
+    }
+
+    form {
+      opacity: 0;
+      animation: showUp 0.5s forwards;
+      animation-delay: 1s;
+    }
   }
 }
 
@@ -80,12 +103,45 @@
   }
 }
 
-@keyframes showUp {
+@keyframes scaleUp {
   from {
     transform: scale(0);
+    opacity: 0;
   }
 
   to {
+    opacity: 1;
     transform: scale(1);
+  }
+}
+
+@keyframes showUp {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideFromTop {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@media screen and (max-width: 760px) {
+  .heading {
+    h1 {
+      --headingSize: 8rem;
+      // background-color: cornflowerblue;
+    }
   }
 }

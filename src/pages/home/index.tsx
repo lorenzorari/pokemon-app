@@ -95,22 +95,23 @@ const Home = () => {
   return (
     <main className={styles.main}>
       <div className={styles['heading-container']}>
-        <Particles
-          className={styles.particles}
-          options={particlesOptions}
-        ></Particles>
+        {/* <Particles className={styles.particles} options={particlesOptions} /> */}
 
-        <h1>Pocketex</h1>
+        <div className={styles['heading-content']}>
+          <div className={styles.heading}>
+            <h1>Pocketex</h1>
+          </div>
+
+          <form>
+            <SearchBar
+              type="text"
+              placeholder="Search a pokemon by name or id..."
+              onChange={handlePokemonSearch}
+              onKeyPress={handleKeyPress}
+            />
+          </form>
+        </div>
       </div>
-
-      <form className={styles['search-bar']}>
-        <SearchBar
-          type="text"
-          placeholder="Search a pokemon by name or id..."
-          onChange={e => handlePokemonSearch(e)}
-          onKeyPress={e => handleKeyPress(e)}
-        />
-      </form>
 
       {!loading && pokemons.length ? (
         <>
