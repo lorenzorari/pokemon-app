@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { ReactSVG } from 'react-svg';
-import HomepageHeading from '../../components/homepage-heading';
+import HomepageHeadingContainer from '../../components/homepage-heading-container';
 import InfiniteScroll from '../../components/infinite-scroll';
 import PokemonCard from '../../components/pokemon/card';
 import { NamedAPIResources } from '../../models/named-api-resource';
@@ -67,7 +67,7 @@ const Home = () => {
 
   return (
     <main className={styles.main}>
-      <HomepageHeading />
+      <HomepageHeadingContainer />
 
       {!loading && pokemons.length ? (
         <>

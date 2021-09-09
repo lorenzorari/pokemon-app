@@ -3,9 +3,9 @@ import Particles from 'react-tsparticles';
 import particlesOptions from '../../data/particlesOptions';
 import ScrollIcon from '../scroll-icon';
 import SearchBar from '../search-bar';
-import styles from './homepage-heading.module.scss';
+import styles from './homepage-heading-container.module.scss';
 
-const HomepageHeading = () => {
+const HomepageHeadingContainer = () => {
   const [searchValue, setSearchValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
@@ -31,14 +31,10 @@ const HomepageHeading = () => {
   };
 
   return (
-    <div className={styles['heading-container']}>
+    <div className={styles['homepage-heading-container']}>
       <Particles className={styles.particles} options={particlesOptions} />
 
       <div className={styles['heading-content']}>
-        <div className={styles.heading}>
-          <h1>Pocketex</h1>
-        </div>
-
         <form>
           <SearchBar
             type="text"
@@ -57,4 +53,4 @@ const HomepageHeading = () => {
   );
 };
 
-export default HomepageHeading;
+export default HomepageHeadingContainer;

@@ -1,4 +1,4 @@
-.heading-container {
+.homepage-heading-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -9,9 +9,9 @@
     position: relative;
     height: 100%;
     width: 100%;
+
     transform: scale(0);
     animation: scaleUp 0.5s forwards;
-
     animation-delay: 1.5s;
   }
 
