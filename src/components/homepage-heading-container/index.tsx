@@ -7,7 +7,11 @@ import SearchBar from '../search-bar';
 import HomepageHeading from './heading';
 import styles from './homepage-heading-container.module.scss';
 
-const HomepageHeadingContainer = () => {
+interface Props {
+  scrollToRef?: React.MutableRefObject<any>;
+}
+
+const HomepageHeadingContainer = ({ scrollToRef }: Props) => {
   const history = useHistory();
   const [searchValue, setSearchValue] = useState('');
   // const [isLoading, setIsLoading] = useState(false);
@@ -29,6 +33,10 @@ const HomepageHeadingContainer = () => {
     }
   };
 
+  const scrollTo = () => {
+    scrollToRef.current.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <section className={styles['homepage-heading-container']}>
       <Particles className={styles.particles} options={particlesOptions} />
@@ -48,6 +56,7 @@ const HomepageHeadingContainer = () => {
 
       <ScrollIcon
         className={styles['scroll-icon']}
+        onClick={scrollTo}
         src="/assets/svg/arrow.svg"
       />
     </section>
