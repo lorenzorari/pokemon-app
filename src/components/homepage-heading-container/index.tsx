@@ -3,6 +3,7 @@ import Particles from 'react-tsparticles';
 import particlesOptions from '../../data/particlesOptions';
 import ScrollIcon from '../scroll-icon';
 import SearchBar from '../search-bar';
+import HomepageHeading from './heading';
 import styles from './homepage-heading-container.module.scss';
 
 const HomepageHeadingContainer = () => {
@@ -35,6 +36,8 @@ const HomepageHeadingContainer = () => {
       <Particles className={styles.particles} options={particlesOptions} />
 
       <div className={styles['heading-content']}>
+        <HomepageHeading />
+
         <form>
           <SearchBar
             type="text"
