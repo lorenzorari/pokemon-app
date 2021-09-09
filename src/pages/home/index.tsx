@@ -70,7 +70,7 @@ const Home = () => {
       <HomepageHeadingContainer />
 
       {!loading && pokemons.length ? (
-        <>
+        <section>
           <InfiniteScroll
             observerCallback={handleObserver}
             loadMore={loadMore}
@@ -93,7 +93,7 @@ const Home = () => {
               ))}
             </div>
           </InfiniteScroll>
-        </>
+        </section>
       ) : (
         <div>Loading...</div>
       )}
