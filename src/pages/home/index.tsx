@@ -1,21 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { ReactSVG } from 'react-svg';
-import { NamedAPIResources } from '../../models/named-api-resource';
-import { Pokemons } from '../../models/pokemon';
+import HomepageHeading from '../../components/homepage-heading';
 import InfiniteScroll from '../../components/infinite-scroll';
 import PokemonCard from '../../components/pokemon/card';
-import SearchBar from '../../components/search-bar';
+import { NamedAPIResources } from '../../models/named-api-resource';
+import { Pokemons } from '../../models/pokemon';
 import { getAllPokemons, getPokemon } from '../../services/pokemon';
 import styles from './home.module.scss';
-import Particles from 'react-tsparticles';
-import particlesOptions from '../../data/particlesOptions';
-import ScrollIcon from '../../components/scroll-icon';
 
 const Home = () => {
   const INITIAL_URL = 'https://pokeapi.co/api/v2/pokemon';
   const history = useHistory();
-  const [searchValue, setSearchValue] = useState('');
   const [pokemons, setPokemons] = useState<Pokemons>([]);
   const [nextPageUrl, setNextPageUrl] = useState<string>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -51,30 +47,6 @@ const Home = () => {
     }
   };
 
-  const handlePokemonSearch = (e: React.FormEvent<HTMLInputElement>) => {
-    setSearchValue(e.currentTarget.value);
-  };
-
-  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      searchPokemon(searchValue);
-    }
-  };
-
-  const searchPokemon = async (value: string) => {
-    if (value === '') {
-      const { results } = await getAllPokemons(INITIAL_URL);
-      setLoading(true);
-      await loadPokemons(results);
-      setLoading(false);
-      return;
-    }
-
-    const pokemon = await getPokemon(value);
-    setPokemons([pokemon]);
-  };
-
   const handleClickCard = (id: number) => {
     history.push(`/pokemon/${id}`);
   };
@@ -95,29 +67,7 @@ const Home = () => {
 
   return (
     <main className={styles.main}>
-      <div className={styles['heading-container']}>
-        <Particles className={styles.particles} options={particlesOptions} />
-
-        <div className={styles['heading-content']}>
-          <div className={styles.heading}>
-            <h1>Pocketex</h1>
-          </div>
-
-          <form>
-            <SearchBar
-              type="text"
-              placeholder="Search a pokemon by name or id..."
-              onChange={handlePokemonSearch}
-              onKeyPress={handleKeyPress}
-            />
-          </form>
-        </div>
-
-        <ScrollIcon
-          className={styles['scroll-icon']}
-          src="/assets/svg/arrow.svg"
-        />
-      </div>
+      <HomepageHeading />
 
       {!loading && pokemons.length ? (
         <>
