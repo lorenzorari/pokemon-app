@@ -19,6 +19,7 @@ const Home = () => {
   const [page, setPage] = useState<number>(1);
 
   const loaderRef = useRef(null);
+  const cardsRef = useRef(null);
 
   useEffect(() => {
     const init = async () => {
@@ -67,10 +68,10 @@ const Home = () => {
 
   return (
     <main className={styles.main}>
-      <HomepageHeadingContainer />
+      <HomepageHeadingContainer scrollToRef={cardsRef} />
 
       {!loading && pokemons.length ? (
-        <section>
+        <section ref={cardsRef}>
           <InfiniteScroll
             observerCallback={handleObserver}
             loadMore={loadMore}
