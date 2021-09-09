@@ -31,3 +31,9 @@
     opacity: 1;
   }
 }
+
+@media screen and (max-width: 760px) {
+  .heading h1 {
+    --headingSize: 8rem;
+  }
+}
