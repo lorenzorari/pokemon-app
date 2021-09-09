@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router';
 import Particles from 'react-tsparticles';
 import particlesOptions from '../../data/particlesOptions';
 import ScrollIcon from '../scroll-icon';
@@ -7,21 +8,18 @@ import HomepageHeading from './heading';
 import styles from './homepage-heading-container.module.scss';
 
 const HomepageHeadingContainer = () => {
+  const history = useHistory();
   const [searchValue, setSearchValue] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
 
   const handlePokemonSearch = (e: React.FormEvent<HTMLInputElement>) => {
     setSearchValue(e.currentTarget.value);
   };
 
   const searchPokemon = async (value: string) => {
-    if (value === '') {
-      // const { results } = await getAllPokemons(INITIAL_URL);
-      // setIsLoading(true);
-      // await loadPokemons(results);
-      // setIsLoading(false);
-      // return;
-    }
+    if (value === '') return;
+
+    history.push(`/pokemon/${value}`);
   };
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
