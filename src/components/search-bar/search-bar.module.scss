@@ -1,24 +1,32 @@
-$figureSize: 1.2rem;
+$figureSize: 1.4rem;
 
 .search-bar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: 3px solid var(--color-black);
-  border-radius: 10px;
-  padding: 0.5rem;
+
+  padding: 0.8rem 1rem;
+
+  // border: 0.188rem solid var(--color-black);
+  border-radius: 0.625rem;
+  background-color: #fff;
 
   input {
-    width: 14rem;
-    padding: 0;
+    width: 100%;
+    padding: 0.1rem 0.2rem;
+
+    font-size: 1rem;
+
+    background-color: transparent;
     border: none;
     outline: none;
   }
 
   figure {
-    margin: 0 0 0 1rem;
+    display: flex;
     height: $figureSize;
     width: $figureSize;
+    margin: 0 0 0 1rem;
 
     img {
       height: 100%;

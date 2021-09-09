@@ -1,5 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700&display=swap');
 
+html {
+  /* Scalable font : 
+      [minimum size] + ([maximum size] - [minimum size])
+      * ((100vw - [minimum viewport width])
+      / ([maximum viewport width] - [minimum viewport width]))
+  */
+  font-size: calc(8px + (16 - 8) * ((100vw - 320px) / (1536 - 320)));
+}
+
 html,
 body {
   margin: 0;
@@ -13,6 +22,7 @@ body {
 
 body {
   color: var(--color-black);
+  overflow-y: overlay;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -22,7 +32,7 @@ img {
 }
 
 ::-webkit-scrollbar {
-  width: 15px;
+  width: 0.8rem;
   background: transparent;
 }
 

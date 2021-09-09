@@ -8,10 +8,7 @@ $columnGap: 1rem;
 
   height: 100vh;
   max-height: 1086px;
-  max-width: 1536px;
   margin: 0 auto;
-
-  overflow-y: hidden;
 }
 
 .basic-info-container {
@@ -20,11 +17,14 @@ $columnGap: 1rem;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  height: 100%;
   width: 45%;
+  min-height: 40rem;
 
   button {
     position: absolute;
     inset: 2rem auto auto 2rem;
+    z-index: 100;
   }
 
   .card {
@@ -37,10 +37,10 @@ $columnGap: 1rem;
 .details {
   display: flex;
   justify-content: center;
-  padding: 3rem 0;
+  padding-top: 3rem;
+  height: 100%;
   width: 55%;
   min-width: 35rem;
-  overflow-y: scroll;
 }
 
 .details-container {
@@ -62,35 +62,38 @@ $columnGap: 1rem;
   text-align: center;
 }
 
-@media screen and (max-width: 1024px) {
-  .layout {
-    overflow-y: overlay;
+.tab-content {
+  margin-top: 1.5rem;
+}
+
+@media screen and (max-width: 760px) {
+  html {
+    font-size: calc(14px + (16 - 14) * ((100vw - 560px) / (760 - 560)));
   }
 
   .basic-info-container {
-    height: 30rem;
+    min-height: 35rem;
     width: 100%;
 
     .card {
-      transform: scale(1.2);
+      transform: scale(1.4);
     }
   }
 
   .details {
     height: 100%;
     width: 100%;
-    padding-top: 1.5rem;
   }
 }
 
 @media screen and (max-width: 560px) {
-  /* Scalable font : 
-      [minimum size] + ([maximum size] - [minimum size])
-      * ((100vw - [minimum viewport width])
-      / ([maximum viewport width] - [minimum viewport width]))
-  */
-
   html {
     font-size: calc(8px + (14 - 8) * ((100vw - 320px) / (560 - 320)));
+  }
+}
+
+@media screen and (max-height: 500px) {
+  .basic-info-container {
+    min-height: 47rem;
   }
 }
