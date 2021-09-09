@@ -32,7 +32,7 @@ img {
 }
 
 ::-webkit-scrollbar {
-  width: 1rem;
+  width: 0.8rem;
   background: transparent;
 }
 
