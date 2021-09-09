@@ -1,0 +1,39 @@
+.heading {
+  --headingSize: 10rem;
+
+  display: flex;
+  align-items: center;
+  height: calc(var(--headingSize) + 2rem);
+  margin-bottom: 1rem;
+  overflow: hidden;
+
+  h1 {
+    font-family: 'Urbanist', sans-serif;
+    font-size: var(--headingSize);
+    letter-spacing: 0.175rem;
+
+    transform: translateY(-100%);
+    animation: slideFromTop 0.5s forwards;
+    animation-delay: 0.5s;
+
+    color: var(--color-white);
+  }
+}
+
+@keyframes slideFromTop {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@media screen and (max-width: 760px) {
+  .heading h1 {
+    --headingSize: 8rem;
+  }
+}
