@@ -16,9 +16,9 @@ const Home = () => {
   const [nextPageUrl, setNextPageUrl] = useState<string>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
-
   const [page, setPage] = useState<number>(1);
-  const loader = useRef(null);
+
+  const loaderRef = useRef(null);
 
   useEffect(() => {
     const init = async () => {
@@ -75,9 +75,9 @@ const Home = () => {
             observerCallback={handleObserver}
             loadMore={loadMore}
             page={page}
-            ref={loader}
+            ref={loaderRef}
             loaderElement={
-              <div ref={loader} className={styles['more-pokemons-loader']}>
+              <div ref={loaderRef} className={styles['more-pokemons-loader']}>
                 <ReactSVG src="/assets/svg/pokeball.svg" />
               </div>
             }
