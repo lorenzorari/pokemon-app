@@ -30,7 +30,7 @@ const HomepageHeadingContainer = () => {
   };
 
   return (
-    <div className={styles['homepage-heading-container']}>
+    <section className={styles['homepage-heading-container']}>
       <Particles className={styles.particles} options={particlesOptions} />
 
       <div className={styles['heading-content']}>
@@ -50,7 +50,7 @@ const HomepageHeadingContainer = () => {
         className={styles['scroll-icon']}
         src="/assets/svg/arrow.svg"
       />
-    </div>
+    </section>
   );
 };
 
