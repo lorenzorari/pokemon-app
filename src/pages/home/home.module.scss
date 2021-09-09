@@ -53,6 +53,14 @@
       animation-delay: 1s;
     }
   }
+
+  .scroll-icon {
+    position: absolute;
+    content: '';
+    inset: auto auto 0 50%;
+    width: 4rem;
+    height: 4rem;
+  }
 }
 
 .search-bar {

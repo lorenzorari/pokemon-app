@@ -10,6 +10,7 @@ import { getAllPokemons, getPokemon } from '../../services/pokemon';
 import styles from './home.module.scss';
 import Particles from 'react-tsparticles';
 import particlesOptions from '../../data/particlesOptions';
+import ScrollIcon from '../../components/scroll-icon';
 
 const Home = () => {
   const INITIAL_URL = 'https://pokeapi.co/api/v2/pokemon';
@@ -111,6 +112,11 @@ const Home = () => {
             />
           </form>
         </div>
+
+        <ScrollIcon
+          className={styles['scroll-icon']}
+          src="/assets/svg/arrow.svg"
+        />
       </div>
 
       {!loading && pokemons.length ? (
