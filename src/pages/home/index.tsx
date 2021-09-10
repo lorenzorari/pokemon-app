@@ -27,7 +27,7 @@ const Home = () => {
       const { results, next } = await getAllPokemons(INITIAL_URL);
       setNextPageUrl(next);
       await loadPokemons(results);
-      // setLoading(false);
+      setLoading(false);
     };
 
     init();
