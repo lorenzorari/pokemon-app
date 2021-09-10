@@ -57,7 +57,7 @@ const PokemonDetails = () => {
     };
 
     init();
-  }, []);
+  }, [id]);
 
   const createEvolution = (url, name) => {
     return {
