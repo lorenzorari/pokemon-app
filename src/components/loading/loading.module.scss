@@ -1,0 +1,57 @@
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.loading-icon {
+  height: 14rem;
+  width: 14rem;
+  animation: spin 1s infinite ease-in-out;
+
+  svg {
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.text {
+  margin-top: 1rem;
+  font-size: 2.5rem;
+  font-weight: 700;
+
+  &::after {
+    display: inline-block;
+    content: '...';
+    animation: dotty steps(1, end) 2s infinite;
+    width: 1.9rem;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dotty {
+  0% {
+    content: '';
+  }
+  25% {
+    content: '.';
+  }
+  50% {
+    content: '..';
+  }
+  75% {
+    content: '...';
+  }
+  100% {
+    content: '';
+  }
+}
