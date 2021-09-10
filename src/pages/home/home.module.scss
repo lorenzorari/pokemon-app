@@ -1,12 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500&display=swap');
-
 .pokemons-container {
   display: grid;
   grid-gap: 1rem;
   grid-template-columns: repeat(auto-fit, 13rem);
   justify-content: center;
   margin: 2rem auto;
-  max-width: 60rem;
+  max-width: 80rem;
   padding: 0 1rem;
 }
 
@@ -30,6 +28,18 @@
   svg {
     height: 100%;
     width: 100%;
+  }
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: var(--color-primary);
+
+  svg path {
+    fill: var(--color-white);
   }
 }
 

@@ -2,9 +2,16 @@ import React from 'react';
 import { getArtworkUrl } from '../../../helpers/get-artwork-url';
 import styles from './evolution.module.scss';
 
-const PokemonEvolution = ({ evolution }) => {
+interface Props {
+  evolution: any;
+  onClick?: () => void;
+}
+
+const PokemonEvolution = ({ evolution, onClick }: Props) => {
+  const cursorStyle = onClick ? { cursor: 'pointer' } : { cursor: 'default' };
+
   return (
-    <article className={styles.evolution}>
+    <article style={cursorStyle} className={styles.evolution} onClick={onClick}>
       <figure>
         <img src={getArtworkUrl(evolution.id)} alt={evolution.name} />
       </figure>

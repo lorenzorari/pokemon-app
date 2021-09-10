@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { ReactSVG } from 'react-svg';
 import HomepageHeadingContainer from '../../components/homepage-heading-container';
 import InfiniteScroll from '../../components/infinite-scroll';
+import Loading from '../../components/loading';
 import PokemonCard from '../../components/pokemon/card';
 import { NamedAPIResources } from '../../models/named-api-resource';
 import { Pokemons } from '../../models/pokemon';
@@ -16,9 +17,10 @@ const Home = () => {
   const [nextPageUrl, setNextPageUrl] = useState<string>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
-
   const [page, setPage] = useState<number>(1);
-  const loader = useRef(null);
+
+  const loaderRef = useRef(null);
+  const cardsRef = useRef(null);
 
   useEffect(() => {
     const init = async () => {
@@ -67,35 +69,39 @@ const Home = () => {
 
   return (
     <main className={styles.main}>
-      <HomepageHeadingContainer />
-
       {!loading && pokemons.length ? (
         <>
-          <InfiniteScroll
-            observerCallback={handleObserver}
-            loadMore={loadMore}
-            page={page}
-            ref={loader}
-            loaderElement={
-              <div ref={loader} className={styles['more-pokemons-loader']}>
-                <ReactSVG src="/assets/svg/pokeball.svg" />
+          <HomepageHeadingContainer scrollToRef={cardsRef} />
+
+          <section ref={cardsRef}>
+            <InfiniteScroll
+              observerCallback={handleObserver}
+              loadMore={loadMore}
+              page={page}
+              ref={loaderRef}
+              loaderElement={
+                <div ref={loaderRef} className={styles['more-pokemons-loader']}>
+                  <ReactSVG src="/assets/svg/pokeball.svg" />
+                </div>
+              }
+            >
+              <div className={styles['pokemons-container']}>
+                {pokemons.map(pokemon => (
+                  <PokemonCard
+                    key={pokemon.id}
+                    className={styles.card}
+                    onClick={() => handleClickCard(pokemon.id)}
+                    pokemon={pokemon}
+                  />
+                ))}
               </div>
-            }
-          >
-            <div className={styles['pokemons-container']}>
-              {pokemons.map(pokemon => (
-                <PokemonCard
-                  key={pokemon.id}
-                  className={styles.card}
-                  onClick={() => handleClickCard(pokemon.id)}
-                  pokemon={pokemon}
-                />
-              ))}
-            </div>
-          </InfiniteScroll>
+            </InfiniteScroll>
+          </section>
         </>
       ) : (
-        <div>Loading...</div>
+        <section className={styles['loading-container']}>
+          <Loading src="/assets/svg/logo.svg" />
+        </section>
       )}
     </main>
   );
