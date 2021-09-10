@@ -36,6 +36,11 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
+  background-color: var(--color-primary);
+
+  svg path {
+    fill: var(--color-white);
+  }
 }
 
 @keyframes spin {
