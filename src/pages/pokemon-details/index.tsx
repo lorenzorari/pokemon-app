@@ -14,6 +14,7 @@ import { getEvolutionChain } from '../../services/evolution-chain';
 import { getPokemon } from '../../services/pokemon';
 import { getSpecies } from '../../services/species';
 import styles from './pokemon-details.module.scss';
+import Loading from '../../components/loading';
 
 interface Params {
   id: string;
@@ -34,6 +35,7 @@ const PokemonDetails = () => {
   const [species, setSpecies] = useState<Species>(null);
   const [pokemonEvolutions, setPokemonEvolutions] = useState([]);
   const [activeTab, setActiveTab] = useState<string>(BIOGRAPHY);
+  const [isLoading, setIsLoading] = useState(true);
 
   const tabs: string[] = [BIOGRAPHY, STATS, EVOLUTIONS];
 
@@ -54,6 +56,7 @@ const PokemonDetails = () => {
 
       setPokemon(pokemonData);
       setSpecies(speciesData);
+      setIsLoading(false);
     };
 
     init();
@@ -129,7 +132,7 @@ const PokemonDetails = () => {
 
   return (
     <main className={styles.layout}>
-      {pokemon && (
+      {!isLoading ? (
         <>
           <div className={styles['basic-info-container']}>
             <Button theme="back" onClick={handleBackButton}>
@@ -156,6 +159,10 @@ const PokemonDetails = () => {
             </div>
           </div>
         </>
+      ) : (
+        <section className={styles['loading-container']}>
+          <Loading src="/assets/svg/logo.svg" text={`Loading pokemon data`} />
+        </section>
       )}
     </main>
   );

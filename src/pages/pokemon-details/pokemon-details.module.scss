@@ -65,6 +65,14 @@ $columnGap: 1rem;
   margin-top: 1.5rem;
 }
 
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+}
+
 @media screen and (max-width: 760px) {
   html {
     font-size: calc(14px + (16 - 14) * ((100vw - 560px) / (760 - 560)));
