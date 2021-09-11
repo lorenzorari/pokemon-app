@@ -1,10 +1,16 @@
 import React from 'react';
+import classNames from 'classnames';
 import styles from './heading.module.scss';
 
-const HomepageHeading = () => {
+interface Props {
+  title: string;
+  className?: string;
+}
+
+const HomepageHeading = ({ title, className }: Props) => {
   return (
-    <div className={styles.heading}>
-      <h1>Pocketex</h1>
+    <div className={classNames(styles.heading, className)}>
+      <h1>{title}</h1>
     </div>
   );
 };
