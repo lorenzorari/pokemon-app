@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router';
 import Particles from 'react-tsparticles';
-import particlesOptions from '../../data/particlesOptions';
+import particlesOptions from '../../data/tsparticlesOptions';
 import ScrollIcon from '../scroll-icon';
 import SearchBar from '../search-bar';
 import HomepageHeading from './heading';
@@ -42,7 +42,7 @@ const HomepageHeadingContainer = ({ scrollToRef }: Props) => {
       <Particles className={styles.particles} options={particlesOptions} />
 
       <div className={styles['heading-content']}>
-        <HomepageHeading />
+        <HomepageHeading title="Pocketex" />
 
         <form>
           <SearchBar
