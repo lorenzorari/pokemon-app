@@ -1,3 +1,22 @@
+.particles {
+  position: absolute;
+  // content: '';
+  display: block;
+  height: 100vh;
+  width: 100%;
+
+  // background-color: cadetblue;
+  // // z-index: 55;
+
+  transform: scale(0);
+  animation: scaleUp 0.5s forwards;
+  animation-delay: 2s;
+}
+
+.hidden {
+  display: none;
+}
+
 .pokemons-container {
   display: grid;
   grid-gap: 1rem;
@@ -49,5 +68,17 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+@keyframes scaleUp {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
 }

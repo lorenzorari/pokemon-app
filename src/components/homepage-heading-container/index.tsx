@@ -39,7 +39,7 @@ const HomepageHeadingContainer = ({ scrollToRef }: Props) => {
 
   return (
     <section className={styles['homepage-heading-container']}>
-      <Particles className={styles.particles} options={particlesOptions} />
+      {/* <Particles className={styles.particles} options={particlesOptions} /> */}
 
       <div className={styles['heading-content']}>
         <HomepageHeading title="Pocketex" />
