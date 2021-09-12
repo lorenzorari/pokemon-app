@@ -79,32 +79,31 @@ const Home = () => {
       />
 
       {!isPageLoading && pokemons.length ? (
-        <>
-          <section ref={cardsRef}>
-            <InfiniteScroll
-              observerCallback={handleObserver}
-              loadMore={loadMore}
-              page={page}
-              ref={loaderRef}
-              loaderElement={
-                <div ref={loaderRef} className={styles['more-pokemons-loader']}>
-                  <ReactSVG src="/assets/svg/pokeball.svg" />
-                </div>
-              }
-            >
-              <div className={styles['pokemons-container']}>
-                {pokemons.map(pokemon => (
-                  <PokemonCard
-                    key={pokemon.id}
-                    className={styles.card}
-                    onClick={() => handleClickCard(pokemon.id)}
-                    pokemon={pokemon}
-                  />
-                ))}
-              </div>
-            </InfiniteScroll>
-          </section>
-        </>
+        <section ref={cardsRef}>
+          <InfiniteScroll
+            observerCallback={handleObserver}
+            loadMore={loadMore}
+            page={page}
+            ref={loaderRef}
+            loaderElement={
+              <Loading
+                className={styles['more-pokemons-loader']}
+                src="/assets/svg/logo.svg"
+              />
+            }
+          >
+            <div className={styles['pokemons-container']}>
+              {pokemons.map(pokemon => (
+                <PokemonCard
+                  key={pokemon.id}
+                  className={styles.card}
+                  onClick={() => handleClickCard(pokemon.id)}
+                  pokemon={pokemon}
+                />
+              ))}
+            </div>
+          </InfiniteScroll>
+        </section>
       ) : (
         <section className={styles['loading-container']}>
           <Loading src="/assets/svg/logo.svg" />
