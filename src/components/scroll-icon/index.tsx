@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import classNames from 'classnames';
 import { ReactSVG } from 'react-svg';
 import styles from './scroll-icon.module.scss';
@@ -24,4 +24,4 @@ const ScrollIcon = ({ src, className, onClick }: Props) => {
   );
 };
 
-export default ScrollIcon;
+export default memo(ScrollIcon, (prev, next) => prev.src === next.src);

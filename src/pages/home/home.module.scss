@@ -22,13 +22,7 @@
 .more-pokemons-loader {
   height: 4rem;
   width: 4rem;
-  margin: 0 auto 1rem auto;
-  animation: spin 2s linear infinite;
-
-  svg {
-    height: 100%;
-    width: 100%;
-  }
+  margin-bottom: 1rem;
 }
 
 .loading-container {
@@ -49,5 +43,17 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+@keyframes scaleUp {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
 }

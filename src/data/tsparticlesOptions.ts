@@ -1,6 +1,6 @@
 import { ISourceOptions } from 'tsparticles';
 
-const particlesOptions: ISourceOptions = {
+const tsparticlesOptions: ISourceOptions = {
   particles: {
     number: {
       value: 10,
@@ -166,4 +166,4 @@ const particlesOptions: ISourceOptions = {
   retina_detect: true,
 };
 
-export default particlesOptions;
+export default tsparticlesOptions;

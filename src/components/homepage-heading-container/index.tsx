@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router';
-import Particles from 'react-tsparticles';
-import particlesOptions from '../../data/particlesOptions';
+import { ReactSVG } from 'react-svg';
+import Particles, { Main } from 'react-tsparticles';
+import particlesOptions from '../../data/tsparticlesOptions';
 import ScrollIcon from '../scroll-icon';
 import SearchBar from '../search-bar';
 import HomepageHeading from './heading';
@@ -9,12 +10,17 @@ import styles from './homepage-heading-container.module.scss';
 
 interface Props {
   scrollToRef?: React.MutableRefObject<any>;
+  areParticlesLoading?: boolean;
+  initParticles?: (tsParticles: Main) => void;
 }
 
-const HomepageHeadingContainer = ({ scrollToRef }: Props) => {
+const HomepageHeadingContainer = ({
+  scrollToRef,
+  areParticlesLoading,
+  initParticles,
+}: Props) => {
   const history = useHistory();
   const [searchValue, setSearchValue] = useState('');
-  // const [isLoading, setIsLoading] = useState(false);
 
   const handlePokemonSearch = (e: React.FormEvent<HTMLInputElement>) => {
     setSearchValue(e.currentTarget.value);
@@ -38,11 +44,21 @@ const HomepageHeadingContainer = ({ scrollToRef }: Props) => {
   };
 
   return (
-    <section className={styles['homepage-heading-container']}>
-      <Particles className={styles.particles} options={particlesOptions} />
+    <section
+      className={
+        areParticlesLoading === true
+          ? styles.hidden
+          : styles['homepage-heading-container']
+      }
+    >
+      <Particles
+        className={styles.particles}
+        init={initParticles}
+        options={particlesOptions}
+      />
 
       <div className={styles['heading-content']}>
-        <HomepageHeading />
+        <HomepageHeading title="Pocketex" />
 
         <form>
           <SearchBar
@@ -53,6 +69,17 @@ const HomepageHeadingContainer = ({ scrollToRef }: Props) => {
           />
         </form>
       </div>
+
+      <a
+        rel="noreferrer"
+        href="https://github.com/lorenzorari/pocketex"
+        target="_blank"
+      >
+        <ReactSVG
+          className={styles['github-logo']}
+          src="/assets/svg/github.svg"
+        />
+      </a>
 
       <ScrollIcon
         className={styles['scroll-icon']}
