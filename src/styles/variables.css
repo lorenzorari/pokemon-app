@@ -19,8 +19,8 @@
   --color-bug-2: #d8e373;
 
   /* 🌑 DARK */
-  --color-dark-1: #705848;
-  --color-dark-2: #9b7d69;
+  --color-dark-1: hsl(236, 7%, 39%);
+  --color-dark-2: hsl(236, 7%, 50%);
 
   /* 🐉 DRAGON */
   --color-dragon-1: #7038f8;
