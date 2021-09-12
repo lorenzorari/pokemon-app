@@ -6,15 +6,15 @@
   background-color: hsl(350, 91%, 45%);
 }
 
-// .particles {
-//   position: relative;
-//   height: 100%;
-//   width: 100%;
+.particles {
+  position: relative;
+  height: 100%;
+  width: 100%;
 
-//   transform: scale(0);
-//   animation: scaleUp 0.5s forwards;
-//   animation-delay: 1.5s;
-// }
+  transform: scale(0);
+  animation: scaleUp 0.5s forwards;
+  animation-delay: 1.5s;
+}
 
 .heading-content {
   position: absolute;
@@ -34,17 +34,21 @@
   height: 4rem;
 }
 
-// @keyframes scaleUp {
-//   from {
-//     transform: scale(0);
-//     opacity: 0;
-//   }
+.hidden {
+  display: none;
+}
 
-//   to {
-//     opacity: 1;
-//     transform: scale(1);
-//   }
-// }
+@keyframes scaleUp {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
 
 @keyframes showUp {
   from {

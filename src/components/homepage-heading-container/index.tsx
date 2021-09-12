@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router';
-import Particles from 'react-tsparticles';
+import Particles, { Main } from 'react-tsparticles';
+import tsparticlesOptions from '../../data/tsparticlesOptions';
 import particlesOptions from '../../data/tsparticlesOptions';
 import ScrollIcon from '../scroll-icon';
 import SearchBar from '../search-bar';
@@ -9,9 +10,15 @@ import styles from './homepage-heading-container.module.scss';
 
 interface Props {
   scrollToRef?: React.MutableRefObject<any>;
+  particlesLoaded?: boolean;
+  setAreParticlesLoading?: any;
 }
 
-const HomepageHeadingContainer = ({ scrollToRef }: Props) => {
+const HomepageHeadingContainer = ({
+  scrollToRef,
+  particlesLoaded,
+  setAreParticlesLoading,
+}: Props) => {
   const history = useHistory();
   const [searchValue, setSearchValue] = useState('');
   // const [isLoading, setIsLoading] = useState(false);
@@ -37,9 +44,23 @@ const HomepageHeadingContainer = ({ scrollToRef }: Props) => {
     scrollToRef.current.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const initParticles = (tsParticles: Main) => {
+    tsParticles
+      .load('tsparticles', tsparticlesOptions)
+      .then(() => setAreParticlesLoading(false));
+  };
+
   return (
-    <section className={styles['homepage-heading-container']}>
-      {/* <Particles className={styles.particles} options={particlesOptions} /> */}
+    <section
+      className={
+        particlesLoaded ? styles['homepage-heading-container'] : styles.hidden
+      }
+    >
+      <Particles
+        className={styles.particles}
+        init={initParticles}
+        options={particlesOptions}
+      />
 
       <div className={styles['heading-content']}>
         <HomepageHeading title="Pocketex" />

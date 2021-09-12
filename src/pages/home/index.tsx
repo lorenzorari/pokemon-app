@@ -1,12 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { ReactSVG } from 'react-svg';
-import Particles, { Main } from 'react-tsparticles';
 import HomepageHeadingContainer from '../../components/homepage-heading-container';
 import InfiniteScroll from '../../components/infinite-scroll';
 import Loading from '../../components/loading';
 import PokemonCard from '../../components/pokemon/card';
-import tsparticlesOptions from '../../data/tsparticlesOptions';
 import { NamedAPIResources } from '../../models/named-api-resource';
 import { Pokemons } from '../../models/pokemon';
 import { getAllPokemons, getPokemon } from '../../services/pokemon';
@@ -17,10 +15,11 @@ const Home = () => {
   const history = useHistory();
   const [pokemons, setPokemons] = useState<Pokemons>([]);
   const [nextPageUrl, setNextPageUrl] = useState<string>(null);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [page, setPage] = useState<number>(1);
-  const [areParticlesLoaded, setAreParticlesLoaded] = useState(false);
+
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
+  const [areParticlesLoading, setAreParticlesLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
 
   const loaderRef = useRef(null);
   const cardsRef = useRef(null);
@@ -70,30 +69,16 @@ const Home = () => {
     setIsLoadingMore(false);
   };
 
-  const initParticles = (tsParticles: Main) => {
-    tsParticles
-      .load('tsparticles', tsparticlesOptions)
-      .then(() => setAreParticlesLoaded(true));
-  };
-
   return (
     <main className={styles.main}>
-      <Particles
-        className={
-          !loading && areParticlesLoaded && pokemons.length
-            ? styles.particles
-            : styles.hidden
-        }
-        init={initParticles}
-        options={tsparticlesOptions}
+      <HomepageHeadingContainer
+        scrollToRef={cardsRef}
+        setAreParticlesLoading={setAreParticlesLoading}
+        particlesLoaded={!loading && !areParticlesLoading}
       />
-      {/* <div className={styles.particles}>Hello</div> */}
 
-      {/* {!loading && pokemons.length ? ( */}
-      {!loading && areParticlesLoaded && pokemons.length ? (
+      {!loading && !areParticlesLoading && pokemons.length ? (
         <>
-          <HomepageHeadingContainer scrollToRef={cardsRef} />
-
           <section ref={cardsRef}>
             <InfiniteScroll
               observerCallback={handleObserver}
