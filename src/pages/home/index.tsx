@@ -20,6 +20,7 @@ const Home = () => {
   const [isLoadingMorePokemon, setIsLoadingMorePokemon] = useState(false);
   const [areParticlesLoading, setAreParticlesLoading] = useState(true);
   const [isLoadingPokemon, setIsLoadingPokemon] = useState<boolean>(true);
+  const isPageLoading: boolean = isLoadingPokemon || areParticlesLoading;
 
   const loaderRef = useRef(null);
   const cardsRef = useRef(null);
@@ -74,10 +75,10 @@ const Home = () => {
       <HomepageHeadingContainer
         scrollToRef={cardsRef}
         setAreParticlesLoading={setAreParticlesLoading}
-        particlesLoaded={!isLoadingPokemon && !areParticlesLoading}
+        particlesLoaded={!isPageLoading}
       />
 
-      {!isLoadingPokemon && !areParticlesLoading && pokemons.length ? (
+      {!isPageLoading && pokemons.length ? (
         <>
           <section ref={cardsRef}>
             <InfiniteScroll
