@@ -10,18 +10,17 @@ import styles from './homepage-heading-container.module.scss';
 
 interface Props {
   scrollToRef?: React.MutableRefObject<any>;
-  particlesLoaded?: boolean;
-  setAreParticlesLoading?: any;
+  areParticlesLoading?: boolean;
+  setAreParticlesLoading?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const HomepageHeadingContainer = ({
   scrollToRef,
-  particlesLoaded,
+  areParticlesLoading,
   setAreParticlesLoading,
 }: Props) => {
   const history = useHistory();
   const [searchValue, setSearchValue] = useState('');
-  // const [isLoading, setIsLoading] = useState(false);
 
   const handlePokemonSearch = (e: React.FormEvent<HTMLInputElement>) => {
     setSearchValue(e.currentTarget.value);
@@ -53,7 +52,9 @@ const HomepageHeadingContainer = ({
   return (
     <section
       className={
-        particlesLoaded ? styles['homepage-heading-container'] : styles.hidden
+        areParticlesLoading === true
+          ? styles.hidden
+          : styles['homepage-heading-container']
       }
     >
       <Particles

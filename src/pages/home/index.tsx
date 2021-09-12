@@ -75,7 +75,7 @@ const Home = () => {
       <HomepageHeadingContainer
         scrollToRef={cardsRef}
         setAreParticlesLoading={setAreParticlesLoading}
-        particlesLoaded={!isPageLoading}
+        areParticlesLoading={isPageLoading}
       />
 
       {!isPageLoading && pokemons.length ? (
