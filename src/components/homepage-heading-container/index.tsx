@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router';
+import { ReactSVG } from 'react-svg';
 import Particles, { Main } from 'react-tsparticles';
 import tsparticlesOptions from '../../data/tsparticlesOptions';
 import particlesOptions from '../../data/tsparticlesOptions';
@@ -75,6 +76,17 @@ const HomepageHeadingContainer = ({
           />
         </form>
       </div>
+
+      <a
+        rel="noreferrer"
+        href="https://github.com/lorenzorari/pocketex"
+        target="_blank"
+      >
+        <ReactSVG
+          className={styles['github-logo']}
+          src="/assets/svg/github.svg"
+        />
+      </a>
 
       <ScrollIcon
         className={styles['scroll-icon']}
