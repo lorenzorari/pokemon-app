@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router';
 import { ReactSVG } from 'react-svg';
 import Particles, { Main } from 'react-tsparticles';
-import tsparticlesOptions from '../../data/tsparticlesOptions';
 import particlesOptions from '../../data/tsparticlesOptions';
 import ScrollIcon from '../scroll-icon';
 import SearchBar from '../search-bar';
@@ -12,13 +11,13 @@ import styles from './homepage-heading-container.module.scss';
 interface Props {
   scrollToRef?: React.MutableRefObject<any>;
   areParticlesLoading?: boolean;
-  setAreParticlesLoading?: React.Dispatch<React.SetStateAction<boolean>>;
+  initParticles?: (tsParticles: Main) => void;
 }
 
 const HomepageHeadingContainer = ({
   scrollToRef,
   areParticlesLoading,
-  setAreParticlesLoading,
+  initParticles,
 }: Props) => {
   const history = useHistory();
   const [searchValue, setSearchValue] = useState('');
@@ -42,12 +41,6 @@ const HomepageHeadingContainer = ({
 
   const scrollTo = () => {
     scrollToRef.current.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  const initParticles = (tsParticles: Main) => {
-    tsParticles
-      .load('tsparticles', tsparticlesOptions)
-      .then(() => setAreParticlesLoading(false));
   };
 
   return (

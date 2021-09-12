@@ -1,10 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { ReactSVG } from 'react-svg';
+import { Main } from 'react-tsparticles';
 import HomepageHeadingContainer from '../../components/homepage-heading-container';
 import InfiniteScroll from '../../components/infinite-scroll';
 import Loading from '../../components/loading';
 import PokemonCard from '../../components/pokemon/card';
+import tsparticlesOptions from '../../data/tsparticlesOptions';
 import { NamedAPIResources } from '../../models/named-api-resource';
 import { Pokemons } from '../../models/pokemon';
 import { getAllPokemons, getPokemon } from '../../services/pokemon';
@@ -70,11 +72,17 @@ const Home = () => {
     setIsLoadingMorePokemon(false);
   };
 
+  const initParticles = (tsParticles: Main) => {
+    tsParticles
+      .load('tsparticles', tsparticlesOptions)
+      .then(() => setAreParticlesLoading(false));
+  };
+
   return (
     <main>
       <HomepageHeadingContainer
         scrollToRef={cardsRef}
-        setAreParticlesLoading={setAreParticlesLoading}
+        initParticles={initParticles}
         areParticlesLoading={isPageLoading}
       />
 
