@@ -94,10 +94,12 @@ const Home = () => {
             page={page}
             ref={loaderRef}
             loaderElement={
-              <Loading
-                className={styles['more-pokemons-loader']}
-                src="/assets/svg/logo.svg"
-              />
+              <div ref={loaderRef}>
+                <Loading
+                  className={styles['more-pokemons-loader']}
+                  src="/assets/svg/logo.svg"
+                />
+              </div>
             }
           >
             <div className={styles['pokemons-container']}>
