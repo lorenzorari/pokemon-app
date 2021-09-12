@@ -17,7 +17,7 @@ const Home = () => {
   const [nextPageUrl, setNextPageUrl] = useState<string>(null);
   const [page, setPage] = useState<number>(1);
 
-  const [isLoadingMore, setIsLoadingMore] = useState(false);
+  const [isLoadingMorePokemon, setIsLoadingMorePokemon] = useState(false);
   const [areParticlesLoading, setAreParticlesLoading] = useState(true);
   const [isLoadingPokemon, setIsLoadingPokemon] = useState<boolean>(true);
 
@@ -56,17 +56,17 @@ const Home = () => {
   };
 
   const handleObserver: IntersectionObserverCallback = (entries, observer) => {
-    if (entries[0].isIntersecting && !isLoadingMore) {
+    if (entries[0].isIntersecting && !isLoadingMorePokemon) {
       observer.unobserve(entries[0].target);
 
-      setIsLoadingMore(true);
+      setIsLoadingMorePokemon(true);
       setPage(page => page + 1);
     }
   };
 
   const loadMore = async () => {
     await handleMorePokemon();
-    setIsLoadingMore(false);
+    setIsLoadingMorePokemon(false);
   };
 
   return (
