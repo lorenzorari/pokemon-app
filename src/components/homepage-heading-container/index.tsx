@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router';
-import Particles from 'react-tsparticles';
-import particlesOptions from '../../data/particlesOptions';
+import Particles, { Main } from 'react-tsparticles';
+import tsparticlesOptions from '../../data/tsparticlesOptions';
+import particlesOptions from '../../data/tsparticlesOptions';
 import ScrollIcon from '../scroll-icon';
 import SearchBar from '../search-bar';
 import HomepageHeading from './heading';
@@ -9,12 +10,17 @@ import styles from './homepage-heading-container.module.scss';
 
 interface Props {
   scrollToRef?: React.MutableRefObject<any>;
+  areParticlesLoading?: boolean;
+  setAreParticlesLoading?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const HomepageHeadingContainer = ({ scrollToRef }: Props) => {
+const HomepageHeadingContainer = ({
+  scrollToRef,
+  areParticlesLoading,
+  setAreParticlesLoading,
+}: Props) => {
   const history = useHistory();
   const [searchValue, setSearchValue] = useState('');
-  // const [isLoading, setIsLoading] = useState(false);
 
   const handlePokemonSearch = (e: React.FormEvent<HTMLInputElement>) => {
     setSearchValue(e.currentTarget.value);
@@ -37,12 +43,28 @@ const HomepageHeadingContainer = ({ scrollToRef }: Props) => {
     scrollToRef.current.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const initParticles = (tsParticles: Main) => {
+    tsParticles
+      .load('tsparticles', tsparticlesOptions)
+      .then(() => setAreParticlesLoading(false));
+  };
+
   return (
-    <section className={styles['homepage-heading-container']}>
-      <Particles className={styles.particles} options={particlesOptions} />
+    <section
+      className={
+        areParticlesLoading === true
+          ? styles.hidden
+          : styles['homepage-heading-container']
+      }
+    >
+      <Particles
+        className={styles.particles}
+        init={initParticles}
+        options={particlesOptions}
+      />
 
       <div className={styles['heading-content']}>
-        <HomepageHeading />
+        <HomepageHeading title="Pocketex" />
 
         <form>
           <SearchBar

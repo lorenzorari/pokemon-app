@@ -15,9 +15,12 @@ const Home = () => {
   const history = useHistory();
   const [pokemons, setPokemons] = useState<Pokemons>([]);
   const [nextPageUrl, setNextPageUrl] = useState<string>(null);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [page, setPage] = useState<number>(1);
+
+  const [isLoadingMorePokemon, setIsLoadingMorePokemon] = useState(false);
+  const [areParticlesLoading, setAreParticlesLoading] = useState(true);
+  const [isLoadingPokemon, setIsLoadingPokemon] = useState<boolean>(true);
+  const isPageLoading: boolean = isLoadingPokemon || areParticlesLoading;
 
   const loaderRef = useRef(null);
   const cardsRef = useRef(null);
@@ -27,7 +30,7 @@ const Home = () => {
       const { results, next } = await getAllPokemons(INITIAL_URL);
       setNextPageUrl(next);
       await loadPokemons(results);
-      setLoading(false);
+      setIsLoadingPokemon(false);
     };
 
     init();
@@ -54,25 +57,29 @@ const Home = () => {
   };
 
   const handleObserver: IntersectionObserverCallback = (entries, observer) => {
-    if (entries[0].isIntersecting && !isLoadingMore) {
+    if (entries[0].isIntersecting && !isLoadingMorePokemon) {
       observer.unobserve(entries[0].target);
 
-      setIsLoadingMore(true);
+      setIsLoadingMorePokemon(true);
       setPage(page => page + 1);
     }
   };
 
   const loadMore = async () => {
     await handleMorePokemon();
-    setIsLoadingMore(false);
+    setIsLoadingMorePokemon(false);
   };
 
   return (
     <main className={styles.main}>
-      {!loading && pokemons.length ? (
-        <>
-          <HomepageHeadingContainer scrollToRef={cardsRef} />
+      <HomepageHeadingContainer
+        scrollToRef={cardsRef}
+        setAreParticlesLoading={setAreParticlesLoading}
+        areParticlesLoading={isPageLoading}
+      />
 
+      {!isPageLoading && pokemons.length ? (
+        <>
           <section ref={cardsRef}>
             <InfiniteScroll
               observerCallback={handleObserver}
