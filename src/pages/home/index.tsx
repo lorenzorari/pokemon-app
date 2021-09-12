@@ -71,7 +71,7 @@ const Home = () => {
   };
 
   return (
-    <main className={styles.main}>
+    <main>
       <HomepageHeadingContainer
         scrollToRef={cardsRef}
         setAreParticlesLoading={setAreParticlesLoading}
