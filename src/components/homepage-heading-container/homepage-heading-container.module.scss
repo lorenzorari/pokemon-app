@@ -32,6 +32,16 @@
   inset: auto auto 0 50%;
   width: 4rem;
   height: 4rem;
+
+  svg {
+    path {
+      transition: opacity 0.1s ease;
+    }
+
+    &:hover path {
+      opacity: 0.5;
+    }
+  }
 }
 
 .hidden {
