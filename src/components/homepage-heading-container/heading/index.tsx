@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import classNames from 'classnames';
 import styles from './heading.module.scss';
 
@@ -15,4 +15,7 @@ const HomepageHeading = ({ title, className }: Props) => {
   );
 };
 
-export default HomepageHeading;
+const arePropsEqual = (prev: Readonly<Props>, next: Readonly<Props>) =>
+  prev.title === next.title;
+
+export default memo(HomepageHeading, arePropsEqual);
