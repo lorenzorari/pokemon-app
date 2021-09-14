@@ -38,6 +38,7 @@ const PokemonDetails = () => {
   const [pokemonEvolutions, setPokemonEvolutions] = useState([]);
   const [activeTab, setActiveTab] = useState<string>(BIOGRAPHY);
   const [isLoading, setIsLoading] = useState(true);
+  const [isSearchModalOpen, setIsSearchModalOpen] = useState<boolean>(false);
 
   const tabs: string[] = [BIOGRAPHY, STATS, EVOLUTIONS];
 
@@ -132,6 +133,10 @@ const PokemonDetails = () => {
     history.push('/');
   };
 
+  const handleSearchIcon = () => {
+    setIsSearchModalOpen(true);
+  };
+
   return (
     <main className={styles.layout}>
       {!isLoading ? (
@@ -147,11 +152,15 @@ const PokemonDetails = () => {
               <ReactSVG
                 className={styles['option-search']}
                 src="/assets/svg/search.svg"
+                onClick={handleSearchIcon}
               />
             </div>
           </section>
 
-          <div className={styles['search-modal']}>
+          <div
+            style={{ display: isSearchModalOpen ? 'flex' : 'none' }}
+            className={styles['search-modal']}
+          >
             <SearchBar className={styles.search} />
           </div>
 
