@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { MouseEventHandler, useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router';
 import { useHistory } from 'react-router-dom';
 import { ChainLink, ChainLinks } from '../../models/evolution/chain';
@@ -17,6 +17,7 @@ import styles from './pokemon-details.module.scss';
 import Loading from '../../components/loading';
 import { ReactSVG } from 'react-svg';
 import SearchBar from '../../components/search-bar';
+import useClickOutside from '../../helpers/hooks/click-outside';
 
 interface Params {
   id: string;
@@ -39,6 +40,8 @@ const PokemonDetails = () => {
   const [activeTab, setActiveTab] = useState<string>(BIOGRAPHY);
   const [isLoading, setIsLoading] = useState(true);
   const [isSearchModalOpen, setIsSearchModalOpen] = useState<boolean>(false);
+
+  const searchModalRef = useRef(null);
 
   const tabs: string[] = [BIOGRAPHY, STATS, EVOLUTIONS];
 
@@ -133,9 +136,12 @@ const PokemonDetails = () => {
     history.push('/');
   };
 
-  const handleSearchIcon = () => {
+  const handleSearchIcon = e => {
+    e.stopPropagation();
     setIsSearchModalOpen(true);
   };
+
+  useClickOutside(searchModalRef, () => setIsSearchModalOpen(false));
 
   return (
     <main className={styles.layout}>
@@ -161,7 +167,7 @@ const PokemonDetails = () => {
             style={{ display: isSearchModalOpen ? 'flex' : 'none' }}
             className={styles['search-modal']}
           >
-            <SearchBar className={styles.search} />
+            <SearchBar ref={searchModalRef} className={styles.search} />
           </div>
 
           <section className={styles.details}>
