@@ -15,6 +15,7 @@ import { getPokemon } from '../../services/pokemon';
 import { getSpecies } from '../../services/species';
 import styles from './pokemon-details.module.scss';
 import Loading from '../../components/loading';
+import { ReactSVG } from 'react-svg';
 
 interface Params {
   id: string;
@@ -138,7 +139,15 @@ const PokemonDetails = () => {
             <Button theme="back" onClick={handleBackButton}>
               Back
             </Button>
+
             <PokemonCard className={styles.card} pokemon={pokemon} />
+
+            <div className={styles.options}>
+              <ReactSVG
+                className={styles['option-search']}
+                src="/assets/svg/search.svg"
+              />
+            </div>
           </section>
 
           <section className={styles.details}>
