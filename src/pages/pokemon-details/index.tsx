@@ -134,14 +134,14 @@ const PokemonDetails = () => {
     <main className={styles.layout}>
       {!isLoading ? (
         <>
-          <div className={styles['basic-info-container']}>
+          <section className={styles['basic-info-container']}>
             <Button theme="back" onClick={handleBackButton}>
               Back
             </Button>
             <PokemonCard className={styles.card} pokemon={pokemon} />
-          </div>
+          </section>
 
-          <div className={styles.details}>
+          <section className={styles.details}>
             <div className={styles['details-container']}>
               <ul className={styles['details-tabs']}>
                 {tabs.map((tab, i) => (
@@ -157,7 +157,7 @@ const PokemonDetails = () => {
 
               <div className={styles['tab-content']}>{tabView[activeTab]}</div>
             </div>
-          </div>
+          </section>
         </>
       ) : (
         <section className={styles['loading-container']}>
