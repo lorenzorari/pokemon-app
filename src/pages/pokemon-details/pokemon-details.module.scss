@@ -61,6 +61,23 @@ $columnGap: 1rem;
   }
 }
 
+.search-modal {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 100%;
+  width: 100%;
+
+  background-color: hsla(0, 0%, 0%, 0.9);
+  z-index: 100;
+
+  .search {
+    width: 60rem;
+  }
+}
+
 .details {
   display: flex;
   justify-content: center;

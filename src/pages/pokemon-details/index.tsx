@@ -16,6 +16,7 @@ import { getSpecies } from '../../services/species';
 import styles from './pokemon-details.module.scss';
 import Loading from '../../components/loading';
 import { ReactSVG } from 'react-svg';
+import SearchBar from '../../components/search-bar';
 
 interface Params {
   id: string;
@@ -149,6 +150,10 @@ const PokemonDetails = () => {
               />
             </div>
           </section>
+
+          <div className={styles['search-modal']}>
+            <SearchBar className={styles.search} />
+          </div>
 
           <section className={styles.details}>
             <div className={styles['details-container']}>
