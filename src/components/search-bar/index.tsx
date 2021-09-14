@@ -17,8 +17,9 @@ const SearchBar = (props: Props) => {
         onChange={props.onChange}
         onKeyPress={props.onKeyPress}
       />
+
       <figure>
-        <img src="./assets/svg/search.svg" />
+        <img src="/assets/svg/search.svg" />
       </figure>
     </div>
   );
