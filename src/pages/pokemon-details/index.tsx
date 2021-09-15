@@ -40,6 +40,7 @@ const PokemonDetails = () => {
   const [activeTab, setActiveTab] = useState<string>(BIOGRAPHY);
   const [isLoading, setIsLoading] = useState(true);
   const [isSearchModalOpen, setIsSearchModalOpen] = useState<boolean>(false);
+  const [searchValue, setSearchValue] = useState('');
 
   const searchModalRef = useRef(null);
 
@@ -54,6 +55,8 @@ const PokemonDetails = () => {
       <PokemonDetailsEvolutions pokemonEvolutions={pokemonEvolutions} />
     ),
   };
+
+  useClickOutside(searchModalRef, () => setIsSearchModalOpen(false));
 
   useEffect(() => {
     const init = async () => {
@@ -141,7 +144,23 @@ const PokemonDetails = () => {
     setIsSearchModalOpen(true);
   };
 
-  useClickOutside(searchModalRef, () => setIsSearchModalOpen(false));
+  const handlePokemonSearch = (e: React.FormEvent<HTMLInputElement>) => {
+    setSearchValue(e.currentTarget.value);
+  };
+
+  const searchPokemon = async (value: string) => {
+    if (value === '') return;
+
+    history.push(`/pokemon/${value}`);
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      searchPokemon(searchValue);
+      setIsSearchModalOpen(false);
+    }
+  };
 
   return (
     <main className={styles.layout}>
@@ -167,7 +186,14 @@ const PokemonDetails = () => {
             style={{ display: isSearchModalOpen ? 'flex' : 'none' }}
             className={styles['search-modal']}
           >
-            <SearchBar ref={searchModalRef} className={styles.search} />
+            <SearchBar
+              ref={searchModalRef}
+              className={styles.search}
+              type="text"
+              placeholder="Search a pokemon by name or id..."
+              onChange={handlePokemonSearch}
+              onKeyPress={handleKeyPress}
+            />
           </div>
 
           <section className={styles.details}>
