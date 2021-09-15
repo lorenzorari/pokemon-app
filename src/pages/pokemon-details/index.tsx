@@ -159,6 +159,7 @@ const PokemonDetails = () => {
       e.preventDefault();
       searchPokemon(searchValue);
       setIsSearchModalOpen(false);
+      setSearchValue('');
     }
   };
 
@@ -193,6 +194,7 @@ const PokemonDetails = () => {
               placeholder="Search a pokemon by name or id..."
               onChange={handlePokemonSearch}
               onKeyPress={handleKeyPress}
+              value={searchValue}
             />
           </div>
 
