@@ -22,7 +22,6 @@ body {
 
 body {
   color: var(--color-black);
-  overflow-y: overlay;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
