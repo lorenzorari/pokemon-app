@@ -9,6 +9,8 @@ $columnGap: 1rem;
   height: 100vh;
   max-height: 1086px;
   margin: 0 auto;
+
+  overflow-y: scroll;
 }
 
 .basic-info-container {
@@ -18,7 +20,6 @@ $columnGap: 1rem;
   align-items: center;
   flex-direction: column;
   width: 45%;
-  min-height: 40rem;
 
   button {
     position: absolute;
@@ -29,12 +30,12 @@ $columnGap: 1rem;
   .card {
     cursor: auto;
     transform: scale(1.8);
-    margin: 8rem 0;
+    margin: 12rem 0 8rem 0;
     box-shadow: 0px 0px 30px 11px hsla(0, 0%, 0%, 0.25);
   }
 
   .options {
-    margin-top: 2rem;
+    margin: 2rem 0;
   }
 
   .option-search {
@@ -141,11 +142,5 @@ $columnGap: 1rem;
 @media screen and (max-width: 560px) {
   html {
     font-size: calc(8px + (14 - 8) * ((100vw - 320px) / (560 - 320)));
-  }
-}
-
-@media screen and (max-height: 500px) {
-  .basic-info-container {
-    min-height: 47rem;
   }
 }
