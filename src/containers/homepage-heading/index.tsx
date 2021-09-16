@@ -5,6 +5,7 @@ import particlesOptions from 'src/data/tsparticlesOptions';
 import ScrollIcon from 'src/containers/homepage-heading/scroll-icon';
 import styles from './homepage-heading.module.scss';
 import HomepageHeadingContent from './content';
+import HomepageHeadingGithubLink from './github-link';
 
 interface Props {
   heading: string;
@@ -39,17 +40,14 @@ const HomepageHeadingContainer = ({
 
       <HomepageHeadingContent heading={heading} />
 
-      <a
+      <HomepageHeadingGithubLink
+        imageSrc="/assets/svg/github.svg"
+        className={styles['github-link']}
         rel="noreferrer"
         href="https://github.com/lorenzorari/pocketex"
         target="_blank"
         aria-label="Github link"
-      >
-        <ReactSVG
-          className={styles['github-logo']}
-          src="/assets/svg/github.svg"
-        />
-      </a>
+      />
 
       <ScrollIcon
         className={styles['scroll-icon']}
