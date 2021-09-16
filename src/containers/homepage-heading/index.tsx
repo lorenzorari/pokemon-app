@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router';
 import { ReactSVG } from 'react-svg';
 import Particles, { Main } from 'react-tsparticles';
-import particlesOptions from '../../data/tsparticlesOptions';
-import ScrollIcon from '../scroll-icon';
-import SearchBar from '../search-bar';
+import particlesOptions from '@data/tsparticlesOptions';
+import ScrollIcon from '@containers/homepage-heading/scroll-icon';
+import SearchBar from '@components/search-bar';
 import HomepageHeading from './heading';
-import styles from './homepage-heading-container.module.scss';
+import styles from './homepage-heading.module.scss';
 
 interface Props {
   scrollToRef?: React.MutableRefObject<any>;
