@@ -1,34 +1,4 @@
-.scroll-icon {
-  animation: showUp 0.5s forwards;
-  animation-delay: 2s;
-  opacity: 0;
-
-  svg {
-    height: 100%;
-    width: 100%;
-
-    transform: translateX(-50%) rotate(-90deg);
-    animation: bounce 1.6s infinite cubic-bezier(0.445, 0.05, 0.55, 0.95);
-    animation-delay: 2s;
-
-    path {
-      fill: var(--color-white);
-    }
-  }
-}
-
-@keyframes bounce {
-  50% {
-    transform: translate(-50%, -15px) rotate(-90deg);
-  }
-}
-
-@keyframes showUp {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
+.scroll-icon svg {
+  height: 100%;
+  width: 100%;
 }
