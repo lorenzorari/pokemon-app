@@ -143,12 +143,18 @@ $columnGap: 1rem;
 
     .card {
       transform: scale(1.4);
+      margin: 6rem 0 0 0;
     }
   }
 
   .details {
     height: 100%;
     width: 100%;
+  }
+
+  .option-search {
+    position: absolute;
+    inset: 2rem 2rem auto auto;
   }
 }
 
