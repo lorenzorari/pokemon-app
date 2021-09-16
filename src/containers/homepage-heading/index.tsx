@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import { ReactSVG } from 'react-svg';
 import Particles, { Main } from 'react-tsparticles';
 import particlesOptions from 'src/data/tsparticlesOptions';
 import ScrollIcon from 'src/containers/homepage-heading/scroll-icon';
+import HomepageHeadingContent from 'src/containers/homepage-heading/content';
+import HomepageHeadingGithubLink from 'src/containers/homepage-heading/github-link';
 import styles from './homepage-heading.module.scss';
-import HomepageHeadingContent from './content';
-import HomepageHeadingGithubLink from './github-link';
 
 interface Props {
   heading: string;
