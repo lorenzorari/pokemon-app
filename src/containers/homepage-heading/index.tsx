@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router';
 import { ReactSVG } from 'react-svg';
 import Particles, { Main } from 'react-tsparticles';
 import particlesOptions from 'src/data/tsparticlesOptions';
 import ScrollIcon from 'src/containers/homepage-heading/scroll-icon';
-import SearchBar from 'src/components/search-bar';
-import HomepageHeading from './heading';
 import styles from './homepage-heading.module.scss';
+import HomepageHeadingContent from './content';
 
 interface Props {
   scrollToRef?: React.MutableRefObject<any>;
@@ -19,26 +17,6 @@ const HomepageHeadingContainer = ({
   areParticlesLoading,
   initParticles,
 }: Props) => {
-  const history = useHistory();
-  const [searchValue, setSearchValue] = useState('');
-
-  const handlePokemonSearch = (e: React.FormEvent<HTMLInputElement>) => {
-    setSearchValue(e.currentTarget.value);
-  };
-
-  const searchPokemon = async (value: string) => {
-    if (value === '') return;
-
-    history.push(`/pokemon/${value}`);
-  };
-
-  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      searchPokemon(searchValue);
-    }
-  };
-
   const scrollTo = () => {
     scrollToRef.current.scrollIntoView({ behavior: 'smooth' });
   };
@@ -57,18 +35,7 @@ const HomepageHeadingContainer = ({
         options={particlesOptions}
       />
 
-      <div className={styles['heading-content']}>
-        <HomepageHeading title="Pocketex" />
-
-        <form>
-          <SearchBar
-            type="text"
-            placeholder="Search a pokemon by name or id..."
-            onChange={handlePokemonSearch}
-            onKeyPress={handleKeyPress}
-          />
-        </form>
-      </div>
+      <HomepageHeadingContent />
 
       <a
         rel="noreferrer"

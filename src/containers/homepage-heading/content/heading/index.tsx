@@ -3,19 +3,19 @@ import classNames from 'classnames';
 import styles from './heading.module.scss';
 
 interface Props {
-  title: string;
+  value: string;
   className?: string;
 }
 
-const HomepageHeading = ({ title, className }: Props) => {
+const HomepageHeadingContentHeading = ({ value, className }: Props) => {
   return (
     <div className={classNames(styles.heading, className)}>
-      <h1>{title}</h1>
+      <h1>{value}</h1>
     </div>
   );
 };
 
 const arePropsEqual = (prev: Readonly<Props>, next: Readonly<Props>) =>
-  prev.title === next.title;
+  prev.value === next.value;
 
-export default memo(HomepageHeading, arePropsEqual);
+export default memo(HomepageHeadingContentHeading, arePropsEqual);

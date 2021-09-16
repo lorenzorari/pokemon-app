@@ -17,16 +17,6 @@
   animation-delay: 1.5s;
 }
 
-.heading-content {
-  position: absolute;
-
-  form {
-    opacity: 0;
-    animation: showUp 0.5s forwards;
-    animation-delay: 1s;
-  }
-}
-
 .github-logo {
   position: absolute;
   content: '';
@@ -84,15 +74,5 @@
   to {
     opacity: 1;
     transform: scale(1);
-  }
-}
-
-@keyframes showUp {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
   }
 }

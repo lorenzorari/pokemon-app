@@ -1,0 +1,19 @@
+.content {
+  position: absolute;
+
+  form {
+    opacity: 0;
+    animation: showUp 0.5s forwards;
+    animation-delay: 1s;
+  }
+}
+
+@keyframes showUp {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
