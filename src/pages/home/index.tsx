@@ -81,6 +81,8 @@ const Home = () => {
     <main className={styles.main}>
       <HomepageHeadingContainer
         heading="Pocketex"
+        githubHref="https://github.com/lorenzorari/pocketex"
+        githubImageSrc="/assets/svg/github.svg"
         scrollToRef={cardsRef}
         initParticles={initParticles}
         areParticlesLoading={isPageLoading}

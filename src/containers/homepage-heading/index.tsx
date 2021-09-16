@@ -9,42 +9,39 @@ import HomepageHeadingGithubLink from './github-link';
 
 interface Props {
   heading: string;
+  githubHref: string;
+  githubImageSrc: string;
   scrollToRef?: React.MutableRefObject<any>;
   areParticlesLoading?: boolean;
   initParticles?: (tsParticles: Main) => void;
 }
 
-const HomepageHeadingContainer = ({
-  heading,
-  scrollToRef,
-  areParticlesLoading,
-  initParticles,
-}: Props) => {
+const HomepageHeadingContainer = (props: Props) => {
   const scrollTo = () => {
-    scrollToRef.current.scrollIntoView({ behavior: 'smooth' });
+    props.scrollToRef.current.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
     <section
       className={
-        areParticlesLoading === true
+        props.areParticlesLoading === true
           ? styles.hidden
           : styles['homepage-heading-container']
       }
     >
       <Particles
         className={styles.particles}
-        init={initParticles}
+        init={props.initParticles}
         options={particlesOptions}
       />
 
-      <HomepageHeadingContent heading={heading} />
+      <HomepageHeadingContent heading={props.heading} />
 
       <HomepageHeadingGithubLink
-        imageSrc="/assets/svg/github.svg"
         className={styles['github-link']}
+        href={props.githubHref}
+        imageSrc={props.githubImageSrc}
         rel="noreferrer"
-        href="https://github.com/lorenzorari/pocketex"
         target="_blank"
         aria-label="Github link"
       />
