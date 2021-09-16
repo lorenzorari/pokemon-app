@@ -9,6 +9,8 @@ $columnGap: 1rem;
   height: 100vh;
   max-height: 1086px;
   margin: 0 auto;
+
+  overflow-y: scroll;
 }
 
 .basic-info-container {
@@ -18,7 +20,6 @@ $columnGap: 1rem;
   align-items: center;
   flex-direction: column;
   width: 45%;
-  min-height: 40rem;
 
   button {
     position: absolute;
@@ -29,7 +30,55 @@ $columnGap: 1rem;
   .card {
     cursor: auto;
     transform: scale(1.8);
+    margin: 12rem 0 8rem 0;
     box-shadow: 0px 0px 30px 11px hsla(0, 0%, 0%, 0.25);
+  }
+
+  .options {
+    margin: 2rem 0;
+  }
+
+  .option-search {
+    height: 1.5rem;
+    width: 1.5rem;
+
+    svg {
+      height: 100%;
+      width: 100%;
+
+      path {
+        fill: hsl(0, 0, 80%);
+        transition: fill 0.1s ease-in;
+      }
+
+      &:hover {
+        cursor: pointer;
+
+        path {
+          fill: var(--color-black);
+        }
+      }
+    }
+  }
+}
+
+.search-modal {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 100%;
+  width: 100%;
+
+  animation: showUp 0.2s ease forwards;
+
+  opacity: 0;
+  background-color: hsla(0, 0%, 0%, 0.9);
+  z-index: 100;
+
+  .search {
+    width: 60rem;
   }
 }
 
@@ -73,6 +122,16 @@ $columnGap: 1rem;
   width: 100%;
 }
 
+@keyframes showUp {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
 @media screen and (max-width: 760px) {
   html {
     font-size: calc(14px + (16 - 14) * ((100vw - 560px) / (760 - 560)));
@@ -96,11 +155,5 @@ $columnGap: 1rem;
 @media screen and (max-width: 560px) {
   html {
     font-size: calc(8px + (14 - 8) * ((100vw - 320px) / (560 - 320)));
-  }
-}
-
-@media screen and (max-height: 500px) {
-  .basic-info-container {
-    min-height: 47rem;
   }
 }

@@ -21,8 +21,8 @@ body {
 }
 
 body {
+  overflow-y: hidden;
   color: var(--color-black);
-  overflow-y: overlay;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

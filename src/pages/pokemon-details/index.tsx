@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { MouseEventHandler, useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router';
 import { useHistory } from 'react-router-dom';
 import { ChainLink, ChainLinks } from '../../models/evolution/chain';
@@ -15,6 +15,9 @@ import { getPokemon } from '../../services/pokemon';
 import { getSpecies } from '../../services/species';
 import styles from './pokemon-details.module.scss';
 import Loading from '../../components/loading';
+import { ReactSVG } from 'react-svg';
+import SearchBar from '../../components/search-bar';
+import useClickOutside from '../../helpers/hooks/click-outside';
 
 interface Params {
   id: string;
@@ -36,6 +39,10 @@ const PokemonDetails = () => {
   const [pokemonEvolutions, setPokemonEvolutions] = useState([]);
   const [activeTab, setActiveTab] = useState<string>(BIOGRAPHY);
   const [isLoading, setIsLoading] = useState(true);
+  const [isSearchModalOpen, setIsSearchModalOpen] = useState<boolean>(false);
+  const [searchValue, setSearchValue] = useState('');
+
+  const searchModalRef = useRef(null);
 
   const tabs: string[] = [BIOGRAPHY, STATS, EVOLUTIONS];
 
@@ -48,6 +55,8 @@ const PokemonDetails = () => {
       <PokemonDetailsEvolutions pokemonEvolutions={pokemonEvolutions} />
     ),
   };
+
+  useClickOutside(searchModalRef, () => setIsSearchModalOpen(false));
 
   useEffect(() => {
     const init = async () => {
@@ -130,18 +139,66 @@ const PokemonDetails = () => {
     history.push('/');
   };
 
+  const handleSearchIcon = e => {
+    e.stopPropagation();
+    setIsSearchModalOpen(true);
+  };
+
+  const handlePokemonSearch = (e: React.FormEvent<HTMLInputElement>) => {
+    setSearchValue(e.currentTarget.value);
+  };
+
+  const searchPokemon = async (value: string) => {
+    if (value === '') return;
+
+    history.push(`/pokemon/${value}`);
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      searchPokemon(searchValue);
+      setIsSearchModalOpen(false);
+      setSearchValue('');
+    }
+  };
+
   return (
     <main className={styles.layout}>
       {!isLoading ? (
         <>
-          <div className={styles['basic-info-container']}>
+          <section className={styles['basic-info-container']}>
             <Button theme="back" onClick={handleBackButton}>
               Back
             </Button>
+
             <PokemonCard className={styles.card} pokemon={pokemon} />
+
+            <div className={styles.options}>
+              <ReactSVG
+                className={styles['option-search']}
+                src="/assets/svg/search.svg"
+                onClick={handleSearchIcon}
+              />
+            </div>
+          </section>
+
+          <div
+            style={{ display: isSearchModalOpen ? 'flex' : 'none' }}
+            className={styles['search-modal']}
+          >
+            <SearchBar
+              ref={searchModalRef}
+              className={styles.search}
+              type="text"
+              placeholder="Search a pokemon by name or id..."
+              onChange={handlePokemonSearch}
+              onKeyPress={handleKeyPress}
+              value={searchValue}
+            />
           </div>
 
-          <div className={styles.details}>
+          <section className={styles.details}>
             <div className={styles['details-container']}>
               <ul className={styles['details-tabs']}>
                 {tabs.map((tab, i) => (
@@ -157,7 +214,7 @@ const PokemonDetails = () => {
 
               <div className={styles['tab-content']}>{tabView[activeTab]}</div>
             </div>
-          </div>
+          </section>
         </>
       ) : (
         <section className={styles['loading-container']}>
