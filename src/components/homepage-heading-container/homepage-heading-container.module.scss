@@ -1,14 +1,15 @@
 .homepage-heading-container {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
   background-color: hsl(350, 91%, 45%);
 }
 
 .particles {
   position: relative;
-  height: 100%;
+  height: 100vh;
+  min-height: 30rem;
   width: 100%;
 
   transform: scale(0);
