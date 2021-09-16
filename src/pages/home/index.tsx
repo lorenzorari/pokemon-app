@@ -79,7 +79,7 @@ const Home = () => {
   };
 
   return (
-    <main>
+    <main className={styles.main}>
       <HomepageHeadingContainer
         scrollToRef={cardsRef}
         initParticles={initParticles}
