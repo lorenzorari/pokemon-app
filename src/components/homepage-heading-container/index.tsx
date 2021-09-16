@@ -74,6 +74,7 @@ const HomepageHeadingContainer = ({
         rel="noreferrer"
         href="https://github.com/lorenzorari/pocketex"
         target="_blank"
+        aria-label="Github link"
       >
         <ReactSVG
           className={styles['github-logo']}
