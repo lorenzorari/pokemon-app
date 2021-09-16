@@ -1,15 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { ReactSVG } from 'react-svg';
 import { Main } from 'react-tsparticles';
-import HomepageHeadingContainer from '../../components/homepage-heading-container';
-import InfiniteScroll from '../../components/infinite-scroll';
-import Loading from '../../components/loading';
-import PokemonCard from '../../components/pokemon/card';
-import tsparticlesOptions from '../../data/tsparticlesOptions';
-import { NamedAPIResources } from '../../models/named-api-resource';
-import { Pokemons } from '../../models/pokemon';
-import { getAllPokemons, getPokemon } from '../../services/pokemon';
+import HomepageHeadingContainer from 'src/containers/homepage-heading';
+import InfiniteScroll from 'src/components/infinite-scroll';
+import Loading from 'src/components/loading';
+import PokemonCard from 'src/components/pokemon/card';
+import tsparticlesOptions from 'src/data/tsparticlesOptions';
+import { NamedAPIResources } from 'src/models/named-api-resource';
+import { Pokemons } from 'src/models/pokemon';
+import { getAllPokemons, getPokemon } from 'src/services/pokemon';
 import styles from './home.module.scss';
 
 const Home = () => {
