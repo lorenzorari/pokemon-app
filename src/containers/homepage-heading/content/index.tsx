@@ -4,7 +4,11 @@ import SearchBar from 'src/components/search-bar';
 import HomepageHeadingContentHeading from 'src/containers/homepage-heading/content/heading';
 import styles from './content.module.scss';
 
-const HomepageHeadingContent = () => {
+interface Props {
+  heading: string;
+}
+
+const HomepageHeadingContent = ({ heading }: Props) => {
   const history = useHistory();
   const [searchValue, setSearchValue] = useState('');
 
@@ -27,7 +31,7 @@ const HomepageHeadingContent = () => {
 
   return (
     <div className={styles['content']}>
-      <HomepageHeadingContentHeading value="Pocketex" />
+      <HomepageHeadingContentHeading value={heading} />
 
       <form>
         <SearchBar

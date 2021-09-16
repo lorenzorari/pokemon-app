@@ -7,12 +7,14 @@ import styles from './homepage-heading.module.scss';
 import HomepageHeadingContent from './content';
 
 interface Props {
+  heading: string;
   scrollToRef?: React.MutableRefObject<any>;
   areParticlesLoading?: boolean;
   initParticles?: (tsParticles: Main) => void;
 }
 
 const HomepageHeadingContainer = ({
+  heading,
   scrollToRef,
   areParticlesLoading,
   initParticles,
@@ -35,7 +37,7 @@ const HomepageHeadingContainer = ({
         options={particlesOptions}
       />
 
-      <HomepageHeadingContent />
+      <HomepageHeadingContent heading={heading} />
 
       <a
         rel="noreferrer"

@@ -80,6 +80,7 @@ const Home = () => {
   return (
     <main className={styles.main}>
       <HomepageHeadingContainer
+        heading="Pocketex"
         scrollToRef={cardsRef}
         initParticles={initParticles}
         areParticlesLoading={isPageLoading}
