@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Tab from 'src/components/tab';
+import DetailsTabs from './tabs';
 import styles from './details.module.scss';
 
 const Details = ({ defaultTab, tabs, tabContent }) => {
@@ -7,17 +7,11 @@ const Details = ({ defaultTab, tabs, tabContent }) => {
 
   return (
     <div className={styles['details-container']}>
-      <ul className={styles['details-tabs']}>
-        {tabs.map((tab, i) => (
-          <Tab
-            key={i}
-            onClick={() => setActiveTab(tab)}
-            isActive={activeTab === tab}
-          >
-            {tab}
-          </Tab>
-        ))}
-      </ul>
+      <DetailsTabs
+        tabs={tabs}
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+      />
 
       <div className={styles['tab-content']}>{tabContent[activeTab]}</div>
     </div>
