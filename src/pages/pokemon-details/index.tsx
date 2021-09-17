@@ -175,7 +175,7 @@ const PokemonDetails = () => {
             Back
           </Button>
 
-          <section className={styles['basic-info-container']}>
+          <section className={styles['card-container']}>
             <PokemonCard className={styles.card} pokemon={pokemon} />
 
             <div className={styles.options}>
