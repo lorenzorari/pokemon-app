@@ -222,9 +222,9 @@ const PokemonDetails = () => {
           </section>
         </>
       ) : (
-        <section className={styles['loading-container']}>
+        <div className={styles['loading-container']}>
           <Loading src="/assets/svg/logo.svg" text={`Loading pokemon data`} />
-        </section>
+        </div>
       )}
     </main>
   );
