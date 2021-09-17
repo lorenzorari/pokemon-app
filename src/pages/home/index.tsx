@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Main } from 'react-tsparticles';
 import Loading from 'src/components/loading';
 import HomepageHeadingContainer from 'src/containers/homepage-heading';
-import PokemonList from 'src/containers/pokemon-list';
+import PokemonList from 'src/containers/pokemon/list';
 import tsparticlesOptions from 'src/data/tsparticlesOptions';
 import { NamedAPIResources } from 'src/models/named-api-resource';
 import { Pokemons } from 'src/models/pokemon';
