@@ -1,4 +1,4 @@
-import React, { MouseEventHandler, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router';
 import { useHistory } from 'react-router-dom';
 import { ChainLink, ChainLinks } from '../../models/evolution/chain';
@@ -9,7 +9,6 @@ import PokemonCard from '../../components/pokemon/card';
 import PokemonDetailsBiography from '../../components/pokemon/details/biography';
 import PokemonDetailsEvolutions from '../../components/pokemon/details/evolutions';
 import PokemonDetailsStats from '../../components/pokemon/details/stats';
-import Tab from '../../components/tab';
 import { getEvolutionChain } from '../../services/evolution-chain';
 import { getPokemon } from '../../services/pokemon';
 import { getSpecies } from '../../services/species';
@@ -19,6 +18,7 @@ import { ReactSVG } from 'react-svg';
 import SearchBar from '../../components/search-bar';
 import useClickOutside from '../../helpers/hooks/click-outside';
 import Modal from 'src/components/modal';
+import Details from 'src/containers/details';
 
 interface Params {
   id: string;
@@ -38,7 +38,6 @@ const PokemonDetails = () => {
   const [pokemon, setPokemon] = useState<Pokemon>(null);
   const [species, setSpecies] = useState<Species>(null);
   const [pokemonEvolutions, setPokemonEvolutions] = useState([]);
-  const [activeTab, setActiveTab] = useState<string>(BIOGRAPHY);
   const [isLoading, setIsLoading] = useState(true);
   const [isSearchModalOpen, setIsSearchModalOpen] = useState<boolean>(false);
   const [searchValue, setSearchValue] = useState('');
@@ -47,7 +46,7 @@ const PokemonDetails = () => {
 
   const tabs: string[] = [BIOGRAPHY, STATS, EVOLUTIONS];
 
-  const tabView = {
+  const tabContent = {
     [BIOGRAPHY]: species && (
       <PokemonDetailsBiography pokemon={pokemon} species={species} />
     ),
@@ -204,21 +203,11 @@ const PokemonDetails = () => {
           </Modal>
 
           <section className={styles.details}>
-            <div className={styles['details-container']}>
-              <ul className={styles['details-tabs']}>
-                {tabs.map((tab, i) => (
-                  <Tab
-                    key={i}
-                    onClick={() => setActiveTab(tab)}
-                    isActive={activeTab === tab}
-                  >
-                    {tab}
-                  </Tab>
-                ))}
-              </ul>
-
-              <div className={styles['tab-content']}>{tabView[activeTab]}</div>
-            </div>
+            <Details
+              defaultTab={BIOGRAPHY}
+              tabs={tabs}
+              tabContent={tabContent}
+            />
           </section>
         </>
       ) : (
