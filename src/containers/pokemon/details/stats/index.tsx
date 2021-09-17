@@ -1,7 +1,7 @@
 import React from 'react';
 import Stat from 'src/components/stat';
 import { Pokemon } from 'src/models/pokemon';
-import { replaceDashBySpace } from 'src/utils/replace-dash-by-space';
+import { replaceDashBySpace } from 'src/helpers/utils/replace-dash-by-space';
 import styles from './stats.module.scss';
 
 interface Props {

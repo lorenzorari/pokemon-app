@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { EvolutionChain } from './../models/evolution/chain';
 import { Species } from './../models/species/index';
-import { convertUnderscoreToCamelcase } from './../utils/convert-underscore-to-camelcase';
+import { convertUnderscoreToCamelcase } from '../helpers/utils/convert-underscore-to-camelcase';
 
 const getEvolutionChain = async ({
   evolutionChain,
