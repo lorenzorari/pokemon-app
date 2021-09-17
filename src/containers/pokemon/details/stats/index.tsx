@@ -1,15 +1,12 @@
 import React from 'react';
 import Stat from 'src/components/stat';
 import { Pokemon } from 'src/models/pokemon';
+import { replaceDashBySpace } from 'src/utils/replace-dash-by-space';
 import styles from './stats.module.scss';
 
 interface Props {
   pokemon: Pokemon;
 }
-
-const replaceDashBySpace = (word: string) => {
-  return word.replace('-', ' ');
-};
 
 const PokemonDetailsStats = ({ pokemon }: Props) => {
   const stats = pokemon.stats.map(({ stat, baseStat }) => {
