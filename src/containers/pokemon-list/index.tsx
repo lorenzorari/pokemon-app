@@ -2,7 +2,7 @@ import React, { Dispatch, useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import InfiniteScroll from 'src/components/infinite-scroll';
 import Loading from 'src/components/loading';
-import PokemonCard from 'src/components/pokemon/card';
+import PokemonCard from 'src/containers/pokemon/card';
 import { Pokemons } from 'src/models/pokemon';
 import styles from './pokemon-list.module.scss';
 

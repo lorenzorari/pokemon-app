@@ -1,5 +1,5 @@
 import React from 'react';
-import { getArtworkUrl } from '../../../../helpers/get-artwork-url';
+import { getArtworkUrl } from 'src/helpers/get-artwork-url';
 import styles from './image.module.scss';
 
 const PokemonCardImage = ({ pokemon }) => {

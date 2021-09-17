@@ -1,13 +1,12 @@
 import React, { memo } from 'react';
-import PokemonCardId from './id';
-import PokemonCardImage from './image';
-import PokemonCardTitle from './title';
-import TypeTag from '../../type-tag';
-import { Pokemon } from '../../../models/pokemon';
-import styles from './card.module.scss';
-import { ReactSVG } from 'react-svg';
 import classNames from 'classnames';
-import PokemonBackgroundImage from './background-image';
+import TypeTag from 'src/components/type-tag';
+import PokemonBackgroundImage from 'src/containers/pokemon/card/background-image';
+import PokemonCardId from 'src/containers/pokemon/card/id';
+import PokemonCardImage from 'src/containers/pokemon/card/image';
+import PokemonCardTitle from 'src/containers/pokemon/card/title';
+import { Pokemon } from 'src/models/pokemon';
+import styles from './card.module.scss';
 
 interface Props {
   pokemon: Pokemon;

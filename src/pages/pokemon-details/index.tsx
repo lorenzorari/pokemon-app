@@ -5,7 +5,7 @@ import { ReactSVG } from 'react-svg';
 import Button from 'src/components/button';
 import Loading from 'src/components/loading';
 import Modal from 'src/components/modal';
-import PokemonCard from 'src/components/pokemon/card';
+import PokemonCard from 'src/containers/pokemon/card';
 import PokemonDetailsBiography from 'src/containers/details/biography';
 import PokemonDetailsEvolutions from 'src/containers/details/evolutions';
 import PokemonDetailsStats from 'src/containers/details/stats';
