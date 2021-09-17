@@ -3,6 +3,7 @@ $columnWidth: 10rem;
 $columnGap: 1rem;
 
 .layout {
+  position: relative;
   display: flex;
   flex-wrap: wrap;
 
@@ -11,16 +12,15 @@ $columnGap: 1rem;
   margin: 0 auto;
 
   overflow-y: scroll;
+}
 
-  button {
-    position: absolute;
-    inset: 2rem auto auto 2rem;
-    z-index: 100;
-  }
+.btn-back {
+  position: absolute;
+  inset: 2rem auto auto 2rem;
+  z-index: 100;
 }
 
 .basic-info-container {
-  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;

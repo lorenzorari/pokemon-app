@@ -167,7 +167,11 @@ const PokemonDetails = () => {
     <main className={styles.layout}>
       {!isLoading ? (
         <>
-          <Button theme="back" onClick={handleBackButton}>
+          <Button
+            className={styles['btn-back']}
+            theme="back"
+            onClick={handleBackButton}
+          >
             Back
           </Button>
 
