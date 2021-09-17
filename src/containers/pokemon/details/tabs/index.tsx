@@ -8,7 +8,7 @@ interface Props {
   setActiveTab: Dispatch<SetStateAction<string>>;
 }
 
-const DetailsTabs = ({ tabs, activeTab, setActiveTab }: Props) => {
+const PokemonDetailsTabs = ({ tabs, activeTab, setActiveTab }: Props) => {
   return (
     <nav>
       <ul className={styles.tabs}>
@@ -26,4 +26,4 @@ const DetailsTabs = ({ tabs, activeTab, setActiveTab }: Props) => {
   );
 };
 
-export default DetailsTabs;
+export default PokemonDetailsTabs;

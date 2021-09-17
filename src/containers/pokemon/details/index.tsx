@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import DetailsTabs from 'src/containers/pokemon/details/tabs';
+import PokemonDetailsTabs from 'src/containers/pokemon/details/tabs';
 import styles from './details.module.scss';
 
 const PokemonDetails = ({ defaultTab, tabs, tabContent }) => {
@@ -7,7 +7,7 @@ const PokemonDetails = ({ defaultTab, tabs, tabContent }) => {
 
   return (
     <div className={styles['details-container']}>
-      <DetailsTabs
+      <PokemonDetailsTabs
         tabs={tabs}
         activeTab={activeTab}
         setActiveTab={setActiveTab}
