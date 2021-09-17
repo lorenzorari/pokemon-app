@@ -12,7 +12,7 @@ import PokemonDetailsStats from 'src/components/pokemon/details/stats';
 import SearchBar from 'src/components/search-bar';
 import Details from 'src/containers/details';
 import { getIdFromSpeciesResourceUrl } from 'src/helpers/get-id-from-species-resource-url';
-import useClickOutside from 'src/helpers/hooks/click-outside';
+import { useClickOutside } from 'src/helpers/hooks/click-outside';
 import { ChainLink, ChainLinks } from 'src/models/evolution/chain';
 import { Pokemon } from 'src/models/pokemon';
 import { Species } from 'src/models/species';
