@@ -1,6 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router';
-import PokemonEvolution from '../../evolution';
+import PokemonEvolution from 'src/components/pokemon/evolution';
 import styles from './evolutions.module.scss';
 
 const PokemonDetailsEvolutions = ({ pokemonEvolutions }) => {

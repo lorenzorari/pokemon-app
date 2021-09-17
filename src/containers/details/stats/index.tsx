@@ -1,6 +1,6 @@
 import React from 'react';
-import { Pokemon } from '../../../../models/pokemon';
-import Stat from '../../../stat';
+import Stat from 'src/components/stat';
+import { Pokemon } from 'src/models/pokemon';
 import styles from './stats.module.scss';
 
 interface Props {

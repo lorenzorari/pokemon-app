@@ -1,8 +1,8 @@
 import React from 'react';
-import { Pokemon } from '../../../../models/pokemon';
-import { Species } from '../../../../models/species';
-import PokemonDescription from '../../description';
-import PokemonInformation from '../../information';
+import { Pokemon } from 'src/models/pokemon';
+import { Species } from 'src/models/species';
+import PokemonDescription from 'src/components/pokemon/description';
+import PokemonInformation from 'src/components/pokemon/information';
 import styles from './biography.module.scss';
 
 interface Props {
