@@ -19,7 +19,7 @@ import { Species } from 'src/models/species';
 import { getEvolutionChain } from 'src/services/evolution-chain';
 import { getPokemon } from 'src/services/pokemon';
 import { getSpecies } from 'src/services/species';
-import styles from './pokemon-details.module.scss';
+import styles from './details.module.scss';
 
 interface Params {
   id: string;
@@ -29,7 +29,7 @@ const BIOGRAPHY = 'Biography';
 const STATS = 'Stats';
 const EVOLUTIONS = 'Evolutions';
 
-const PokemonDetails = () => {
+const DetailsPage = () => {
   const { id } = useParams<Params>();
   const history = useHistory();
   const [pokemon, setPokemon] = useState<Pokemon>(null);
@@ -213,4 +213,4 @@ const PokemonDetails = () => {
   );
 };
 
-export default PokemonDetails;
+export default DetailsPage;

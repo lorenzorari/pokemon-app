@@ -6,13 +6,13 @@ import {
   Switch,
 } from 'react-router-dom';
 import HomePage from 'src/pages/home';
-import PokemonDetails from 'src/pages/pokemon-details';
+import DetailsPage from 'src/pages/details';
 
 function App() {
   return (
     <Router>
       <Switch>
-        <Route exact path="/pokemon/:id" component={PokemonDetails} />
+        <Route exact path="/pokemon/:id" component={DetailsPage} />
         <Route exact path="/" component={HomePage} />
         <Redirect from="*" to="/" />
       </Switch>
