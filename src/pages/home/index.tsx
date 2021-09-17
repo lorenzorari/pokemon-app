@@ -9,7 +9,7 @@ import { Pokemons } from 'src/models/pokemon';
 import { getAllPokemons, getPokemon } from 'src/services/pokemon';
 import styles from './home.module.scss';
 
-const Home = () => {
+const HomePage = () => {
   const INITIAL_URL = 'https://pokeapi.co/api/v2/pokemon';
 
   const [pokemons, setPokemons] = useState<Pokemons>([]);
@@ -89,4 +89,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomePage;
