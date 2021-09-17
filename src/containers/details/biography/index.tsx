@@ -1,5 +1,5 @@
 import React from 'react';
-import PokemonDescription from 'src/components/pokemon/description';
+import PokemonDescription from 'src/containers/pokemon/description';
 import PokemonInformation from 'src/containers/pokemon/information';
 import { Pokemon } from 'src/models/pokemon';
 import { Species } from 'src/models/species';
