@@ -161,10 +161,7 @@ const PokemonDetails = () => {
   };
 
   return (
-    <main
-      style={{ overflowY: isSearchModalOpen ? 'auto' : 'scroll' }}
-      className={styles.main}
-    >
+    <main className={styles.main}>
       {!isLoading ? (
         <>
           <Button
