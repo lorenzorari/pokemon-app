@@ -3,7 +3,6 @@ $columnWidth: 10rem;
 $columnGap: 1rem;
 
 .layout {
-  position: relative;
   display: flex;
   flex-wrap: wrap;
 
@@ -21,6 +20,7 @@ $columnGap: 1rem;
 }
 
 .card-container {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -63,7 +63,6 @@ $columnGap: 1rem;
 }
 
 .search-modal {
-  position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -75,7 +74,6 @@ $columnGap: 1rem;
 
   opacity: 0;
   background-color: hsla(0, 0%, 0%, 0.9);
-  z-index: 100;
 
   .search {
     width: 60rem;

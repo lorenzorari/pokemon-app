@@ -18,6 +18,7 @@ import Loading from '../../components/loading';
 import { ReactSVG } from 'react-svg';
 import SearchBar from '../../components/search-bar';
 import useClickOutside from '../../helpers/hooks/click-outside';
+import Modal from 'src/components/modal';
 
 interface Params {
   id: string;
@@ -164,7 +165,10 @@ const PokemonDetails = () => {
   };
 
   return (
-    <main className={styles.layout}>
+    <main
+      style={{ overflowY: isSearchModalOpen ? 'auto' : 'scroll' }}
+      className={styles.layout}
+    >
       {!isLoading ? (
         <>
           <Button
@@ -187,10 +191,7 @@ const PokemonDetails = () => {
             </div>
           </section>
 
-          <div
-            style={{ display: isSearchModalOpen ? 'flex' : 'none' }}
-            className={styles['search-modal']}
-          >
+          <Modal className={styles['search-modal']} isOpen={isSearchModalOpen}>
             <SearchBar
               ref={searchModalRef}
               className={styles.search}
@@ -200,7 +201,7 @@ const PokemonDetails = () => {
               onKeyPress={handleKeyPress}
               value={searchValue}
             />
-          </div>
+          </Modal>
 
           <section className={styles.details}>
             <div className={styles['details-container']}>
