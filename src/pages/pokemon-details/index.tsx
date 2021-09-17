@@ -1,24 +1,24 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router';
 import { useHistory } from 'react-router-dom';
-import { ChainLink, ChainLinks } from '../../models/evolution/chain';
-import { Pokemon } from '../../models/pokemon';
-import { Species } from '../../models/species';
-import Button from '../../components/button';
-import PokemonCard from '../../components/pokemon/card';
-import PokemonDetailsBiography from '../../components/pokemon/details/biography';
-import PokemonDetailsEvolutions from '../../components/pokemon/details/evolutions';
-import PokemonDetailsStats from '../../components/pokemon/details/stats';
-import { getEvolutionChain } from '../../services/evolution-chain';
-import { getPokemon } from '../../services/pokemon';
-import { getSpecies } from '../../services/species';
-import styles from './pokemon-details.module.scss';
-import Loading from '../../components/loading';
 import { ReactSVG } from 'react-svg';
-import SearchBar from '../../components/search-bar';
-import useClickOutside from '../../helpers/hooks/click-outside';
+import Button from 'src/components/button';
+import Loading from 'src/components/loading';
 import Modal from 'src/components/modal';
+import PokemonCard from 'src/components/pokemon/card';
+import PokemonDetailsBiography from 'src/components/pokemon/details/biography';
+import PokemonDetailsEvolutions from 'src/components/pokemon/details/evolutions';
+import PokemonDetailsStats from 'src/components/pokemon/details/stats';
+import SearchBar from 'src/components/search-bar';
 import Details from 'src/containers/details';
+import useClickOutside from 'src/helpers/hooks/click-outside';
+import { ChainLink, ChainLinks } from 'src/models/evolution/chain';
+import { Pokemon } from 'src/models/pokemon';
+import { Species } from 'src/models/species';
+import { getEvolutionChain } from 'src/services/evolution-chain';
+import { getPokemon } from 'src/services/pokemon';
+import { getSpecies } from 'src/services/species';
+import styles from './pokemon-details.module.scss';
 
 interface Params {
   id: string;
@@ -166,7 +166,7 @@ const PokemonDetails = () => {
   return (
     <main
       style={{ overflowY: isSearchModalOpen ? 'auto' : 'scroll' }}
-      className={styles.layout}
+      className={styles.main}
     >
       {!isLoading ? (
         <>
