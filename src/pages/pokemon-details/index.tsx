@@ -11,6 +11,7 @@ import PokemonDetailsEvolutions from 'src/components/pokemon/details/evolutions'
 import PokemonDetailsStats from 'src/components/pokemon/details/stats';
 import SearchBar from 'src/components/search-bar';
 import Details from 'src/containers/details';
+import { getIdFromSpeciesResourceUrl } from 'src/helpers/get-id-from-species-resource-url';
 import useClickOutside from 'src/helpers/hooks/click-outside';
 import { ChainLink, ChainLinks } from 'src/models/evolution/chain';
 import { Pokemon } from 'src/models/pokemon';
@@ -27,10 +28,6 @@ interface Params {
 const BIOGRAPHY = 'Biography';
 const STATS = 'Stats';
 const EVOLUTIONS = 'Evolutions';
-
-const getIdFromSpeciesResourceUrl = (url: string) => {
-  return +url.split('/').slice(-2)[0];
-};
 
 const PokemonDetails = () => {
   const { id } = useParams<Params>();
