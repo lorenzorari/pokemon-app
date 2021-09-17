@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { Pokemon } from '../models/pokemon';
 import { PokemonPagination } from './../models/pokemon/pagination';
-import { convertUnderscoreToCamelcase } from './../utils/convert-underscore-to-camelcase';
+import { convertUnderscoreToCamelcase } from '../helpers/utils/convert-underscore-to-camelcase';
 
 const INITIAL_URL = 'https://pokeapi.co/api/v2/pokemon';
 

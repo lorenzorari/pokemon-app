@@ -5,15 +5,15 @@ import {
   Route,
   Switch,
 } from 'react-router-dom';
-import Home from '../../pages/home';
-import PokemonDetails from '../../pages/pokemon-details';
+import HomePage from 'src/pages/home';
+import DetailsPage from 'src/pages/details';
 
 function App() {
   return (
     <Router>
       <Switch>
-        <Route exact path="/pokemon/:id" component={PokemonDetails} />
-        <Route exact path="/" component={Home} />
+        <Route exact path="/pokemon/:id" component={DetailsPage} />
+        <Route exact path="/" component={HomePage} />
         <Redirect from="*" to="/" />
       </Switch>
     </Router>

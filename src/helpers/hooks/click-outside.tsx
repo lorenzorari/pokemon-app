@@ -4,11 +4,12 @@ interface ClickOutsideCallback {
   (): void;
 }
 
-const useClickOutside = (
-  ref: MutableRefObject<any>,
-  callback: ClickOutsideCallback
-) => {
-  const handleClick = e => {
+interface HookClickOutside {
+  (ref: MutableRefObject<any>, callback: ClickOutsideCallback): void;
+}
+
+export const useClickOutside: HookClickOutside = (ref, callback) => {
+  const handleClick = (e: Event) => {
     console.log(e.target, ref.current);
 
     if (ref.current && !ref.current.contains(e.target)) {
@@ -22,5 +23,3 @@ const useClickOutside = (
     };
   });
 };
-
-export default useClickOutside;
