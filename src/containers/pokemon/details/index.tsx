@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import DetailsTabs from './tabs';
+import DetailsTabs from 'src/containers/pokemon/details/tabs';
 import styles from './details.module.scss';
 
 const Details = ({ defaultTab, tabs, tabContent }) => {
