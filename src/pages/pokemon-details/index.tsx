@@ -167,11 +167,11 @@ const PokemonDetails = () => {
     <main className={styles.layout}>
       {!isLoading ? (
         <>
-          <section className={styles['basic-info-container']}>
-            <Button theme="back" onClick={handleBackButton}>
-              Back
-            </Button>
+          <Button theme="back" onClick={handleBackButton}>
+            Back
+          </Button>
 
+          <section className={styles['basic-info-container']}>
             <PokemonCard className={styles.card} pokemon={pokemon} />
 
             <div className={styles.options}>

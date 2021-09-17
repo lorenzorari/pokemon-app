@@ -11,6 +11,12 @@ $columnGap: 1rem;
   margin: 0 auto;
 
   overflow-y: scroll;
+
+  button {
+    position: absolute;
+    inset: 2rem auto auto 2rem;
+    z-index: 100;
+  }
 }
 
 .basic-info-container {
@@ -20,12 +26,6 @@ $columnGap: 1rem;
   align-items: center;
   flex-direction: column;
   width: 45%;
-
-  button {
-    position: absolute;
-    inset: 2rem auto auto 2rem;
-    z-index: 100;
-  }
 
   .card {
     cursor: auto;
