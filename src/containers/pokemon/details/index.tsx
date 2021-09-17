@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import DetailsTabs from 'src/containers/pokemon/details/tabs';
 import styles from './details.module.scss';
 
-const Details = ({ defaultTab, tabs, tabContent }) => {
+const PokemonDetails = ({ defaultTab, tabs, tabContent }) => {
   const [activeTab, setActiveTab] = useState<string>(defaultTab);
 
   return (
@@ -18,4 +18,4 @@ const Details = ({ defaultTab, tabs, tabContent }) => {
   );
 };
 
-export default Details;
+export default PokemonDetails;

@@ -10,7 +10,7 @@ import PokemonDetailsBiography from 'src/containers/pokemon/details/biography';
 import PokemonDetailsEvolutions from 'src/containers/pokemon/details/evolutions';
 import PokemonDetailsStats from 'src/containers/pokemon/details/stats';
 import SearchBar from 'src/components/search-bar';
-import Details from 'src/containers/pokemon/details';
+import PokemonDetails from 'src/containers/pokemon/details';
 import { getIdFromSpeciesResourceUrl } from 'src/helpers/get-id-from-species-resource-url';
 import { useClickOutside } from 'src/helpers/hooks/click-outside';
 import { ChainLink, ChainLinks } from 'src/models/evolution/chain';
@@ -197,7 +197,7 @@ const DetailsPage = () => {
           </Modal>
 
           <section className={styles.details}>
-            <Details
+            <PokemonDetails
               defaultTab={BIOGRAPHY}
               tabs={tabs}
               tabContent={tabContent}
