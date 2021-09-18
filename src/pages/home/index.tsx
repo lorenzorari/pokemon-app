@@ -10,23 +10,27 @@ import { getAllPokemons, getPokemon } from 'src/services/pokemon';
 import styles from './home.module.scss';
 
 const HomePage = () => {
-  const INITIAL_URL = 'https://pokeapi.co/api/v2/pokemon';
+  const POKEMON_QUANTITY = 898;
+  const POKEMON_FETCH_LIMIT = 20;
 
   const [pokemons, setPokemons] = useState<Pokemons>([]);
   const [nextPageUrl, setNextPageUrl] = useState<string>(null);
+  const [allPokemonResources, setAllPokemonResources] =
+    useState<NamedAPIResources>([]);
+
   const [isLoadingMorePokemon, setIsLoadingMorePokemon] = useState(false);
   const [areParticlesLoading, setAreParticlesLoading] = useState(true);
   const [isLoadingPokemon, setIsLoadingPokemon] = useState<boolean>(true);
-
   const isPageLoading: boolean = isLoadingPokemon || areParticlesLoading;
 
   const cardsRef = useRef(null);
 
   useEffect(() => {
     const init = async () => {
-      const { results, next } = await getAllPokemons(INITIAL_URL);
-      setNextPageUrl(next);
-      await loadPokemons(results);
+      const { results } = await getAllPokemons(null, POKEMON_QUANTITY);
+      await loadPokemons(results.slice(0, POKEMON_FETCH_LIMIT));
+      setNextPageUrl('https://pokeapi.co/api/v2/pokemon?offset=20&limit=20');
+      setAllPokemonResources(results);
       setIsLoadingPokemon(false);
     };
 
@@ -43,7 +47,7 @@ const HomePage = () => {
 
   const handleMorePokemon = async () => {
     if (nextPageUrl) {
-      const { results, next } = await getAllPokemons(nextPageUrl);
+      const { results, next } = await getAllPokemons(null, null, nextPageUrl);
       setNextPageUrl(next);
       await loadPokemons(results);
     }
@@ -69,6 +73,7 @@ const HomePage = () => {
         scrollToRef={cardsRef}
         initParticles={initParticles}
         areParticlesLoading={isPageLoading}
+        dataToFilter={allPokemonResources}
       />
 
       {!isPageLoading && pokemons.length ? (
