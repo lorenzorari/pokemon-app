@@ -7,6 +7,7 @@ import {
   NamedAPIResources,
 } from 'src/models/named-api-resource';
 import styles from './autocomplete.module.scss';
+import Suggestions from './suggestions';
 
 interface Props {
   dataToFilter?: NamedAPIResources;
@@ -96,17 +97,11 @@ const Autocomplete = ({ dataToFilter, suggestionsSize = 4 }: Props) => {
         value={searchValue}
       />
 
-      <ul className={styles['suggestion-list']}>
-        {suggestions.map((suggestion, i) => (
-          <li
-            key={i}
-            className={suggestionSelected === i ? styles.selected : ''}
-            onClick={() => handleClickSuggestion(suggestion)}
-          >
-            #{getIdFromResourceUrl(suggestion.url)} {suggestion.name}
-          </li>
-        ))}
-      </ul>
+      <Suggestions
+        suggestions={suggestions}
+        suggestionSelected={suggestionSelected}
+        onClickSuggestion={handleClickSuggestion}
+      />
     </form>
   );
 };
