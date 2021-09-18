@@ -1,9 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router';
 import SearchBar from 'src/components/search-bar';
+import { NamedAPIResources } from 'src/models/named-api-resource';
+import { Pokemons } from 'src/models/pokemon';
 import styles from './autocomplete.module.scss';
 
-const Autocomplete = ({ dataToFilter }) => {
+interface Props {
+  dataToFilter?: Pokemons;
+}
+
+const Autocomplete = ({ dataToFilter }: Props) => {
   const history = useHistory();
   const [searchValue, setSearchValue] = useState('');
   const [suggestions, setSuggestions] = useState([]);
@@ -19,12 +25,16 @@ const Autocomplete = ({ dataToFilter }) => {
 
     if (value.length === 0) return reset();
 
-    const filteredData: string[] = dataToFilter.filter((item: string) =>
-      item.toLowerCase().includes(value.toLowerCase())
-    );
+    const filteredData = dataToFilter.filter(({ name, id }) => {
+      const nameLowercased = name.toLowerCase();
+      const valueLowercased = value.toLowerCase();
+
+      if (isNaN(+value)) return nameLowercased.includes(valueLowercased);
+
+      return id.toString().includes(value);
+    });
 
     setSuggestions(filteredData.slice(0, 4));
-
     setSearchValue(value);
     setSuggestionSelected(-1);
   };
@@ -74,7 +84,7 @@ const Autocomplete = ({ dataToFilter }) => {
             key={i}
             className={suggestionSelected === i ? styles.selected : ''}
           >
-            {suggestion}
+            #{suggestion.id} {suggestion.name}
           </li>
         ))}
       </ul>
