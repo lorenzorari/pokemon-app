@@ -11,7 +11,7 @@ import PokemonDetailsEvolutions from 'src/containers/pokemon/details/evolutions'
 import PokemonDetailsStats from 'src/containers/pokemon/details/stats';
 import SearchBar from 'src/components/search-bar';
 import PokemonDetails from 'src/containers/pokemon/details';
-import { getIdFromSpeciesResourceUrl } from 'src/helpers/get-id-from-species-resource-url';
+import { getIdFromResourceUrl } from 'src/helpers/get-id-from-resource-url';
 import { useClickOutside } from 'src/helpers/hooks/click-outside';
 import { ChainLink, ChainLinks } from 'src/models/evolution/chain';
 import { Pokemon } from 'src/models/pokemon';
@@ -70,7 +70,7 @@ const DetailsPage = () => {
 
   const createEvolution = (url, name) => {
     return {
-      id: getIdFromSpeciesResourceUrl(url),
+      id: getIdFromResourceUrl(url),
       name,
     };
   };

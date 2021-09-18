@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router';
 import SearchBar from 'src/components/search-bar';
-import { getIdFromSpeciesResourceUrl } from 'src/helpers/get-id-from-species-resource-url';
+import { getIdFromResourceUrl } from 'src/helpers/get-id-from-resource-url';
 import {
   NamedAPIResource,
   NamedAPIResources,
@@ -39,7 +39,7 @@ const Autocomplete = ({ dataToFilter, suggestionsSize = 4 }: Props) => {
 
       if (isNaN(+value)) return nameLowercased.includes(valueLowercased);
 
-      const id = getIdFromSpeciesResourceUrl(url);
+      const id = getIdFromResourceUrl(url);
 
       return id.toString().includes(value);
     });
@@ -81,7 +81,7 @@ const Autocomplete = ({ dataToFilter, suggestionsSize = 4 }: Props) => {
   };
 
   const handleClickSuggestion = (suggestion: NamedAPIResource) => {
-    const id = getIdFromSpeciesResourceUrl(suggestion.url);
+    const id = getIdFromResourceUrl(suggestion.url);
     navigateToDetails(id);
   };
 
@@ -103,7 +103,7 @@ const Autocomplete = ({ dataToFilter, suggestionsSize = 4 }: Props) => {
             className={suggestionSelected === i ? styles.selected : ''}
             onClick={() => handleClickSuggestion(suggestion)}
           >
-            #{getIdFromSpeciesResourceUrl(suggestion.url)} {suggestion.name}
+            #{getIdFromResourceUrl(suggestion.url)} {suggestion.name}
           </li>
         ))}
       </ul>
