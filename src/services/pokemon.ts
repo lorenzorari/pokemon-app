@@ -14,7 +14,15 @@ const getPokemon = async (pokemon: string): Promise<Pokemon> => {
   );
 };
 
-const getAllPokemons = async (url: string): Promise<PokemonPagination> => {
+const getAllPokemons = async (
+  offset: number = null,
+  limit: number = null,
+  url: string = INITIAL_URL
+): Promise<PokemonPagination> => {
+  if (offset || limit) {
+    url = INITIAL_URL + `?offset=${offset}&limit=${limit}`;
+  }
+
   return new Promise(resolve =>
     axios.get(url).then(({ data }) => resolve(data as PokemonPagination))
   );
