@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import SearchBar from 'src/components/search-bar';
 import styles from './autocomplete.module.scss';
@@ -7,31 +7,53 @@ const Autocomplete = ({ dataToFilter }) => {
   const history = useHistory();
   const [searchValue, setSearchValue] = useState('');
   const [suggestions, setSuggestions] = useState([]);
+  const [suggestionSelected, setSuggestionSelected] = useState<number>(-1);
+
+  const reset = () => {
+    setSuggestions([]);
+    setSearchValue('');
+  };
 
   const handleChangeSearch = (e: React.FormEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
 
-    if (value.length > 0) {
-      const filteredData: string[] = dataToFilter.filter((item: string) =>
-        item.toLowerCase().includes(value.toLowerCase())
-      );
+    if (value.length === 0) return reset();
 
-      setSuggestions(filteredData.slice(0, 4));
-    }
+    const filteredData: string[] = dataToFilter.filter((item: string) =>
+      item.toLowerCase().includes(value.toLowerCase())
+    );
+
+    setSuggestions(filteredData.slice(0, 4));
 
     setSearchValue(value);
+    setSuggestionSelected(-1);
   };
 
-  const search = async (value: string) => {
+  const handleSubmit = async (value: string) => {
     if (value === '') return;
 
     history.push(`/pokemon/${value}`);
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      search(searchValue);
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    switch (e.key) {
+      case 'ArrowDown':
+        if (suggestionSelected < suggestions.length - 1) {
+          e.preventDefault();
+          setSuggestionSelected(v => v + 1);
+        }
+        break;
+
+      case 'ArrowUp':
+        if (suggestionSelected >= 0) {
+          e.preventDefault();
+          setSuggestionSelected(v => v - 1);
+        }
+        break;
+
+      case 'Enter':
+        e.preventDefault();
+        handleSubmit(searchValue);
     }
   };
 
@@ -42,12 +64,18 @@ const Autocomplete = ({ dataToFilter }) => {
         className={styles['search-bar']}
         placeholder="Search a pokemon by name or id..."
         onChange={handleChangeSearch}
-        onKeyPress={handleKeyPress}
+        onKeyDown={handleKeyDown}
+        value={searchValue}
       />
 
       <ul className={styles['suggestion-list']}>
         {suggestions.map((suggestion, i) => (
-          <li key={i}>{suggestion}</li>
+          <li
+            key={i}
+            className={suggestionSelected === i ? styles.selected : ''}
+          >
+            {suggestion}
+          </li>
         ))}
       </ul>
     </form>
