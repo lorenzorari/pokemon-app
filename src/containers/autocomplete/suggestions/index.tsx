@@ -25,7 +25,7 @@ const Suggestions = ({
           className={suggestionSelected === i ? styles.selected : ''}
           onClick={() => onClickSuggestion(suggestion)}
         >
-          #{getIdFromResourceUrl(suggestion.url)} {suggestion.name}
+          {suggestion.name} <span>#{getIdFromResourceUrl(suggestion.url)}</span>
         </li>
       ))}
     </ul>

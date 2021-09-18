@@ -8,6 +8,8 @@
   list-style: none;
 
   li {
+    display: flex;
+    justify-content: space-between;
     padding: 0.5rem 1.2rem;
     text-transform: capitalize;
 
@@ -18,6 +20,10 @@
     &:last-child {
       border-bottom-left-radius: 0.625rem;
       border-bottom-right-radius: 0.625rem;
+    }
+
+    span {
+      font-weight: 700;
     }
   }
 }
