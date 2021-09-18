@@ -39,10 +39,17 @@ const Autocomplete = ({ dataToFilter }: Props) => {
     setSuggestionSelected(-1);
   };
 
+  const navigateToDetails = pokemonId => {
+    history.push(`/pokemon/${pokemonId}`);
+  };
+
   const handleSubmit = async (value: string) => {
     if (value === '') return;
 
-    history.push(`/pokemon/${value}`);
+    if (suggestionSelected !== -1)
+      return navigateToDetails(suggestions[suggestionSelected].name);
+
+    navigateToDetails(value);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -67,6 +74,10 @@ const Autocomplete = ({ dataToFilter }: Props) => {
     }
   };
 
+  const handleClickSuggestion = id => {
+    navigateToDetails(id);
+  };
+
   return (
     <form className={styles.form}>
       <SearchBar
@@ -83,6 +94,7 @@ const Autocomplete = ({ dataToFilter }: Props) => {
           <li
             key={i}
             className={suggestionSelected === i ? styles.selected : ''}
+            onClick={() => handleClickSuggestion(suggestion.id)}
           >
             #{suggestion.id} {suggestion.name}
           </li>
