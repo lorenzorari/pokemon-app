@@ -1,19 +1,27 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router';
 import SearchBar from 'src/components/search-bar';
-import { NamedAPIResources } from 'src/models/named-api-resource';
-import { Pokemons } from 'src/models/pokemon';
+import { getIdFromSpeciesResourceUrl } from 'src/helpers/get-id-from-species-resource-url';
+import {
+  NamedAPIResource,
+  NamedAPIResources,
+} from 'src/models/named-api-resource';
 import styles from './autocomplete.module.scss';
 
 interface Props {
-  dataToFilter?: Pokemons;
+  dataToFilter?: NamedAPIResources;
+  suggestionsSize: number;
 }
 
-const Autocomplete = ({ dataToFilter }: Props) => {
+const Autocomplete = ({ dataToFilter, suggestionsSize = 4 }: Props) => {
   const history = useHistory();
   const [searchValue, setSearchValue] = useState('');
-  const [suggestions, setSuggestions] = useState([]);
+  const [suggestions, setSuggestions] = useState<NamedAPIResources>([]);
   const [suggestionSelected, setSuggestionSelected] = useState<number>(-1);
+
+  const navigateToDetails = pokemonId => {
+    history.push(`/pokemon/${pokemonId}`);
+  };
 
   const reset = () => {
     setSuggestions([]);
@@ -25,22 +33,20 @@ const Autocomplete = ({ dataToFilter }: Props) => {
 
     if (value.length === 0) return reset();
 
-    const filteredData = dataToFilter.filter(({ name, id }) => {
+    const filteredData = dataToFilter.filter(({ name, url }) => {
       const nameLowercased = name.toLowerCase();
       const valueLowercased = value.toLowerCase();
 
       if (isNaN(+value)) return nameLowercased.includes(valueLowercased);
 
+      const id = getIdFromSpeciesResourceUrl(url);
+
       return id.toString().includes(value);
     });
 
-    setSuggestions(filteredData.slice(0, 4));
+    setSuggestions(filteredData.slice(0, suggestionsSize));
     setSearchValue(value);
     setSuggestionSelected(-1);
-  };
-
-  const navigateToDetails = pokemonId => {
-    history.push(`/pokemon/${pokemonId}`);
   };
 
   const handleSubmit = async (value: string) => {
@@ -74,7 +80,8 @@ const Autocomplete = ({ dataToFilter }: Props) => {
     }
   };
 
-  const handleClickSuggestion = id => {
+  const handleClickSuggestion = (suggestion: NamedAPIResource) => {
+    const id = getIdFromSpeciesResourceUrl(suggestion.url);
     navigateToDetails(id);
   };
 
@@ -94,9 +101,9 @@ const Autocomplete = ({ dataToFilter }: Props) => {
           <li
             key={i}
             className={suggestionSelected === i ? styles.selected : ''}
-            onClick={() => handleClickSuggestion(suggestion.id)}
+            onClick={() => handleClickSuggestion(suggestion)}
           >
-            #{suggestion.id} {suggestion.name}
+            #{getIdFromSpeciesResourceUrl(suggestion.url)} {suggestion.name}
           </li>
         ))}
       </ul>
