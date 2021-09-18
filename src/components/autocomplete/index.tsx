@@ -12,9 +12,11 @@ const Autocomplete = ({ dataToFilter }) => {
     const { value } = e.currentTarget;
 
     if (value.length > 0) {
-      const filteredData = dataToFilter.filter(item => item.includes(value));
+      const filteredData: string[] = dataToFilter.filter((item: string) =>
+        item.toLowerCase().includes(value.toLowerCase())
+      );
 
-      setSuggestions(filteredData);
+      setSuggestions(filteredData.slice(0, 4));
     }
 
     setSearchValue(value);
