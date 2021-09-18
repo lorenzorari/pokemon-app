@@ -10,7 +10,7 @@ import styles from './autocomplete.module.scss';
 
 interface Props {
   dataToFilter?: NamedAPIResources;
-  suggestionsSize: number;
+  suggestionsSize?: number;
 }
 
 const Autocomplete = ({ dataToFilter, suggestionsSize = 4 }: Props) => {
