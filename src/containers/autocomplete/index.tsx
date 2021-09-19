@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { forwardRef, MutableRefObject, useState } from 'react';
 import { useHistory } from 'react-router';
 import SearchBar from 'src/components/search-bar';
 import { getIdFromResourceUrl } from 'src/helpers/get-id-from-resource-url';
@@ -18,126 +18,130 @@ interface Props {
   placeholder?: string;
 }
 
-const Autocomplete = ({
-  dataToFilter,
-  suggestionsSize = 4,
-  className,
-  placeholder,
-}: Props) => {
-  const history = useHistory();
-  const [searchValue, setSearchValue] = useState('');
-  const [suggestions, setSuggestions] = useState<NamedAPIResources>([]);
-  const [suggestionSelected, setSuggestionSelected] = useState<number>(-1);
-  const [error, setError] = useState<string>('');
+const Autocomplete = forwardRef(
+  (
+    { dataToFilter, suggestionsSize = 4, className, placeholder }: Props,
+    ref?: MutableRefObject<any>
+  ) => {
+    const history = useHistory();
+    const [searchValue, setSearchValue] = useState('');
+    const [suggestions, setSuggestions] = useState<NamedAPIResources>([]);
+    const [suggestionSelected, setSuggestionSelected] = useState<number>(-1);
+    const [error, setError] = useState<string>('');
 
-  const navigateToDetails = (pokemonId: string | number) => {
-    history.push(`/pokemon/${pokemonId}`);
-  };
+    const navigateToDetails = (pokemonId: string | number) => {
+      history.push(`/pokemon/${pokemonId}`);
+    };
 
-  const reset = () => {
-    setSuggestions([]);
-    setSearchValue('');
-    setError('');
-  };
-
-  const isValueValidated = (value: string) => {
-    if (value === '') return false;
-
-    if (!suggestions.length) {
-      if (isNaN(+value)) setError(`${value} is not a Pokémon.`);
-      else
-        setError('No Pokémon has this id, please choose an id from 1 to 898.');
-
-      return false;
-    }
-
-    if (suggestions[0] !== value) {
+    const reset = () => {
       setSuggestions([]);
-      setError(`${value} is not a Pokémon`);
-      return false;
-    }
+      setSearchValue('');
+      setError('');
+    };
 
-    return true;
-  };
+    const isValueValidated = (value: string) => {
+      if (value === '') return false;
 
-  const handleChangeSearch = (e: React.FormEvent<HTMLInputElement>) => {
-    const { value } = e.currentTarget;
+      if (!suggestions.length) {
+        if (isNaN(+value)) setError(`${value} is not a Pokémon.`);
+        else
+          setError(
+            'No Pokémon has this id, please choose an id from 1 to 898.'
+          );
 
-    if (value.length === 0) return reset();
+        return false;
+      }
 
-    if (error) setError('');
+      if (suggestions[0] !== value) {
+        setSuggestions([]);
+        setError(`${value} is not a Pokémon`);
+        return false;
+      }
 
-    const filteredData = dataToFilter.filter(({ name, url }) => {
-      const nameLowercased = name.toLowerCase();
-      const valueLowercased = value.toLowerCase();
+      return true;
+    };
 
-      if (isNaN(+value)) return nameLowercased.includes(valueLowercased);
+    const handleChangeSearch = (e: React.FormEvent<HTMLInputElement>) => {
+      const { value } = e.currentTarget;
 
-      const id = getIdFromResourceUrl(url);
+      if (value.length === 0) return reset();
 
-      return id.toString().includes(value);
-    });
+      if (error) setError('');
 
-    setSuggestions(filteredData.slice(0, suggestionsSize));
-    setSearchValue(value);
-    setSuggestionSelected(-1);
-  };
+      const filteredData = dataToFilter.filter(({ name, url }) => {
+        const nameLowercased = name.toLowerCase();
+        const valueLowercased = value.toLowerCase();
 
-  const handleSubmit = async (value: string) => {
-    if (!isValueValidated(value)) return;
+        if (isNaN(+value)) return nameLowercased.includes(valueLowercased);
 
-    if (suggestionSelected !== -1)
-      return navigateToDetails(suggestions[suggestionSelected].name);
+        const id = getIdFromResourceUrl(url);
 
-    navigateToDetails(value);
-  };
+        return id.toString().includes(value);
+      });
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    switch (e.key) {
-      case 'ArrowDown':
-        if (suggestionSelected < suggestions.length - 1) {
+      setSuggestions(filteredData.slice(0, suggestionsSize));
+      setSearchValue(value);
+      setSuggestionSelected(-1);
+    };
+
+    const handleSubmit = async (value: string) => {
+      if (!isValueValidated(value)) return;
+
+      if (suggestionSelected !== -1)
+        return navigateToDetails(suggestions[suggestionSelected].name);
+
+      navigateToDetails(value);
+    };
+
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+      switch (e.key) {
+        case 'ArrowDown':
+          if (suggestionSelected < suggestions.length - 1) {
+            e.preventDefault();
+            setSuggestionSelected(v => v + 1);
+          }
+          break;
+
+        case 'ArrowUp':
+          if (suggestionSelected >= 0) {
+            e.preventDefault();
+            setSuggestionSelected(v => v - 1);
+          }
+          break;
+
+        case 'Enter':
           e.preventDefault();
-          setSuggestionSelected(v => v + 1);
-        }
-        break;
+          handleSubmit(searchValue);
+      }
+    };
 
-      case 'ArrowUp':
-        if (suggestionSelected >= 0) {
-          e.preventDefault();
-          setSuggestionSelected(v => v - 1);
-        }
-        break;
+    const handleClickSuggestion = (suggestion: NamedAPIResource) => {
+      const id = getIdFromResourceUrl(suggestion.url);
+      navigateToDetails(id);
+    };
 
-      case 'Enter':
-        e.preventDefault();
-        handleSubmit(searchValue);
-    }
-  };
+    return (
+      <form ref={ref} className={classNames(styles.form, className)}>
+        <SearchBar
+          type="text"
+          placeholder={placeholder}
+          onChange={handleChangeSearch}
+          onKeyDown={handleKeyDown}
+          value={searchValue}
+        />
 
-  const handleClickSuggestion = (suggestion: NamedAPIResource) => {
-    const id = getIdFromResourceUrl(suggestion.url);
-    navigateToDetails(id);
-  };
+        <Suggestions
+          suggestions={suggestions}
+          suggestionSelected={suggestionSelected}
+          onClickSuggestion={handleClickSuggestion}
+        />
 
-  return (
-    <form className={classNames(styles.form, className)}>
-      <SearchBar
-        type="text"
-        placeholder={placeholder}
-        onChange={handleChangeSearch}
-        onKeyDown={handleKeyDown}
-        value={searchValue}
-      />
+        <AutocompleteError error={error} src="/assets/svg/cross.svg" />
+      </form>
+    );
+  }
+);
 
-      <Suggestions
-        suggestions={suggestions}
-        suggestionSelected={suggestionSelected}
-        onClickSuggestion={handleClickSuggestion}
-      />
-
-      <AutocompleteError error={error} src="/assets/svg/cross.svg" />
-    </form>
-  );
-};
+Autocomplete.displayName = 'Autocomplete';
 
 export default Autocomplete;
