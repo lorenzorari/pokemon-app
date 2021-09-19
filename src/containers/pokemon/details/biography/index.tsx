@@ -64,7 +64,7 @@ const PokemonDetailsBiography = ({ pokemon, species }: Props) => {
           {getAnthropometry(pokemon.weight)} kg
         </PokemonInformation>
 
-        <PokemonInformation title="Abilities">content</PokemonInformation>
+        {/* <PokemonInformation title="Abilities">content</PokemonInformation> */}
 
         <PokemonInformation title="Gender">{getGender()}</PokemonInformation>
       </ul>
