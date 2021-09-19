@@ -20,6 +20,7 @@ import { getEvolutionChain } from 'src/services/evolution-chain';
 import { getPokemon } from 'src/services/pokemon';
 import { getSpecies } from 'src/services/species';
 import styles from './details.module.scss';
+import Autocomplete from 'src/containers/autocomplete';
 
 interface Params {
   id: string;
@@ -185,7 +186,7 @@ const DetailsPage = () => {
           </section>
 
           <Modal className={styles['search-modal']} isOpen={isSearchModalOpen}>
-            <SearchBar
+            {/* <SearchBar
               ref={searchModalRef}
               className={styles.search}
               type="text"
@@ -193,7 +194,8 @@ const DetailsPage = () => {
               onChange={handlePokemonSearch}
               onKeyPress={handleKeyPress}
               value={searchValue}
-            />
+            /> */}
+            <Autocomplete ref={searchModalRef} />
           </Modal>
 
           <section className={styles.details}>
