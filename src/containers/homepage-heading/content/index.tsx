@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { useHistory } from 'react-router';
+import React from 'react';
 import Autocomplete from 'src/containers/autocomplete';
 import HomepageHeadingContentHeading from 'src/containers/homepage-heading/content/heading';
 import { NamedAPIResources } from 'src/models/named-api-resource';
