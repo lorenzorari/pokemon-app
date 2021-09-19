@@ -123,7 +123,6 @@ const Autocomplete = ({
     <form className={classNames(styles.form, className)}>
       <SearchBar
         type="text"
-        className={styles['search-bar']}
         placeholder={placeholder}
         onChange={handleChangeSearch}
         onKeyDown={handleKeyDown}
