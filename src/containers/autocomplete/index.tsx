@@ -8,6 +8,7 @@ import {
   NamedAPIResources,
 } from 'src/models/named-api-resource';
 import styles from './autocomplete.module.scss';
+import AutocompleteError from './error';
 import Suggestions from './suggestions';
 
 interface Props {
@@ -128,14 +129,7 @@ const Autocomplete = ({ dataToFilter, suggestionsSize = 4 }: Props) => {
         onClickSuggestion={handleClickSuggestion}
       />
 
-      {error && (
-        <div className={styles.error}>
-          {error}
-          <span>
-            <ReactSVG className={styles.icon} src="/assets/svg/cross.svg" />
-          </span>
-        </div>
-      )}
+      <AutocompleteError error={error} src="/assets/svg/cross.svg" />
     </form>
   );
 };
