@@ -53,7 +53,10 @@ const Autocomplete = forwardRef(
         return false;
       }
 
-      if (suggestionSelected === -1 && suggestions[0] !== value) {
+      const { name, url } = suggestions[0];
+      const id = getIdFromResourceUrl(url).toString();
+
+      if (suggestionSelected === -1 && name !== value && id !== value) {
         setSuggestions([]);
         setError(`${value} is not a Pokémon`);
         return false;
