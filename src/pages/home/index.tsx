@@ -1,37 +1,36 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import { ReactSVG } from 'react-svg';
 import { Main } from 'react-tsparticles';
-import HomepageHeadingContainer from '../../components/homepage-heading-container';
-import InfiniteScroll from '../../components/infinite-scroll';
-import Loading from '../../components/loading';
-import PokemonCard from '../../components/pokemon/card';
-import tsparticlesOptions from '../../data/tsparticlesOptions';
-import { NamedAPIResources } from '../../models/named-api-resource';
-import { Pokemons } from '../../models/pokemon';
-import { getAllPokemons, getPokemon } from '../../services/pokemon';
+import Loading from 'src/components/loading';
+import { POKEMON_QUANTITY } from 'src/constants';
+import HomepageHeadingContainer from 'src/containers/homepage-heading';
+import PokemonList from 'src/containers/pokemon/list';
+import tsparticlesOptions from 'src/data/tsparticlesOptions';
+import { NamedAPIResources } from 'src/models/named-api-resource';
+import { Pokemons } from 'src/models/pokemon';
+import { getAllPokemons, getPokemon } from 'src/services/pokemon';
 import styles from './home.module.scss';
 
-const Home = () => {
-  const INITIAL_URL = 'https://pokeapi.co/api/v2/pokemon';
-  const history = useHistory();
+const HomePage = () => {
+  const POKEMON_FETCH_LIMIT = 20;
+
   const [pokemons, setPokemons] = useState<Pokemons>([]);
   const [nextPageUrl, setNextPageUrl] = useState<string>(null);
-  const [page, setPage] = useState<number>(1);
+  const [allPokemonResources, setAllPokemonResources] =
+    useState<NamedAPIResources>([]);
 
   const [isLoadingMorePokemon, setIsLoadingMorePokemon] = useState(false);
   const [areParticlesLoading, setAreParticlesLoading] = useState(true);
   const [isLoadingPokemon, setIsLoadingPokemon] = useState<boolean>(true);
   const isPageLoading: boolean = isLoadingPokemon || areParticlesLoading;
 
-  const loaderRef = useRef(null);
   const cardsRef = useRef(null);
 
   useEffect(() => {
     const init = async () => {
-      const { results, next } = await getAllPokemons(INITIAL_URL);
-      setNextPageUrl(next);
-      await loadPokemons(results);
+      const { results } = await getAllPokemons(null, POKEMON_QUANTITY);
+      await loadPokemons(results.slice(0, POKEMON_FETCH_LIMIT));
+      setNextPageUrl('https://pokeapi.co/api/v2/pokemon?offset=20&limit=20');
+      setAllPokemonResources(results);
       setIsLoadingPokemon(false);
     };
 
@@ -48,22 +47,9 @@ const Home = () => {
 
   const handleMorePokemon = async () => {
     if (nextPageUrl) {
-      const { results, next } = await getAllPokemons(nextPageUrl);
+      const { results, next } = await getAllPokemons(null, null, nextPageUrl);
       setNextPageUrl(next);
       await loadPokemons(results);
-    }
-  };
-
-  const handleClickCard = (id: number) => {
-    history.push(`/pokemon/${id}`);
-  };
-
-  const handleObserver: IntersectionObserverCallback = (entries, observer) => {
-    if (entries[0].isIntersecting && !isLoadingMorePokemon) {
-      observer.unobserve(entries[0].target);
-
-      setIsLoadingMorePokemon(true);
-      setPage(page => page + 1);
     }
   };
 
@@ -79,40 +65,25 @@ const Home = () => {
   };
 
   return (
-    <main>
+    <main className={styles.main}>
       <HomepageHeadingContainer
+        heading="Pocketex"
+        githubHref="https://github.com/lorenzorari/pocketex"
+        githubImageSrc="/assets/svg/github.svg"
         scrollToRef={cardsRef}
         initParticles={initParticles}
         areParticlesLoading={isPageLoading}
+        dataToFilter={allPokemonResources}
       />
 
       {!isPageLoading && pokemons.length ? (
         <section ref={cardsRef}>
-          <InfiniteScroll
-            observerCallback={handleObserver}
+          <PokemonList
+            pokemons={pokemons}
             loadMore={loadMore}
-            page={page}
-            ref={loaderRef}
-            loaderElement={
-              <div ref={loaderRef}>
-                <Loading
-                  className={styles['more-pokemons-loader']}
-                  src="/assets/svg/logo.svg"
-                />
-              </div>
-            }
-          >
-            <div className={styles['pokemons-container']}>
-              {pokemons.map(pokemon => (
-                <PokemonCard
-                  key={pokemon.id}
-                  className={styles.card}
-                  onClick={() => handleClickCard(pokemon.id)}
-                  pokemon={pokemon}
-                />
-              ))}
-            </div>
-          </InfiniteScroll>
+            isLoadingMorePokemon={isLoadingMorePokemon}
+            setIsLoadingMorePokemon={setIsLoadingMorePokemon}
+          />
         </section>
       ) : (
         <section className={styles['loading-container']}>
@@ -123,4 +94,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomePage;

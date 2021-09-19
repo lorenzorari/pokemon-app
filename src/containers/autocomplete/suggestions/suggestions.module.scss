@@ -1,0 +1,33 @@
+.suggestions {
+  position: absolute;
+  inset: 1.6rem 0 auto;
+  padding: 0;
+  background-color: var(--color-white);
+  border-bottom-left-radius: 0.625rem;
+  border-bottom-right-radius: 0.625rem;
+  list-style: none;
+
+  li {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 1.2rem;
+    text-transform: capitalize;
+
+    &:hover {
+      background-color: hsl(0, 0, 90%);
+    }
+
+    &:last-child {
+      border-bottom-left-radius: 0.625rem;
+      border-bottom-right-radius: 0.625rem;
+    }
+
+    span {
+      font-weight: 700;
+    }
+  }
+}
+
+.selected {
+  background-color: hsl(0, 0, 90%);
+}

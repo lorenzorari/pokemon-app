@@ -1,20 +1,16 @@
 import React from 'react';
-import {
-  BrowserRouter as Router,
-  Redirect,
-  Route,
-  Switch,
-} from 'react-router-dom';
-import Home from '../../pages/home';
-import PokemonDetails from '../../pages/pokemon-details';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import HomePage from 'src/pages/home';
+import DetailsPage from 'src/pages/details';
+import NotFoundPage from 'src/pages/404';
 
 function App() {
   return (
     <Router>
       <Switch>
-        <Route exact path="/pokemon/:id" component={PokemonDetails} />
-        <Route exact path="/" component={Home} />
-        <Redirect from="*" to="/" />
+        <Route exact path="/pokemon/:id" component={DetailsPage} />
+        <Route exact path="/" component={HomePage} />
+        <Route path="*" component={NotFoundPage} />
       </Switch>
     </Router>
   );
