@@ -15,7 +15,10 @@ const HomepageHeadingContent = ({ heading, dataToFilter }: Props) => {
     <div className={styles['content']}>
       <HomepageHeadingContentHeading value={heading} />
 
-      <Autocomplete dataToFilter={dataToFilter} />
+      <Autocomplete
+        dataToFilter={dataToFilter}
+        placeholder="Search a pokemon by name or id..."
+      />
     </div>
   );
 };
