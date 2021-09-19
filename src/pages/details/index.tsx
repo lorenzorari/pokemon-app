@@ -1,3 +1,4 @@
+import { AxiosError } from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router';
 import { useHistory } from 'react-router-dom';
@@ -78,11 +79,17 @@ const DetailsPage = () => {
     const initPokemon = async () => {
       setIsSearchModalOpen(false);
       setIsLoadingPokemon(true);
-      const pokemonData = await getPokemon(id);
-      const speciesData = await getSpecies(pokemonData);
 
-      setPokemon(pokemonData);
-      setSpecies(speciesData);
+      try {
+        const pokemonData: any = await getPokemon(id);
+        const speciesData = await getSpecies(pokemonData);
+
+        setPokemon(pokemonData);
+        setSpecies(speciesData);
+      } catch (err) {
+        history.push('/');
+      }
+
       setIsLoadingPokemon(false);
     };
 
