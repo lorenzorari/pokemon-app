@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router';
-import { ReactSVG } from 'react-svg';
 import SearchBar from 'src/components/search-bar';
 import { getIdFromResourceUrl } from 'src/helpers/get-id-from-resource-url';
 import {
   NamedAPIResource,
   NamedAPIResources,
 } from 'src/models/named-api-resource';
-import styles from './autocomplete.module.scss';
 import AutocompleteError from './error';
 import Suggestions from './suggestions';
+import styles from './autocomplete.module.scss';
 
 interface Props {
   dataToFilter?: NamedAPIResources;
