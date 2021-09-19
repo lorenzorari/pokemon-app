@@ -52,7 +52,7 @@ const Autocomplete = forwardRef(
         return false;
       }
 
-      if (suggestions[0] !== value) {
+      if (suggestionSelected === -1 && suggestions[0] !== value) {
         setSuggestions([]);
         setError(`${value} is not a Pokémon`);
         return false;
@@ -121,8 +121,9 @@ const Autocomplete = forwardRef(
     };
 
     return (
-      <form ref={ref} className={classNames(styles.form, className)}>
+      <form className={classNames(styles.form, className)}>
         <SearchBar
+          ref={ref}
           type="text"
           placeholder={placeholder}
           onChange={handleChangeSearch}
