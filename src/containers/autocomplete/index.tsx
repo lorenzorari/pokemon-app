@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router';
+import { ReactSVG } from 'react-svg';
 import SearchBar from 'src/components/search-bar';
 import { getIdFromResourceUrl } from 'src/helpers/get-id-from-resource-url';
 import {
@@ -19,6 +20,7 @@ const Autocomplete = ({ dataToFilter, suggestionsSize = 4 }: Props) => {
   const [searchValue, setSearchValue] = useState('');
   const [suggestions, setSuggestions] = useState<NamedAPIResources>([]);
   const [suggestionSelected, setSuggestionSelected] = useState<number>(-1);
+  const [error, setError] = useState<string>('');
 
   const navigateToDetails = pokemonId => {
     history.push(`/pokemon/${pokemonId}`);
@@ -27,12 +29,35 @@ const Autocomplete = ({ dataToFilter, suggestionsSize = 4 }: Props) => {
   const reset = () => {
     setSuggestions([]);
     setSearchValue('');
+    setError('');
+  };
+
+  const isValueValidated = (value: string) => {
+    if (value === '') return false;
+
+    if (!suggestions.length) {
+      if (isNaN(+value)) setError(`${value} is not a Pokémon.`);
+      else
+        setError('No Pokémon has this id, please choose an id from 1 to 898.');
+
+      return false;
+    }
+
+    if (suggestions[0] !== value) {
+      setSuggestions([]);
+      setError(`${value} is not a Pokémon`);
+      return false;
+    }
+
+    return true;
   };
 
   const handleChangeSearch = (e: React.FormEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
 
     if (value.length === 0) return reset();
+
+    if (error) setError('');
 
     const filteredData = dataToFilter.filter(({ name, url }) => {
       const nameLowercased = name.toLowerCase();
@@ -51,7 +76,7 @@ const Autocomplete = ({ dataToFilter, suggestionsSize = 4 }: Props) => {
   };
 
   const handleSubmit = async (value: string) => {
-    if (value === '') return;
+    if (!isValueValidated(value)) return;
 
     if (suggestionSelected !== -1)
       return navigateToDetails(suggestions[suggestionSelected].name);
@@ -102,6 +127,15 @@ const Autocomplete = ({ dataToFilter, suggestionsSize = 4 }: Props) => {
         suggestionSelected={suggestionSelected}
         onClickSuggestion={handleClickSuggestion}
       />
+
+      {error && (
+        <div className={styles.error}>
+          {error}
+          <span>
+            <ReactSVG className={styles.icon} src="/assets/svg/cross.svg" />
+          </span>
+        </div>
+      )}
     </form>
   );
 };
