@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Main } from 'react-tsparticles';
 import Loading from 'src/components/loading';
+import { POKEMON_QUANTITY } from 'src/constants';
 import HomepageHeadingContainer from 'src/containers/homepage-heading';
 import PokemonList from 'src/containers/pokemon/list';
 import tsparticlesOptions from 'src/data/tsparticlesOptions';
@@ -10,7 +11,6 @@ import { getAllPokemons, getPokemon } from 'src/services/pokemon';
 import styles from './home.module.scss';
 
 const HomePage = () => {
-  const POKEMON_QUANTITY = 898;
   const POKEMON_FETCH_LIMIT = 20;
 
   const [pokemons, setPokemons] = useState<Pokemons>([]);

@@ -1,6 +1,8 @@
+import classNames from 'classnames';
 import React, { forwardRef, MutableRefObject, useState } from 'react';
 import { useHistory } from 'react-router';
 import SearchBar from 'src/components/search-bar';
+import { POKEMON_QUANTITY } from 'src/constants';
 import { getIdFromResourceUrl } from 'src/helpers/get-id-from-resource-url';
 import {
   NamedAPIResource,
@@ -9,7 +11,6 @@ import {
 import AutocompleteError from './error';
 import Suggestions from './suggestions';
 import styles from './autocomplete.module.scss';
-import classNames from 'classnames';
 
 interface Props {
   dataToFilter?: NamedAPIResources;
@@ -46,7 +47,7 @@ const Autocomplete = forwardRef(
         if (isNaN(+value)) setError(`${value} is not a Pokémon.`);
         else
           setError(
-            'No Pokémon has this id, please choose an id from 1 to 898.'
+            `No Pokémon has this id, please choose an id from 1 to ${POKEMON_QUANTITY}.`
           );
 
         return false;

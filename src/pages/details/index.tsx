@@ -5,6 +5,7 @@ import { ReactSVG } from 'react-svg';
 import Button from 'src/components/button';
 import Loading from 'src/components/loading';
 import Modal from 'src/components/modal';
+import { POKEMON_QUANTITY } from 'src/constants';
 import Autocomplete from 'src/containers/autocomplete';
 import PokemonCard from 'src/containers/pokemon/card';
 import PokemonDetails from 'src/containers/pokemon/details';
@@ -64,7 +65,7 @@ const DetailsPage = () => {
 
   useEffect(() => {
     const initAllPokemonResources = async () => {
-      const { results } = await getAllPokemons(null, 898);
+      const { results } = await getAllPokemons(null, POKEMON_QUANTITY);
 
       setAllPokemonResources(results);
       setIsLoadingResources(false);
