@@ -14,7 +14,7 @@ const Button = ({ children, className, theme = 'default', onClick }: Props) => {
   return (
     <>
       {theme === 'default' ? (
-        <button className={className} onClick={onClick}>
+        <button className={classNames(styles.btn, className)} onClick={onClick}>
           {children}
         </button>
       ) : (

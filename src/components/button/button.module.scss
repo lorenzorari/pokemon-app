@@ -1,3 +1,13 @@
+.btn {
+  padding: 0.5rem 1rem;
+
+  transition: background-color 0.1s ease;
+
+  border: 0.2rem solid transparent;
+  border-radius: 0.625rem;
+  cursor: pointer;
+}
+
 .btn-back {
   display: flex;
   background: none;
