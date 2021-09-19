@@ -38,9 +38,13 @@ const DetailsPage = () => {
   const [allPokemonResources, setAllPokemonResources] =
     useState<NamedAPIResources>([]);
   const [pokemonEvolutions, setPokemonEvolutions] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
   const [isSearchModalOpen, setIsSearchModalOpen] = useState<boolean>(false);
-  const [searchValue, setSearchValue] = useState('');
+
+  const [isLoadingPokemon, setIsLoadingPokemon] = useState<boolean>(true);
+  const [isLoadingResources, setIsLoadingResources] = useState<boolean>(true);
+  const [isLoadingEvolutions, setIsLoadingEvolutions] = useState<boolean>(true);
+  const isLoading: boolean =
+    isLoadingPokemon || isLoadingResources || isLoadingEvolutions;
 
   const searchModalRef = useRef(null);
 
@@ -59,26 +63,39 @@ const DetailsPage = () => {
   useClickOutside(searchModalRef, () => setIsSearchModalOpen(false));
 
   useEffect(() => {
-    const init = async () => {
-      const pokemonData = await getPokemon(id);
-      const speciesData = await getSpecies(pokemonData);
+    const initAllPokemonResources = async () => {
       const { results } = await getAllPokemons(null, 898);
 
       setAllPokemonResources(results);
-      setPokemon(pokemonData);
-      setSpecies(speciesData);
-      setIsLoading(false);
+      setIsLoadingResources(false);
     };
 
-    init();
+    initAllPokemonResources();
+  }, []);
+
+  useEffect(() => {
+    const initPokemon = async () => {
+      setIsSearchModalOpen(false);
+      setIsLoadingPokemon(true);
+      const pokemonData = await getPokemon(id);
+      const speciesData = await getSpecies(pokemonData);
+
+      setPokemon(pokemonData);
+      setSpecies(speciesData);
+      setIsLoadingPokemon(false);
+    };
+
+    initPokemon();
   }, [id]);
 
   useEffect(() => {
     const initEvolutions = async () => {
+      setIsLoadingEvolutions(true);
       const { chain } = await getEvolutionChain(species);
       const evolutions = getPokemonEvolutions(chain);
 
       setPokemonEvolutions(evolutions);
+      setIsLoadingEvolutions(false);
     };
 
     species && initEvolutions();
