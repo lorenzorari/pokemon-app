@@ -5,19 +5,20 @@ import { ReactSVG } from 'react-svg';
 import Button from 'src/components/button';
 import Loading from 'src/components/loading';
 import Modal from 'src/components/modal';
+import Autocomplete from 'src/containers/autocomplete';
 import PokemonCard from 'src/containers/pokemon/card';
+import PokemonDetails from 'src/containers/pokemon/details';
 import PokemonDetailsBiography from 'src/containers/pokemon/details/biography';
 import PokemonDetailsEvolutions from 'src/containers/pokemon/details/evolutions';
 import PokemonDetailsStats from 'src/containers/pokemon/details/stats';
-import SearchBar from 'src/components/search-bar';
-import PokemonDetails from 'src/containers/pokemon/details';
-import { getIdFromSpeciesResourceUrl } from 'src/helpers/get-id-from-species-resource-url';
+import { getIdFromResourceUrl } from 'src/helpers/get-id-from-resource-url';
 import { useClickOutside } from 'src/helpers/hooks/click-outside';
 import { ChainLink, ChainLinks } from 'src/models/evolution/chain';
+import { NamedAPIResources } from 'src/models/named-api-resource';
 import { Pokemon } from 'src/models/pokemon';
 import { Species } from 'src/models/species';
 import { getEvolutionChain } from 'src/services/evolution-chain';
-import { getPokemon } from 'src/services/pokemon';
+import { getAllPokemons, getPokemon } from 'src/services/pokemon';
 import { getSpecies } from 'src/services/species';
 import styles from './details.module.scss';
 
@@ -34,10 +35,16 @@ const DetailsPage = () => {
   const history = useHistory();
   const [pokemon, setPokemon] = useState<Pokemon>(null);
   const [species, setSpecies] = useState<Species>(null);
+  const [allPokemonResources, setAllPokemonResources] =
+    useState<NamedAPIResources>([]);
   const [pokemonEvolutions, setPokemonEvolutions] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
   const [isSearchModalOpen, setIsSearchModalOpen] = useState<boolean>(false);
-  const [searchValue, setSearchValue] = useState('');
+
+  const [isLoadingPokemon, setIsLoadingPokemon] = useState<boolean>(true);
+  const [isLoadingResources, setIsLoadingResources] = useState<boolean>(true);
+  const [isLoadingEvolutions, setIsLoadingEvolutions] = useState<boolean>(true);
+  const isLoading: boolean =
+    isLoadingPokemon || isLoadingResources || isLoadingEvolutions;
 
   const searchModalRef = useRef(null);
 
@@ -56,21 +63,47 @@ const DetailsPage = () => {
   useClickOutside(searchModalRef, () => setIsSearchModalOpen(false));
 
   useEffect(() => {
-    const init = async () => {
+    const initAllPokemonResources = async () => {
+      const { results } = await getAllPokemons(null, 898);
+
+      setAllPokemonResources(results);
+      setIsLoadingResources(false);
+    };
+
+    initAllPokemonResources();
+  }, []);
+
+  useEffect(() => {
+    const initPokemon = async () => {
+      setIsSearchModalOpen(false);
+      setIsLoadingPokemon(true);
       const pokemonData = await getPokemon(id);
       const speciesData = await getSpecies(pokemonData);
 
       setPokemon(pokemonData);
       setSpecies(speciesData);
-      setIsLoading(false);
+      setIsLoadingPokemon(false);
     };
 
-    init();
+    initPokemon();
   }, [id]);
+
+  useEffect(() => {
+    const initEvolutions = async () => {
+      setIsLoadingEvolutions(true);
+      const { chain } = await getEvolutionChain(species);
+      const evolutions = getPokemonEvolutions(chain);
+
+      setPokemonEvolutions(evolutions);
+      setIsLoadingEvolutions(false);
+    };
+
+    species && initEvolutions();
+  }, [species]);
 
   const createEvolution = (url, name) => {
     return {
-      id: getIdFromSpeciesResourceUrl(url),
+      id: getIdFromResourceUrl(url),
       name,
     };
   };
@@ -121,17 +154,6 @@ const DetailsPage = () => {
     return null;
   };
 
-  useEffect(() => {
-    const init = async () => {
-      const { chain } = await getEvolutionChain(species);
-      const evolutions = getPokemonEvolutions(chain);
-
-      setPokemonEvolutions(evolutions);
-    };
-
-    species && init();
-  }, [species]);
-
   const handleBackButton = () => {
     history.push('/');
   };
@@ -139,25 +161,6 @@ const DetailsPage = () => {
   const handleSearchIcon = e => {
     e.stopPropagation();
     setIsSearchModalOpen(true);
-  };
-
-  const handlePokemonSearch = (e: React.FormEvent<HTMLInputElement>) => {
-    setSearchValue(e.currentTarget.value);
-  };
-
-  const searchPokemon = async (value: string) => {
-    if (value === '') return;
-
-    history.push(`/pokemon/${value}`);
-  };
-
-  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      searchPokemon(searchValue);
-      setIsSearchModalOpen(false);
-      setSearchValue('');
-    }
   };
 
   return (
@@ -185,14 +188,12 @@ const DetailsPage = () => {
           </section>
 
           <Modal className={styles['search-modal']} isOpen={isSearchModalOpen}>
-            <SearchBar
+            <Autocomplete
               ref={searchModalRef}
-              className={styles.search}
-              type="text"
+              className={styles.autocomplete}
               placeholder="Search a pokemon by name or id..."
-              onChange={handlePokemonSearch}
-              onKeyPress={handleKeyPress}
-              value={searchValue}
+              suggestionsSize={10}
+              dataToFilter={allPokemonResources}
             />
           </Modal>
 

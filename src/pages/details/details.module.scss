@@ -61,7 +61,6 @@
 .search-modal {
   display: flex;
   justify-content: center;
-  align-items: center;
 
   height: 100%;
   width: 100%;
@@ -71,7 +70,8 @@
   opacity: 0;
   background-color: hsla(0, 0%, 0%, 0.9);
 
-  .search {
+  .autocomplete {
+    margin: 4rem 1rem 0;
     width: 60rem;
   }
 }

@@ -14,6 +14,7 @@ interface Props {
   value?: string;
   onChange?: ChangeEventHandler<any>;
   onKeyPress?: KeyboardEventHandler<any>;
+  onKeyDown?: KeyboardEventHandler<any>;
 }
 
 const SearchBar = forwardRef((props: Props, ref?: MutableRefObject<any>) => {
@@ -27,6 +28,7 @@ const SearchBar = forwardRef((props: Props, ref?: MutableRefObject<any>) => {
         placeholder={props.placeholder}
         onChange={props.onChange}
         onKeyPress={props.onKeyPress}
+        onKeyDown={props.onKeyDown}
         value={props.value}
       />
 

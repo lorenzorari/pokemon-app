@@ -5,11 +5,13 @@ import ScrollIcon from 'src/containers/homepage-heading/scroll-icon';
 import HomepageHeadingContent from 'src/containers/homepage-heading/content';
 import HomepageHeadingGithubLink from 'src/containers/homepage-heading/github-link';
 import styles from './homepage-heading.module.scss';
+import { NamedAPIResources } from 'src/models/named-api-resource';
 
 interface Props {
   heading: string;
   githubHref: string;
   githubImageSrc: string;
+  dataToFilter?: NamedAPIResources;
   scrollToRef?: React.MutableRefObject<any>;
   areParticlesLoading?: boolean;
   initParticles?: (tsParticles: Main) => void;
@@ -34,7 +36,10 @@ const HomepageHeadingContainer = (props: Props) => {
         options={particlesOptions}
       />
 
-      <HomepageHeadingContent heading={props.heading} />
+      <HomepageHeadingContent
+        heading={props.heading}
+        dataToFilter={props.dataToFilter}
+      />
 
       <HomepageHeadingGithubLink
         className={styles['github-link']}
