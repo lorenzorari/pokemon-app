@@ -30,7 +30,7 @@ const Autocomplete = ({
   const [suggestionSelected, setSuggestionSelected] = useState<number>(-1);
   const [error, setError] = useState<string>('');
 
-  const navigateToDetails = pokemonId => {
+  const navigateToDetails = (pokemonId: string | number) => {
     history.push(`/pokemon/${pokemonId}`);
   };
 
