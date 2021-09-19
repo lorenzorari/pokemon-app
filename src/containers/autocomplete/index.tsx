@@ -15,12 +15,14 @@ interface Props {
   dataToFilter?: NamedAPIResources;
   suggestionsSize?: number;
   className?: string;
+  placeholder?: string;
 }
 
 const Autocomplete = ({
   dataToFilter,
   suggestionsSize = 4,
   className,
+  placeholder,
 }: Props) => {
   const history = useHistory();
   const [searchValue, setSearchValue] = useState('');
@@ -122,7 +124,7 @@ const Autocomplete = ({
       <SearchBar
         type="text"
         className={styles['search-bar']}
-        placeholder="Search a pokemon by name or id..."
+        placeholder={placeholder}
         onChange={handleChangeSearch}
         onKeyDown={handleKeyDown}
         value={searchValue}
