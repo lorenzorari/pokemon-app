@@ -9,13 +9,19 @@ import {
 import AutocompleteError from './error';
 import Suggestions from './suggestions';
 import styles from './autocomplete.module.scss';
+import classNames from 'classnames';
 
 interface Props {
   dataToFilter?: NamedAPIResources;
   suggestionsSize?: number;
+  className?: string;
 }
 
-const Autocomplete = ({ dataToFilter, suggestionsSize = 4 }: Props) => {
+const Autocomplete = ({
+  dataToFilter,
+  suggestionsSize = 4,
+  className,
+}: Props) => {
   const history = useHistory();
   const [searchValue, setSearchValue] = useState('');
   const [suggestions, setSuggestions] = useState<NamedAPIResources>([]);
@@ -112,7 +118,7 @@ const Autocomplete = ({ dataToFilter, suggestionsSize = 4 }: Props) => {
   };
 
   return (
-    <form className={styles.form}>
+    <form className={classNames(styles.form, className)}>
       <SearchBar
         type="text"
         className={styles['search-bar']}
