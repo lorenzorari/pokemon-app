@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { Pokemon } from '../models/pokemon';
-import { PokemonPagination } from './../models/pokemon/pagination';
-import { convertUnderscoreToCamelcase } from '../helpers/utils/convert-underscore-to-camelcase';
+import { convertUnderscoreToCamelcase } from 'src/helpers/utils/convert-underscore-to-camelcase';
+import { Pokemon } from 'src/models/pokemon';
+import { PokemonPagination } from 'src/models/pokemon/pagination';
 
 const INITIAL_URL = 'https://pokeapi.co/api/v2/pokemon';
 
@@ -24,9 +24,7 @@ const getAllPokemons = async (
     url = INITIAL_URL + `?offset=${offset}&limit=${limit}`;
   }
 
-  return new Promise(resolve =>
-    axios.get(url).then(({ data }) => resolve(data as PokemonPagination))
-  );
+  return axios.get(url).then(({ data }) => data as PokemonPagination);
 };
 
 export { getPokemon, getAllPokemons };
