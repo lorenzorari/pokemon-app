@@ -1,17 +1,15 @@
 import axios from 'axios';
-import { EvolutionChain } from './../models/evolution/chain';
-import { Species } from './../models/species/index';
-import { convertUnderscoreToCamelcase } from '../helpers/utils/convert-underscore-to-camelcase';
+import { convertUnderscoreToCamelcase } from 'src/helpers/utils/convert-underscore-to-camelcase';
+import { EvolutionChain } from 'src/models/evolution/chain';
+import { Species } from 'src/models/species/index';
 
 const getEvolutionChain = async ({
   evolutionChain,
 }: Species): Promise<EvolutionChain> => {
-  return new Promise(resolve =>
-    axios.get(evolutionChain.url).then(res => {
-      const data = convertUnderscoreToCamelcase(res.data);
-      return resolve(data as EvolutionChain);
-    })
-  );
+  return axios.get(evolutionChain.url).then(res => {
+    const data = convertUnderscoreToCamelcase(res.data);
+    return data as EvolutionChain;
+  });
 };
 
 export { getEvolutionChain };
