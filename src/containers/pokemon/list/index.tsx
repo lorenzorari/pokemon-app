@@ -2,6 +2,7 @@ import React, { Dispatch, useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import InfiniteScroll from 'src/components/infinite-scroll';
 import Loading from 'src/components/loading';
+import { POKEMON_QUANTITY } from 'src/constants';
 import PokemonCard from 'src/containers/pokemon/card';
 import { Pokemons } from 'src/models/pokemon';
 import styles from './pokemon-list.module.scss';
@@ -38,12 +39,16 @@ const PokemonList = (props: Props) => {
       page={page}
       ref={loaderRef}
       loaderElement={
-        <div ref={loaderRef}>
-          <Loading
-            className={styles['more-pokemons-loader']}
-            src="/assets/svg/logo.svg"
-          />
-        </div>
+        <>
+          {props.pokemons.length < POKEMON_QUANTITY && (
+            <div ref={loaderRef}>
+              <Loading
+                className={styles['more-pokemons-loader']}
+                src="/assets/svg/logo.svg"
+              />
+            </div>
+          )}
+        </>
       }
     >
       <div className={styles['pokemons-container']}>
