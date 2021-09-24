@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
 import { Main } from 'react-tsparticles';
 import Loading from 'src/components/loading';
@@ -7,6 +8,7 @@ import PokemonList from 'src/containers/pokemon/list';
 import tsparticlesOptions from 'src/data/tsparticlesOptions';
 import { NamedAPIResources } from 'src/models/named-api-resource';
 import { Pokemons } from 'src/models/pokemon';
+import { getGeneration } from 'src/services/generation';
 import { getAllPokemons, getPokemon } from 'src/services/pokemon';
 import styles from './home.module.scss';
 
@@ -15,6 +17,9 @@ const HomePage = () => {
 
   const [pokemons, setPokemons] = useState<Pokemons>([]);
   const [nextPageUrl, setNextPageUrl] = useState<string>(null);
+  const [generationSelected, setGenerationSelected] = useState('');
+  const [generationResources, setGenerationResources] =
+    useState<NamedAPIResources>([]);
   const [allPokemonResources, setAllPokemonResources] =
     useState<NamedAPIResources>([]);
 
@@ -27,10 +32,14 @@ const HomePage = () => {
 
   useEffect(() => {
     const init = async () => {
-      const { results } = await getAllPokemons(null, POKEMON_QUANTITY);
-      await loadPokemons(results.slice(0, POKEMON_FETCH_LIMIT));
+      const { results: pokeRes } = await getAllPokemons(null, POKEMON_QUANTITY);
+      const { results: generationRes } = await getGeneration();
+
+      await loadPokemons(pokeRes.slice(0, POKEMON_FETCH_LIMIT));
+
       setNextPageUrl('https://pokeapi.co/api/v2/pokemon?offset=20&limit=20');
-      setAllPokemonResources(results);
+      setGenerationResources(generationRes);
+      setAllPokemonResources(pokeRes);
       setIsLoadingPokemon(false);
     };
 
@@ -85,6 +94,14 @@ const HomePage = () => {
                 ({pokemons.length} / {POKEMON_QUANTITY})
               </span>
             </h2>
+
+            <select onChange={e => console.log(e.target.value)}>
+              {generationResources.map(({ name }) => (
+                <option key={name} value={name}>
+                  {name}
+                </option>
+              ))}
+            </select>
 
             <PokemonList
               pokemons={pokemons}
