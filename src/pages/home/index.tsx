@@ -77,13 +77,22 @@ const HomePage = () => {
       />
 
       {!isPageLoading && pokemons.length ? (
-        <section ref={cardsRef}>
-          <PokemonList
-            pokemons={pokemons}
-            loadMore={loadMore}
-            isLoadingMorePokemon={isLoadingMorePokemon}
-            setIsLoadingMorePokemon={setIsLoadingMorePokemon}
-          />
+        <section className={styles['cards-section']} ref={cardsRef}>
+          <div className={styles['cards-container']}>
+            <h2 className={styles['cards-section-heading']}>
+              Pokémon{' '}
+              <span>
+                ({pokemons.length} / {POKEMON_QUANTITY})
+              </span>
+            </h2>
+
+            <PokemonList
+              pokemons={pokemons}
+              loadMore={loadMore}
+              isLoadingMorePokemon={isLoadingMorePokemon}
+              setIsLoadingMorePokemon={setIsLoadingMorePokemon}
+            />
+          </div>
         </section>
       ) : (
         <section className={styles['loading-container']}>

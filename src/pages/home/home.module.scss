@@ -16,3 +16,13 @@
     fill: var(--color-white);
   }
 }
+
+.cards-section-heading {
+  font-size: 2.2rem;
+}
+
+.cards-container {
+  max-width: 5 * 13rem + 6rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
