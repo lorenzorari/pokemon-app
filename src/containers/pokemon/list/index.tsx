@@ -1,4 +1,4 @@
-import React, { Dispatch, useRef, useState } from 'react';
+import React, { Dispatch, useCallback, useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import InfiniteScroll from 'src/components/infinite-scroll';
 import Loading from 'src/components/loading';
@@ -23,14 +23,16 @@ const PokemonList = (props: Props) => {
     history.push(`/pokemon/${id}`);
   };
 
-  const handleObserver: IntersectionObserverCallback = (entries, observer) => {
-    if (entries[0].isIntersecting && !props.isLoadingMorePokemon) {
-      observer.unobserve(entries[0].target);
+  const handleObserver: IntersectionObserverCallback = useCallback(
+    entries => {
+      const { isIntersecting } = entries[0];
 
-      props.setIsLoadingMorePokemon(true);
-      setPage(page => page + 1);
-    }
-  };
+      if (isIntersecting && !props.isLoadingMorePokemon) {
+        setPage(page => page + 1);
+      }
+    },
+    [props.isLoadingMorePokemon]
+  );
 
   return (
     <InfiniteScroll
