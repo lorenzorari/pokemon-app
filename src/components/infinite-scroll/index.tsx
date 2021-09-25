@@ -18,8 +18,10 @@ const InfiniteScroll = forwardRef(
     useEffect(() => {
       const observer = new IntersectionObserver(observerCallback);
 
-      if (ref.current) observer.observe(ref.current);
-    });
+      if (ref?.current) observer.observe(ref.current);
+
+      return () => observer.unobserve(ref.current);
+    }, [ref, observerCallback]);
 
     useEffect(() => {
       if (page > 1) loadMore();
