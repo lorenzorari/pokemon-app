@@ -14,7 +14,7 @@ import styles from './home.module.scss';
 const HomePage = () => {
   const POKEMON_FETCH_LIMIT = 20;
 
-  const [pokemons, setPokemons] = useState<Pokemons>([]);
+  const [displayedPokemons, setDisplayedPokemons] = useState<Pokemons>([]);
   const [generationResources, setGenerationResources] =
     useState<NamedAPIResources>([]);
   const [allPokemonResources, setAllPokemonResources] =
@@ -50,11 +50,11 @@ const HomePage = () => {
       data.map(async ({ name }) => await getPokemon(name))
     );
 
-    setPokemons([...pokemons, ...pokemonData]);
+    setDisplayedPokemons([...displayedPokemons, ...pokemonData]);
   };
 
   const handleMorePokemon = async () => {
-    const { length } = pokemons;
+    const { length } = displayedPokemons;
     const endSlice = length + POKEMON_FETCH_LIMIT;
     const slicedResources = filteredPokemonResources.slice(length, endSlice);
 
@@ -85,13 +85,13 @@ const HomePage = () => {
         dataToFilter={allPokemonResources}
       />
 
-      {!isPageLoading && pokemons.length ? (
+      {!isPageLoading && displayedPokemons.length ? (
         <section className={styles['cards-section']} ref={cardsRef}>
           <div className={styles['cards-container']}>
             <h2 className={styles['cards-section-heading']}>
               Pokémon{' '}
               <span>
-                ({pokemons.length} / {POKEMON_QUANTITY})
+                ({displayedPokemons.length} / {POKEMON_QUANTITY})
               </span>
             </h2>
 
@@ -104,7 +104,7 @@ const HomePage = () => {
             </select>
 
             <PokemonList
-              pokemons={pokemons}
+              pokemons={displayedPokemons}
               loadMore={loadMore}
               isLoadingMorePokemon={isLoadingMorePokemon}
               setIsLoadingMorePokemon={setIsLoadingMorePokemon}
