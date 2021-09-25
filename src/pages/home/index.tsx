@@ -34,8 +34,10 @@ const HomePage = () => {
       const { results: pokeRes } = await getAllPokemons(null, POKEMON_QUANTITY);
       const { results: generationRes } = await getGeneration();
 
-      await loadPokemons(pokeRes.slice(0, POKEMON_FETCH_LIMIT));
+      const slicedPokemonResources = pokeRes.slice(0, POKEMON_FETCH_LIMIT);
+      const pokemonData = await loadPokemons(slicedPokemonResources);
 
+      setDisplayedPokemons([...displayedPokemons, ...pokemonData]);
       setAllPokemonResources(pokeRes);
       setFilteredPokemonResources(pokeRes);
       setGenerationResources(generationRes);
@@ -50,7 +52,7 @@ const HomePage = () => {
       data.map(async ({ name }) => await getPokemon(name))
     );
 
-    setDisplayedPokemons([...displayedPokemons, ...pokemonData]);
+    return pokemonData;
   };
 
   const handleMorePokemon = async () => {
@@ -58,7 +60,9 @@ const HomePage = () => {
     const endSlice = length + POKEMON_FETCH_LIMIT;
     const slicedResources = filteredPokemonResources.slice(length, endSlice);
 
-    await loadPokemons(slicedResources);
+    const pokemonData = await loadPokemons(slicedResources);
+
+    setDisplayedPokemons([...displayedPokemons, ...pokemonData]);
   };
 
   const loadMore = async () => {
