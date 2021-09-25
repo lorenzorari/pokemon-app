@@ -20,7 +20,7 @@ const InfiniteScroll = forwardRef(
 
       if (ref?.current) observer.observe(ref.current);
 
-      return () => observer.unobserve(ref.current);
+      return () => observer.disconnect();
     }, [ref, observerCallback]);
 
     useEffect(() => {
