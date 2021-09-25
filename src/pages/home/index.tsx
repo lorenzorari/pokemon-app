@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
 import { Main } from 'react-tsparticles';
 import Loading from 'src/components/loading';
@@ -16,11 +15,11 @@ const HomePage = () => {
   const POKEMON_FETCH_LIMIT = 20;
 
   const [pokemons, setPokemons] = useState<Pokemons>([]);
-  const [nextPageUrl, setNextPageUrl] = useState<string>(null);
-  const [generationSelected, setGenerationSelected] = useState('');
   const [generationResources, setGenerationResources] =
     useState<NamedAPIResources>([]);
   const [allPokemonResources, setAllPokemonResources] =
+    useState<NamedAPIResources>([]);
+  const [filteredPokemonResources, setFilteredPokemonResources] =
     useState<NamedAPIResources>([]);
 
   const [isLoadingMorePokemon, setIsLoadingMorePokemon] = useState(false);
@@ -37,9 +36,9 @@ const HomePage = () => {
 
       await loadPokemons(pokeRes.slice(0, POKEMON_FETCH_LIMIT));
 
-      setNextPageUrl('https://pokeapi.co/api/v2/pokemon?offset=20&limit=20');
-      setGenerationResources(generationRes);
       setAllPokemonResources(pokeRes);
+      setFilteredPokemonResources(pokeRes);
+      setGenerationResources(generationRes);
       setIsLoadingPokemon(false);
     };
 
@@ -55,14 +54,15 @@ const HomePage = () => {
   };
 
   const handleMorePokemon = async () => {
-    if (nextPageUrl) {
-      const { results, next } = await getAllPokemons(null, null, nextPageUrl);
-      setNextPageUrl(next);
-      await loadPokemons(results);
-    }
+    const { length } = pokemons;
+    const endSlice = length + POKEMON_FETCH_LIMIT;
+    const slicedResources = filteredPokemonResources.slice(length, endSlice);
+
+    await loadPokemons(slicedResources);
   };
 
   const loadMore = async () => {
+    setIsLoadingMorePokemon(true);
     await handleMorePokemon();
     setIsLoadingMorePokemon(false);
   };
