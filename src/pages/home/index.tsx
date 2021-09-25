@@ -15,6 +15,8 @@ const HomePage = () => {
   const POKEMON_FETCH_LIMIT = 20;
 
   const [displayedPokemons, setDisplayedPokemons] = useState<Pokemons>([]);
+  const [pokemonListLimit, setPokemonListLimit] =
+    useState<number>(POKEMON_QUANTITY);
   const [generationResources, setGenerationResources] =
     useState<NamedAPIResources>([]);
   const [allPokemonResources, setAllPokemonResources] =
@@ -112,6 +114,7 @@ const HomePage = () => {
               loadMore={loadMore}
               isLoadingMorePokemon={isLoadingMorePokemon}
               setIsLoadingMorePokemon={setIsLoadingMorePokemon}
+              limit={pokemonListLimit}
             />
           </div>
         </section>

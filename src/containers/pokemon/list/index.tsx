@@ -12,6 +12,7 @@ interface Props {
   setIsLoadingMorePokemon: Dispatch<React.SetStateAction<boolean>>;
   loadMore: () => Promise<void>;
   pokemons: Pokemons;
+  limit: number;
 }
 
 const PokemonList = (props: Props) => {
@@ -42,7 +43,7 @@ const PokemonList = (props: Props) => {
       ref={loaderRef}
       loaderElement={
         <>
-          {props.pokemons.length < POKEMON_QUANTITY && (
+          {props.pokemons.length < props.limit && (
             <div ref={loaderRef}>
               <Loading
                 className={styles['more-pokemons-loader']}
