@@ -60,6 +60,7 @@ const HomePage = () => {
       const pokemonData = await loadPokemons(slicedFilteredPokemonResources);
 
       setDisplayedPokemons(pokemonData);
+      setPokemonListLimit(filteredPokemonResources.length);
       setIsFilteringPokemon(false);
     };
 
@@ -122,7 +123,7 @@ const HomePage = () => {
             <h2 className={styles['cards-section-heading']}>
               Pokémon{' '}
               <span>
-                ({displayedPokemons.length} / {POKEMON_QUANTITY})
+                ({displayedPokemons.length} / {pokemonListLimit})
               </span>
             </h2>
 
