@@ -11,9 +11,9 @@ import { getGeneration } from 'src/services/generation';
 import { getAllPokemons, getPokemon } from 'src/services/pokemon';
 import styles from './home.module.scss';
 
-const HomePage = () => {
-  const POKEMON_FETCH_LIMIT = 20;
+const POKEMON_FETCH_LIMIT = 20;
 
+const HomePage = () => {
   const [displayedPokemons, setDisplayedPokemons] = useState<Pokemons>([]);
   const [generationNames, setGenerationNames] = useState<string[]>([]);
   const [pokemonListLimit, setPokemonListLimit] =
