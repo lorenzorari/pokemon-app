@@ -136,19 +136,14 @@ const HomePage = () => {
               ))}
             </select>
 
-            {isFilteringPokemon === false ? (
-              <PokemonList
-                pokemons={displayedPokemons}
-                loadMore={loadMore}
-                isLoadingMorePokemon={isLoadingMore}
-                setIsLoadingMorePokemon={setIsLoadingMore}
-                limit={pokemonListLimit}
-              />
-            ) : (
-              <div>
-                <Loading src="/assets/svg/logo.svg" />
-              </div>
-            )}
+            <PokemonList
+              pokemons={displayedPokemons}
+              loadMore={loadMore}
+              isLoadingMorePokemon={isLoadingMore}
+              setIsLoadingMorePokemon={setIsLoadingMore}
+              limit={pokemonListLimit}
+              isFiltering={isFilteringPokemon}
+            />
           </div>
         </section>
       ) : (

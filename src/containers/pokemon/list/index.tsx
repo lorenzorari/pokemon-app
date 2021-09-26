@@ -13,6 +13,7 @@ interface Props {
   loadMore: () => Promise<void>;
   pokemons: Pokemons;
   limit: number;
+  isFiltering: boolean;
 }
 
 const PokemonList = (props: Props) => {
@@ -36,35 +37,43 @@ const PokemonList = (props: Props) => {
   );
 
   return (
-    <InfiniteScroll
-      observerCallback={handleObserver}
-      loadMore={props.loadMore}
-      page={page}
-      ref={loaderRef}
-      loaderElement={
-        <>
-          {props.pokemons.length < props.limit && (
-            <div ref={loaderRef}>
-              <Loading
-                className={styles['more-pokemons-loader']}
-                src="/assets/svg/logo.svg"
+    <>
+      {props.isFiltering === false ? (
+        <InfiniteScroll
+          observerCallback={handleObserver}
+          loadMore={props.loadMore}
+          page={page}
+          ref={loaderRef}
+          loaderElement={
+            <>
+              {props.pokemons.length < props.limit && (
+                <div ref={loaderRef}>
+                  <Loading
+                    className={styles['more-pokemons-loader']}
+                    src="/assets/svg/logo.svg"
+                  />
+                </div>
+              )}
+            </>
+          }
+        >
+          <div className={styles['pokemons-container']}>
+            {props.pokemons.map(pokemon => (
+              <PokemonCard
+                key={pokemon.id}
+                className={styles.card}
+                onClick={() => handleClickCard(pokemon.id)}
+                pokemon={pokemon}
               />
-            </div>
-          )}
-        </>
-      }
-    >
-      <div className={styles['pokemons-container']}>
-        {props.pokemons.map(pokemon => (
-          <PokemonCard
-            key={pokemon.id}
-            className={styles.card}
-            onClick={() => handleClickCard(pokemon.id)}
-            pokemon={pokemon}
-          />
-        ))}
-      </div>
-    </InfiniteScroll>
+            ))}
+          </div>
+        </InfiniteScroll>
+      ) : (
+        <div className={styles['filter-loader']}>
+          <Loading src="/assets/svg/logo.svg" />
+        </div>
+      )}
+    </>
   );
 };
 
