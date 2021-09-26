@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { Main } from 'react-tsparticles';
 import Loading from 'src/components/loading';
 import { POKEMON_QUANTITY } from 'src/constants';
@@ -15,10 +15,9 @@ const HomePage = () => {
   const POKEMON_FETCH_LIMIT = 20;
 
   const [displayedPokemons, setDisplayedPokemons] = useState<Pokemons>([]);
+  const [generationNames, setGenerationNames] = useState<string[]>([]);
   const [pokemonListLimit, setPokemonListLimit] =
     useState<number>(POKEMON_QUANTITY);
-  const [generationResources, setGenerationResources] =
-    useState<NamedAPIResources>([]);
   const [allPokemonResources, setAllPokemonResources] =
     useState<NamedAPIResources>([]);
   const [filteredPokemonResources, setFilteredPokemonResources] =
@@ -40,9 +39,9 @@ const HomePage = () => {
       const pokemonData = await loadPokemons(slicedPokemonResources);
 
       setDisplayedPokemons([...displayedPokemons, ...pokemonData]);
+      setGenerationNames(generationRes.map(gen => gen.name));
       setAllPokemonResources(pokeRes);
       setFilteredPokemonResources(pokeRes);
-      setGenerationResources(generationRes);
       setIsLoadingPokemon(false);
     };
 
@@ -79,6 +78,10 @@ const HomePage = () => {
       .then(() => setAreParticlesLoading(false));
   };
 
+  const handleChangeGeneration = (e: ChangeEvent<HTMLSelectElement>) => {
+    const { value } = e.target;
+  };
+
   return (
     <main className={styles.main}>
       <HomepageHeadingContainer
@@ -101,10 +104,11 @@ const HomePage = () => {
               </span>
             </h2>
 
-            <select onChange={e => console.log(e.target.value)}>
-              {generationResources.map(({ name }) => (
+            <select onChange={handleChangeGeneration}>
+              <option value="all">All</option>
+              {generationNames.map(name => (
                 <option key={name} value={name}>
-                  {name}
+                  Generation {name.split('-')[1].toUpperCase()}
                 </option>
               ))}
             </select>
