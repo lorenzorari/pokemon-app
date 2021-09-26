@@ -5,6 +5,7 @@ import { POKEMON_QUANTITY } from 'src/constants';
 import HomepageHeadingContainer from 'src/containers/homepage-heading';
 import PokemonList from 'src/containers/pokemon/list';
 import tsparticlesOptions from 'src/data/tsparticlesOptions';
+import { getGenerationSlices } from 'src/helpers/get-generation-slices';
 import { NamedAPIResources } from 'src/models/named-api-resource';
 import { Pokemons } from 'src/models/pokemon';
 import { getGeneration } from 'src/services/generation';
@@ -25,6 +26,7 @@ const HomePage = () => {
 
   const [isLoadingPokemon, setIsLoadingPokemon] = useState<boolean>(true);
   const [isLoadingMore, setIsLoadingMore] = useState<boolean>(false);
+  const [isFilteringPokemon, setIsFilteringPokemon] = useState<boolean>(false);
   const [areParticlesLoading, setAreParticlesLoading] = useState<boolean>(true);
   const isPageLoading: boolean = isLoadingPokemon || areParticlesLoading;
 
@@ -47,6 +49,22 @@ const HomePage = () => {
 
     init();
   }, []);
+
+  useEffect(() => {
+    const updateDisplayedPokemons = async () => {
+      setIsFilteringPokemon(true);
+      const slicedFilteredPokemonResources = filteredPokemonResources.slice(
+        0,
+        POKEMON_FETCH_LIMIT
+      );
+      const pokemonData = await loadPokemons(slicedFilteredPokemonResources);
+
+      setDisplayedPokemons(pokemonData);
+      setIsFilteringPokemon(false);
+    };
+
+    updateDisplayedPokemons();
+  }, [filteredPokemonResources]);
 
   const loadPokemons = async (data: NamedAPIResources) => {
     const pokemonData = await Promise.all(
@@ -80,6 +98,10 @@ const HomePage = () => {
 
   const handleChangeGeneration = (e: ChangeEvent<HTMLSelectElement>) => {
     const { value } = e.target;
+    const { startSlice, endSlice } = getGenerationSlices(value);
+    const slicedGeneration = allPokemonResources.slice(startSlice, endSlice);
+
+    setFilteredPokemonResources(slicedGeneration);
   };
 
   return (
@@ -113,13 +135,19 @@ const HomePage = () => {
               ))}
             </select>
 
-            <PokemonList
-              pokemons={displayedPokemons}
-              loadMore={loadMore}
-              isLoadingMorePokemon={isLoadingMore}
-              setIsLoadingMorePokemon={setIsLoadingMore}
-              limit={pokemonListLimit}
-            />
+            {isFilteringPokemon === false ? (
+              <PokemonList
+                pokemons={displayedPokemons}
+                loadMore={loadMore}
+                isLoadingMorePokemon={isLoadingMore}
+                setIsLoadingMorePokemon={setIsLoadingMore}
+                limit={pokemonListLimit}
+              />
+            ) : (
+              <div>
+                <Loading src="/assets/svg/logo.svg" />
+              </div>
+            )}
           </div>
         </section>
       ) : (
