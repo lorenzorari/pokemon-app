@@ -23,9 +23,9 @@ const HomePage = () => {
   const [filteredPokemonResources, setFilteredPokemonResources] =
     useState<NamedAPIResources>([]);
 
-  const [isLoadingMorePokemon, setIsLoadingMorePokemon] = useState(false);
-  const [areParticlesLoading, setAreParticlesLoading] = useState(true);
   const [isLoadingPokemon, setIsLoadingPokemon] = useState<boolean>(true);
+  const [isLoadingMore, setIsLoadingMore] = useState<boolean>(false);
+  const [areParticlesLoading, setAreParticlesLoading] = useState<boolean>(true);
   const isPageLoading: boolean = isLoadingPokemon || areParticlesLoading;
 
   const cardsRef = useRef(null);
@@ -67,9 +67,9 @@ const HomePage = () => {
   };
 
   const loadMore = async () => {
-    setIsLoadingMorePokemon(true);
+    setIsLoadingMore(true);
     await handleMorePokemon();
-    setIsLoadingMorePokemon(false);
+    setIsLoadingMore(false);
   };
 
   const initParticles = (tsParticles: Main) => {
@@ -116,8 +116,8 @@ const HomePage = () => {
             <PokemonList
               pokemons={displayedPokemons}
               loadMore={loadMore}
-              isLoadingMorePokemon={isLoadingMorePokemon}
-              setIsLoadingMorePokemon={setIsLoadingMorePokemon}
+              isLoadingMorePokemon={isLoadingMore}
+              setIsLoadingMorePokemon={setIsLoadingMore}
               limit={pokemonListLimit}
             />
           </div>
