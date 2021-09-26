@@ -8,37 +8,37 @@ export const getGenerationSlices = (generationName: string) => {
       break;
 
     case 'generation-ii':
-      startSlice = 152;
+      startSlice = 151;
       endSlice = 251;
       break;
 
     case 'generation-iii':
-      startSlice = 252;
+      startSlice = 251;
       endSlice = 386;
       break;
 
     case 'generation-iv':
-      startSlice = 387;
+      startSlice = 386;
       endSlice = 493;
       break;
 
     case 'generation-v':
-      startSlice = 494;
+      startSlice = 493;
       endSlice = 649;
       break;
 
     case 'generation-vi':
-      startSlice = 650;
+      startSlice = 649;
       endSlice = 721;
       break;
 
     case 'generation-vii':
-      startSlice = 722;
+      startSlice = 721;
       endSlice = 802;
       break;
 
     case 'generation-viii':
-      startSlice = 803;
+      startSlice = 802;
       endSlice = 898;
       break;
   }
