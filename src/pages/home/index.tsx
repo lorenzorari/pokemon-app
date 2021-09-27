@@ -1,4 +1,5 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
+import { ReactSVG } from 'react-svg';
 import { Main } from 'react-tsparticles';
 import Loading from 'src/components/loading';
 import { POKEMON_QUANTITY } from 'src/constants';
@@ -127,23 +128,48 @@ const HomePage = () => {
               </span>
             </h2>
 
-            <select onChange={handleChangeGeneration}>
+            <div
+              className={styles.select}
+              onChange={e => handleChangeGeneration}
+            >
+              <div className={styles['select-trigger']}>
+                All
+                <ReactSVG
+                  className={styles.arrow}
+                  src="assets/svg/arrow.svg"
+                  wrapper="span"
+                />
+              </div>
+
+              <ul className={styles.options}>
+                <li className={styles.option} value="all">
+                  All
+                </li>
+                {generationNames.map(name => (
+                  <li className={styles.option} key={name} value={name}>
+                    Generation {name.split('-')[1].toUpperCase()}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* <select className={styles.select} onChange={handleChangeGeneration}>
               <option value="all">All</option>
               {generationNames.map(name => (
                 <option key={name} value={name}>
                   Generation {name.split('-')[1].toUpperCase()}
                 </option>
               ))}
-            </select>
+            </select> */}
 
-            <PokemonList
+            {/* <PokemonList
               pokemons={displayedPokemons}
               loadMore={loadMore}
               isLoadingMorePokemon={isLoadingMore}
               setIsLoadingMorePokemon={setIsLoadingMore}
               limit={pokemonListLimit}
               isFiltering={isFilteringPokemon}
-            />
+            /> */}
           </div>
         </section>
       ) : (
