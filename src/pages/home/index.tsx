@@ -2,6 +2,8 @@ import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { ReactSVG } from 'react-svg';
 import { Main } from 'react-tsparticles';
 import Loading from 'src/components/loading';
+import Option from 'src/components/option';
+import Select from 'src/components/select';
 import { POKEMON_QUANTITY } from 'src/constants';
 import HomepageHeadingContainer from 'src/containers/homepage-heading';
 import PokemonList from 'src/containers/pokemon/list';
@@ -18,6 +20,7 @@ const POKEMON_FETCH_LIMIT = 20;
 const HomePage = () => {
   const [displayedPokemons, setDisplayedPokemons] = useState<Pokemons>([]);
   const [generationNames, setGenerationNames] = useState<string[]>([]);
+  const [generationSelected, setGenerationSelected] = useState<string>('All');
   const [pokemonListLimit, setPokemonListLimit] =
     useState<number>(POKEMON_QUANTITY);
   const [allPokemonResources, setAllPokemonResources] =
@@ -98,11 +101,19 @@ const HomePage = () => {
       .then(() => setAreParticlesLoading(false));
   };
 
-  const handleChangeGeneration = (e: ChangeEvent<HTMLSelectElement>) => {
-    const { value } = e.target;
+  const handleClickGeneration = (value: string) => {
+    if (value === 'All') {
+      setGenerationSelected(value);
+      setFilteredPokemonResources(allPokemonResources);
+      return;
+    }
+
     const { startSlice, endSlice } = getGenerationSlices(value);
     const slicedGeneration = allPokemonResources.slice(startSlice, endSlice);
 
+    const generationNumber = value.split('-')[1].toUpperCase();
+
+    setGenerationSelected(`Generation ${generationNumber}`);
     setFilteredPokemonResources(slicedGeneration);
   };
 
@@ -128,48 +139,28 @@ const HomePage = () => {
               </span>
             </h2>
 
-            <div
-              className={styles.select}
-              onChange={e => handleChangeGeneration}
-            >
-              <div className={styles['select-trigger']}>
-                All
-                <ReactSVG
-                  className={styles.arrow}
-                  src="assets/svg/arrow.svg"
-                  wrapper="span"
-                />
-              </div>
+            <Select className={styles.select} defaultValue={generationSelected}>
+              <Option onClick={() => handleClickGeneration('All')}>All</Option>
 
-              <ul className={styles.options}>
-                <li className={styles.option} value="all">
-                  All
-                </li>
-                {generationNames.map(name => (
-                  <li className={styles.option} key={name} value={name}>
-                    Generation {name.split('-')[1].toUpperCase()}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* <select className={styles.select} onChange={handleChangeGeneration}>
-              <option value="all">All</option>
               {generationNames.map(name => (
-                <option key={name} value={name}>
+                <Option
+                  className={styles.option}
+                  key={name}
+                  onClick={() => handleClickGeneration(name)}
+                >
                   Generation {name.split('-')[1].toUpperCase()}
-                </option>
+                </Option>
               ))}
-            </select> */}
+            </Select>
 
-            {/* <PokemonList
+            <PokemonList
               pokemons={displayedPokemons}
               loadMore={loadMore}
               isLoadingMorePokemon={isLoadingMore}
               setIsLoadingMorePokemon={setIsLoadingMore}
               limit={pokemonListLimit}
               isFiltering={isFilteringPokemon}
-            /> */}
+            />
           </div>
         </section>
       ) : (
