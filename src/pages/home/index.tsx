@@ -139,19 +139,27 @@ const HomePage = () => {
               </span>
             </h2>
 
-            <Select className={styles.select} defaultValue={generationSelected}>
-              <Option onClick={() => handleClickGeneration('All')}>All</Option>
+            <div className={styles.filter}>
+              <h3>Filter :</h3>
 
-              {generationNames.map(name => (
-                <Option
-                  className={styles.option}
-                  key={name}
-                  onClick={() => handleClickGeneration(name)}
-                >
-                  Generation {name.split('-')[1].toUpperCase()}
+              <Select
+                className={styles.select}
+                defaultValue={generationSelected}
+              >
+                <Option onClick={() => handleClickGeneration('All')}>
+                  All
                 </Option>
-              ))}
-            </Select>
+                {generationNames.map(name => (
+                  <Option
+                    className={styles.option}
+                    key={name}
+                    onClick={() => handleClickGeneration(name)}
+                  >
+                    Generation {name.split('-')[1].toUpperCase()}
+                  </Option>
+                ))}
+              </Select>
+            </div>
 
             <PokemonList
               pokemons={displayedPokemons}
