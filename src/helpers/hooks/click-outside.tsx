@@ -10,8 +10,6 @@ interface HookClickOutside {
 
 export const useClickOutside: HookClickOutside = (ref, callback) => {
   const handleClick = (e: Event) => {
-    console.log(e.target, ref.current);
-
     if (ref.current && !ref.current.contains(e.target)) {
       callback();
     }
