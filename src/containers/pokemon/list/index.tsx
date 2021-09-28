@@ -1,4 +1,10 @@
-import React, { Dispatch, useCallback, useRef, useState } from 'react';
+import React, {
+  Dispatch,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { useHistory } from 'react-router-dom';
 import InfiniteScroll from 'src/components/infinite-scroll';
 import Loading from 'src/components/loading';
@@ -21,9 +27,7 @@ const PokemonList = (props: Props) => {
   const [page, setPage] = useState<number>(1);
   const loaderRef = useRef(null);
 
-  const handleClickCard = (id: number) => {
-    history.push(`/pokemon/${id}`);
-  };
+  useEffect(() => props.isFiltering && setPage(1), [props.isFiltering]);
 
   const handleObserver: IntersectionObserverCallback = useCallback(
     entries => {
@@ -35,6 +39,10 @@ const PokemonList = (props: Props) => {
     },
     [props.isLoadingMorePokemon]
   );
+
+  const handleClickCard = (id: number) => {
+    history.push(`/pokemon/${id}`);
+  };
 
   return (
     <>
