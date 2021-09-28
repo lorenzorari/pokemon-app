@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { memo } from 'react';
 import Particles, { Main } from 'react-tsparticles';
 import particlesOptions from 'src/data/tsparticlesOptions';
 import ScrollIcon from 'src/containers/homepage-heading/scroll-icon';
@@ -59,4 +59,15 @@ const HomepageHeadingContainer = (props: Props) => {
   );
 };
 
-export default HomepageHeadingContainer;
+const arePropsEqual = (prev: Readonly<Props>, next: Readonly<Props>) => {
+  return (
+    prev.areParticlesLoading === next.areParticlesLoading &&
+    prev.dataToFilter === next.dataToFilter &&
+    prev.githubHref === next.githubHref &&
+    prev.githubImageSrc === next.githubImageSrc &&
+    prev.heading === next.heading &&
+    prev.scrollToRef === next.scrollToRef
+  );
+};
+
+export default memo(HomepageHeadingContainer, arePropsEqual);
