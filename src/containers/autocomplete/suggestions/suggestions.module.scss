@@ -14,7 +14,7 @@
     text-transform: capitalize;
 
     &:hover {
-      background-color: hsl(0, 0, 90%);
+      background-color: hsl(0, 0%, 90%);
     }
 
     &:last-child {
@@ -29,5 +29,5 @@
 }
 
 .selected {
-  background-color: hsl(0, 0, 90%);
+  background-color: hsl(0, 0%, 90%);
 }

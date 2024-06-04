@@ -1,6 +1,5 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { ReactSVG } from 'react-svg';
-import { Main } from 'react-tsparticles';
 import Loading from 'src/components/loading';
 import Option from 'src/components/option';
 import Select from 'src/components/select';
@@ -21,31 +20,31 @@ const HomePage = () => {
   const [displayedPokemons, setDisplayedPokemons] = useState<Pokemons>([]);
   const [generationNames, setGenerationNames] = useState<string[]>([]);
   const [generationSelected, setGenerationSelected] = useState<string>('All');
-  const [pokemonListLimit, setPokemonListLimit] =
-    useState<number>(POKEMON_QUANTITY);
-  const [allPokemonResources, setAllPokemonResources] =
-    useState<NamedAPIResources>([]);
-  const [filteredPokemonResources, setFilteredPokemonResources] =
-    useState<NamedAPIResources>([]);
+  const [pokemonListLimit, setPokemonListLimit] = useState<number>(POKEMON_QUANTITY);
+  const [allPokemonResources, setAllPokemonResources] = useState<NamedAPIResources>([]);
+  const [filteredPokemonResources, setFilteredPokemonResources] = useState<NamedAPIResources>([]);
 
   const [isLoadingPokemon, setIsLoadingPokemon] = useState<boolean>(true);
   const [isLoadingMore, setIsLoadingMore] = useState<boolean>(false);
   const [isFilteringPokemon, setIsFilteringPokemon] = useState<boolean>(false);
   const [areParticlesLoading, setAreParticlesLoading] = useState<boolean>(true);
   const isPageLoading: boolean = isLoadingPokemon || areParticlesLoading;
+  // const isPageLoading: boolean = isLoadingPokemon;
 
   const cardsRef = useRef(null);
 
   useEffect(() => {
     const init = async () => {
-      const { results: pokeRes } = await getAllPokemons(null, POKEMON_QUANTITY);
+      const { results: pokeRes } = await getAllPokemons(undefined, POKEMON_QUANTITY);
       const { results: generationRes } = await getGeneration();
+
+      if (!pokeRes || !generationRes) return;
 
       const slicedPokemonResources = pokeRes.slice(0, POKEMON_FETCH_LIMIT);
       const pokemonData = await loadPokemons(slicedPokemonResources);
 
       setDisplayedPokemons([...displayedPokemons, ...pokemonData]);
-      setGenerationNames(generationRes.map(gen => gen.name));
+      setGenerationNames(generationRes.map((gen) => gen.name));
       setAllPokemonResources(pokeRes);
       setFilteredPokemonResources(pokeRes);
       setIsLoadingPokemon(false);
@@ -57,10 +56,7 @@ const HomePage = () => {
   useEffect(() => {
     const updateDisplayedPokemons = async () => {
       setIsFilteringPokemon(true);
-      const slicedFilteredPokemonResources = filteredPokemonResources.slice(
-        0,
-        POKEMON_FETCH_LIMIT
-      );
+      const slicedFilteredPokemonResources = filteredPokemonResources.slice(0, POKEMON_FETCH_LIMIT);
       const pokemonData = await loadPokemons(slicedFilteredPokemonResources);
 
       setDisplayedPokemons(pokemonData);
@@ -72,9 +68,7 @@ const HomePage = () => {
   }, [filteredPokemonResources]);
 
   const loadPokemons = async (data: NamedAPIResources) => {
-    const pokemonData = await Promise.all(
-      data.map(async ({ name }) => await getPokemon(name))
-    );
+    const pokemonData = await Promise.all(data.map(async ({ name }) => await getPokemon(name)));
 
     return pokemonData;
   };
@@ -95,10 +89,8 @@ const HomePage = () => {
     setIsLoadingMore(false);
   };
 
-  const initParticles = (tsParticles: Main) => {
-    tsParticles
-      .load('tsparticles', tsparticlesOptions)
-      .then(() => setAreParticlesLoading(false));
+  const initParticles = (tsParticles: any) => {
+    tsParticles.load('tsparticles', tsparticlesOptions).then(() => setAreParticlesLoading(false));
   };
 
   const handleClickGeneration = (value: string) => {
@@ -128,7 +120,6 @@ const HomePage = () => {
         areParticlesLoading={isPageLoading}
         dataToFilter={allPokemonResources}
       />
-
       {!isPageLoading && displayedPokemons.length ? (
         <section className={styles['cards-section']} ref={cardsRef}>
           <div className={styles['cards-container']}>
@@ -142,14 +133,9 @@ const HomePage = () => {
             <div className={styles.filter}>
               <h3>Filter :</h3>
 
-              <Select
-                className={styles.select}
-                defaultValue={generationSelected}
-              >
-                <Option onClick={() => handleClickGeneration('All')}>
-                  All
-                </Option>
-                {generationNames.map(name => (
+              <Select className={styles.select} defaultValue={generationSelected}>
+                <Option onClick={() => handleClickGeneration('All')}>All</Option>
+                {generationNames.map((name) => (
                   <Option
                     className={styles.option}
                     key={name}
