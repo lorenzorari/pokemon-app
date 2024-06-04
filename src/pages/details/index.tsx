@@ -1,5 +1,4 @@
-import { AxiosError } from 'axios';
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router';
 import { useHistory } from 'react-router-dom';
 import { ReactSVG } from 'react-svg';
@@ -35,28 +34,24 @@ const EVOLUTIONS = 'Evolutions';
 const DetailsPage = () => {
   const { id } = useParams<Params>();
   const history = useHistory();
-  const [pokemon, setPokemon] = useState<Pokemon>(null);
-  const [species, setSpecies] = useState<Species>(null);
-  const [allPokemonResources, setAllPokemonResources] =
-    useState<NamedAPIResources>([]);
+  const [pokemon, setPokemon] = useState<Pokemon | null>(null);
+  const [species, setSpecies] = useState<Species | null>(null);
+  const [allPokemonResources, setAllPokemonResources] = useState<NamedAPIResources>([]);
   const [pokemonEvolutions, setPokemonEvolutions] = useState([]);
   const [isSearchModalOpen, setIsSearchModalOpen] = useState<boolean>(false);
 
   const [isLoadingPokemon, setIsLoadingPokemon] = useState<boolean>(true);
   const [isLoadingResources, setIsLoadingResources] = useState<boolean>(true);
   const [isLoadingEvolutions, setIsLoadingEvolutions] = useState<boolean>(true);
-  const isLoading: boolean =
-    isLoadingPokemon || isLoadingResources || isLoadingEvolutions;
+  const isLoading: boolean = isLoadingPokemon || isLoadingResources || isLoadingEvolutions;
 
   const searchModalRef = useRef(null);
 
   const tabs: string[] = [BIOGRAPHY, STATS, EVOLUTIONS];
 
   const tabContent = {
-    [BIOGRAPHY]: species && (
-      <PokemonDetailsBiography pokemon={pokemon} species={species} />
-    ),
-    [STATS]: <PokemonDetailsStats pokemon={pokemon} />,
+    [BIOGRAPHY]: species && <PokemonDetailsBiography pokemon={pokemon!} species={species} />,
+    [STATS]: <PokemonDetailsStats pokemon={pokemon!} />,
     [EVOLUTIONS]: pokemonEvolutions.length > 0 && (
       <PokemonDetailsEvolutions pokemonEvolutions={pokemonEvolutions} />
     ),
@@ -66,9 +61,9 @@ const DetailsPage = () => {
 
   useEffect(() => {
     const initAllPokemonResources = async () => {
-      const { results } = await getAllPokemons(null, POKEMON_QUANTITY);
+      const { results } = await getAllPokemons(undefined, POKEMON_QUANTITY);
 
-      setAllPokemonResources(results);
+      setAllPokemonResources(results!);
       setIsLoadingResources(false);
     };
 
@@ -99,8 +94,8 @@ const DetailsPage = () => {
   useEffect(() => {
     const initEvolutions = async () => {
       setIsLoadingEvolutions(true);
-      const { chain } = await getEvolutionChain(species);
-      const evolutions = getPokemonEvolutions(chain);
+      const { chain } = await getEvolutionChain(species!);
+      const evolutions = getPokemonEvolutions(chain!);
 
       setPokemonEvolutions(evolutions);
       setIsLoadingEvolutions(false);
@@ -109,7 +104,7 @@ const DetailsPage = () => {
     species && initEvolutions();
   }, [species]);
 
-  const createEvolution = (url, name) => {
+  const createEvolution = (url: string, name: string) => {
     return {
       id: getIdFromResourceUrl(url),
       name,
@@ -117,19 +112,16 @@ const DetailsPage = () => {
   };
 
   const addSimpleEvolution = ({ species }: ChainLink, array: Array<any>) => {
-    array.push(createEvolution(species.url, species.name));
+    array.push(createEvolution(species.url!, species.name!));
   };
 
-  const addAlternateEvolutions = (
-    chainLinks: ChainLinks,
-    array: Array<any>
-  ) => {
+  const addAlternateEvolutions = (chainLinks: ChainLinks, array: Array<any>) => {
     const finalEvolutions: any = [];
 
     const alternateEvos = chainLinks.map(({ evolvesTo, species }) => {
       if (evolvesTo.length) addSimpleEvolution(evolvesTo[0], finalEvolutions);
 
-      return createEvolution(species.url, species.name);
+      return createEvolution(species.url!, species.name!);
     });
 
     array.push(alternateEvos);
@@ -140,7 +132,7 @@ const DetailsPage = () => {
     if (chainLink) {
       const { url, name } = chainLink.species; // First species
 
-      const evolutions: any = [createEvolution(url, name)];
+      const evolutions: any = [createEvolution(url!, name!)];
 
       let currentEvo = chainLink.evolvesTo;
 
@@ -166,7 +158,7 @@ const DetailsPage = () => {
     history.push('/');
   };
 
-  const handleSearchIcon = e => {
+  const handleSearchIcon = (e: any) => {
     e.stopPropagation();
     setIsSearchModalOpen(true);
   };
@@ -175,16 +167,12 @@ const DetailsPage = () => {
     <main className={styles.main}>
       {!isLoading ? (
         <>
-          <Button
-            className={styles['btn-back']}
-            theme="back"
-            onClick={handleBackButton}
-          >
+          <Button className={styles['btn-back']} theme="back" onClick={handleBackButton}>
             Back
           </Button>
 
           <section className={styles['card-container']}>
-            <PokemonCard className={styles.card} pokemon={pokemon} />
+            <PokemonCard className={styles.card} pokemon={pokemon!} />
 
             <div className={styles.options}>
               <ReactSVG
@@ -206,11 +194,7 @@ const DetailsPage = () => {
           </Modal>
 
           <section className={styles.details}>
-            <PokemonDetails
-              defaultTab={BIOGRAPHY}
-              tabs={tabs}
-              tabContent={tabContent}
-            />
+            <PokemonDetails defaultTab={BIOGRAPHY} tabs={tabs} tabContent={tabContent} />
           </section>
         </>
       ) : (

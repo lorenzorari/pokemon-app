@@ -1,9 +1,4 @@
-import React, {
-  ChangeEventHandler,
-  forwardRef,
-  KeyboardEventHandler,
-  MutableRefObject,
-} from 'react';
+import { ChangeEventHandler, forwardRef, KeyboardEventHandler } from 'react';
 import classNames from 'classnames';
 import styles from './search-bar.module.scss';
 
@@ -17,12 +12,9 @@ interface Props {
   onKeyDown?: KeyboardEventHandler<any>;
 }
 
-const SearchBar = forwardRef((props: Props, ref?: MutableRefObject<any>) => {
+const SearchBar = forwardRef((props: Props, ref?: React.LegacyRef<HTMLDivElement> | undefined) => {
   return (
-    <div
-      ref={ref}
-      className={classNames(styles['search-bar'], props.className)}
-    >
+    <div ref={ref} className={classNames(styles['search-bar'], props.className)}>
       <input
         type={props.type}
         placeholder={props.placeholder}

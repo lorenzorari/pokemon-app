@@ -17,16 +17,6 @@
 - [PokéAPI](https://pokeapi.co/)
 - [Netlify](https://www.netlify.com/)
 
-# Installing
-
-1.  Install dependencies
-
-        yarn install
-
-2.  Run the app locally
-
-		yarn start
-
 # Credits
 
 [Pokemon Type SVG Icons](https://github.com/duiker101/pokemon-type-svg-icons)

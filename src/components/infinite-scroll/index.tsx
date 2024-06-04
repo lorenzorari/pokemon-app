@@ -1,4 +1,4 @@
-import React, { forwardRef, FunctionComponent, useEffect } from 'react';
+import React, { forwardRef, useEffect } from 'react';
 
 interface Props {
   children: React.ReactNode;
@@ -9,10 +9,7 @@ interface Props {
 }
 
 const InfiniteScroll = forwardRef(
-  (
-    { children, observerCallback, page, loadMore, loaderElement }: Props,
-    ref: React.MutableRefObject<any>
-  ) => {
+  ({ children, observerCallback, page, loadMore, loaderElement }: Props, ref: any) => {
     const Loader = () => loaderElement;
 
     useEffect(() => {

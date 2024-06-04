@@ -1,4 +1,3 @@
-import React from 'react';
 import classNames from 'classnames';
 import { ReactSVG } from 'react-svg';
 import styles from './loading.module.scss';
@@ -12,10 +11,7 @@ interface Props {
 const Loading = ({ src, className, text }: Props) => {
   return (
     <div className={styles.loading}>
-      <ReactSVG
-        className={classNames(styles['loading-icon'], className)}
-        src={src}
-      />
+      <ReactSVG className={classNames(styles['loading-icon'], className)} src={src} />
       {text && <span className={styles.text}>{text}</span>}
     </div>
   );

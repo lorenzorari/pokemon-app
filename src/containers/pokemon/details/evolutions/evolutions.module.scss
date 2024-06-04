@@ -22,7 +22,7 @@ $pokemonImageSize: 9.5rem;
 
       font-size: 4rem;
       font-weight: 700;
-      color: hsl(0, 0, 90%);
+      color: hsl(0, 0%, 90%);
     }
 
     .line-container {
@@ -35,9 +35,9 @@ $pokemonImageSize: 9.5rem;
 
       hr {
         width: 100%;
-        border: 0.25rem solid hsl(0, 0, 90%);
+        border: 0.25rem solid hsl(0, 0%, 90%);
         border-radius: 9rem;
-        background-color: hsl(0, 0, 90%);
+        background-color: hsl(0, 0%, 90%);
       }
     }
 

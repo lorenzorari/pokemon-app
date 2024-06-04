@@ -12,14 +12,14 @@
 
     transition: background-color 0.1s ease-in;
 
-    background-color: hsl(0, 0, 94%);
+    background-color: hsl(0, 0%, 94%);
     border: 0.125rem solid transparent;
     border-radius: 0.625rem;
     outline: none;
     user-select: none;
 
     &:hover {
-      background-color: hsl(0, 0, 90%);
+      background-color: hsl(0, 0%, 90%);
     }
 
     &:focus {

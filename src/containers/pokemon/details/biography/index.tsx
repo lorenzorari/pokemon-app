@@ -1,4 +1,3 @@
-import React from 'react';
 import PokemonDescription from 'src/containers/pokemon/description';
 import PokemonInformation from 'src/containers/pokemon/information';
 import { Pokemon } from 'src/models/pokemon';
@@ -12,11 +11,11 @@ interface Props {
 
 const PokemonDetailsBiography = ({ pokemon, species }: Props) => {
   const getDescription = () => {
-    const text = species.flavorTextEntries.find(
+    const text = species?.flavorTextEntries?.find(
       ({ language }) => language.name === 'en'
-    ).flavorText;
+    )!.flavorText;
 
-    return text
+    return text!
       .replace(/u'\f'/, ' ')
       .replace(/\u00AD/g, '')
       .replace(/\u000C/g, ' ')
@@ -26,7 +25,7 @@ const PokemonDetailsBiography = ({ pokemon, species }: Props) => {
   };
 
   const getSpecies = () => {
-    return species.genera.find(({ language }) => language.name === 'en').genus;
+    return species?.genera?.find(({ language }) => language?.name === 'en')!.genus;
   };
 
   const getAnthropometry = (value: number) => {
@@ -57,11 +56,11 @@ const PokemonDetailsBiography = ({ pokemon, species }: Props) => {
         <PokemonInformation title="Species">{getSpecies()}</PokemonInformation>
 
         <PokemonInformation title="Height">
-          {getAnthropometry(pokemon.height)} m
+          {getAnthropometry(pokemon?.height!)} m
         </PokemonInformation>
 
         <PokemonInformation title="Weight">
-          {getAnthropometry(pokemon.weight)} kg
+          {getAnthropometry(pokemon.weight!)} kg
         </PokemonInformation>
 
         {/* <PokemonInformation title="Abilities">content</PokemonInformation> */}

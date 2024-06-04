@@ -1,4 +1,3 @@
-import React from 'react';
 import { useHistory } from 'react-router';
 import Button from 'src/components/button';
 import styles from './not-found.module.scss';

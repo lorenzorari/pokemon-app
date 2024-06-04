@@ -1,4 +1,3 @@
-import React from 'react';
 import { ReactSVG } from 'react-svg';
 import classNames from 'classnames';
 import styles from './github-link.module.scss';

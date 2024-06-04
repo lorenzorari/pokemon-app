@@ -16,7 +16,7 @@ interface Props {
 
 const PokemonCard = ({ pokemon, className, onClick }: Props) => {
   const pokemonTypes = pokemon.types;
-  const pokemonType = pokemonTypes[0].type.name;
+  const pokemonType = pokemonTypes?.[0].type.name;
 
   const style = {
     '--color-type-1': `var(--color-${pokemonType}-1)`,
@@ -24,17 +24,13 @@ const PokemonCard = ({ pokemon, className, onClick }: Props) => {
   } as React.CSSProperties;
 
   return (
-    <article
-      className={classNames(styles.card, className)}
-      style={style}
-      onClick={onClick}
-    >
+    <article className={classNames(styles.card, className)} style={style} onClick={onClick}>
       <PokemonCardTitle pokemon={pokemon} />
 
       <PokemonCardId pokemon={pokemon} />
 
       <div className={styles['types-container']}>
-        {pokemonTypes.map(({ type }, i) => (
+        {pokemonTypes?.map(({ type }, i) => (
           <TypeTag key={i} className={styles['type-tag']} value={type.name} />
         ))}
       </div>
@@ -51,7 +47,7 @@ const PokemonCard = ({ pokemon, className, onClick }: Props) => {
   );
 };
 
-const PokemonCardPropsAreEqual = (prev, next) => {
+const PokemonCardPropsAreEqual = (prev: any, next: any) => {
   return prev.pokemon === next.pokemon;
 };
 
