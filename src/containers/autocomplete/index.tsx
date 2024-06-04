@@ -1,13 +1,10 @@
 import classNames from 'classnames';
-import React, { forwardRef, MutableRefObject, useState } from 'react';
+import React, { forwardRef, useState } from 'react';
 import { useHistory } from 'react-router';
 import SearchBar from 'src/components/search-bar';
 import { POKEMON_QUANTITY } from 'src/constants';
 import { getIdFromResourceUrl } from 'src/helpers/get-id-from-resource-url';
-import {
-  NamedAPIResource,
-  NamedAPIResources,
-} from 'src/models/named-api-resource';
+import { NamedAPIResource, NamedAPIResources } from 'src/models/named-api-resource';
 import AutocompleteError from './error';
 import Suggestions from './suggestions';
 import styles from './autocomplete.module.scss';
@@ -22,7 +19,7 @@ interface Props {
 const Autocomplete = forwardRef(
   (
     { dataToFilter, suggestionsSize = 4, className, placeholder }: Props,
-    ref?: MutableRefObject<any>
+    ref?: React.LegacyRef<HTMLDivElement> | undefined
   ) => {
     const history = useHistory();
     const [searchValue, setSearchValue] = useState('');
@@ -45,16 +42,13 @@ const Autocomplete = forwardRef(
 
       if (!suggestions.length) {
         if (isNaN(+value)) setError(`${value} is not a Pokémon.`);
-        else
-          setError(
-            `No Pokémon has this id, please choose an id from 1 to ${POKEMON_QUANTITY}.`
-          );
+        else setError(`No Pokémon has this id, please choose an id from 1 to ${POKEMON_QUANTITY}.`);
 
         return false;
       }
 
       const { name, url } = suggestions[0];
-      const id = getIdFromResourceUrl(url).toString();
+      const id = getIdFromResourceUrl(url!).toString();
 
       if (suggestionSelected === -1 && name !== value && id !== value) {
         setSuggestions([]);
@@ -72,18 +66,18 @@ const Autocomplete = forwardRef(
 
       if (error) setError('');
 
-      const filteredData = dataToFilter.filter(({ name, url }) => {
-        const nameLowercased = name.toLowerCase();
+      const filteredData = dataToFilter?.filter(({ name, url }) => {
+        const nameLowercased = name!.toLowerCase();
         const valueLowercased = value.toLowerCase();
 
         if (isNaN(+value)) return nameLowercased.includes(valueLowercased);
 
-        const id = getIdFromResourceUrl(url);
+        const id = getIdFromResourceUrl(url!);
 
         return id.toString().includes(value);
       });
 
-      setSuggestions(filteredData.slice(0, suggestionsSize));
+      setSuggestions(filteredData!.slice(0, suggestionsSize));
       setSearchValue(value);
       setSuggestionSelected(-1);
     };
@@ -92,7 +86,7 @@ const Autocomplete = forwardRef(
       if (!isValueValidated(value)) return;
 
       if (suggestionSelected !== -1)
-        return navigateToDetails(suggestions[suggestionSelected].name);
+        return navigateToDetails(suggestions[suggestionSelected].name!);
 
       navigateToDetails(value);
     };
@@ -102,14 +96,14 @@ const Autocomplete = forwardRef(
         case 'ArrowDown':
           if (suggestionSelected < suggestions.length - 1) {
             e.preventDefault();
-            setSuggestionSelected(v => v + 1);
+            setSuggestionSelected((v) => v + 1);
           }
           break;
 
         case 'ArrowUp':
           if (suggestionSelected >= 0) {
             e.preventDefault();
-            setSuggestionSelected(v => v - 1);
+            setSuggestionSelected((v) => v - 1);
           }
           break;
 
@@ -120,7 +114,7 @@ const Autocomplete = forwardRef(
     };
 
     const handleClickSuggestion = (suggestion: NamedAPIResource) => {
-      const id = getIdFromResourceUrl(suggestion.url);
+      const id = getIdFromResourceUrl(suggestion.url!);
       navigateToDetails(id);
     };
 

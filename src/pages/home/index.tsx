@@ -1,5 +1,4 @@
-import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
-import { ReactSVG } from 'react-svg';
+import { useEffect, useRef, useState } from 'react';
 import Loading from 'src/components/loading';
 import Option from 'src/components/option';
 import Select from 'src/components/select';
@@ -44,7 +43,7 @@ const HomePage = () => {
       const pokemonData = await loadPokemons(slicedPokemonResources);
 
       setDisplayedPokemons([...displayedPokemons, ...pokemonData]);
-      setGenerationNames(generationRes.map((gen) => gen.name));
+      setGenerationNames(generationRes.map((gen) => gen.name!));
       setAllPokemonResources(pokeRes);
       setFilteredPokemonResources(pokeRes);
       setIsLoadingPokemon(false);
@@ -68,7 +67,7 @@ const HomePage = () => {
   }, [filteredPokemonResources]);
 
   const loadPokemons = async (data: NamedAPIResources) => {
-    const pokemonData = await Promise.all(data.map(async ({ name }) => await getPokemon(name)));
+    const pokemonData = await Promise.all(data.map(async ({ name }) => await getPokemon(name!)));
 
     return pokemonData;
   };

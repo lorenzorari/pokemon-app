@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 import Tab from 'src/components/tab';
 import styles from './tabs.module.scss';
 
@@ -13,11 +13,7 @@ const PokemonDetailsTabs = ({ tabs, activeTab, setActiveTab }: Props) => {
     <nav>
       <ul className={styles.tabs}>
         {tabs.map((tab, i) => (
-          <Tab
-            key={i}
-            onClick={() => setActiveTab(tab)}
-            isActive={activeTab === tab}
-          >
+          <Tab key={i} onClick={() => setActiveTab(tab)} isActive={activeTab === tab}>
             {tab}
           </Tab>
         ))}

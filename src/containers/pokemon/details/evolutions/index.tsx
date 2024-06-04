@@ -1,9 +1,8 @@
-import React from 'react';
 import { useHistory } from 'react-router';
 import PokemonEvolution from 'src/containers/pokemon/evolution';
 import styles from './evolutions.module.scss';
 
-const PokemonDetailsEvolutions = ({ pokemonEvolutions }) => {
+const PokemonDetailsEvolutions = ({ pokemonEvolutions }: any) => {
   const history = useHistory();
 
   const handleClick = (evolution: any) => {
@@ -12,7 +11,7 @@ const PokemonDetailsEvolutions = ({ pokemonEvolutions }) => {
 
   return (
     <ul className={styles['evolutions-container']}>
-      {pokemonEvolutions.map(evo => {
+      {pokemonEvolutions.map((evo: any) => {
         return (
           <li key={evo.id}>
             <div className={styles['line-container']}>
@@ -20,7 +19,7 @@ const PokemonDetailsEvolutions = ({ pokemonEvolutions }) => {
             </div>
 
             {Array.isArray(evo) ? (
-              evo.map(alternateEvo => (
+              evo.map((alternateEvo) => (
                 <PokemonEvolution
                   key={alternateEvo.id}
                   evolution={alternateEvo}
@@ -28,10 +27,7 @@ const PokemonDetailsEvolutions = ({ pokemonEvolutions }) => {
                 />
               ))
             ) : (
-              <PokemonEvolution
-                evolution={evo}
-                onClick={() => handleClick(evo)}
-              />
+              <PokemonEvolution evolution={evo} onClick={() => handleClick(evo)} />
             )}
           </li>
         );

@@ -8,7 +8,7 @@ const INITIAL_URL = 'https://pokeapi.co/api/v2/pokemon';
 const getPokemon = async (pokemon: string): Promise<Pokemon> => {
   return axios
     .get(`${INITIAL_URL}/${pokemon}`)
-    .then(res => {
+    .then((res) => {
       const data = convertUnderscoreToCamelcase(res.data);
       return data as Pokemon;
     })
@@ -16,8 +16,8 @@ const getPokemon = async (pokemon: string): Promise<Pokemon> => {
 };
 
 const getAllPokemons = async (
-  offset: number = null,
-  limit: number = null,
+  offset?: number,
+  limit?: number,
   url: string = INITIAL_URL
 ): Promise<PokemonPagination> => {
   if (offset || limit) {

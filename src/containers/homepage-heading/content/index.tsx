@@ -1,4 +1,3 @@
-import React from 'react';
 import Autocomplete from 'src/containers/autocomplete';
 import HomepageHeadingContentHeading from 'src/containers/homepage-heading/content/heading';
 import { NamedAPIResources } from 'src/models/named-api-resource';
@@ -14,10 +13,7 @@ const HomepageHeadingContent = ({ heading, dataToFilter }: Props) => {
     <div className={styles['content']}>
       <HomepageHeadingContentHeading value={heading} />
 
-      <Autocomplete
-        dataToFilter={dataToFilter}
-        placeholder="Search a pokemon by name or id..."
-      />
+      <Autocomplete dataToFilter={dataToFilter} placeholder="Search a pokemon by name or id..." />
     </div>
   );
 };

@@ -1,4 +1,3 @@
-import React from 'react';
 import { getArtworkUrl } from 'src/helpers/get-artwork-url';
 import styles from './evolution.module.scss';
 

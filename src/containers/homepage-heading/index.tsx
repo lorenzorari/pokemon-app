@@ -30,7 +30,7 @@ const HomepageHeadingContainer = (props: Props) => {
     >
       <Particles
         className={styles.particles}
-        init={props.initParticles}
+        init={props.initParticles as any}
         options={particlesOptions}
       />
 

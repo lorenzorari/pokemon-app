@@ -1,4 +1,3 @@
-import React from 'react';
 import classNames from 'classnames';
 import { ReactSVG } from 'react-svg';
 import styles from './error.module.scss';
@@ -16,7 +15,7 @@ const AutocompleteError = ({ error, className, src }: Props) => {
         <div className={classNames(styles.error, className)}>
           {error}
           <span>
-            <ReactSVG className={styles.icon} src={src} />
+            <ReactSVG className={styles.icon} src={src!} />
           </span>
         </div>
       )}
