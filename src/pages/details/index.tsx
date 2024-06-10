@@ -13,7 +13,7 @@ import PokemonDetailsBiography from 'src/containers/pokemon/details/biography';
 import PokemonDetailsEvolutions from 'src/containers/pokemon/details/evolutions';
 import PokemonDetailsStats from 'src/containers/pokemon/details/stats';
 import { getIdFromResourceUrl } from 'src/helpers/get-id-from-resource-url';
-import { useClickOutside } from 'src/helpers/hooks/click-outside';
+import { useClickOutside } from 'src/hooks/click-outside';
 import { ChainLink, ChainLinks } from 'src/models/evolution/chain';
 import { NamedAPIResources } from 'src/models/named-api-resource';
 import { Pokemon } from 'src/models/pokemon';

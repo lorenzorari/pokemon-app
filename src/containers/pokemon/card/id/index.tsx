@@ -1,4 +1,4 @@
-import { zeroPad } from 'src/helpers/utils/zero-pad';
+import { zeroPad } from 'src/utils/zero-pad';
 import styles from './id.module.scss';
 
 const PokemonCardId = ({ pokemon }: any) => {

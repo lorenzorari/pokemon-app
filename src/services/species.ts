@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { convertUnderscoreToCamelcase } from 'src/helpers/utils/convert-underscore-to-camelcase';
+import { convertUnderscoreToCamelcase } from 'src/utils/convert-underscore-to-camelcase';
 import { Pokemon } from 'src/models/pokemon/index';
 import { Species } from 'src/models/species';
 
