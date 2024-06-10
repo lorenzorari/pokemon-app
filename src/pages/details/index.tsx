@@ -16,12 +16,12 @@ import { getIdFromResourceUrl } from 'src/helpers/get-id-from-resource-url';
 import { useClickOutside } from 'src/hooks/click-outside';
 import { ChainLink, ChainLinks } from 'src/models/evolution/chain';
 import { NamedAPIResources } from 'src/models/named-api-resource';
-import { Pokemon } from 'src/models/pokemon';
 import { Species } from 'src/models/species';
 import { getEvolutionChain } from 'src/services/evolution-chain';
 import { getAllPokemons, getPokemon } from 'src/services/pokemon';
 import { getSpecies } from 'src/services/species';
 import styles from './details.module.scss';
+import usePokemon from 'src/hooks/pokemon/usePokemon';
 
 interface Params {
   id: string;
@@ -34,7 +34,8 @@ const EVOLUTIONS = 'Evolutions';
 const DetailsPage = () => {
   const { id } = useParams<Params>();
   const history = useHistory();
-  const [pokemon, setPokemon] = useState<Pokemon | null>(null);
+  const { pokemon } = usePokemon(id);
+
   const [species, setSpecies] = useState<Species | null>(null);
   const [allPokemonResources, setAllPokemonResources] = useState<NamedAPIResources>([]);
   const [pokemonEvolutions, setPokemonEvolutions] = useState([]);
@@ -79,7 +80,6 @@ const DetailsPage = () => {
         const pokemonData: any = await getPokemon(id);
         const speciesData = await getSpecies(pokemonData);
 
-        setPokemon(pokemonData);
         setSpecies(speciesData);
       } catch (err) {
         history.push('/');

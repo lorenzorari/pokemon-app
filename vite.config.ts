@@ -8,4 +8,13 @@ export default defineConfig({
   build: {
     outDir: './build',
   },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'https://pokeapi.co/api/v2',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ''),
+      },
+    },
+  },
 });

@@ -1,18 +1,12 @@
 import axios from 'axios';
-import { convertUnderscoreToCamelcase } from 'src/utils/convert-underscore-to-camelcase';
 import { Pokemon } from 'src/models/pokemon';
 import { PokemonPagination } from 'src/models/pokemon/pagination';
+import { pokeapi } from 'src/helpers/http';
 
 const INITIAL_URL = 'https://pokeapi.co/api/v2/pokemon';
 
-const getPokemon = async (pokemon: string): Promise<Pokemon> => {
-  return axios
-    .get(`${INITIAL_URL}/${pokemon}`)
-    .then((res) => {
-      const data = convertUnderscoreToCamelcase(res.data);
-      return data as Pokemon;
-    })
-    .catch(({ response }) => response);
+const getPokemon = async (id: string): Promise<Pokemon> => {
+  return await pokeapi.get(`pokemon/${id}`).json<Pokemon>();
 };
 
 const getAllPokemons = async (
