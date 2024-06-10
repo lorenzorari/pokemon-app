@@ -13,7 +13,5 @@ export interface ChainLink {
   isBaby: boolean;
   species: NamedAPIResource;
   evolutionDetails: EvolutionDetails;
-  evolvesTo: ChainLinks;
+  evolvesTo: ChainLink[];
 }
-
-export declare type ChainLinks = ChainLink[];

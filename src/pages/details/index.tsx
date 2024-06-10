@@ -12,15 +12,13 @@ import PokemonDetails from 'src/containers/pokemon/details';
 import PokemonDetailsBiography from 'src/containers/pokemon/details/biography';
 import PokemonDetailsEvolutions from 'src/containers/pokemon/details/evolutions';
 import PokemonDetailsStats from 'src/containers/pokemon/details/stats';
-import { getIdFromResourceUrl } from 'src/helpers/get-id-from-resource-url';
 import { useClickOutside } from 'src/hooks/click-outside';
-import { ChainLink, ChainLinks } from 'src/models/evolution/chain';
 import { NamedAPIResources } from 'src/models/named-api-resource';
-import { getEvolutionChain } from 'src/services/evolution-chain';
 import { getAllPokemons } from 'src/services/pokemon';
 import styles from './details.module.scss';
 import { usePokemon } from 'src/hooks/pokemon/usePokemon';
 import { usePokemonSpecies } from 'src/hooks/pokemon/usePokemonSpecies';
+import { usePokemonEvolutions } from 'src/hooks/pokemon/usePokemonEvolutions';
 
 interface Params {
   id: string;
@@ -35,14 +33,13 @@ const DetailsPage = () => {
   const history = useHistory();
   const { pokemon, isPokemonLoading } = usePokemon(id);
   const { pokemonSpecies: species } = usePokemonSpecies(id);
+  const { pokemonEvolutions, arePokemonEvolutionsLoading } = usePokemonEvolutions(id);
 
   const [allPokemonResources, setAllPokemonResources] = useState<NamedAPIResources>([]);
-  const [pokemonEvolutions, setPokemonEvolutions] = useState([]);
   const [isSearchModalOpen, setIsSearchModalOpen] = useState<boolean>(false);
 
   const [isLoadingResources, setIsLoadingResources] = useState<boolean>(true);
-  const [isLoadingEvolutions, setIsLoadingEvolutions] = useState<boolean>(true);
-  const isLoading: boolean = isPokemonLoading || isLoadingResources || isLoadingEvolutions;
+  const isLoading: boolean = isPokemonLoading || isLoadingResources || arePokemonEvolutionsLoading;
 
   const searchModalRef = useRef(null);
 
@@ -51,7 +48,7 @@ const DetailsPage = () => {
   const tabContent = {
     [BIOGRAPHY]: species && <PokemonDetailsBiography pokemon={pokemon!} species={species} />,
     [STATS]: <PokemonDetailsStats pokemon={pokemon!} />,
-    [EVOLUTIONS]: pokemonEvolutions.length > 0 && (
+    [EVOLUTIONS]: pokemonEvolutions?.length > 0 && (
       <PokemonDetailsEvolutions pokemonEvolutions={pokemonEvolutions} />
     ),
   };
@@ -76,69 +73,6 @@ const DetailsPage = () => {
 
     initPokemon();
   }, [id]);
-
-  useEffect(() => {
-    const initEvolutions = async () => {
-      setIsLoadingEvolutions(true);
-      const { chain } = await getEvolutionChain(species!);
-      const evolutions = getPokemonEvolutions(chain!);
-
-      setPokemonEvolutions(evolutions);
-      setIsLoadingEvolutions(false);
-    };
-
-    species && initEvolutions();
-  }, [species]);
-
-  const createEvolution = (url: string, name: string) => {
-    return {
-      id: getIdFromResourceUrl(url),
-      name,
-    };
-  };
-
-  const addSimpleEvolution = ({ species }: ChainLink, array: Array<any>) => {
-    array.push(createEvolution(species.url!, species.name!));
-  };
-
-  const addAlternateEvolutions = (chainLinks: ChainLinks, array: Array<any>) => {
-    const finalEvolutions: any = [];
-
-    const alternateEvos = chainLinks.map(({ evolvesTo, species }) => {
-      if (evolvesTo.length) addSimpleEvolution(evolvesTo[0], finalEvolutions);
-
-      return createEvolution(species.url!, species.name!);
-    });
-
-    array.push(alternateEvos);
-    finalEvolutions.length && array.push(finalEvolutions);
-  };
-
-  const getPokemonEvolutions = (chainLink: ChainLink) => {
-    if (chainLink) {
-      const { url, name } = chainLink.species; // First species
-
-      const evolutions: any = [createEvolution(url!, name!)];
-
-      let currentEvo = chainLink.evolvesTo;
-
-      while (currentEvo.length) {
-        if (currentEvo.length === 1) {
-          addSimpleEvolution(currentEvo[0], evolutions);
-          currentEvo = currentEvo[0].evolvesTo;
-        }
-
-        if (currentEvo.length > 1) {
-          addAlternateEvolutions(currentEvo, evolutions);
-          break;
-        }
-      }
-
-      return evolutions;
-    }
-
-    return null;
-  };
 
   const handleBackButton = () => {
     history.push('/');
