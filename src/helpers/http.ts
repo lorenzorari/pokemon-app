@@ -7,9 +7,8 @@ export const pokeapi = ky.extend({
     afterResponse: [
       async (_request, _options, response) => {
         const data = await response.json();
-        console.log({ data });
-
         const camelizedData = convertUnderscoreToCamelcase(data);
+
         return new Response(JSON.stringify(camelizedData));
       },
     ],

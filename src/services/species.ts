@@ -1,13 +1,8 @@
-import axios from 'axios';
-import { convertUnderscoreToCamelcase } from 'src/utils/convert-underscore-to-camelcase';
-import { Pokemon } from 'src/models/pokemon/index';
 import { Species } from 'src/models/species';
+import { pokeapi } from 'src/helpers/http';
 
-const getSpecies = async ({ species }: Pokemon): Promise<Species> => {
-  return axios.get(species?.url!).then((res) => {
-    const data = convertUnderscoreToCamelcase(res.data);
-    return data as Species;
-  });
+const getSpecies = async (pokemonId: string): Promise<Species> => {
+  return pokeapi.get(`pokemon-species/${pokemonId}`).json<Species>();
 };
 
 export { getSpecies };

@@ -16,12 +16,11 @@ import { getIdFromResourceUrl } from 'src/helpers/get-id-from-resource-url';
 import { useClickOutside } from 'src/hooks/click-outside';
 import { ChainLink, ChainLinks } from 'src/models/evolution/chain';
 import { NamedAPIResources } from 'src/models/named-api-resource';
-import { Species } from 'src/models/species';
 import { getEvolutionChain } from 'src/services/evolution-chain';
-import { getAllPokemons, getPokemon } from 'src/services/pokemon';
-import { getSpecies } from 'src/services/species';
+import { getAllPokemons } from 'src/services/pokemon';
 import styles from './details.module.scss';
-import usePokemon from 'src/hooks/pokemon/usePokemon';
+import { usePokemon } from 'src/hooks/pokemon/usePokemon';
+import { usePokemonSpecies } from 'src/hooks/pokemon/usePokemonSpecies';
 
 interface Params {
   id: string;
@@ -34,17 +33,16 @@ const EVOLUTIONS = 'Evolutions';
 const DetailsPage = () => {
   const { id } = useParams<Params>();
   const history = useHistory();
-  const { pokemon } = usePokemon(id);
+  const { pokemon, isPokemonLoading } = usePokemon(id);
+  const { pokemonSpecies: species } = usePokemonSpecies(id);
 
-  const [species, setSpecies] = useState<Species | null>(null);
   const [allPokemonResources, setAllPokemonResources] = useState<NamedAPIResources>([]);
   const [pokemonEvolutions, setPokemonEvolutions] = useState([]);
   const [isSearchModalOpen, setIsSearchModalOpen] = useState<boolean>(false);
 
-  const [isLoadingPokemon, setIsLoadingPokemon] = useState<boolean>(true);
   const [isLoadingResources, setIsLoadingResources] = useState<boolean>(true);
   const [isLoadingEvolutions, setIsLoadingEvolutions] = useState<boolean>(true);
-  const isLoading: boolean = isLoadingPokemon || isLoadingResources || isLoadingEvolutions;
+  const isLoading: boolean = isPokemonLoading || isLoadingResources || isLoadingEvolutions;
 
   const searchModalRef = useRef(null);
 
@@ -74,18 +72,6 @@ const DetailsPage = () => {
   useEffect(() => {
     const initPokemon = async () => {
       setIsSearchModalOpen(false);
-      setIsLoadingPokemon(true);
-
-      try {
-        const pokemonData: any = await getPokemon(id);
-        const speciesData = await getSpecies(pokemonData);
-
-        setSpecies(speciesData);
-      } catch (err) {
-        history.push('/');
-      }
-
-      setIsLoadingPokemon(false);
     };
 
     initPokemon();
