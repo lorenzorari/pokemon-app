@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;700&display=swap");
 
 .heading {
   --headingSize: 10rem;
@@ -10,7 +10,7 @@
   overflow: hidden;
 
   h1 {
-    font-family: 'Urbanist', sans-serif;
+    font-family: "Urbanist", sans-serif;
     font-size: var(--headingSize);
     letter-spacing: 0.175rem;
 

@@ -1,52 +1,52 @@
-import { useEffect, useRef, useState } from 'react';
-import { useParams } from 'react-router';
-import { useHistory } from 'react-router-dom';
-import { ReactSVG } from 'react-svg';
-import Button from 'src/components/button';
-import Loading from 'src/components/loading';
-import Modal from 'src/components/modal';
-import { POKEMON_QUANTITY } from 'src/constants';
-import Autocomplete from 'src/containers/autocomplete';
-import PokemonCard from 'src/containers/pokemon/card';
-import PokemonDetails from 'src/containers/pokemon/details';
-import PokemonDetailsBiography from 'src/containers/pokemon/details/biography';
-import PokemonDetailsEvolutions from 'src/containers/pokemon/details/evolutions';
-import PokemonDetailsStats from 'src/containers/pokemon/details/stats';
-import { useClickOutside } from 'src/hooks/click-outside';
-import { NamedAPIResources } from 'src/models/named-api-resource';
-import { getAllPokemons } from 'src/services/pokemon';
-import styles from './details.module.scss';
-import { usePokemon } from 'src/hooks/pokemon/usePokemon';
-import { usePokemonSpecies } from 'src/hooks/pokemon/usePokemonSpecies';
-import { usePokemonEvolutions } from 'src/hooks/pokemon/usePokemonEvolutions';
+import { useEffect, useRef, useState } from "react";
+import { useParams } from "react-router";
+import { Link, useHistory } from "react-router-dom";
+import { POKEMON_QUANTITY } from "src/constants";
+import PokemonDetailsBiography from "src/containers/pokemon/details/biography";
+import PokemonDetailsEvolutions from "src/containers/pokemon/details/evolutions";
+import PokemonDetailsStats from "src/containers/pokemon/details/stats";
+import { useClickOutside } from "src/hooks/click-outside";
+import { NamedAPIResources } from "src/models/named-api-resource";
+import { getAllPokemons } from "src/services/pokemon";
+import styles from "./details.module.scss";
+import { usePokemon } from "src/hooks/pokemon/usePokemon";
+import { usePokemonSpecies } from "src/hooks/pokemon/usePokemonSpecies";
+import { usePokemonEvolutions } from "src/hooks/pokemon/usePokemonEvolutions";
+import { ReactSVG } from "react-svg";
+import PokemonDetailHero from "src/components/pages/pokemon-details/Hero";
 
 interface Params {
   id: string;
 }
 
-const BIOGRAPHY = 'Biography';
-const STATS = 'Stats';
-const EVOLUTIONS = 'Evolutions';
+const BIOGRAPHY = "Biography";
+const STATS = "Stats";
+const EVOLUTIONS = "Evolutions";
 
 const DetailsPage = () => {
   const { id } = useParams<Params>();
   const history = useHistory();
   const { pokemon, isPokemonLoading } = usePokemon(id);
   const { pokemonSpecies: species } = usePokemonSpecies(id);
-  const { pokemonEvolutions, arePokemonEvolutionsLoading } = usePokemonEvolutions(id);
+  const { pokemonEvolutions, arePokemonEvolutionsLoading } =
+    usePokemonEvolutions(id);
 
-  const [allPokemonResources, setAllPokemonResources] = useState<NamedAPIResources>([]);
+  const [allPokemonResources, setAllPokemonResources] =
+    useState<NamedAPIResources>([]);
   const [isSearchModalOpen, setIsSearchModalOpen] = useState<boolean>(false);
 
   const [isLoadingResources, setIsLoadingResources] = useState<boolean>(true);
-  const isLoading: boolean = isPokemonLoading || isLoadingResources || arePokemonEvolutionsLoading;
+  const isLoading: boolean =
+    isPokemonLoading || isLoadingResources || arePokemonEvolutionsLoading;
 
   const searchModalRef = useRef(null);
 
   const tabs: string[] = [BIOGRAPHY, STATS, EVOLUTIONS];
 
   const tabContent = {
-    [BIOGRAPHY]: species && <PokemonDetailsBiography pokemon={pokemon!} species={species} />,
+    [BIOGRAPHY]: species && (
+      <PokemonDetailsBiography pokemon={pokemon!} species={species} />
+    ),
     [STATS]: <PokemonDetailsStats pokemon={pokemon!} />,
     [EVOLUTIONS]: pokemonEvolutions?.length > 0 && (
       <PokemonDetailsEvolutions pokemonEvolutions={pokemonEvolutions} />
@@ -74,55 +74,57 @@ const DetailsPage = () => {
     initPokemon();
   }, [id]);
 
-  const handleBackButton = () => {
-    history.push('/');
+  const getDescription = () => {
+    const text = species?.flavorTextEntries?.find(
+      ({ language }) => language.name === "en",
+    )!.flavorText;
+
+    if (!text) return "";
+
+    return (
+      text
+        ?.replace(/u'\f'/, " ")
+        .replace(/\u00AD/g, "")
+        // eslint-disable-next-line no-control-regex
+        .replace(/\u000C/g, " ")
+        .replace(/u' -\n'/, " - ")
+        .replace(/u'-\n'/, "-")
+        .replace(/(\r\n|\n|\r)/gm, " ")
+    );
   };
 
-  const handleSearchIcon = (e: any) => {
-    e.stopPropagation();
-    setIsSearchModalOpen(true);
-  };
+  function getPokemonType() {
+    return pokemon?.types?.[0].type.name;
+  }
 
   return (
-    <main className={styles.main}>
-      {!isLoading ? (
-        <>
-          <Button className={styles['btn-back']} theme="back" onClick={handleBackButton}>
-            Back
-          </Button>
-
-          <section className={styles['card-container']}>
-            <PokemonCard className={styles.card} pokemon={pokemon!} />
-
-            <div className={styles.options}>
-              <ReactSVG
-                className={styles['option-search']}
-                src="/assets/svg/search.svg"
-                onClick={handleSearchIcon}
-              />
-            </div>
-          </section>
-
-          <Modal className={styles['search-modal']} isOpen={isSearchModalOpen}>
-            <Autocomplete
-              ref={searchModalRef}
-              className={styles.autocomplete}
-              placeholder="Search a pokemon by name or id..."
-              suggestionsSize={10}
-              dataToFilter={allPokemonResources}
+    <>
+      <header className="sticky top-0 border-b border-b-[#ffffff4d] px-32 py-6 backdrop-blur-lg">
+        <nav>
+          <Link
+            to="/"
+            className="inline-flex items-center gap-2 text-3xl font-bold"
+          >
+            <ReactSVG
+              wrapper="div"
+              width={10}
+              className="h-10 w-10"
+              src="/assets/svg/logo.svg"
             />
-          </Modal>
-
-          <section className={styles.details}>
-            <PokemonDetails defaultTab={BIOGRAPHY} tabs={tabs} tabContent={tabContent} />
-          </section>
-        </>
-      ) : (
-        <div className={styles['loading-container']}>
-          <Loading src="/assets/svg/logo.svg" text={`Loading pokemon data`} />
-        </div>
-      )}
-    </main>
+            Pocketex
+          </Link>
+        </nav>
+      </header>
+      <main className={styles.main}>
+        {pokemon && (
+          <PokemonDetailHero
+            pokemon={pokemon}
+            pokemonType={getPokemonType()}
+            description={getDescription()}
+          />
+        )}
+      </main>
+    </>
   );
 };
 
