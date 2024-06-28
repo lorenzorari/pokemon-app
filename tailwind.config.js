@@ -77,6 +77,19 @@ export default {
           2: "var(--color-water-2)",
         },
       },
+      keyframes: {
+        levitate: {
+          "0%, 100%": {
+            transform: "translateY(-6px)",
+          },
+          "50%": {
+            transform: "translateY(6px)",
+          },
+        },
+      },
+      animation: {
+        levitate: "levitate 4s ease-in-out infinite",
+      },
     },
   },
   plugins: [],

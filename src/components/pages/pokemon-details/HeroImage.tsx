@@ -24,12 +24,16 @@ const PokemonDetailHeroImage = ({ pokemonType, imageSrc, imageAlt }: Props) => {
         className="absolute size-[400px] rounded-full opacity-[18%]"
       ></div>
       <div
-        className="absolute size-[400px] animate-spin rounded-full border [animation-duration:10s]"
+        className="absolute size-[400px] animate-spin rounded-full [animation-duration:10s]"
         style={{
           backgroundImage: `conic-gradient(from 0deg at 100% 10%,#FFFFFFFF 0%,#FFFFFFFF 50%,${backgroundColor} 100%)`,
         }}
       ></div>
-      <img className="z-10" src={imageSrc} alt={imageAlt} />
+      <img
+        className="levitate animate-levitate z-10"
+        src={imageSrc}
+        alt={imageAlt}
+      />
     </>
   );
 };

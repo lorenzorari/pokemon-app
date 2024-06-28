@@ -8,7 +8,6 @@ import PokemonDetailsStats from "src/containers/pokemon/details/stats";
 import { useClickOutside } from "src/hooks/click-outside";
 import { NamedAPIResources } from "src/models/named-api-resource";
 import { getAllPokemons } from "src/services/pokemon";
-import styles from "./details.module.scss";
 import { usePokemon } from "src/hooks/pokemon/usePokemon";
 import { usePokemonSpecies } from "src/hooks/pokemon/usePokemonSpecies";
 import { usePokemonEvolutions } from "src/hooks/pokemon/usePokemonEvolutions";
@@ -27,7 +26,7 @@ const DetailsPage = () => {
   const { id } = useParams<Params>();
   const history = useHistory();
   const { pokemon, isPokemonLoading } = usePokemon(id);
-  const { pokemonSpecies: species } = usePokemonSpecies(id);
+  const { pokemonSpecies: species, getGenus } = usePokemonSpecies(id);
   const { pokemonEvolutions, arePokemonEvolutionsLoading } =
     usePokemonEvolutions(id);
 
@@ -99,7 +98,7 @@ const DetailsPage = () => {
 
   return (
     <>
-      <header className="sticky top-0 border-b border-b-[#ffffff4d] px-32 py-6 backdrop-blur-lg">
+      <header className="sticky top-0 mx-auto max-w-[1840px] border-b border-b-[#ffffff4d] px-32 py-6 backdrop-blur-lg">
         <nav>
           <Link
             to="/"
@@ -115,9 +114,10 @@ const DetailsPage = () => {
           </Link>
         </nav>
       </header>
-      <main className={styles.main}>
+      <main className="mx-auto max-w-[1840px]">
         {pokemon && (
           <PokemonDetailHero
+            genus={getGenus()}
             pokemon={pokemon}
             pokemonType={getPokemonType()}
             description={getDescription()}
