@@ -22,7 +22,7 @@ const PokemonDetailHero = ({
   return (
     <section className="flex h-[calc(100vh-95.5px)] max-h-[820px] min-h-[810px] w-full items-center justify-between gap-2 overflow-x-clip px-32 py-4">
       <div className="max-w-96">
-        <PokemonTypeBadge variant={pokemonType} />
+        <PokemonTypeBadge variant={pokemonType} withLabel />
         <h1 className="mb-4 mt-3 text-7xl font-bold capitalize">
           {pokemon?.name}
         </h1>

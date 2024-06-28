@@ -1,4 +1,6 @@
 import classNames from "classnames";
+import { capitalize } from "src/utils/capitalize";
+import { SVG } from "src/components/SVG";
 
 export enum PokemonType {
   Bug = "bug",
@@ -23,6 +25,7 @@ export enum PokemonType {
 
 interface Props {
   variant: PokemonType;
+  withLabel?: boolean;
 }
 
 const POKEMON_TYPES = {
@@ -47,21 +50,25 @@ const POKEMON_TYPES = {
 };
 
 const PokemonTypeBadge = (props: Props) => {
-  const { variant } = props;
+  const { variant, withLabel = false } = props;
   const variantClass = POKEMON_TYPES[variant];
-
-  function capitalize(s: string) {
-    return (s && s[0].toUpperCase() + s.slice(1)) || "";
-  }
+  const iconOnlyClass = "justify-center p-[6px]";
+  const withLabelClass = "px-[14px] py-1";
 
   return (
     <span
       className={classNames(
-        "rounded-full px-3 py-1 font-bold capitalize text-white",
+        "inline-flex items-center gap-1 rounded-full font-bold text-white",
+        withLabel ? withLabelClass : iconOnlyClass,
         variantClass,
       )}
     >
-      {capitalize(variant)}
+      <SVG
+        className="size-5"
+        src={`/assets/svg/pokemon-types/${variant}.svg`}
+      />
+
+      {withLabel && capitalize(variant)}
     </span>
   );
 };
