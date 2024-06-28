@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router";
-import { Link, useHistory } from "react-router-dom";
 import { POKEMON_QUANTITY } from "src/constants";
 import PokemonDetailsBiography from "src/containers/pokemon/details/biography";
 import PokemonDetailsEvolutions from "src/containers/pokemon/details/evolutions";
@@ -11,8 +10,8 @@ import { getAllPokemons } from "src/services/pokemon";
 import { usePokemon } from "src/hooks/pokemon/usePokemon";
 import { usePokemonSpecies } from "src/hooks/pokemon/usePokemonSpecies";
 import { usePokemonEvolutions } from "src/hooks/pokemon/usePokemonEvolutions";
-import { ReactSVG } from "react-svg";
 import PokemonDetailHero from "src/components/pages/pokemon-details/Hero";
+import { Navbar } from "src/components/layouts/Navbar";
 
 interface Params {
   id: string;
@@ -24,7 +23,6 @@ const EVOLUTIONS = "Evolutions";
 
 const DetailsPage = () => {
   const { id } = useParams<Params>();
-  const history = useHistory();
   const { pokemon, isPokemonLoading } = usePokemon(id);
   const { pokemonSpecies: species, getGenus } = usePokemonSpecies(id);
   const { pokemonEvolutions, arePokemonEvolutionsLoading } =
@@ -98,23 +96,8 @@ const DetailsPage = () => {
 
   return (
     <>
-      <header className="sticky top-0 mx-auto max-w-[1840px] border-b border-b-[#ffffff4d] px-32 py-6 backdrop-blur-lg">
-        <nav>
-          <Link
-            to="/"
-            className="inline-flex items-center gap-2 text-3xl font-bold"
-          >
-            <ReactSVG
-              wrapper="div"
-              width={10}
-              className="h-10 w-10"
-              src="/assets/svg/logo.svg"
-            />
-            Pocketex
-          </Link>
-        </nav>
-      </header>
-      <main className="mx-auto max-w-[1840px]">
+      <Navbar />
+      <main className="mx-auto max-w-[1440px]">
         {pokemon && (
           <PokemonDetailHero
             genus={getGenus()}
