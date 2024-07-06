@@ -35,6 +35,23 @@ export const Training = ({ pokemon, species }: Props) => {
             ))}
           </ul>
         </DetailField>
+        <DetailField label="Abilities">
+          <ul className="list-disc pl-[1.1rem]">
+            {pokemon.abilities?.map(({ ability, isHidden }) => (
+              <li key={ability.name}>
+                {replaceDashesBySpaces(ability.name)}{" "}
+                {isHidden && (
+                  <span
+                    title="Hidden ability"
+                    className="rounded-full bg-gray-200 px-2 py-[2px] text-xs font-bold text-gray-500"
+                  >
+                    Hidden
+                  </span>
+                )}
+              </li>
+            ))}
+          </ul>
+        </DetailField>
       </section>
     </DetailPanel>
   );
