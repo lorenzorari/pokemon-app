@@ -1,12 +1,12 @@
-import { Names } from '../name';
-import { APIResource } from './../api-resource';
-import { Descriptions } from './../description';
-import { NamedAPIResource } from './../named-api-resource';
-import { SpeciesDexEntries } from './dex-entry';
-import { FlavorTexts } from './flavor-text';
-import { Genera } from './genus';
-import { PalParkEncounterAreas } from './pal-park-encounter-area';
-import { SpeciesVarieties } from './variety';
+import { Names } from "../name";
+import { APIResource } from "./../api-resource";
+import { Descriptions } from "./../description";
+import { NamedAPIResource } from "./../named-api-resource";
+import { SpeciesDexEntries } from "./dex-entry";
+import { FlavorTexts } from "./flavor-text";
+import { Genera } from "./genus";
+import { PalParkEncounterAreas } from "./pal-park-encounter-area";
+import { SpeciesVarieties } from "./variety";
 
 export interface Species {
   id?: number;
@@ -23,7 +23,7 @@ export interface Species {
   formsSwitchable?: boolean;
   growthRate?: NamedAPIResource;
   pokedexNumbers?: SpeciesDexEntries;
-  eggGroups?: NamedAPIResource;
+  eggGroups?: NamedAPIResource[];
   color?: NamedAPIResource;
   shape?: NamedAPIResource;
   evolvesFromSpecies?: NamedAPIResource;

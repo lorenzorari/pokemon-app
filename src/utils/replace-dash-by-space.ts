@@ -1,3 +1,3 @@
-export const replaceDashBySpace = (word: string) => {
-  return word.replace('-', ' ');
+export const replaceDashesBySpaces = (word: string) => {
+  return word.replaceAll("-", " ");
 };

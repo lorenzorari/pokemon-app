@@ -20,7 +20,7 @@ const PokemonDetailHero = ({
   genus,
 }: Props) => {
   return (
-    <section className="flex h-[calc(100vh-95.5px)] max-h-[820px] min-h-[810px] w-full items-center justify-between gap-2 overflow-x-clip px-32 py-4">
+    <section className="flex max-h-[820px] min-h-[740px] w-full items-center justify-between gap-2 overflow-x-clip px-32 py-4">
       <div className="max-w-96">
         <PokemonTypeBadge variant={pokemonType} withLabel />
         <h1 className="mb-4 mt-3 text-7xl font-bold capitalize">
@@ -31,7 +31,7 @@ const PokemonDetailHero = ({
         <div className="grid w-full grid-cols-3 gap-2">
           <InfoTile title="Height" text={`${pokemon.height} m`} />
           <InfoTile title="Weight" text={`${pokemon.weight} kg`} />
-          <InfoTile title="Height" text={`${genus}`} />
+          <InfoTile title="Species" text={`${genus}`} />
         </div>
       </div>
 

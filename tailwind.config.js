@@ -90,6 +90,9 @@ export default {
       animation: {
         levitate: "levitate 4s ease-in-out infinite",
       },
+      screens: {
+        "3xl": "1792px",
+      },
     },
   },
   plugins: [],

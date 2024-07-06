@@ -12,6 +12,10 @@ import { usePokemonSpecies } from "src/hooks/pokemon/usePokemonSpecies";
 import { usePokemonEvolutions } from "src/hooks/pokemon/usePokemonEvolutions";
 import PokemonDetailHero from "src/components/pages/pokemon-details/Hero";
 import { Navbar } from "src/components/layouts/Navbar";
+import { DetailPanel } from "src/components/details/DetailPanel";
+import { DetailField } from "src/components/details/DetailField";
+import { replaceDashesBySpaces } from "src/utils/replace-dash-by-space";
+import { Breeding } from "src/components/pages/pokemon-details/Breeding";
 
 interface Params {
   id: string;
@@ -97,14 +101,23 @@ const DetailsPage = () => {
   return (
     <>
       <Navbar />
-      <main className="mx-auto max-w-[1440px]">
+      <main className="mx-auto 2xl:max-w-[1440px]">
         {pokemon && (
-          <PokemonDetailHero
-            genus={getGenus()}
-            pokemon={pokemon}
-            pokemonType={getPokemonType()}
-            description={getDescription()}
-          />
+          <>
+            <PokemonDetailHero
+              genus={getGenus()}
+              pokemon={pokemon}
+              pokemonType={getPokemonType()}
+              description={getDescription()}
+            />
+            {species && (
+              <section className="relative z-10 -mt-16 rounded-t-[40px] bg-white px-32 py-[60px] shadow-[0px_100px_484px_0px_rgba(0,0,0,0.4)]">
+                <div>
+                  <Breeding species={species} />
+                </div>
+              </section>
+            )}
+          </>
         )}
       </main>
     </>

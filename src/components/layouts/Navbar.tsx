@@ -3,7 +3,7 @@ import { SVG } from "src/components/SVG";
 
 export const Navbar = () => {
   return (
-    <header className="sticky top-0 mx-auto max-w-[1440px] border-b border-b-[#ffffff4d] px-32 py-6 backdrop-blur-lg">
+    <header className="sticky top-0 mx-auto border-b border-b-[#ffffff4d] px-32 py-6 backdrop-blur-lg 2xl:max-w-[1440px]">
       <nav>
         <Link
           to="/"

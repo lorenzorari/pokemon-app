@@ -2727,6 +2727,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tabler/icons-react@npm:^3.9.0":
+  version: 3.9.0
+  resolution: "@tabler/icons-react@npm:3.9.0"
+  dependencies:
+    "@tabler/icons": "npm:3.9.0"
+  peerDependencies:
+    react: ">= 16"
+  checksum: 10c0/89fe826ed972e99ce8fa4d9390b8bc01a8cb1f1d662c34cc97977d01a9c7b7e51e755bfcceef212cb126441775dc66dcd08e048f9af7bd6fdf70c0a4ed748cf4
+  languageName: node
+  linkType: hard
+
+"@tabler/icons@npm:3.9.0":
+  version: 3.9.0
+  resolution: "@tabler/icons@npm:3.9.0"
+  checksum: 10c0/7e5497442fc70aa264e723d074c85f7a4cc5622318105bada0a7ec392d2c1d0b376cb21a8ed06cc9e696f8a8d29e16c547980fb4a1edddb66b47284be885226a
+  languageName: node
+  linkType: hard
+
 "@tanem/svg-injector@npm:^10.1.21":
   version: 10.1.68
   resolution: "@tanem/svg-injector@npm:10.1.68"
@@ -16955,6 +16973,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "vite@workspace:."
   dependencies:
+    "@tabler/icons-react": "npm:^3.9.0"
     "@types/axios": "npm:^0.14.0"
     "@types/classnames": "npm:^2.3.1"
     "@types/humps": "npm:^2.0.0"
