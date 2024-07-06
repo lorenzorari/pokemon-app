@@ -1,7 +1,7 @@
+import { NamedAPIResource } from "src/models/named-api-resource";
+
 export interface PokemonStat {
-  stat?: any;
+  stat?: NamedAPIResource;
   effort?: number;
   baseStat?: number;
 }
-
-export declare type PokemonStats = PokemonStat[];

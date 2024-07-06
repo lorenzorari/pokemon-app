@@ -2,7 +2,6 @@ import { IconGenderFemale, IconGenderMale } from "@tabler/icons-react";
 import { useMemo } from "react";
 import { DetailField, DetailPanel } from "src/components/details";
 import { Species } from "src/models/species";
-import { replaceDashesBySpaces } from "src/utils/replace-dash-by-space";
 
 interface Props {
   species: Species;
@@ -27,9 +26,6 @@ export const Breeding = ({ species }: Props) => {
   return (
     <DetailPanel title="Breeding">
       <section>
-        <DetailField label="Growth Rate">
-          {replaceDashesBySpaces(species?.growthRate?.name ?? "")}
-        </DetailField>
         <DetailField label="Egg Groups">{eggGroups}</DetailField>
         <DetailField label="Egg Cycles">
           {species?.hatchCounter} cycles
