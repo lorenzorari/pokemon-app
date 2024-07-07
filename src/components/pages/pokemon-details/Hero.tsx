@@ -20,7 +20,7 @@ const PokemonDetailHero = ({
   genus,
 }: Props) => {
   return (
-    <section className="flex max-h-[820px] min-h-[740px] w-full items-center justify-between gap-2 overflow-x-clip px-32 py-4">
+    <section className="flex max-h-[820px] min-h-[760px] w-full items-center justify-between gap-2 overflow-x-clip px-32 py-4">
       <div className="max-w-96">
         <PokemonTypeBadge variant={pokemonType} withLabel />
         <h1 className="mb-4 mt-3 text-7xl font-bold capitalize">
@@ -35,7 +35,7 @@ const PokemonDetailHero = ({
         </div>
       </div>
 
-      <div className="relative flex items-center justify-center pr-16">
+      <div className="relative flex items-center justify-center pr-16 pt-11">
         <PokemonDetailHeroImage
           pokemonType={pokemonType}
           imageSrc={getArtworkUrl(pokemon?.id ?? 0)}

@@ -30,7 +30,7 @@ const PokemonDetailHeroImage = ({ pokemonType, imageSrc, imageAlt }: Props) => {
         }}
       ></div>
       <img
-        className="levitate animate-levitate z-10"
+        className="levitate z-10 animate-levitate"
         src={imageSrc}
         alt={imageAlt}
       />
