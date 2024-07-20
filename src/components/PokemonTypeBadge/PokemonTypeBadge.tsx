@@ -1,6 +1,7 @@
 import classNames from "classnames";
 import { capitalize } from "src/utils/capitalize";
 import { SVG } from "src/components/SVG";
+import { useMemo } from "react";
 
 export enum PokemonType {
   Bug = "bug",
@@ -55,6 +56,8 @@ const PokemonTypeBadge = (props: Props) => {
   const iconOnlyClass = "justify-center p-[6px]";
   const withLabelClass = "px-[14px] py-1";
 
+  const typeLabel = useMemo(() => capitalize(variant), [variant]);
+
   return (
     <span
       className={classNames(
@@ -62,13 +65,14 @@ const PokemonTypeBadge = (props: Props) => {
         withLabel ? withLabelClass : iconOnlyClass,
         variantClass,
       )}
+      title={withLabel ? undefined : typeLabel}
     >
       <SVG
-        className="size-5"
+        className="size-4"
         src={`/assets/svg/pokemon-types/${variant}.svg`}
       />
 
-      {withLabel && capitalize(variant)}
+      {withLabel && typeLabel}
     </span>
   );
 };

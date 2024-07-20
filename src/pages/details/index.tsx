@@ -1,8 +1,11 @@
+import { useMemo } from "react";
 import { useParams } from "react-router";
 import { Navbar } from "src/components/layouts/Navbar";
 import { Breeding } from "src/components/pages/pokemon-details/Breeding";
 import PokemonDetailHero from "src/components/pages/pokemon-details/Hero";
 import { Training } from "src/components/pages/pokemon-details/Training";
+import { TypeEffectiveness } from "src/components/pages/pokemon-details/TypeEffectiveness";
+import { PokemonType } from "src/components/PokemonTypeBadge/PokemonTypeBadge";
 import { usePokemon } from "src/hooks/pokemon/usePokemon";
 import { usePokemonSpecies } from "src/hooks/pokemon/usePokemonSpecies";
 
@@ -16,6 +19,10 @@ const DetailsPage = () => {
   const { pokemonSpecies: species, getGenus } = usePokemonSpecies(id);
   // const { pokemonEvolutions, arePokemonEvolutionsLoading } =
   //   usePokemonEvolutions(id);
+  const pokemonTypes = useMemo<string[]>(
+    () => pokemon?.types?.map(({ type }) => type.name) || [],
+    [pokemon?.types],
+  );
 
   const getDescription = () => {
     const text = species?.flavorTextEntries?.find(
@@ -36,10 +43,6 @@ const DetailsPage = () => {
     );
   };
 
-  function getPokemonType() {
-    return pokemon?.types?.[0].type.name;
-  }
-
   return (
     <>
       <Navbar />
@@ -49,14 +52,15 @@ const DetailsPage = () => {
             <PokemonDetailHero
               genus={getGenus()}
               pokemon={pokemon}
-              pokemonType={getPokemonType()}
+              pokemonTypes={pokemonTypes as PokemonType[]}
               description={getDescription()}
             />
             {species && (
               <section className="relative z-10 -mt-16 rounded-t-[40px] bg-white px-32 py-[60px] shadow-[0px_100px_484px_0px_rgba(0,0,0,0.4)]">
-                <div className="grid grid-cols-3">
+                <div className="grid grid-cols-[repeat(auto-fit,minmax(340px,1fr))] gap-10">
                   <Breeding species={species} />
                   <Training pokemon={pokemon} species={species} />
+                  <TypeEffectiveness types={pokemonTypes} />
                 </div>
               </section>
             )}

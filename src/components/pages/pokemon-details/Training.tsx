@@ -27,8 +27,8 @@ export const Training = ({ pokemon, species }: Props) => {
         </DetailField>
         <DetailField label="EV Yield">
           <ul>
-            {evYields?.map((evYield) => (
-              <li>
+            {evYields?.map((evYield, index) => (
+              <li key={index}>
                 {evYield.effort}{" "}
                 {replaceDashesBySpaces(evYield.stat?.name ?? "")}
               </li>

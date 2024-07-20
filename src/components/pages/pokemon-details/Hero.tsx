@@ -8,21 +8,26 @@ import InfoTile from "src/components/info-tile/InfoTile";
 
 interface Props {
   pokemon: Pokemon;
-  pokemonType: PokemonType;
+  pokemonTypes: PokemonType[];
   description: string;
   genus: string;
 }
 
 const PokemonDetailHero = ({
   pokemon,
-  pokemonType,
+  pokemonTypes,
   description,
   genus,
 }: Props) => {
   return (
     <section className="flex max-h-[820px] min-h-[760px] w-full items-center justify-between gap-2 overflow-x-clip px-32 py-4">
       <div className="max-w-96">
-        <PokemonTypeBadge variant={pokemonType} withLabel />
+        <div className="flex gap-2">
+          {pokemonTypes.map((type) => (
+            <PokemonTypeBadge key={type} variant={type} withLabel />
+          ))}
+        </div>
+
         <h1 className="mb-4 mt-3 text-7xl font-bold capitalize">
           {pokemon?.name}
         </h1>
@@ -37,7 +42,7 @@ const PokemonDetailHero = ({
 
       <div className="relative flex items-center justify-center pr-16 pt-11">
         <PokemonDetailHeroImage
-          pokemonType={pokemonType}
+          pokemonType={pokemonTypes[0]}
           imageSrc={getArtworkUrl(pokemon?.id ?? 0)}
           imageAlt={pokemon?.name}
         />
