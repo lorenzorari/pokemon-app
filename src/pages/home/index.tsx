@@ -1,27 +1,33 @@
-import { useEffect, useRef, useState } from 'react';
-import Loading from 'src/components/loading';
-import Option from 'src/components/option';
-import Select from 'src/components/select';
-import { POKEMON_QUANTITY } from 'src/constants';
-import HomepageHeadingContainer from 'src/containers/homepage-heading';
-import PokemonList from 'src/containers/pokemon/list';
-import tsparticlesOptions from 'src/data/tsparticlesOptions';
-import { getGenerationSlices } from 'src/helpers/get-generation-slices';
-import { NamedAPIResources } from 'src/models/named-api-resource';
-import { Pokemons } from 'src/models/pokemon';
-import { getGeneration } from 'src/services/generation';
-import { getAllPokemons, getPokemon } from 'src/services/pokemon';
-import styles from './home.module.scss';
+import { useEffect, useRef, useState } from "react";
+import { POKEMON_QUANTITY } from "src/constants";
+import PokemonList from "src/containers/pokemon/list";
+import tsparticlesOptions from "src/data/tsparticlesOptions";
+import { getGenerationSlices } from "src/helpers/get-generation-slices";
+import { NamedAPIResources } from "src/models/named-api-resource";
+import { Pokemons } from "src/models/pokemon";
+import { getGeneration } from "src/services/generation";
+import { getAllPokemons, getPokemon } from "src/services/pokemon";
+import styles from "./home.module.scss";
+import {
+  Select,
+  SelectContent,
+  SelectTrigger,
+  SelectValue,
+  SelectItem,
+} from "src/components/select";
 
 const POKEMON_FETCH_LIMIT = 20;
 
 const HomePage = () => {
   const [displayedPokemons, setDisplayedPokemons] = useState<Pokemons>([]);
   const [generationNames, setGenerationNames] = useState<string[]>([]);
-  const [generationSelected, setGenerationSelected] = useState<string>('All');
-  const [pokemonListLimit, setPokemonListLimit] = useState<number>(POKEMON_QUANTITY);
-  const [allPokemonResources, setAllPokemonResources] = useState<NamedAPIResources>([]);
-  const [filteredPokemonResources, setFilteredPokemonResources] = useState<NamedAPIResources>([]);
+  const [generationSelected, setGenerationSelected] = useState<string>("All");
+  const [pokemonListLimit, setPokemonListLimit] =
+    useState<number>(POKEMON_QUANTITY);
+  const [allPokemonResources, setAllPokemonResources] =
+    useState<NamedAPIResources>([]);
+  const [filteredPokemonResources, setFilteredPokemonResources] =
+    useState<NamedAPIResources>([]);
 
   const [isLoadingPokemon, setIsLoadingPokemon] = useState<boolean>(true);
   const [isLoadingMore, setIsLoadingMore] = useState<boolean>(false);
@@ -34,7 +40,10 @@ const HomePage = () => {
 
   useEffect(() => {
     const init = async () => {
-      const { results: pokeRes } = await getAllPokemons(undefined, POKEMON_QUANTITY);
+      const { results: pokeRes } = await getAllPokemons(
+        undefined,
+        POKEMON_QUANTITY,
+      );
       const { results: generationRes } = await getGeneration();
 
       if (!pokeRes || !generationRes) return;
@@ -55,7 +64,10 @@ const HomePage = () => {
   useEffect(() => {
     const updateDisplayedPokemons = async () => {
       setIsFilteringPokemon(true);
-      const slicedFilteredPokemonResources = filteredPokemonResources.slice(0, POKEMON_FETCH_LIMIT);
+      const slicedFilteredPokemonResources = filteredPokemonResources.slice(
+        0,
+        POKEMON_FETCH_LIMIT,
+      );
       const pokemonData = await loadPokemons(slicedFilteredPokemonResources);
 
       setDisplayedPokemons(pokemonData);
@@ -67,7 +79,9 @@ const HomePage = () => {
   }, [filteredPokemonResources]);
 
   const loadPokemons = async (data: NamedAPIResources) => {
-    const pokemonData = await Promise.all(data.map(async ({ name }) => await getPokemon(name!)));
+    const pokemonData = await Promise.all(
+      data.map(async ({ name }) => await getPokemon(name!)),
+    );
 
     return pokemonData;
   };
@@ -89,11 +103,13 @@ const HomePage = () => {
   };
 
   const initParticles = (tsParticles: any) => {
-    tsParticles.load('tsparticles', tsparticlesOptions).then(() => setAreParticlesLoading(false));
+    tsParticles
+      .load("tsparticles", tsparticlesOptions)
+      .then(() => setAreParticlesLoading(false));
   };
 
   const handleClickGeneration = (value: string) => {
-    if (value === 'All') {
+    if (value === "All") {
       setGenerationSelected(value);
       setFilteredPokemonResources(allPokemonResources);
       return;
@@ -102,7 +118,7 @@ const HomePage = () => {
     const { startSlice, endSlice } = getGenerationSlices(value);
     const slicedGeneration = allPokemonResources.slice(startSlice, endSlice);
 
-    const generationNumber = value.split('-')[1].toUpperCase();
+    const generationNumber = value.split("-")[1].toUpperCase();
 
     setGenerationSelected(`Generation ${generationNumber}`);
     setFilteredPokemonResources(slicedGeneration);
@@ -110,7 +126,7 @@ const HomePage = () => {
 
   return (
     <main className={styles.main}>
-      <HomepageHeadingContainer
+      {/* <HomepageHeadingContainer
         heading="Pocketex"
         githubHref="https://github.com/lorenzorari/pocketex"
         githubImageSrc="/assets/svg/github.svg"
@@ -118,49 +134,57 @@ const HomePage = () => {
         initParticles={initParticles}
         areParticlesLoading={isPageLoading}
         dataToFilter={allPokemonResources}
-      />
-      {!isPageLoading && displayedPokemons.length ? (
-        <section className={styles['cards-section']} ref={cardsRef}>
-          <div className={styles['cards-container']}>
-            <h2 className={styles['cards-section-heading']}>
-              Pokémon{' '}
-              <span>
-                ({displayedPokemons.length} / {pokemonListLimit})
-              </span>
-            </h2>
-
-            <div className={styles.filter}>
-              <h3>Filter :</h3>
-
-              <Select className={styles.select} defaultValue={generationSelected}>
-                <Option onClick={() => handleClickGeneration('All')}>All</Option>
-                {generationNames.map((name) => (
-                  <Option
-                    className={styles.option}
-                    key={name}
-                    onClick={() => handleClickGeneration(name)}
-                  >
-                    Generation {name.split('-')[1].toUpperCase()}
-                  </Option>
-                ))}
-              </Select>
-            </div>
-
-            <PokemonList
-              pokemons={displayedPokemons}
-              loadMore={loadMore}
-              isLoadingMorePokemon={isLoadingMore}
-              setIsLoadingMorePokemon={setIsLoadingMore}
-              limit={pokemonListLimit}
-              isFiltering={isFilteringPokemon}
-            />
+      /> */}
+      {/* {!isPageLoading && displayedPokemons.length ? ( */}
+      <section ref={cardsRef} className="px-32">
+        <div>
+          <div className="mb-4 flex items-center gap-2">
+            <h2 className="text-4xl font-bold">Pokémon</h2>
+            <span className="rounded-full bg-gray-200/70 px-2 text-sm text-gray-500">
+              {pokemonListLimit}
+            </span>
           </div>
-        </section>
-      ) : (
-        <section className={styles['loading-container']}>
+
+          <div className="mb-10">
+            <Select defaultValue="All" onValueChange={handleClickGeneration}>
+              <SelectTrigger>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent className="px-1">
+                <SelectItem
+                  value={"All"}
+                  className="select-none hover:bg-black hover:text-white"
+                >
+                  All generations
+                </SelectItem>
+                {generationNames.map((name) => (
+                  <SelectItem
+                    className="select-none hover:bg-black hover:text-white"
+                    key={name}
+                    value={name}
+                  >
+                    Generation {name.split("-")[1].toUpperCase()}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+
+          <PokemonList
+            pokemons={displayedPokemons}
+            loadMore={loadMore}
+            isLoadingMorePokemon={isLoadingMore}
+            setIsLoadingMorePokemon={setIsLoadingMore}
+            limit={pokemonListLimit}
+            isFiltering={isFilteringPokemon}
+          />
+        </div>
+      </section>
+      {/* ) : (
+        <section className={styles["loading-container"]}>
           <Loading src="/assets/svg/logo.svg" />
         </section>
-      )}
+      )} */}
     </main>
   );
 };
