@@ -4,7 +4,7 @@
   /* BASE */
   --color-black: #3f3f3f;
   --color-white: white;
-  --color-primary: hsl(350, 91%, 45%);
+  --color-primary: #DC0A2D;
   --color-type-1: var(--color-normal-1);
   --color-type-2: var(--color-normal-2);
 

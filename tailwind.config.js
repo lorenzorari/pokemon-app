@@ -4,6 +4,7 @@ export default {
   theme: {
     extend: {
       colors: {
+        primary: "var(--color-primary)",
         black: "var(--color-black)",
         bug: {
           1: "var(--color-bug-1)",

@@ -12,7 +12,7 @@
   h1 {
     font-family: "Urbanist", sans-serif;
     font-size: var(--headingSize);
-    letter-spacing: 0.175rem;
+    font-weight: 600;
 
     transform: translateY(-100%);
     animation: slideFromTop 0.5s forwards;

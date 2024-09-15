@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { useParams } from "react-router";
-import { Navbar } from "src/components/layouts/Navbar";
+import { Navbar } from "src/layouts/Navbar";
 import { Breeding } from "src/components/pages/pokemon-details/Breeding";
 import PokemonDetailHero from "src/components/pages/pokemon-details/Hero";
 import { Training } from "src/components/pages/pokemon-details/Training";
