@@ -1,8 +1,8 @@
-import ky from 'ky';
-import { convertUnderscoreToCamelcase } from 'src/utils/convert-underscore-to-camelcase';
+import ky from "ky";
+import { convertUnderscoreToCamelcase } from "src/utils/convert-underscore-to-camelcase";
 
 export const pokeapi = ky.extend({
-  prefixUrl: '/api',
+  prefixUrl: "https://pokeapi.co/api/v2",
   hooks: {
     afterResponse: [
       async (_request, _options, response) => {
