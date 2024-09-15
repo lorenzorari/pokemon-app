@@ -9,7 +9,7 @@ interface Props {
 
 const PokemonDetailsStats = ({ pokemon }: Props) => {
   const stats = pokemon.stats?.map(({ stat, baseStat }) => {
-    const statName = replaceDashesBySpaces(stat.name);
+    const statName = replaceDashesBySpaces(stat?.name ?? "");
     return { title: statName, value: baseStat };
   });
 
