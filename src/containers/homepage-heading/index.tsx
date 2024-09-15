@@ -38,21 +38,6 @@ const HomepageHeadingContainer = (props: Props) => {
         heading={props.heading}
         dataToFilter={props.dataToFilter}
       />
-
-      {/* <HomepageHeadingGithubLink
-        className={styles['github-link']}
-        href={props.githubHref}
-        imageSrc={props.githubImageSrc}
-        rel="noreferrer"
-        target="_blank"
-        aria-label="Github link"
-      /> */}
-
-      {/* <ScrollIcon
-        className={styles["scroll-icon"]}
-        onClick={scrollTo}
-        src="/assets/svg/arrow.svg"
-      /> */}
     </section>
   );
 };
