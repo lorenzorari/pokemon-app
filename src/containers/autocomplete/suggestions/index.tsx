@@ -1,14 +1,10 @@
-import { getIdFromResourceUrl } from "src/helpers/get-id-from-resource-url";
-import {
-  NamedAPIResource,
-  NamedAPIResources,
-} from "src/models/named-api-resource";
-import { cn } from "src/utils/classnames";
+import { cn } from 'src/utils/classnames';
+import { PokemonAutocompleteItem } from '../types';
 
 interface Props {
-  suggestions: NamedAPIResources;
+  suggestions: PokemonAutocompleteItem[];
   suggestionSelected: number;
-  onClickSuggestion?: (suggestion: NamedAPIResource) => void;
+  onClickSuggestion?: (suggestion: PokemonAutocompleteItem) => void;
 }
 
 const Suggestions = ({
@@ -17,19 +13,28 @@ const Suggestions = ({
   onClickSuggestion,
 }: Props) => {
   return (
-    <ul className="absolute w-full overflow-hidden rounded-b-xl border-t bg-white shadow-sm">
+    <ul className="absolute top-[50%] z-[-1] w-full overflow-hidden rounded-b-2xl bg-white pt-6 shadow-sm">
       {suggestions.map((suggestion, i) => (
         <li
           key={i}
           className={cn(
-            "px-4 py-2 capitalize",
-            suggestionSelected === i && "bg-gray-100",
+            'cursor-pointer px-4 py-2 capitalize hover:bg-gray-100',
+            suggestionSelected === i && 'bg-gray-100',
           )}
           onClick={() => onClickSuggestion!(suggestion)}
         >
-          {suggestion.name}{" "}
-          <span className="text-[10px] text-gray-400">
-            #{getIdFromResourceUrl(suggestion.url!)}
+          <span className="flex gap-2">
+            <img
+              src={suggestion.imageUrl}
+              alt={suggestion.name}
+              className="w-6"
+            />
+            <div>
+              <span>{suggestion.name} </span>
+              <span className="text-[10px] text-gray-400">
+                #{suggestion.id}
+              </span>
+            </div>
           </span>
         </li>
       ))}

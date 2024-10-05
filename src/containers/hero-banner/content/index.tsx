@@ -1,5 +1,5 @@
 import Autocomplete from "src/containers/autocomplete";
-import HomepageHeadingContentHeading from "src/containers/homepage-heading/content/heading";
+import HomepageHeadingContentHeading from "src/containers/hero-banner/content/heading";
 import { NamedAPIResources } from "src/models/named-api-resource";
 import styles from "./content.module.scss";
 

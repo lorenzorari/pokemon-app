@@ -2,7 +2,7 @@ import { getSpecies } from "src/services/species";
 import useSWR from "swr";
 
 export function usePokemonSpecies(pokemonId: string) {
-  const { data: pokemonSpecies } = useSWR("pokemon-species/", () =>
+  const { data: pokemonSpecies } = useSWR("pokemon-species", () =>
     getSpecies(pokemonId),
   );
 

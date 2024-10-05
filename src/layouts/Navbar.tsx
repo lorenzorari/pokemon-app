@@ -12,7 +12,7 @@ export const Navbar = ({ isHome }: Props) => {
     <header
       className={cn(
         "sticky top-0 z-20 mx-auto border-b border-b-[#ffffff4d] px-32 py-6 backdrop-blur-lg 2xl:max-w-[1440px]",
-        { "relative border-none backdrop-blur-0": isHome },
+        { "relative border-none backdrop-blur-none": isHome },
       )}
     >
       <nav className="flex items-center justify-between">
