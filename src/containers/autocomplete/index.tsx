@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useHistory } from 'react-router';
 import { POKEMON_QUANTITY } from 'src/constants';
 import AutocompleteError from './error';
@@ -7,6 +7,7 @@ import { usePokemonAutocomplete } from 'src/hooks/pokemon/usePokemonAutocomplete
 import { PokemonAutocompleteItem } from './types';
 import { IconSearch } from '@tabler/icons-react';
 import { isStringEmpty } from 'src/utils/string';
+import { useOnClickOutside } from 'usehooks-ts';
 
 interface Props {
   suggestionsSize?: number;
@@ -21,6 +22,10 @@ const Autocomplete = ({ suggestionsSize = 5, placeholder }: Props) => {
   const [suggestions, setSuggestions] = useState<PokemonAutocompleteItem[]>([]);
   const [suggestionSelected, setSuggestionSelected] = useState<number>(-1);
   const [error, setError] = useState<string>('');
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const inputRef = useRef(null);
+
+  useOnClickOutside(inputRef, () => setIsOpen(false));
 
   const navigateToDetails = (pokemonId: string | number) => {
     if (typeof pokemonId === 'string') {
@@ -124,6 +129,7 @@ const Autocomplete = ({ suggestionsSize = 5, placeholder }: Props) => {
 
   return (
     <form
+      ref={inputRef}
       onSubmit={handleSubmit}
       className="relative w-full animate-fadeIn opacity-0 [animation-delay:1s]"
     >
@@ -134,6 +140,7 @@ const Autocomplete = ({ suggestionsSize = 5, placeholder }: Props) => {
           placeholder={placeholder}
           onChange={handleChangeSearch}
           onKeyDown={handleKeyDown}
+          onFocus={() => setIsOpen(true)}
           value={searchValue}
         />
 
@@ -142,7 +149,7 @@ const Autocomplete = ({ suggestionsSize = 5, placeholder }: Props) => {
         </button>
       </div>
 
-      {!isStringEmpty(searchValue) && (
+      {isOpen && !isStringEmpty(searchValue) && (
         <Suggestions
           suggestions={suggestions}
           suggestionSelected={suggestionSelected}
