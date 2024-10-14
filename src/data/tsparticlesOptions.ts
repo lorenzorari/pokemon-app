@@ -42,7 +42,7 @@ const tsparticlesOptions: ISourceOptions = {
           height: 100,
         },
         {
-          src: '/assets/svg/pokemon-types/fightning.svg',
+          src: '/assets/svg/pokemon-types/fighting.svg',
           width: 100,
           height: 100,
         },
