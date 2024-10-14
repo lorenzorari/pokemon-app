@@ -6,6 +6,7 @@ import Suggestions from './suggestions';
 import { usePokemonAutocomplete } from 'src/hooks/pokemon/usePokemonAutocomplete';
 import { PokemonAutocompleteItem } from './types';
 import { IconSearch } from '@tabler/icons-react';
+import { isStringEmpty } from 'src/utils/string';
 
 interface Props {
   suggestionsSize?: number;
@@ -13,11 +14,7 @@ interface Props {
   placeholder?: string;
 }
 
-const Autocomplete = ({
-  suggestionsSize = 5,
-  className,
-  placeholder,
-}: Props) => {
+const Autocomplete = ({ suggestionsSize = 5, placeholder }: Props) => {
   const history = useHistory();
   const { pokemonAutocompleteItems } = usePokemonAutocomplete();
   const [searchValue, setSearchValue] = useState('');
@@ -95,7 +92,7 @@ const Autocomplete = ({
     if (!isValueValidated(searchValue)) return;
 
     if (suggestionSelected !== -1)
-      return navigateToDetails(suggestions[suggestionSelected].name!);
+      return navigateToDetails(suggestions[suggestionSelected].name);
 
     navigateToDetails(searchValue);
   };
@@ -117,7 +114,6 @@ const Autocomplete = ({
         break;
 
       case 'Enter':
-        e.preventDefault();
         handleSubmit(e);
     }
   };
@@ -127,7 +123,10 @@ const Autocomplete = ({
   };
 
   return (
-    <form onSubmit={handleSubmit} className="relative w-full">
+    <form
+      onSubmit={handleSubmit}
+      className="relative w-full animate-fadeIn opacity-0 [animation-delay:1s]"
+    >
       <div className="flex items-center rounded-full bg-white pr-4 transition-all">
         <input
           className="w-full rounded-[inherit] bg-transparent py-2 pl-4 outline-none"
@@ -143,7 +142,7 @@ const Autocomplete = ({
         </button>
       </div>
 
-      {!!suggestions.length && (
+      {!isStringEmpty(searchValue) && (
         <Suggestions
           suggestions={suggestions}
           suggestionSelected={suggestionSelected}
