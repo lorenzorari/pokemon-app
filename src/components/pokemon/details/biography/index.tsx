@@ -1,5 +1,5 @@
-import PokemonDescription from 'src/containers/pokemon/description';
-import PokemonInformation from 'src/containers/pokemon/information';
+import PokemonDescription from 'src/components/pokemon/description';
+import PokemonInformation from 'src/components/pokemon/information';
 import { Pokemon } from 'src/models/pokemon';
 import { Species } from 'src/models/species';
 import styles from './biography.module.scss';
@@ -12,7 +12,7 @@ interface Props {
 const PokemonDetailsBiography = ({ pokemon, species }: Props) => {
   const getDescription = () => {
     const text = species?.flavorTextEntries?.find(
-      ({ language }) => language.name === 'en'
+      ({ language }) => language.name === 'en',
     )!.flavorText;
 
     return text!
@@ -25,7 +25,8 @@ const PokemonDetailsBiography = ({ pokemon, species }: Props) => {
   };
 
   const getSpecies = () => {
-    return species?.genera?.find(({ language }) => language?.name === 'en')!.genus;
+    return species?.genera?.find(({ language }) => language?.name === 'en')!
+      .genus;
   };
 
   const getAnthropometry = (value: number) => {

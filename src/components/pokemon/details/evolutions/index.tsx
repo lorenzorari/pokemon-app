@@ -1,5 +1,5 @@
 import { useHistory } from 'react-router';
-import PokemonEvolution from 'src/containers/pokemon/evolution';
+import PokemonEvolution from 'src/components/pokemon/evolution';
 import styles from './evolutions.module.scss';
 
 const PokemonDetailsEvolutions = ({ pokemonEvolutions }: any) => {
@@ -27,7 +27,10 @@ const PokemonDetailsEvolutions = ({ pokemonEvolutions }: any) => {
                 />
               ))
             ) : (
-              <PokemonEvolution evolution={evo} onClick={() => handleClick(evo)} />
+              <PokemonEvolution
+                evolution={evo}
+                onClick={() => handleClick(evo)}
+              />
             )}
           </li>
         );

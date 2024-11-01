@@ -1,8 +1,14 @@
-import React, { Dispatch, useCallback, useEffect, useRef, useState } from 'react';
+import React, {
+  Dispatch,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { useHistory } from 'react-router-dom';
 import InfiniteScroll from 'src/components/infinite-scroll';
 import Loading from 'src/components/loading';
-import PokemonCard from 'src/containers/pokemon/card';
+import PokemonCard from 'src/components/pokemon/card';
 import { Pokemons } from 'src/models/pokemon';
 import styles from './pokemon-list.module.scss';
 
@@ -34,7 +40,7 @@ const PokemonList = (props: Props) => {
         setPage((page) => page + 1);
       }
     },
-    [props.isLoadingMorePokemon]
+    [props.isLoadingMorePokemon],
   );
 
   const handleClickCard = (id: number) => {
@@ -53,7 +59,10 @@ const PokemonList = (props: Props) => {
             <>
               {props.pokemons.length < props.limit && (
                 <div ref={loaderRef}>
-                  <Loading className={styles['more-pokemons-loader']} src="/assets/svg/logo.svg" />
+                  <Loading
+                    className={styles['more-pokemons-loader']}
+                    src="/assets/svg/logo.svg"
+                  />
                 </div>
               )}
             </>

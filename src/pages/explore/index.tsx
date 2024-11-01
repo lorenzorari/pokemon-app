@@ -1,19 +1,19 @@
-import { useEffect, useRef, useState } from "react";
-import { POKEMON_QUANTITY } from "src/constants";
-import PokemonList from "src/containers/pokemon/list";
-import { getGenerationSlices } from "src/helpers/get-generation-slices";
-import { NamedAPIResources } from "src/models/named-api-resource";
-import { Pokemons } from "src/models/pokemon";
-import { getGeneration } from "src/services/generation";
-import { getAllPokemons, getPokemon } from "src/services/pokemon";
+import { useEffect, useRef, useState } from 'react';
+import { POKEMON_QUANTITY } from 'src/constants';
+import PokemonList from 'src/components/pokemon/list';
+import { getGenerationSlices } from 'src/helpers/get-generation-slices';
+import { NamedAPIResources } from 'src/models/named-api-resource';
+import { Pokemons } from 'src/models/pokemon';
+import { getGeneration } from 'src/services/generation';
+import { getAllPokemons, getPokemon } from 'src/services/pokemon';
 import {
   Select,
   SelectContent,
   SelectTrigger,
   SelectValue,
   SelectItem,
-} from "src/components/select";
-import { MainLayout } from "src/layouts/MainLayout";
+} from 'src/components/select';
+import { MainLayout } from 'src/layouts/MainLayout';
 
 const POKEMON_FETCH_LIMIT = 20;
 
@@ -96,7 +96,7 @@ const ExplorePage = () => {
   };
 
   const handleClickGeneration = (value: string) => {
-    if (value === "All") {
+    if (value === 'All') {
       setFilteredPokemonResources(allPokemonResources);
       return;
     }
@@ -124,7 +124,7 @@ const ExplorePage = () => {
             </SelectTrigger>
             <SelectContent className="px-1">
               <SelectItem
-                value={"All"}
+                value={'All'}
                 className="select-none hover:bg-black hover:text-white"
               >
                 All generations
@@ -135,7 +135,7 @@ const ExplorePage = () => {
                   key={name}
                   value={name}
                 >
-                  Generation {name.split("-")[1].toUpperCase()}
+                  Generation {name.split('-')[1].toUpperCase()}
                 </SelectItem>
               ))}
             </SelectContent>

@@ -1,8 +1,9 @@
 import { zeroPad } from 'src/utils/zero-pad';
-import styles from './id.module.scss';
 
 const PokemonCardId = ({ pokemon }: any) => {
-  return <div className={styles.id}>{`#${zeroPad(pokemon?.id, 3)}`}</div>;
+  return (
+    <div className="mb-2 text-lg font-light tracking-wider text-white">{`#${zeroPad(pokemon?.id, 3)}`}</div>
+  );
 };
 
 export default PokemonCardId;
