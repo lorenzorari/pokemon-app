@@ -4,7 +4,7 @@ import { pokeapi } from 'src/helpers/http';
 import { getAnthropometry } from 'src/helpers/getAnthropometry';
 import { POKEMON_QUANTITY } from 'src/constants';
 import { getIdFromResourceUrl } from 'src/helpers/get-id-from-resource-url';
-import { PokemonAutocompleteItem } from 'src/containers/autocomplete/types';
+import { PokemonAutocompleteItem } from 'src/components/autocomplete/types';
 import { getArtworkUrl } from 'src/helpers/get-artwork-url';
 
 const getPokemon = async (id: string): Promise<Pokemon> => {

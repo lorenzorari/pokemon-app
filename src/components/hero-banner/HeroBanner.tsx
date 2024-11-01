@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Particles from 'react-tsparticles';
-import Autocomplete from 'src/containers/autocomplete';
+import Autocomplete from 'src/components/autocomplete';
 import tsparticlesOptions from 'src/data/tsparticlesOptions';
 
 interface Props {
