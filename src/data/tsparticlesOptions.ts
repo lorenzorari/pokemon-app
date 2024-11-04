@@ -1,3 +1,4 @@
+import { PokemonType } from 'src/models/types';
 import { ISourceOptions } from 'tsparticles';
 
 const tsparticlesOptions: ISourceOptions = {
@@ -14,99 +15,15 @@ const tsparticlesOptions: ISourceOptions = {
     },
     shape: {
       type: 'image',
-      images: [
-        {
-          src: '/assets/svg/pokemon-types/bug.svg',
-          width: 100,
-          height: 100,
-          fill: true,
+      images: Object.values(PokemonType).map((type) => ({
+        src: `/assets/svg/pokemon-types/${type}.svg`,
+        width: 100,
+        height: 100,
+        replaceColor: true,
+        particles: {
+          color: { value: '#fff' },
         },
-        {
-          src: '/assets/svg/pokemon-types/dark.svg',
-          width: 100,
-          height: 100,
-        },
-        {
-          src: '/assets/svg/pokemon-types/dragon.svg',
-          width: 100,
-          height: 100,
-        },
-        {
-          src: '/assets/svg/pokemon-types/electric.svg',
-          width: 100,
-          height: 100,
-        },
-        {
-          src: '/assets/svg/pokemon-types/fairy.svg',
-          width: 100,
-          height: 100,
-        },
-        {
-          src: '/assets/svg/pokemon-types/fighting.svg',
-          width: 100,
-          height: 100,
-        },
-        {
-          src: '/assets/svg/pokemon-types/fire.svg',
-          width: 100,
-          height: 100,
-        },
-        {
-          src: '/assets/svg/pokemon-types/flying.svg',
-          width: 100,
-          height: 100,
-        },
-        {
-          src: '/assets/svg/pokemon-types/ghost.svg',
-          width: 100,
-          height: 100,
-        },
-        {
-          src: '/assets/svg/pokemon-types/grass.svg',
-          width: 100,
-          height: 100,
-        },
-        {
-          src: '/assets/svg/pokemon-types/ground.svg',
-          width: 100,
-          height: 100,
-        },
-        {
-          src: '/assets/svg/pokemon-types/ice.svg',
-          width: 100,
-          height: 100,
-        },
-        {
-          src: '/assets/svg/pokemon-types/normal.svg',
-          width: 100,
-          height: 100,
-        },
-        {
-          src: '/assets/svg/pokemon-types/poison.svg',
-          width: 100,
-          height: 100,
-        },
-        {
-          src: '/assets/svg/pokemon-types/psychic.svg',
-          width: 100,
-          height: 100,
-        },
-        {
-          src: '/assets/svg/pokemon-types/rock.svg',
-          width: 100,
-          height: 100,
-        },
-        {
-          src: '/assets/svg/pokemon-types/steel.svg',
-          width: 100,
-          height: 100,
-        },
-        {
-          src: '/assets/svg/pokemon-types/water.svg',
-          width: 100,
-          height: 100,
-        },
-      ],
+      })),
     },
     opacity: {
       value: 0.5,

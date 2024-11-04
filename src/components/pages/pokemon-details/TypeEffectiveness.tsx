@@ -1,13 +1,13 @@
-import { useEffect, useState } from "react";
-import { DetailField, DetailPanel } from "src/components/details";
-import PokemonTypeBadge from "src/components/PokemonTypeBadge";
-import { PokemonType } from "src/components/PokemonTypeBadge/PokemonTypeBadge";
-import { Button, ButtonVariant } from "src/components/ui/Button";
+import { useEffect, useState } from 'react';
+import { DetailField, DetailPanel } from 'src/components/details';
+import PokemonTypeBadge from 'src/components/PokemonTypeBadge';
+import { Button, ButtonVariant } from 'src/components/ui/Button';
 import {
   TypeEffectivenessGroup,
   TypeEffectivenessGroupLabel,
   useTypeEffectiveness,
-} from "src/hooks/types/useTypeEffectiveness";
+} from 'src/hooks/types/useTypeEffectiveness';
+import { PokemonType } from 'src/models/types';
 
 interface Props {
   types: string[];

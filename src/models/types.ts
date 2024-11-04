@@ -1,4 +1,4 @@
-import { NamedAPIResource } from "./named-api-resource";
+import { NamedAPIResource } from './named-api-resource';
 
 export interface Type {
   id: number;
@@ -34,4 +34,25 @@ interface Name {
 interface TypePokemon {
   slot: number;
   pokemon: NamedAPIResource;
+}
+
+export enum PokemonType {
+  Bug = 'bug',
+  Dark = 'dark',
+  Dragon = 'dragon',
+  Electric = 'electric',
+  Fairy = 'fairy',
+  Fighting = 'fighting',
+  Fire = 'fire',
+  Flying = 'flying',
+  Ghost = 'ghost',
+  Grass = 'grass',
+  Ground = 'ground',
+  Ice = 'ice',
+  Normal = 'normal',
+  Poison = 'poison',
+  Psychic = 'psychic',
+  Rock = 'rock',
+  Steel = 'steel',
+  Water = 'water',
 }
