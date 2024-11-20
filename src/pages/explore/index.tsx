@@ -3,7 +3,7 @@ import { POKEMON_QUANTITY } from 'src/constants';
 import PokemonList from 'src/components/pokemon/list';
 import { getGenerationSlices } from 'src/helpers/get-generation-slices';
 import { NamedAPIResources } from 'src/models/named-api-resource';
-import { Pokemons } from 'src/models/pokemon';
+// import { Pokemons } from 'src/models/pokemon';
 import { getGeneration } from 'src/services/generation';
 import { getAllPokemons, getPokemon } from 'src/services/pokemon';
 import {
@@ -18,7 +18,7 @@ import { MainLayout } from 'src/layouts/MainLayout';
 const POKEMON_FETCH_LIMIT = 20;
 
 const ExplorePage = () => {
-  const [displayedPokemons, setDisplayedPokemons] = useState<Pokemons>([]);
+  // const [displayedPokemons, setDisplayedPokemons] = useState<Pokemons>([]);
   const [generationNames, setGenerationNames] = useState<string[]>([]);
   const [pokemonListLimit, setPokemonListLimit] =
     useState<number>(POKEMON_QUANTITY);
@@ -45,7 +45,7 @@ const ExplorePage = () => {
       const slicedPokemonResources = pokeRes.slice(0, POKEMON_FETCH_LIMIT);
       const pokemonData = await loadPokemons(slicedPokemonResources);
 
-      setDisplayedPokemons([...displayedPokemons, ...pokemonData]);
+      // setDisplayedPokemons([...displayedPokemons, ...pokemonData]);
       setGenerationNames(generationRes.map((gen) => gen.name!));
       setAllPokemonResources(pokeRes);
       setFilteredPokemonResources(pokeRes);
@@ -63,7 +63,7 @@ const ExplorePage = () => {
       );
       const pokemonData = await loadPokemons(slicedFilteredPokemonResources);
 
-      setDisplayedPokemons(pokemonData);
+      // setDisplayedPokemons(pokemonData);
       setPokemonListLimit(filteredPokemonResources.length);
       setIsFilteringPokemon(false);
     };
@@ -80,13 +80,13 @@ const ExplorePage = () => {
   };
 
   const handleMorePokemon = async () => {
-    const { length } = displayedPokemons;
+    // const { length } = displayedPokemons;
     const endSlice = length + POKEMON_FETCH_LIMIT;
     const slicedResources = filteredPokemonResources.slice(length, endSlice);
 
     const pokemonData = await loadPokemons(slicedResources);
 
-    setDisplayedPokemons([...displayedPokemons, ...pokemonData]);
+    // setDisplayedPokemons([...displayedPokemons, ...pokemonData]);
   };
 
   const loadMore = async () => {
@@ -143,7 +143,7 @@ const ExplorePage = () => {
         </div>
 
         <PokemonList
-          pokemons={displayedPokemons}
+          // pokemons={displayedPokemons}
           loadMore={loadMore}
           isLoadingMorePokemon={isLoadingMore}
           setIsLoadingMorePokemon={setIsLoadingMore}

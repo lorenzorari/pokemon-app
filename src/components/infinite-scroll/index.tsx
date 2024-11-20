@@ -5,11 +5,14 @@ interface Props {
   observerCallback: IntersectionObserverCallback;
   page: number;
   loaderElement: JSX.Element;
-  loadMore: () => Promise<void>;
+  loadMore: () => void;
 }
 
 const InfiniteScroll = forwardRef(
-  ({ children, observerCallback, page, loadMore, loaderElement }: Props, ref: any) => {
+  (
+    { children, observerCallback, page, loadMore, loaderElement }: Props,
+    ref: any,
+  ) => {
     const Loader = () => loaderElement;
 
     useEffect(() => {
@@ -20,17 +23,13 @@ const InfiniteScroll = forwardRef(
       return () => observer.disconnect();
     }, [ref, observerCallback]);
 
-    useEffect(() => {
-      if (page > 1) loadMore();
-    }, [page]);
-
     return (
       <>
         {children}
         <Loader />
       </>
     );
-  }
+  },
 );
 
 InfiniteScroll.displayName = 'InfiniteScroll';

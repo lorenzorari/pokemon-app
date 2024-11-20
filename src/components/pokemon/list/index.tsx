@@ -8,20 +8,21 @@ import React, {
 import { useHistory } from 'react-router-dom';
 import InfiniteScroll from 'src/components/infinite-scroll';
 import Loading from 'src/components/loading';
-import PokemonCard from 'src/components/pokemon/card';
-import { Pokemons } from 'src/models/pokemon';
 import styles from './pokemon-list.module.scss';
+import { usePokemonPagination } from 'src/hooks/pokemon/usePokemonPagination';
+import PokemonCard from '../card';
 
 interface Props {
   isLoadingMorePokemon: boolean;
   setIsLoadingMorePokemon: Dispatch<React.SetStateAction<boolean>>;
   loadMore: () => Promise<void>;
-  pokemons: Pokemons;
+  // pokemons: Pokemons;
   limit: number;
   isFiltering: boolean;
 }
 
 const PokemonList = (props: Props) => {
+  const { pagination, size, setSize, isValidating } = usePokemonPagination();
   const history = useHistory();
   const [page, setPage] = useState<number>(1);
   const loaderRef = useRef(null);
@@ -36,47 +37,54 @@ const PokemonList = (props: Props) => {
     (entries) => {
       const { isIntersecting } = entries[0];
 
-      if (isIntersecting && !props.isLoadingMorePokemon) {
-        setPage((page) => page + 1);
+      if (isIntersecting && !isValidating) {
+        setSize(size + 1);
       }
     },
-    [props.isLoadingMorePokemon],
+    [isValidating, size, setSize],
   );
 
-  const handleClickCard = (id: number) => {
+  const handleClickCard = (id: string) => {
     history.push(`/pokemon/${id}`);
   };
+
+  function loadMore() {
+    // setSize(size + 1);
+  }
 
   return (
     <>
       {props.isFiltering === false ? (
         <InfiniteScroll
           observerCallback={handleObserver}
-          loadMore={props.loadMore}
+          loadMore={loadMore}
           page={page}
           ref={loaderRef}
           loaderElement={
             <>
-              {props.pokemons.length < props.limit && (
-                <div ref={loaderRef}>
-                  <Loading
-                    className={styles['more-pokemons-loader']}
-                    src="/assets/svg/logo.svg"
-                  />
-                </div>
-              )}
+              {/* TODO Remove when end list */}
+              {/* {props.pokemons.length < props.limit && ( */}
+              <div ref={loaderRef}>
+                <Loading
+                  className={styles['more-pokemons-loader']}
+                  src="/assets/svg/logo.svg"
+                />
+              </div>
+              {/* )} */}
             </>
           }
         >
           <div className={styles['pokemons-container']}>
-            {props.pokemons.map((pokemon) => (
-              <PokemonCard
-                key={pokemon.id}
-                className={styles.card}
-                onClick={() => handleClickCard(pokemon.id!)}
-                pokemon={pokemon}
-              />
-            ))}
+            {pagination?.map((page) =>
+              page.pokemons?.map((pokemon) => (
+                <PokemonCard
+                  key={pokemon.id}
+                  className={styles.card}
+                  onClick={() => handleClickCard(pokemon.name!)}
+                  pokemon={pokemon}
+                />
+              )),
+            )}
           </div>
         </InfiniteScroll>
       ) : (
