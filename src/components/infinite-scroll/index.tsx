@@ -9,17 +9,12 @@ interface Props {
 }
 
 const InfiniteScroll = forwardRef(
-  (
-    { children, observerCallback, page, loadMore, loaderElement }: Props,
-    ref: any,
-  ) => {
+  ({ children, observerCallback, loaderElement }: Props, ref: any) => {
     const Loader = () => loaderElement;
 
     useEffect(() => {
       const observer = new IntersectionObserver(observerCallback);
-
       if (ref?.current) observer.observe(ref.current);
-
       return () => observer.disconnect();
     }, [ref, observerCallback]);
 

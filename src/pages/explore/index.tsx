@@ -3,9 +3,8 @@ import { POKEMON_QUANTITY } from 'src/constants';
 import PokemonList from 'src/components/pokemon/list';
 import { getGenerationSlices } from 'src/helpers/get-generation-slices';
 import { NamedAPIResources } from 'src/models/named-api-resource';
-// import { Pokemons } from 'src/models/pokemon';
 import { getGeneration } from 'src/services/generation';
-import { getAllPokemons, getPokemon } from 'src/services/pokemon';
+import { getAllPokemons } from 'src/services/pokemon';
 import {
   Select,
   SelectContent,
@@ -14,11 +13,9 @@ import {
   SelectItem,
 } from 'src/components/select';
 import { MainLayout } from 'src/layouts/MainLayout';
-
-const POKEMON_FETCH_LIMIT = 20;
+import { cn } from 'src/utils/classnames';
 
 const ExplorePage = () => {
-  // const [displayedPokemons, setDisplayedPokemons] = useState<Pokemons>([]);
   const [generationNames, setGenerationNames] = useState<string[]>([]);
   const [pokemonListLimit, setPokemonListLimit] =
     useState<number>(POKEMON_QUANTITY);
@@ -27,7 +24,6 @@ const ExplorePage = () => {
   const [filteredPokemonResources, setFilteredPokemonResources] =
     useState<NamedAPIResources>([]);
 
-  const [isLoadingMore, setIsLoadingMore] = useState<boolean>(false);
   const [isFilteringPokemon, setIsFilteringPokemon] = useState<boolean>(false);
 
   const cardsRef = useRef(null);
@@ -42,10 +38,6 @@ const ExplorePage = () => {
 
       if (!pokeRes || !generationRes) return;
 
-      const slicedPokemonResources = pokeRes.slice(0, POKEMON_FETCH_LIMIT);
-      const pokemonData = await loadPokemons(slicedPokemonResources);
-
-      // setDisplayedPokemons([...displayedPokemons, ...pokemonData]);
       setGenerationNames(generationRes.map((gen) => gen.name!));
       setAllPokemonResources(pokeRes);
       setFilteredPokemonResources(pokeRes);
@@ -57,43 +49,13 @@ const ExplorePage = () => {
   useEffect(() => {
     const updateDisplayedPokemons = async () => {
       setIsFilteringPokemon(true);
-      const slicedFilteredPokemonResources = filteredPokemonResources.slice(
-        0,
-        POKEMON_FETCH_LIMIT,
-      );
-      const pokemonData = await loadPokemons(slicedFilteredPokemonResources);
 
-      // setDisplayedPokemons(pokemonData);
       setPokemonListLimit(filteredPokemonResources.length);
       setIsFilteringPokemon(false);
     };
 
     updateDisplayedPokemons();
   }, [filteredPokemonResources]);
-
-  const loadPokemons = async (data: NamedAPIResources) => {
-    const pokemonData = await Promise.all(
-      data.map(async ({ name }) => await getPokemon(name!)),
-    );
-
-    return pokemonData;
-  };
-
-  const handleMorePokemon = async () => {
-    // const { length } = displayedPokemons;
-    const endSlice = length + POKEMON_FETCH_LIMIT;
-    const slicedResources = filteredPokemonResources.slice(length, endSlice);
-
-    const pokemonData = await loadPokemons(slicedResources);
-
-    // setDisplayedPokemons([...displayedPokemons, ...pokemonData]);
-  };
-
-  const loadMore = async () => {
-    setIsLoadingMore(true);
-    await handleMorePokemon();
-    setIsLoadingMore(false);
-  };
 
   const handleClickGeneration = (value: string) => {
     if (value === 'All') {
@@ -112,7 +74,12 @@ const ExplorePage = () => {
       <section ref={cardsRef} className="px-32">
         <div className="mb-4 flex items-center gap-2">
           <h2 className="text-4xl font-bold">Pokémon</h2>
-          <span className="rounded-full bg-gray-200/70 px-2 text-sm text-gray-500">
+          <span
+            className={cn(
+              'rounded-full bg-gray-200/70 px-2 text-sm text-gray-500 opacity-0',
+              { 'opacity-100 transition-opacity': pokemonListLimit > 0 },
+            )}
+          >
             {pokemonListLimit}
           </span>
         </div>
@@ -142,14 +109,7 @@ const ExplorePage = () => {
           </Select>
         </div>
 
-        <PokemonList
-          // pokemons={displayedPokemons}
-          loadMore={loadMore}
-          isLoadingMorePokemon={isLoadingMore}
-          setIsLoadingMorePokemon={setIsLoadingMore}
-          limit={pokemonListLimit}
-          isFiltering={isFilteringPokemon}
-        />
+        <PokemonList isFiltering={isFilteringPokemon} />
       </section>
     </MainLayout>
   );

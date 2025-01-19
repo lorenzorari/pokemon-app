@@ -1,23 +1,13 @@
-import React, {
-  Dispatch,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import InfiniteScroll from 'src/components/infinite-scroll';
 import Loading from 'src/components/loading';
 import styles from './pokemon-list.module.scss';
 import { usePokemonPagination } from 'src/hooks/pokemon/usePokemonPagination';
 import PokemonCard from '../card';
+import { Loader } from 'src/components/ui/Loader';
 
 interface Props {
-  isLoadingMorePokemon: boolean;
-  setIsLoadingMorePokemon: Dispatch<React.SetStateAction<boolean>>;
-  loadMore: () => Promise<void>;
-  // pokemons: Pokemons;
-  limit: number;
   isFiltering: boolean;
 }
 
@@ -38,10 +28,10 @@ const PokemonList = (props: Props) => {
       const { isIntersecting } = entries[0];
 
       if (isIntersecting && !isValidating) {
-        setSize(size + 1);
+        loadMore();
       }
     },
-    [isValidating, size, setSize],
+    [isValidating, loadMore],
   );
 
   const handleClickCard = (id: string) => {
@@ -49,7 +39,7 @@ const PokemonList = (props: Props) => {
   };
 
   function loadMore() {
-    // setSize(size + 1);
+    setSize(size + 1);
   }
 
   return (
@@ -64,11 +54,8 @@ const PokemonList = (props: Props) => {
             <>
               {/* TODO Remove when end list */}
               {/* {props.pokemons.length < props.limit && ( */}
-              <div ref={loaderRef}>
-                <Loading
-                  className={styles['more-pokemons-loader']}
-                  src="/assets/svg/logo.svg"
-                />
+              <div ref={loaderRef} className="flex justify-center py-8">
+                <Loader />
               </div>
               {/* )} */}
             </>
