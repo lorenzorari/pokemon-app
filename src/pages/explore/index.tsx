@@ -71,7 +71,7 @@ const ExplorePage = () => {
 
   return (
     <MainLayout>
-      <section ref={cardsRef} className="px-32">
+      <section ref={cardsRef} className="px-5 lg:px-10 xl:px-32">
         <div className="mb-4 flex items-center gap-2">
           <h2 className="text-4xl font-bold">Pokémon</h2>
           <span

@@ -27,7 +27,7 @@ const HeroBanner = (props: Props) => {
       <div className="flex h-full items-center justify-center">
         <div className="relative z-[1]">
           <div className="overflow-hidden">
-            <h1 className="-translate-y-full animate-slideFromTop text-[10rem] font-semibold leading-snug text-white [animation-delay:0.5s]">
+            <h1 className="-translate-y-full animate-slideFromTop text-[20vw] font-semibold leading-snug text-white [animation-delay:0.5s] lg:text-[10vw] xl:text-[8.59755vw]">
               {props.heading}
             </h1>
           </div>
