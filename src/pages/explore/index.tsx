@@ -14,11 +14,14 @@ import {
 } from 'src/components/select';
 import { MainLayout } from 'src/layouts/MainLayout';
 import { cn } from 'src/utils/classnames';
+import {
+  PokemonCounter,
+  PokemonCounterContext,
+} from './contexts/usePokemonCounter';
 
 const ExplorePage = () => {
   const [generationNames, setGenerationNames] = useState<string[]>([]);
-  const [pokemonListLimit, setPokemonListLimit] =
-    useState<number>(POKEMON_QUANTITY);
+  const [pokemonCount, setPokemonCount] = useState<PokemonCounter>(undefined);
   const [allPokemonResources, setAllPokemonResources] =
     useState<NamedAPIResources>([]);
   const [filteredPokemonResources, setFilteredPokemonResources] =
@@ -50,7 +53,7 @@ const ExplorePage = () => {
     const updateDisplayedPokemons = async () => {
       setIsFilteringPokemon(true);
 
-      setPokemonListLimit(filteredPokemonResources.length);
+      // setPokemonCount(filteredPokemonResources.length);
       setIsFilteringPokemon(false);
     };
 
@@ -71,46 +74,48 @@ const ExplorePage = () => {
 
   return (
     <MainLayout>
-      <section ref={cardsRef} className="px-5 lg:px-10 xl:px-32">
-        <div className="mb-4 flex items-center gap-2">
-          <h2 className="text-4xl font-bold">Pokémon</h2>
-          <span
-            className={cn(
-              'rounded-full bg-gray-200/70 px-2 text-sm text-gray-500 opacity-0',
-              { 'opacity-100 transition-opacity': pokemonListLimit > 0 },
-            )}
-          >
-            {pokemonListLimit}
-          </span>
-        </div>
-
-        <div className="mb-10">
-          <Select defaultValue="All" onValueChange={handleClickGeneration}>
-            <SelectTrigger>
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent className="px-1">
-              <SelectItem
-                value={'All'}
-                className="select-none hover:bg-black hover:text-white"
-              >
-                All generations
-              </SelectItem>
-              {generationNames.map((name) => (
+      <PokemonCounterContext.Provider value={{ setPokemonCount }}>
+        <section ref={cardsRef} className="px-5 lg:px-10 xl:px-32">
+          <div className="mb-4 flex items-center gap-2">
+            <h2 className="text-4xl font-bold">Pokémon</h2>
+            <span
+              className={cn(
+                'rounded-full bg-gray-200/70 px-2 text-sm text-gray-500 opacity-0',
+                {
+                  'opacity-100 transition-opacity': (pokemonCount || 0) > 0,
+                },
+              )}
+            >
+              {pokemonCount}
+            </span>
+          </div>
+          <div className="mb-10">
+            <Select defaultValue="All" onValueChange={handleClickGeneration}>
+              <SelectTrigger>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent className="px-1">
                 <SelectItem
+                  value={'All'}
                   className="select-none hover:bg-black hover:text-white"
-                  key={name}
-                  value={name}
                 >
-                  Generation {name.split('-')[1].toUpperCase()}
+                  All generations
                 </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
-
-        <PokemonList isFiltering={isFilteringPokemon} />
-      </section>
+                {generationNames.map((name) => (
+                  <SelectItem
+                    className="select-none hover:bg-black hover:text-white"
+                    key={name}
+                    value={name}
+                  >
+                    Generation {name.split('-')[1].toUpperCase()}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+          <PokemonList isFiltering={isFilteringPokemon} />
+        </section>
+      </PokemonCounterContext.Provider>
     </MainLayout>
   );
 };

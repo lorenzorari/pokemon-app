@@ -1,22 +1,23 @@
 import { NamedAPIResource } from 'src/models/named-api-resource';
-import { getAllPokemons, getPokemon } from 'src/services/pokemon';
+import { usePokemonCounter } from 'src/pages/explore/contexts/usePokemonCounter';
+import { getPokemon } from 'src/services/pokemon';
+import { getSpeciesPagination } from 'src/services/species';
 import useSWRInfinite from 'swr/infinite';
 
 export function usePokemonPagination() {
-  // const {data, isLoading} = useSWR(`pokemon?offset=${offset}&limit=${limit}`, () =>
-  //   getAllPokemons(offset, limit),
-  // );
   const { data, setSize, size, isValidating } = useSWRInfinite(
     getKey,
     fetchPagination,
   );
+  const { setPokemonCount } = usePokemonCounter();
 
   function getKey(pageIndex: number, previousPageData: any) {
-    // reached the end
-    if (previousPageData && !previousPageData.next) return null;
+    const isFirstPage = pageIndex === 0;
+    const isLastPage = previousPageData && !previousPageData.next;
 
-    // first page, we don't have `previousPageData`
-    if (pageIndex === 0) return `/pokemon?limit=20`;
+    if (isLastPage) return null;
+
+    if (isFirstPage) return `/pokemon-species?limit=20`;
 
     // add the cursor to the API endpoint
     return previousPageData.next.split('v2')[1];
@@ -29,8 +30,12 @@ export function usePokemonPagination() {
     const offset = Number(searchParams.get('offset'));
     const limit = Number(searchParams.get('limit'));
 
-    const { results, previous, next } = await getAllPokemons(offset, limit);
+    const { results, previous, next, count } = await getSpeciesPagination(
+      offset,
+      limit,
+    );
     const pokemons = await loadPokemons(results);
+    setPokemonCount(count);
 
     return { pokemons, next, previous };
   }
