@@ -8,14 +8,21 @@
 	<a href="https://pocketex.netlify.app/" rel="noreferrer">View demo</a>
 </p>
 
-# Built with
+# Roadmap
 
-- [React](https://fr.reactjs.org/)
-- [TypeScript](https://www.typescriptlang.org/)
-- [SASS](https://sass-lang.com/)
-- CSS modules
-- [PokéAPI](https://pokeapi.co/)
-- [Netlify](https://www.netlify.com/)
+✅ Homepage\
+⌛️ Explore\
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;✅ Display all Pokémon\
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⌛️ Filter by generation\
+⌛️ Pokemon details\
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;✅ Breeding\
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;✅ Training\
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;✅ Relations\
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⌛️ Base stats\
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⌛️ Forms\
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⌛️ Evolution chain\
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⌛️ Go to previous/next Pokémon\
+⌛️ Dark mode
 
 # Credits
 
