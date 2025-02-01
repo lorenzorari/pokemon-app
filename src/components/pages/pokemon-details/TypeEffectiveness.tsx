@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
-import { DetailField, DetailPanel } from 'src/components/details';
+import { DetailField } from 'src/components/details';
 import PokemonTypeBadge from 'src/components/PokemonTypeBadge';
 import { Button, ButtonVariant } from 'src/components/ui/Button';
+import { Panel } from 'src/components/ui/panel';
 import {
   TypeEffectivenessGroup,
   TypeEffectivenessGroupLabel,
@@ -34,7 +35,7 @@ export const TypeEffectiveness = ({ types }: Props) => {
   }
 
   return (
-    <DetailPanel title="Type Effectiveness">
+    <Panel title="Type Effectiveness">
       <div className="mb-4 flex gap-2">
         <Button
           variant={
@@ -101,6 +102,6 @@ export const TypeEffectiveness = ({ types }: Props) => {
           <p>None</p>
         )}
       </DetailField>
-    </DetailPanel>
+    </Panel>
   );
 };

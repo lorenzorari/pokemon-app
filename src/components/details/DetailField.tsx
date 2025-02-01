@@ -1,4 +1,6 @@
 import { ReactNode } from 'react';
+import { PanelField } from '../ui/panel/PanelField';
+import { PanelLabel } from '../ui/panel/PanelLabel';
 
 interface Props {
   label: string;
@@ -7,9 +9,9 @@ interface Props {
 
 export const DetailField = ({ label, children }: Props) => {
   return (
-    <div className="grid grid-cols-1 gap-1 border-b border-b-gray-200 py-[10px] last:border-b-0 sm:grid-cols-2 md:grid-cols-[170px_1fr]">
-      <span className="text-gray-400">{label}</span>
+    <PanelField className="grid grid-cols-1 gap-1 sm:grid-cols-2 md:grid-cols-[170px_1fr]">
+      <PanelLabel>{label}</PanelLabel>
       <span className="capitalize">{children}</span>
-    </div>
+    </PanelField>
   );
 };

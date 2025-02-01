@@ -8,6 +8,7 @@ import { TypeEffectiveness } from 'src/components/pages/pokemon-details/TypeEffe
 import { usePokemon } from 'src/hooks/pokemon/usePokemon';
 import { usePokemonSpecies } from 'src/hooks/pokemon/usePokemonSpecies';
 import { PokemonType } from 'src/models/types';
+import { Stats } from 'src/components/pages/pokemon-details/Stats';
 
 interface Params {
   id: string;
@@ -61,6 +62,7 @@ const DetailsPage = () => {
                   <Breeding species={species} />
                   <Training pokemon={pokemon} species={species} />
                   <TypeEffectiveness types={pokemonTypes} />
+                  <Stats />
                 </div>
               </section>
             )}

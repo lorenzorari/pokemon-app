@@ -1,8 +1,9 @@
-import { useMemo } from "react";
-import { DetailField, DetailPanel } from "src/components/details";
-import { Pokemon } from "src/models/pokemon";
-import { Species } from "src/models/species";
-import { replaceDashesBySpaces } from "src/utils/replace-dash-by-space";
+import { useMemo } from 'react';
+import { DetailField } from 'src/components/details';
+import { Panel } from 'src/components/ui/panel';
+import { Pokemon } from 'src/models/pokemon';
+import { Species } from 'src/models/species';
+import { replaceDashesBySpaces } from 'src/utils/replace-dash-by-space';
 
 interface Props {
   pokemon: Pokemon;
@@ -16,21 +17,21 @@ export const Training = ({ pokemon, species }: Props) => {
   );
 
   return (
-    <DetailPanel title="Catch & Training">
+    <Panel title="Catch & Training">
       <section>
         <DetailField label="Catch Rate">{species?.captureRate}</DetailField>
         <DetailField label="Base Happiness">
           {species.baseHappiness}
         </DetailField>
         <DetailField label="Growth Rate">
-          {replaceDashesBySpaces(species?.growthRate?.name ?? "")}
+          {replaceDashesBySpaces(species?.growthRate?.name ?? '')}
         </DetailField>
         <DetailField label="EV Yield">
           <ul>
             {evYields?.map((evYield, index) => (
               <li key={index}>
-                {evYield.effort}{" "}
-                {replaceDashesBySpaces(evYield.stat?.name ?? "")}
+                {evYield.effort}{' '}
+                {replaceDashesBySpaces(evYield.stat?.name ?? '')}
               </li>
             ))}
           </ul>
@@ -39,7 +40,7 @@ export const Training = ({ pokemon, species }: Props) => {
           <ul className="list-disc pl-[1.1rem]">
             {pokemon.abilities?.map(({ ability, isHidden }) => (
               <li key={ability.name}>
-                {replaceDashesBySpaces(ability.name)}{" "}
+                {replaceDashesBySpaces(ability.name)}{' '}
                 {isHidden && (
                   <span
                     title="Hidden ability"
@@ -53,6 +54,6 @@ export const Training = ({ pokemon, species }: Props) => {
           </ul>
         </DetailField>
       </section>
-    </DetailPanel>
+    </Panel>
   );
 };
