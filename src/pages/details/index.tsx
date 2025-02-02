@@ -62,7 +62,7 @@ const DetailsPage = () => {
                   <Breeding species={species} />
                   <Training pokemon={pokemon} species={species} />
                   <TypeEffectiveness types={pokemonTypes} />
-                  <Stats />
+                  {pokemon.stats && <Stats stats={pokemon.stats} />}
                 </div>
               </section>
             )}
