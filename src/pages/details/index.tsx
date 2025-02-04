@@ -8,7 +8,7 @@ import { TypeEffectiveness } from 'src/components/pages/pokemon-details/TypeEffe
 import { usePokemon } from 'src/hooks/pokemon/usePokemon';
 import { usePokemonSpecies } from 'src/hooks/pokemon/usePokemonSpecies';
 import { PokemonType } from 'src/models/types';
-import { Stats } from 'src/components/pages/pokemon-details/Stats';
+import { Stats } from 'src/components/pages/pokemon-details/stats';
 
 interface Params {
   id: string;
