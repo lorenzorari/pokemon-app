@@ -28,7 +28,7 @@ const PokemonDetailHero = ({
               <PokemonTypeBadge key={type} variant={type} withLabel />
             ))}
           </div>
-          <h1 className="mb-4 mt-3 text-5xl font-bold capitalize lg:text-7xl">
+          <h1 className="mb-4 mt-3 text-5xl font-bold lg:text-7xl">
             {pokemon?.name}
           </h1>
           <h2 className="text-4xl font-light md:mb-10 lg:text-5xl">{`#${zeroPad(pokemon?.id ?? 0, 3)}`}</h2>

@@ -6,10 +6,12 @@ import { POKEMON_QUANTITY } from 'src/constants';
 import { getIdFromResourceUrl } from 'src/helpers/get-id-from-resource-url';
 import { PokemonAutocompleteItem } from 'src/components/autocomplete/types';
 import { getArtworkUrl } from 'src/helpers/get-artwork-url';
+import { capitalize } from 'src/utils/capitalize';
 
 const getPokemon = async (id: string): Promise<Pokemon> => {
   const pokemonData = await pokeapi.get(`pokemon/${id}`).json<Pokemon>();
 
+  pokemonData.name = capitalize(pokemonData?.name ?? '');
   pokemonData.height = getAnthropometry(pokemonData.height ?? -1);
   pokemonData.weight = getAnthropometry(pokemonData.weight ?? -1);
 

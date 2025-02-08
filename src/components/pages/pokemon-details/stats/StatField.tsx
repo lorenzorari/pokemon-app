@@ -28,30 +28,6 @@ export function StatField({ label, range, rangeLimit = 255 }: Props) {
     return match ? match.color : '';
   }
 
-  // function calculateStats(
-  //   isHP: boolean,
-  //   base: number,
-  //   level = 100,
-  //   iv = IV.MAX,
-  //   ev = EV.MAX,
-  //   nature: number = NATURE.NORMAL,
-  // ) {
-  //   const bonus = isHP ? level + 10 : 5;
-  //   const natureValue = isHP ? 1 : nature;
-
-  //   return Math.floor(
-  //     (((2 * base + iv + ev / 4) * level) / 100 + bonus) * natureValue,
-  //   );
-  // }
-
-  // function calculateMinStats(isHP: boolean, base: number) {
-  //   return calculateStats(isHP, base, 50, IV.MIN, EV.MIN, NATURE.LOW);
-  // }
-
-  // function calculateMaxStats(isHP: boolean, base: number) {
-  //   return calculateStats(isHP, base, 50, IV.MAX, EV.MAX, NATURE.HIGH);
-  // }
-
   return (
     <PanelField
       className={cn(
@@ -68,8 +44,9 @@ export function StatField({ label, range, rangeLimit = 255 }: Props) {
         <span className="relative block h-[10px] w-full overflow-hidden rounded-full bg-gray-200">
           {range.map((baseStat, index) => (
             <span
+              key={index}
               className={cn(
-                'absolute inset-y-0 block',
+                'absolute inset-y-0 block transition-all',
                 index === 0 && 'z-10',
                 index === 1 && 'opacity-30',
                 getBgColor(baseStat),
@@ -82,12 +59,6 @@ export function StatField({ label, range, rangeLimit = 255 }: Props) {
       <div className="text-right">
         <span>{range.join(' - ')}</span>
       </div>
-      {/* <div className="text-right">
-          <span>
-            {calculateMinStats(label === 'hp', baseStat)}-
-            {calculateMaxStats(label === 'hp', baseStat)}
-          </span>
-        </div> */}
     </PanelField>
   );
 }

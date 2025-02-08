@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useParams } from 'react-router';
 import { Navbar } from 'src/layouts/Navbar';
 import { Breeding } from 'src/components/pages/pokemon-details/Breeding';
@@ -18,12 +18,16 @@ const DetailsPage = () => {
   const { id } = useParams<Params>();
   const { pokemon } = usePokemon(id);
   const { pokemonSpecies: species, getGenus } = usePokemonSpecies(id);
-  // const { pokemonEvolutions, arePokemonEvolutionsLoading } =
-  //   usePokemonEvolutions(id);
   const pokemonTypes = useMemo<string[]>(
     () => pokemon?.types?.map(({ type }) => type.name) || [],
     [pokemon?.types],
   );
+
+  useEffect(() => {
+    if (pokemon?.name) {
+      document.title = `${pokemon.name} | Pocketex`;
+    }
+  }, [pokemon]);
 
   const getDescription = () => {
     const text = species?.flavorTextEntries?.find(
