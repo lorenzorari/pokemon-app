@@ -1,8 +1,12 @@
-import { zeroPad } from 'src/utils/zero-pad';
+import { getPokemonNumber } from 'src/helpers/getPokemonNumber';
 
 const PokemonCardId = ({ pokemon }: any) => {
+  const pokemonNumber = getPokemonNumber(pokemon?.id);
+
   return (
-    <div className="mb-2 text-lg font-light tracking-wider text-white">{`#${zeroPad(pokemon?.id, 3)}`}</div>
+    <div className="mb-2 text-lg font-light tracking-wider text-white">
+      {pokemonNumber}
+    </div>
   );
 };
 

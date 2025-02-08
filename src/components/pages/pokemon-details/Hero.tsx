@@ -1,10 +1,10 @@
 import PokemonTypeBadge from 'src/components/PokemonTypeBadge';
 import { getArtworkUrl } from 'src/helpers/get-artwork-url';
 import { Pokemon } from 'src/models/pokemon';
-import { zeroPad } from 'src/utils/zero-pad';
 import PokemonDetailHeroImage from './HeroImage';
 import InfoTile from 'src/components/info-tile/InfoTile';
 import { PokemonType } from 'src/models/types';
+import { getPokemonNumber } from 'src/helpers/getPokemonNumber';
 
 interface Props {
   pokemon: Pokemon;
@@ -19,6 +19,8 @@ const PokemonDetailHero = ({
   description,
   genus,
 }: Props) => {
+  const pokemonNumber = getPokemonNumber(pokemon?.id);
+
   return (
     <section className="relative h-[690px] overflow-x-clip px-5 py-4 md:flex md:max-h-[500px] md:w-full md:items-center md:justify-between md:gap-2 lg:max-h-[820px] lg:min-h-[760px] lg:px-10 xl:px-32">
       <div>
@@ -31,7 +33,9 @@ const PokemonDetailHero = ({
           <h1 className="mb-4 mt-3 text-5xl font-bold lg:text-7xl">
             {pokemon?.name}
           </h1>
-          <h2 className="text-4xl font-light md:mb-10 lg:text-5xl">{`#${zeroPad(pokemon?.id ?? 0, 3)}`}</h2>
+          <h2 className="text-4xl font-light md:mb-10 lg:text-5xl">
+            {pokemonNumber}
+          </h2>
           <p className="mb-6 hidden md:block">{description}</p>
         </div>
 
