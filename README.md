@@ -18,7 +18,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;✅ Breeding\
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;✅ Training\
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;✅ Relations\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⌛️ Base stats\
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;✅ Base stats\
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⌛️ Forms\
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⌛️ Evolution chain\
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;⌛️ Go to previous/next Pokémon\
