@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import PokemonList from 'src/components/pokemon/list';
+import PokemonList from 'src/features/explore/components/pokemon-list';
 import {
   Select,
   SelectContent,

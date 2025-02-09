@@ -1,14 +1,14 @@
 import { useEffect, useMemo } from 'react';
 import { useParams } from 'react-router';
 import { Navbar } from 'src/layouts/Navbar';
-import { Breeding } from 'src/components/pages/pokemon-details/Breeding';
-import PokemonDetailHero from 'src/components/pages/pokemon-details/Hero';
-import { Training } from 'src/components/pages/pokemon-details/Training';
-import { TypeEffectiveness } from 'src/components/pages/pokemon-details/TypeEffectiveness';
+import { Breeding } from 'src/features/pokemon-details/components/Breeding';
+import PokemonDetailHero from 'src/features/pokemon-details/components/Hero';
+import { Training } from 'src/features/pokemon-details/components/Training';
+import { TypeEffectiveness } from 'src/features/pokemon-details/components/TypeEffectiveness';
 import { usePokemon } from 'src/hooks/pokemon/usePokemon';
 import { usePokemonSpecies } from 'src/hooks/pokemon/usePokemonSpecies';
 import { PokemonType } from 'src/models/types';
-import { Stats } from 'src/components/pages/pokemon-details/stats';
+import { Stats } from 'src/features/pokemon-details/components/stats';
 
 interface Params {
   id: string;

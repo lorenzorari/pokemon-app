@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { StatField } from 'src/components/pages/pokemon-details/stats';
+import { StatField } from 'src/features/pokemon-details/components/stats';
 import { Pokemon } from 'src/models/pokemon';
 import { capitalize } from 'src/utils/capitalize';
 import { replaceDashesBySpaces } from 'src/utils/replace-dash-by-space';

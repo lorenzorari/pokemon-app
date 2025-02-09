@@ -2,10 +2,10 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import InfiniteScroll from 'src/components/infinite-scroll';
 import Loading from 'src/components/loading';
-import styles from './pokemon-list.module.scss';
 import { usePokemonPagination } from 'src/hooks/pokemon/usePokemonPagination';
-import PokemonCard from '../card';
+import PokemonCard from 'src/components/pokemon/card';
 import { Loader } from 'src/components/ui/Loader';
+import styles from './pokemon-list.module.scss';
 
 interface Props {
   isFiltering: boolean;
