@@ -9,6 +9,7 @@ import { usePokemon } from 'src/hooks/pokemon/usePokemon';
 import { usePokemonSpecies } from 'src/hooks/pokemon/usePokemonSpecies';
 import { PokemonType } from 'src/models/types';
 import { Stats } from 'src/features/pokemon-details/components/stats';
+import { EvolutionChain } from 'src/features/pokemon-details/components/evolution-chain';
 
 interface Params {
   id: string;
@@ -18,10 +19,7 @@ const DetailsPage = () => {
   const { id } = useParams<Params>();
   const { pokemon } = usePokemon(id);
   const { pokemonSpecies: species, getGenus } = usePokemonSpecies(id);
-  const pokemonTypes = useMemo<string[]>(
-    () => pokemon?.types?.map(({ type }) => type.name) || [],
-    [pokemon?.types],
-  );
+  const pokemonTypes = useMemo<string[]>(() => pokemon?.types?.map(({ type }) => type.name) || [], [pokemon?.types]);
 
   useEffect(() => {
     if (pokemon?.name) {
@@ -30,9 +28,7 @@ const DetailsPage = () => {
   }, [pokemon]);
 
   const getDescription = () => {
-    const text = species?.flavorTextEntries?.find(
-      ({ language }) => language.name === 'en',
-    )!.flavorText;
+    const text = species?.flavorTextEntries?.find(({ language }) => language.name === 'en')!.flavorText;
 
     if (!text) return '';
 
@@ -61,14 +57,15 @@ const DetailsPage = () => {
               description={getDescription()}
             />
             {species && (
-              <section className="relative z-10 rounded-t-[40px] bg-white px-5 py-10 shadow-[0px_100px_484px_0px_rgba(0,0,0,0.4)] lg:-mt-16 lg:px-10 lg:py-[60px] xl:px-32">
+              <div className="relative z-10 rounded-t-[40px] bg-white px-5 py-10 shadow-[0px_100px_484px_0px_rgba(0,0,0,0.4)] lg:-mt-16 lg:px-10 lg:py-[60px] xl:px-32">
+                <EvolutionChain evolutionChainUrl={species.evolutionChain?.url} />
                 <div className="grid gap-10 md:grid-cols-[repeat(auto-fit,minmax(340px,1fr))]">
                   <Breeding species={species} />
                   <Training pokemon={pokemon} species={species} />
                   <TypeEffectiveness types={pokemonTypes} />
                   {pokemon.stats && <Stats stats={pokemon.stats} />}
                 </div>
-              </section>
+              </div>
             )}
           </>
         )}

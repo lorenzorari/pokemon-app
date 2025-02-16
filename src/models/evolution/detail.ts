@@ -20,5 +20,3 @@ export interface EvolutionDetail {
   tradeSpecies: NamedAPIResource;
   turnUpsideDown: boolean;
 }
-
-export declare type EvolutionDetails = EvolutionDetail[];
