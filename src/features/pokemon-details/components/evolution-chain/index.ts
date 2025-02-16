@@ -1,1 +1,1 @@
-export { EvolutionChain } from './EvolutionChain';
+export { EvolutionChainPanel } from './EvolutionChainPanel';

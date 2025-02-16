@@ -9,7 +9,7 @@ import { usePokemon } from 'src/hooks/pokemon/usePokemon';
 import { usePokemonSpecies } from 'src/hooks/pokemon/usePokemonSpecies';
 import { PokemonType } from 'src/models/types';
 import { Stats } from 'src/features/pokemon-details/components/stats';
-import { EvolutionChain } from 'src/features/pokemon-details/components/evolution-chain';
+import { EvolutionChainPanel } from 'src/features/pokemon-details/components/evolution-chain';
 
 interface Params {
   id: string;
@@ -58,7 +58,7 @@ const DetailsPage = () => {
             />
             {species && (
               <div className="relative z-10 rounded-t-[40px] bg-white px-5 py-10 shadow-[0px_100px_484px_0px_rgba(0,0,0,0.4)] lg:-mt-16 lg:px-10 lg:py-[60px] xl:px-32">
-                <EvolutionChain evolutionChainUrl={species.evolutionChain?.url} />
+                <EvolutionChainPanel evolutionChainUrl={species.evolutionChain?.url} />
                 <div className="grid gap-10 md:grid-cols-[repeat(auto-fit,minmax(340px,1fr))]">
                   <Breeding species={species} />
                   <Training pokemon={pokemon} species={species} />
